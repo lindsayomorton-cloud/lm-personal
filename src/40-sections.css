@@ -1180,3 +1180,8 @@ html.in-vx .drift{opacity:0!important;visibility:hidden!important}
 .tv-sound{position:absolute;left:50%;bottom:16%;translate:-50% 0;z-index:9;font:800 13px/1 var(--body);padding:.6em 1em;border-radius:999px;border:2px solid #15302c;background:#ceff32;color:#15302c;cursor:pointer;animation:tvChip 1.4s ease-in-out infinite}
 @keyframes tvChip{50%{scale:1.08}}
 .dolphin.tv-dol{margin-left:-125px!important}
+/* paintings get BIG on hover (desktop), lifting over everything around them */
+@media (hover:hover) and (min-width:901px){
+  .art-wall button{transition:transform .45s cubic-bezier(.2,1.25,.4,1),filter .45s!important}
+  .art-wall button:hover,.art-wall button:focus-visible{transform:translateY(-10px) scale(1.75) rotate(0)!important;z-index:80!important;position:relative;filter:drop-shadow(0 30px 40px rgba(10,30,10,.55))}
+}
