@@ -832,7 +832,23 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     /* talk to the YouTube player so it plays the instant you hover */
     function cmd(f, args) { var fr = vid.querySelector("iframe"); if (fr && fr.contentWindow) fr.contentWindow.postMessage(JSON.stringify({ event: "command", func: f, args: args || [] }), "*"); }
     function fast() {}
-    vid.addEventListener("load", function () { cmd("addEventListener", ["onReady"]); }, true);
+    /* YouTube only takes commands after a "listening" handshake: do it as soon as the player loads,
+       then quietly buffer the clip (muted play, pause at 0) so hovering starts it instantly */
+    var ytReady = false, ytState = -1, primed = false;
+    addEventListener("message", function (e) {
+      if (!/youtube/.test(e.origin)) return; var d; try { d = JSON.parse(e.data); } catch (er) { return; }
+      if (d.event === "onReady" || d.event === "initialDelivery" || d.event === "infoDelivery") ytReady = true;
+      if (d.info && typeof d.info.playerState === "number") {
+        ytState = d.info.playerState;
+        if (ytState === 1 && !primed && !tvLive) { primed = true; cmd("pauseVideo"); cmd("seekTo", [0, true]); setTimeout(function () { if (!tvLive) cmd("unMute"); }, 150); }
+      }
+    });
+    vid.addEventListener("load", function () {
+      ytReady = false; ytState = -1; primed = tvLive;
+      var fr = vid.querySelector("iframe"), n = 0;
+      (function hello() { if (!fr || !fr.isConnected || ytReady || n++ > 40) return; try { fr.contentWindow.postMessage(JSON.stringify({ event: "listening", id: 1, channel: "widget" }), "*"); } catch (er) {} setTimeout(hello, 120); })();
+      (function prime() { if (tvLive) return; if (!ytReady) { setTimeout(prime, 150); return; } cmd("mute"); cmd("playVideo"); })();
+    }, true);
     /* the player loads well before the TV is on screen, so it's ready the moment you hover */
     (function () { var bey = $("beyond") || tv; if (!("IntersectionObserver" in window)) { show(0, false); return; }
       new IntersectionObserver(function (es, ob) { if (es[0].isIntersecting) { ob.disconnect(); if (!vid.innerHTML) show(0, false); } }, { rootMargin: "1200px 0px" }).observe(bey); })();
@@ -850,7 +866,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
       function onMsg(e) { if (!/youtube/.test(e.origin)) return; try { var d = JSON.parse(e.data); if (d.info && d.info.playerState === 1) started = true; } catch (er) {} }
       addEventListener("message", onMsg);
       var fr = vid.querySelector("iframe");
-      if (fr && canSound()) { try { fr.contentWindow.postMessage(JSON.stringify({ event: "listening" }), "*"); } catch (er) {} cmd("playVideo"); setTimeout(function () { removeEventListener("message", onMsg); if (!started) show(ch, true); }, 900); }
+      if (fr && ytReady && canSound()) { cmd("unMute"); cmd("setVolume", [80]); cmd("playVideo"); setTimeout(function () { removeEventListener("message", onMsg); if (!started && ytState !== 1) show(ch, true); }, 2500); }
       else { removeEventListener("message", onMsg); show(ch, true); }
       if (!canSound()) {
         var chip = document.createElement("button"); chip.type = "button"; chip.className = "tv-sound"; chip.textContent = "🔊 Tap for sound";
