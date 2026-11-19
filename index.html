@@ -630,6 +630,12 @@ html.daisy-calling .hero h1{opacity:.5}
 @keyframes tagShake{0%,100%{rotate:-7deg}20%{rotate:-16deg}40%{rotate:4deg}60%{rotate:-12deg}80%{rotate:0deg}}
 .daisy-call .tag-hint{position:absolute;left:50%;bottom:calc(100% + 14px);translate:-50% 0;white-space:nowrap;font:800 15px/1 var(--body);font-style:normal;font-variant:normal;color:#15302c;text-shadow:none;background:#fff;padding:.55em .9em;border-radius:999px;box-shadow:3px 3px 0 #ec2b7a;rotate:7deg;animation:callIn .4s cubic-bezier(.2,1.6,.4,1) both}
 html:not(.vx-done) body{overscroll-behavior-y:none}
+/* the big daisy stands in front of the headline */
+html body .hero .hero-daisy{z-index:8!important}
+/* the bunny is bigger and quicker now that the visitor has asked for him */
+.rabbit{width:clamp(300px,26vw,420px)!important}
+@media (max-width:599px){.rabbit{width:clamp(200px,52vw,280px)!important}}
+.rabbit.go,.rabbit.go.fast{animation-duration:4.2s!important}.rabbit.go span,.rabbit.go.fast span{animation-duration:4.2s!important}
 
 /* ============ Jump-in link bar ============ */
 .jump{position:relative;z-index:50;background:var(--night);padding:18px clamp(16px,4vw,56px) 22px}
