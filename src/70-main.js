@@ -1,18 +1,40 @@
-/* ===== master volume: every sound on the site is scaled by one volume knob the visitor controls ===== */
+/* ===== master volume: every sound on the site is scaled by one volume knob the visitor controls =====
+   iPhones and iPads ignore audio.volume, so there each sound is routed through a Web Audio gain instead,
+   and "Sound off" mutes every sound outright (that part works everywhere) */
 (function () {
   var master = .8; try { var v = parseFloat(localStorage.getItem("lmVolume")); if (!isNaN(v)) master = Math.min(1, Math.max(0, v)); } catch (e) {}
-  var d = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, "volume"), all = new Set();
+  var d = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, "volume"), all = new Set(), muted = false;
+  try { muted = localStorage.getItem("doorSound") === "off"; } catch (e) {}
   if (!d || !d.set) return;
+  var locked = false; try { var pr = new Audio(); d.set.call(pr, .5); locked = Math.abs(d.get.call(pr) - .5) > .01 || /[?&]ioslock/.test(location.search); } catch (e) {}
+  var AC = window.AudioContext || window.webkitAudioContext, ctx = null;
+  function unlock() { if (!ctx && locked && AC) try { ctx = new AC(); } catch (e) {} if (ctx && ctx.state !== "running") { var r = ctx.resume(); if (r && r.catch) r.catch(function () {}); } }
+  if (locked && AC) ["touchend", "pointerdown", "click", "keydown"].forEach(function (ev) { addEventListener(ev, unlock, true); });
+  function route(a) {
+    if (!locked || !AC || a.__gain || a.__noRoute) return;
+    try { if (!ctx) ctx = new AC(); var src = ctx.createMediaElementSource(a), g = ctx.createGain(); src.connect(g); g.connect(ctx.destination); a.__gain = g; }
+    catch (e) { a.__noRoute = true; }
+  }
+  function apply(a) {
+    var lv = Math.min(1, Math.max(0, (a.__baseVol === undefined ? 1 : a.__baseVol) * master));
+    if (a.__gain) { a.__gain.gain.value = lv; d.set.call(a, 1); } else d.set.call(a, lv);
+    a.muted = muted;
+  }
   Object.defineProperty(HTMLMediaElement.prototype, "volume", { configurable: true,
     get: function () { return this.__baseVol === undefined ? d.get.call(this) : this.__baseVol; },
-    set: function (v) { this.__baseVol = v; all.add(this); d.set.call(this, Math.min(1, Math.max(0, v * master))); } });
+    set: function (v) { this.__baseVol = v; all.add(this); apply(this); } });
   var play = HTMLMediaElement.prototype.play;
-  HTMLMediaElement.prototype.play = function () { if (this.__baseVol === undefined) this.volume = d.get.call(this); return play.apply(this, arguments); };
+  HTMLMediaElement.prototype.play = function () {
+    if (this.__baseVol === undefined) this.__baseVol = d.get.call(this);
+    all.add(this); route(this); unlock(); apply(this);
+    return play.apply(this, arguments);
+  };
   window.__getVolume = function () { return master; };
   window.__setVolume = function (v) {
     master = Math.min(1, Math.max(0, v)); try { localStorage.setItem("lmVolume", master); } catch (e) {}
-    all.forEach(function (a) { d.set.call(a, Math.min(1, Math.max(0, (a.__baseVol || 0) * master))); });
+    all.forEach(apply);
   };
+  window.__setMuted = function (m) { muted = !!m; all.forEach(apply); };
 })();
 /* a "real" hover means the visitor actually moved the mouse onto it (not a page scroll sliding it under a still mouse),
    and not in the moment right after a pop-up closes */
@@ -492,7 +514,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   ["dooropen", "doorslam", "welcome", "goodbye", "imrcv"].forEach(function (n) { var a = new Audio(); a.preload = "auto"; a.src = "assets/sfx/" + n + ".mp3"; SFX[n] = a; });
   /* AIM's "Welcome!" when sound goes on, "Goodbye!" when it goes off */
   sndBtn.addEventListener("click", function () { playSfx(soundOn ? "goodbye" : "welcome"); });
-  sndBtn.addEventListener("click", function () { soundOn = !soundOn; paintSnd(); try { localStorage.setItem("doorSound", soundOn ? "on" : "off"); } catch (e) {} if (soundOn && window.__bmwRetry) setTimeout(window.__bmwRetry, 50); document.dispatchEvent(new Event("lm-sound")); });
+  sndBtn.addEventListener("click", function () { soundOn = !soundOn; paintSnd(); try { localStorage.setItem("doorSound", soundOn ? "on" : "off"); } catch (e) {} if (soundOn && window.__bmwRetry) setTimeout(window.__bmwRetry, 50); if (window.__setMuted) { if (soundOn) window.__setMuted(false); else setTimeout(function () { if (!soundOn) window.__setMuted(true); }, 900); } document.dispatchEvent(new Event("lm-sound")); });
   function audio() { if (!ctx) { var C = window.AudioContext || window.webkitAudioContext; if (!C) return null; ctx = new C(); } if (ctx.state === "suspended") ctx.resume(); return ctx; }
   function tone(c, f1, f2, t0, d, g, type) { var o = c.createOscillator(), v = c.createGain(); o.type = type || "sine"; o.frequency.setValueAtTime(f1, t0); o.frequency.exponentialRampToValueAtTime(f2, t0 + d); v.gain.setValueAtTime(.0001, t0); v.gain.exponentialRampToValueAtTime(g, t0 + .02); v.gain.exponentialRampToValueAtTime(.0001, t0 + d); o.connect(v).connect(c.destination); o.start(t0); o.stop(t0 + d + .05); }
   function creak(c, t0, d, up) { var n = c.sampleRate * d, b = c.createBuffer(1, n, c.sampleRate), x = b.getChannelData(0); for (var i = 0; i < n; i++) x[i] = (Math.random() * 2 - 1) * (Math.sin(i / (c.sampleRate / 38)) > .6 ? 1 : .25); var s = c.createBufferSource(); s.buffer = b; var f = c.createBiquadFilter(); f.type = "bandpass"; f.Q.value = 9; f.frequency.setValueAtTime(up ? 380 : 900, t0); f.frequency.linearRampToValueAtTime(up ? 900 : 380, t0 + d); var g = c.createGain(); g.gain.setValueAtTime(.0001, t0); g.gain.linearRampToValueAtTime(.18, t0 + .05); g.gain.linearRampToValueAtTime(.0001, t0 + d); s.connect(f).connect(g).connect(c.destination); s.start(t0); }
