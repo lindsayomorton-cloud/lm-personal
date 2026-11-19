@@ -5343,7 +5343,6 @@ window.__mail = function () {
     if (!b.isConnected) { root.classList.add("daisy-calling"); hero.appendChild(b); place(); }
     if (scrollY > 0) scrollTo(0, 0);
     b.classList.remove("nudge"); void b.offsetWidth; b.classList.add("nudge");
-    if (!b.querySelector(".tag-hint")) { var t = document.createElement("span"); t.className = "tag-hint"; t.textContent = "Click me first ✿"; b.appendChild(t); }
   };
   /* a click anywhere near the flower counts too */
   hero.addEventListener("click", function (e) {
