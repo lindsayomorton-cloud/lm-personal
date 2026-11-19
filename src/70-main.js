@@ -246,7 +246,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
        while the Lego jellyfish is pulled into the center, both at the same pace */
     [["vx-rider", "vbOut1", 0], ["pr-jelly", "vbOut1", Math.PI * .8]].forEach(function (d) {
       var s = document.createElement("span"); s.className = "vb big hero-pair";
-      s.style.cssText = "--anim:" + d[1] + ";--w:240px;--tx:" + (Math.cos(d[2]) * 60).toFixed(1) + "vw;--ty:" + (Math.sin(d[2]) * 40 - 10).toFixed(1) + "vh;--s:3.2;--dur:6s;--del:1.1s;--rt:" + (d[1] === "vbIn1" ? 0 : 20) + "deg";
+      s.style.cssText = "--anim:" + d[1] + ";--w:240px;--tx:" + (Math.cos(d[2]) * 60).toFixed(1) + "vw;--ty:" + (Math.sin(d[2]) * 40 - 10).toFixed(1) + "vh;--s:3.2;--dur:6s;--del:.5s;--rt:" + (d[1] === "vbIn1" ? 0 : 20) + "deg";
       s.innerHTML = '<img src="assets/proj/' + d[0] + '.webp" alt="">';
       box.appendChild(s);
     });
@@ -274,7 +274,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     for (var g = 0; g < 20; g++) {
       var e = document.createElement("span"), up = g % 3 === 2;
       e.className = "vx-enter " + (up ? "up" : "down");
-      e.style.cssText = "--x:" + (2 + ((g * 37) % 20) / 20 * 92 + (rnd() - .5) * 3).toFixed(1) + "%;--w:" + Math.round(up ? 120 + rnd() * 70 : 56 + rnd() * 50) + "px;--del:" + (.8 + g / 20 * 7 + rnd() * .3).toFixed(2) + "s;--dur:" + (up ? 4.5 + rnd() * 1.5 : 3 + rnd() * 1.5).toFixed(2) + "s;--rt:" + Math.round(-300 + rnd() * 600) + "deg";
+      e.style.cssText = "--x:" + (2 + ((g * 37) % 20) / 20 * 92 + (rnd() - .5) * 3).toFixed(1) + "%;--w:" + Math.round(up ? 120 + rnd() * 70 : 56 + rnd() * 50) + "px;--del:" + (.2 + g / 20 * 3.5 + rnd() * .25).toFixed(2) + "s;--dur:" + (up ? 4.5 + rnd() * 1.5 : 3 + rnd() * 1.5).toFixed(2) + "s;--rt:" + Math.round(-300 + rnd() * 600) + "deg";
       e.innerHTML = '<img src="assets/proj/' + (up ? rise[g % rise.length] : fall[g % fall.length]) + '.webp" alt="">';
       /* the green plumbob gem stays small */
       if (!up && fall[g % fall.length] === "gem-plumbob") e.style.setProperty("--w", Math.round(30 + rnd() * 10) + "px");
@@ -309,7 +309,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     setTimeout(vxBurst, 3300);
     setTimeout(dolGems, 2700);   /* gems leap up alongside the dolphin's jump */
     setTimeout(puzzlePoof, 4250);   /* he dives into "puzzle.": sparkles poof out of the word and balloons drift in and shrink away into the vortex */   /* the dolphin lands at 4.3s: smoke and sparkles puff up a second before he's fully down */
-    setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); }, 4900);   /* the chair, teacup and the rest pour in the moment the dolphin splashes down */
+    setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); }, 4400);   /* the chair, teacup and the rest pour in the moment the dolphin splashes down */
   }
   /* a puff of smoke and a spray of sparkles as everything else pours into the vortex */
   function dolGems() {
@@ -318,8 +318,8 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     var G = document.createElement("div"); G.className = "dol-gems"; G.setAttribute("aria-hidden", "true");
     G.style.left = (r ? r.left + r.width * .6 : innerWidth / 2) + "px"; G.style.top = (r ? r.top + r.height * .7 : innerHeight / 2) + "px";
     var pics = ["gem-star3-pink", "gem-flower-blue", "gem-star3-yellow", "cr-heart", "gem-star-glass", "gem-pink", "gem-star3-blue"], h = "";
-    for (var k = 0; k < 9; k++) { var dx = 40 + k * 34 + Math.random() * 30, up = 120 + Math.random() * 150;
-      h += '<img src="assets/proj/' + pics[k % pics.length] + '.webp" alt="" style="width:' + Math.round(28 + Math.random() * 26) + 'px;--dx:' + dx.toFixed(0) + 'px;--up:' + up.toFixed(0) + 'px;--dl:' + (k * .09).toFixed(2) + 's;--r:' + Math.round(-200 + Math.random() * 400) + 'deg">'; }
+    for (var k = 0; k < 27; k++) { var dx = 20 + (k % 9) * 36 + Math.random() * 40 - (k % 3) * 30, up = 90 + Math.random() * 230;
+      h += '<img src="assets/proj/' + pics[k % pics.length] + '.webp" alt="" style="width:' + Math.round(28 + Math.random() * 26) + 'px;--dx:' + dx.toFixed(0) + 'px;--up:' + up.toFixed(0) + 'px;--dl:' + (k * .035 + Math.random() * .08).toFixed(2) + 's;--r:' + Math.round(-200 + Math.random() * 400) + 'deg">'; }
     G.innerHTML = h; document.body.appendChild(G); setTimeout(function () { G.remove(); }, 2600);
   }
   function puzzlePoof() {
@@ -1229,7 +1229,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
 /* hero daisy blooms once the photo has dropped in */
 (function () { var d = document.querySelector(".hero-daisy"); if (!d) return;
   /* it blooms together with the daisy patch, the moment the hero appears */
-  (function wait() { if (document.documentElement.classList.contains("hero-go")) { d.src = d.dataset.src + "?t=" + Date.now(); d.classList.add("grow"); } else setTimeout(wait, 60); })(); })();
+  (function wait() { if (document.documentElement.classList.contains("hero-go")) { d.src = d.dataset.src + "?t=" + Date.now(); d.classList.add("grow"); var d2 = document.querySelector(".hero-daisy2"); if (d2) { d2.src = d2.dataset.src + "?u=" + Date.now(); d2.classList.add("grow"); } } else setTimeout(wait, 60); })(); })();
 
 /* each Playroom sticker starts at the door's center, so it flies out of the door to its spot */
 (function () {

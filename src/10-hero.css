@@ -540,3 +540,16 @@ html body .hero .hero-daisy{z-index:8!important}
 @media (max-width:599px){.rabbit{width:clamp(200px,52vw,280px)!important}}
 .rabbit.go,.rabbit.go.fast{animation-duration:4.2s!important}.rabbit.go span,.rabbit.go.fast span{animation-duration:4.2s!important}
 @media (min-width:900px){html body .hero h1 .w3{padding-left:.95em!important}}
+/* the big glowing "Click Me" daisy now stands over Lindsay's shoulder */
+@media (min-width:900px){
+  html body .hero .hero-daisy{left:calc(102vw - min(82svh,92%) * .8 + min(82svh,92%) * .02)!important;bottom:-6%!important;translate:-50% 0!important;margin-left:0!important;z-index:9!important}
+}
+/* a smaller plain daisy blooms at the edge of the daisy field, where the big one used to be */
+.hero-daisy2{position:absolute;z-index:3;left:clamp(240px,56vw,1000px);bottom:-4%;width:clamp(150px,15vw,270px);height:auto;translate:-50% 0;pointer-events:none;opacity:0;transform-origin:50% 100%}
+.hero-daisy2.grow{animation:heroDaisyUp 1s cubic-bezier(.2,1.4,.4,1) .15s both,heroDaisySway 5.5s ease-in-out 1.3s infinite}
+@media (max-width:899px){.hero-daisy2{left:12%;width:clamp(90px,24vw,150px);bottom:-2%}}
+@media (prefers-reduced-motion:reduce){.hero-daisy2{opacity:1;animation:none!important}}
+
+/* the small daisy sits just inside the field's edge, peeking out from behind the big one */
+@media (min-width:900px){.hero-daisy2{left:calc(min(55vw,880px) - 50px)!important}
+  html body .hero .hero-daisy{left:calc(102vw - min(82svh,92%) * .8 + min(82svh,92%) * .1)!important}}
