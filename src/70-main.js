@@ -131,7 +131,8 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   if (rabbit) rabbit.addEventListener("animationstart", function (e) {
     if (e.target !== rabbit) return;
     var d = parseFloat(getComputedStyle(rabbit).animationDuration) * 1000 || 5200;
-    setTimeout(function () { vxLive(); pullIn(); }, d * .78);
+    setTimeout(vxLive, d * .78);   /* the vortex opens as the dive ends */
+    setTimeout(pullIn, d * .55 + 2200);   /* the page only starts scrolling once the camera push has finished, so the two never fight */
   });
   /* a poof of light and sparkles where he dives in, as you're pushed into the vortex */
   function poof(el) {

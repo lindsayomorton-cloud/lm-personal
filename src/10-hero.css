@@ -484,3 +484,13 @@ html.daisy-calling .hero .hero-daisy{pointer-events:auto!important;cursor:pointe
 .daisy-call{background:linear-gradient(120deg,#ec2b7a 0%,#ff4f6d 45%,#ff7a00 100%)!important}
 .daisy-call::after{background:#ff7a00!important}
 .daisy-call:hover{background:linear-gradient(120deg,#fe7bbf 0%,#ff8a1f 100%)!important}
+/* ===== smoother push-in on the bunny's hole =====
+   1) the hero becomes its own GPU layer as soon as the bunny starts, so the zoom never has to re-draw the page mid-move
+   2) a gentle ease that starts moving right away instead of a slow start and a lurch
+   3) the expensive glow filters on the bunny and his sparkles are swapped for cheap ones while the camera moves */
+html.bunny-on .hero,html.bunny-zoom .hero{will-change:transform}
+.hero{transition:transform 2.2s cubic-bezier(.3,.05,.2,1)!important;backface-visibility:hidden}
+html.bunny-zoom .rabbit.go>span{filter:drop-shadow(0 0 14px rgba(255,255,255,.95)) drop-shadow(0 0 30px rgba(254,123,191,.8))!important}
+html.bunny-zoom .rb-sp{filter:none!important;box-shadow:0 0 10px 3px rgba(255,255,255,.7)}
+html.bunny-zoom .hero-daisy,html.bunny-zoom .hero .fl{animation-play-state:paused!important}
+html.bunny-zoom .hero h1{text-shadow:none}

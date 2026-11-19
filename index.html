@@ -581,6 +581,16 @@ html.daisy-calling .hero .hero-daisy{pointer-events:auto!important;cursor:pointe
 .daisy-call{background:linear-gradient(120deg,#ec2b7a 0%,#ff4f6d 45%,#ff7a00 100%)!important}
 .daisy-call::after{background:#ff7a00!important}
 .daisy-call:hover{background:linear-gradient(120deg,#fe7bbf 0%,#ff8a1f 100%)!important}
+/* ===== smoother push-in on the bunny's hole =====
+   1) the hero becomes its own GPU layer as soon as the bunny starts, so the zoom never has to re-draw the page mid-move
+   2) a gentle ease that starts moving right away instead of a slow start and a lurch
+   3) the expensive glow filters on the bunny and his sparkles are swapped for cheap ones while the camera moves */
+html.bunny-on .hero,html.bunny-zoom .hero{will-change:transform}
+.hero{transition:transform 2.2s cubic-bezier(.3,.05,.2,1)!important;backface-visibility:hidden}
+html.bunny-zoom .rabbit.go>span{filter:drop-shadow(0 0 14px rgba(255,255,255,.95)) drop-shadow(0 0 30px rgba(254,123,191,.8))!important}
+html.bunny-zoom .rb-sp{filter:none!important;box-shadow:0 0 10px 3px rgba(255,255,255,.7)}
+html.bunny-zoom .hero-daisy,html.bunny-zoom .hero .fl{animation-play-state:paused!important}
+html.bunny-zoom .hero h1{text-shadow:none}
 
 /* ============ Jump-in link bar ============ */
 .jump{position:relative;z-index:50;background:var(--night);padding:18px clamp(16px,4vw,56px) 22px}
@@ -3180,7 +3190,7 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
       <div class="shelf" aria-hidden="true"><img loading="lazy" decoding="async" src="assets/proj/door-halftone.webp" alt=""></div>
     </div>
     <div class="side side-about">
-      <figure class="frame-big framed" aria-hidden="true"><span class="ph ph-art"><img loading="lazy" decoding="async" src="assets/proj/portrait-art.webp" alt=""></span><img loading="lazy" decoding="async" class="fr" src="assets/proj/pink-frame.webp" alt=""></figure>
+      <figure class="frame-big framed" aria-hidden="true"><span class="ph ph-cut"><img loading="lazy" decoding="async" src="assets/proj/portrait-lime-clean.webp" alt=""></span><img loading="lazy" decoding="async" class="fr" src="assets/proj/pink-frame.webp" alt=""></figure>
       <div class="card study-card">
         <span class="sc-tab" aria-hidden="true">Room No. 01</span>
         <span class="sc-stamp" aria-hidden="true">15+ yrs<br><small>in growth</small></span>
@@ -3769,7 +3779,8 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   if (rabbit) rabbit.addEventListener("animationstart", function (e) {
     if (e.target !== rabbit) return;
     var d = parseFloat(getComputedStyle(rabbit).animationDuration) * 1000 || 5200;
-    setTimeout(function () { vxLive(); pullIn(); }, d * .78);
+    setTimeout(vxLive, d * .78);   /* the vortex opens as the dive ends */
+    setTimeout(pullIn, d * .55 + 2200);   /* the page only starts scrolling once the camera push has finished, so the two never fight */
   });
   /* a poof of light and sparkles where he dives in, as you're pushed into the vortex */
   function poof(el) {
