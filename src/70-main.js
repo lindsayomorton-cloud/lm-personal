@@ -537,7 +537,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
       if (!bg && !p.logo) bg = '<span class="slot-name">' + text(p.name) + '</span>';
       stage = bg + (p.logo ? '<img class="slot-logo" src="' + p.logo + '" alt="" loading="lazy">' : "") + '<span class="slot-soon">Preview coming soon</span><span class="slot-cue">See details →</span>';
     }
-    var more = p.learn ? '<button type="button" class="learn" data-p="' + i + '">Learn more about ' + text(p.name) + ' →</button>' : p.preview && !p.noDetails ? '<button type="button" class="slot-more" data-p="' + i + '">Project details →</button>' : "";
+    var more = p.learn ? '<button type="button" class="learn" data-p="' + i + '">Visit ' + text(p.name) + ' →</button>' : p.preview && !p.noDetails ? '<button type="button" class="slot-more" data-p="' + i + '">Project details →</button>' : "";
     return '<article class="slot' + (p.preview ? "" : " no-pv") + '" data-slot="' + i + '"><button type="button" class="slot-stage" data-p="' + i + '" aria-label="' + (p.site ? "Visit the " + text(p.name) + " site" : (p.preview ? "Open the " : "See details for ") + text(p.name) + (p.preview ? " preview" : "")) + '">' + stage + '</button>'
       + '<div class="slot-info">' + (p.kick ? '<span class="slot-kick">' + text(p.kick) + '</span>' : "") + '<h3>' + text(p.name) + '</h3>' + (p.one ? '<p>' + text(p.one) + '</p>' : "") + more + '</div></article>';
   }
@@ -610,8 +610,8 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   roomBody.addEventListener("click", function (e) {
     var b = e.target.closest("[data-p]"); if (!b || !current || !current.projects) return;
     var p = current.projects[+b.dataset.p];
-    /* Pollinate's film is only a teaser: clicking it goes straight to the real site */
-    if (b.classList.contains("slot-stage") && p.site) openFull(p.site, p.name, b);
+    /* Pollinate has no details popup: the film and its button both go straight to the real site */
+    if (p.site) openFull(p.site, p.name, b);
     else if (b.classList.contains("slot-stage") && p.preview) openPreview(p.preview, b);
     else if (p.full) openFull(p.full, p.name, b);
     else openProject(p, b);
