@@ -194,15 +194,17 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   /* he runs about two seconds after the page opens (or sooner, the moment you start scrolling) */
   else (function wait() {
     var hb = document.querySelector(".hero").getBoundingClientRect(), heroUp = root.classList.contains("tall") || (hb.bottom > innerHeight * .5 && hb.top < innerHeight * .5);
-    if (hideLoader.fading && heroUp && (window.__daisyGo || holdScroll.t)) { if (holdScroll.t) rabbit.classList.add("fast"); runRabbit(); } else setTimeout(wait, 100);
+    if (hideLoader.fading && heroUp && window.__daisyGo) { if (holdScroll.t) rabbit.classList.add("fast"); runRabbit(); } else setTimeout(wait, 100);
   })();
   /* if you try to scroll before he has run, the page holds still while he dashes across (a little quicker),
      then dives, and the site carries you down into the vortex */
   function holdScroll(e) {
     if (root.classList.contains("tall") || !rabbit || !rabbit.isConnected || releaseHold.done) return;
-    if (!holdScroll.t) holdScroll.t = setTimeout(releaseHold, 5200);
     if (e.type === "keydown" && !/^(ArrowDown|PageDown|Space| |End)$/.test(e.key)) return;
     e.preventDefault();
+    /* nobody scrolls past the hero until they've clicked: the page stays put and the tag asks again */
+    if (!window.__daisyGo) { if (window.__nudgeTag) window.__nudgeTag(); return; }
+    if (!holdScroll.t) holdScroll.t = setTimeout(releaseHold, 5200);
     if (!runRabbit.done && hideLoader.fading) { rabbit.classList.add("fast"); runRabbit(); }
   }
   /* never hold the page for more than a few seconds, whatever happens to the rabbit */
@@ -1563,6 +1565,15 @@ window.__mail = function () {
     if (window.__poof) window.__poof(dz);
   }
   b.addEventListener("click", go); dz.addEventListener("click", go);
+  /* dragging the scrollbar can't sneak past either */
+  addEventListener("scroll", function () { if (!window.__daisyGo && b.isConnected && document.querySelector(".rabbit") && scrollY > 4) window.__nudgeTag(); }, { passive: true });
+  window.__nudgeTag = function () {
+    if (window.__daisyGo) return;
+    if (!b.isConnected) { root.classList.add("daisy-calling"); hero.appendChild(b); place(); }
+    if (scrollY > 0) scrollTo(0, 0);
+    b.classList.remove("nudge"); void b.offsetWidth; b.classList.add("nudge");
+    if (!b.querySelector(".tag-hint")) { var t = document.createElement("span"); t.className = "tag-hint"; t.textContent = "Click me first ✿"; b.appendChild(t); }
+  };
   /* a click anywhere near the flower counts too */
   hero.addEventListener("click", function (e) {
     if (window.__daisyGo || !root.classList.contains("daisy-calling")) return;

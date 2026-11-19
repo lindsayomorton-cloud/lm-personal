@@ -528,3 +528,8 @@ html.bunny-zoom .hero h1{text-shadow:none}
 html.daisy-calling .hero h1{opacity:.5}
 @media (min-width:900px){.daisy-call{font-size:clamp(24px,2vw,32px)!important;padding:.4em 1.35em .45em .95em!important}.daisy-call .tag-hole{right:26px;width:11px;height:11px;margin-top:-5.5px}}
 @media (max-width:899px){.daisy-call{font-size:21px!important}}
+/* if they try to scroll before clicking, the tag shakes and asks */
+.daisy-call.nudge{animation:tagShake .5s ease both,tagSwing 2.6s ease-in-out .5s infinite!important}
+@keyframes tagShake{0%,100%{rotate:-7deg}20%{rotate:-16deg}40%{rotate:4deg}60%{rotate:-12deg}80%{rotate:0deg}}
+.daisy-call .tag-hint{position:absolute;left:50%;bottom:calc(100% + 14px);translate:-50% 0;white-space:nowrap;font:800 15px/1 var(--body);font-style:normal;font-variant:normal;color:#15302c;text-shadow:none;background:#fff;padding:.55em .9em;border-radius:999px;box-shadow:3px 3px 0 #ec2b7a;rotate:7deg;animation:callIn .4s cubic-bezier(.2,1.6,.4,1) both}
+html:not(.vx-done) body{overscroll-behavior-y:none}
