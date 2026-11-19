@@ -496,6 +496,40 @@ html body .hero .hero-daisy{left:clamp(240px,56vw,1000px)!important;top:auto!imp
   .hero h1 .w2{font-size:.82em!important}
   html body .hero-figure{height:min(74svh,84%)!important;right:-3%!important}
 }
+/* ===== narrow screens (under 900px): one tidy first screen =====
+   words up top, a smaller arched photo under them, daisies along the bottom, all inside the first view */
+@media (max-width:899px){
+  .hero{display:flex!important;flex-direction:column!important;min-height:100svh!important;max-height:none!important}
+  .hero-copy{order:1!important;padding:clamp(84px,13vw,110px) 22px 0!important;z-index:6!important;position:relative}
+  .hero h1{font-size:clamp(40px,12.4vw,92px)!important;line-height:.9!important;margin:0!important}
+  .hero h1 .w2{font-size:min(.86em,8vw)!important;padding-left:.4em!important}
+  html body .hero h1 .w3{padding-left:1.1em!important}
+  .hero-stage{order:2!important;flex:1;padding:14px 22px 18px!important;display:flex!important;align-items:flex-end;justify-content:center;min-height:0}
+  html body .hero-figure,html.hero-go body .hero-figure{position:relative!important;inset:auto!important;top:auto!important;right:auto!important;bottom:auto!important;
+    width:auto!important;height:min(42svh,72vw)!important;aspect-ratio:4/5;margin:0 auto!important;translate:0 0!important}
+  html:not(.hero-go) body .hero-figure{translate:0 110vh!important}
+  .hero-photo{width:100%!important;height:100%!important;aspect-ratio:auto!important}
+  .hero-tag{font-size:12px!important;padding:7px 12px!important;bottom:-10px!important}
+  .hero-sun{width:min(52vw,320px)!important;left:4%!important;top:auto!important;bottom:22%!important}
+  .hero-daisies{width:100vw!important;max-height:30svh;object-fit:cover;object-position:0 100%;z-index:2!important}
+  html body .hero .hero-daisy{width:clamp(110px,26vw,190px)!important;left:auto!important;right:3%!important;bottom:2%!important;translate:0 0!important;margin:0!important;z-index:7!important}
+  .hero .fl{display:none!important}
+}
+@media (max-width:899px){
+  html body .hero-figure,html.hero-go body .hero-figure{height:min(54svh,92vw,calc(100svh - 300px))!important;z-index:4!important}
+  .hero-tag{z-index:8!important}
+  .hero-daisies{max-height:24svh}
+}
+@media (max-width:899px){
+  .hero-stage{position:relative;z-index:5!important}
+  .hero h1{font-size:clamp(40px,min(12.4vw,9.4svh),92px)!important}
+}
+@media (max-width:899px){.hero-stage{align-items:center!important}}
+/* the bunny takes his time again */
+.rabbit.go{animation-duration:6.4s!important}.rabbit.go span{animation-duration:6.4s!important}.rabbit.go.fast{animation-duration:4.8s!important}.rabbit.go.fast span{animation-duration:4.8s!important}
+/* Skilled arrives sooner */
+html.hero-go .hero h1 .w3{transition-delay:.85s!important}
+@media (max-width:899px){.hero-stage{align-items:flex-start!important;padding-top:30px!important}}
 
 /* ============ Jump-in link bar ============ */
 .jump{position:relative;z-index:50;background:var(--night);padding:18px clamp(16px,4vw,56px) 22px}
@@ -2513,6 +2547,9 @@ html.in-vx .drift{opacity:0!important;visibility:hidden!important}
 .book li.bk-now span::before{content:"";width:.55em;height:.55em;border-radius:50%;background:#ec2b7a;box-shadow:0 0 6px #ec2b7a;animation:bkLive 1.2s ease-in-out infinite}
 @keyframes bkLive{50%{opacity:.25}}
 @media (max-width:900px){.brew-river{display:none!important}}
+/* portrait backdrops: flat color, no bright center */
+.connect-photo{background:#f57c24!important}
+.framed .ph.ph-cut{background:#fe7bbf!important}
 
 /* ============ Pop-up windows ============ */
 .modal{position:fixed;inset:0;display:grid;place-items:center;padding:16px;background:rgba(18,8,36,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:fadeIn .3s ease}
@@ -2938,6 +2975,12 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
 .sol-bar .sol-x{background:var(--ink)!important;color:#fff!important}
 .sol-bar .sol-x:hover{background:#ec2b7a!important}
 .sol-overlay.is-fs{padding:0}.sol-overlay.is-fs .sol-table{max-width:none;border-radius:0}
+.sol-yay{position:absolute;left:50%;top:38%;width:clamp(150px,22vw,300px);z-index:1002;pointer-events:none;translate:-50% -50%;filter:drop-shadow(0 14px 22px rgba(0,0,0,.35));animation:solYay 1.1s cubic-bezier(.2,1.6,.4,1) both,solYayBob 2s ease-in-out 1.1s infinite;transition:opacity .6s,scale .6s}
+.sol-yay.bye{opacity:0;scale:.6}
+@keyframes solYay{0%{scale:0;rotate:-40deg;opacity:0}60%{scale:1.15;rotate:8deg;opacity:1}100%{scale:1;rotate:-4deg}}
+@keyframes solYayBob{50%{translate:-50% calc(-50% - 12px);rotate:4deg}}
+.sol-win-card{margin-top:clamp(140px,22vw,260px)}
+@media (prefers-reduced-motion:reduce){.sol-yay{animation:none}}
 
 
 </style>
@@ -2963,7 +3006,7 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
   <img class="fl" src="assets/proj/gem-star3-yellow.webp" alt="" aria-hidden="true" style="left:3%;top:58%;width:44px;--r:14deg;--d:7.5s">
   <img class="fl" src="assets/proj/cr-star-rpink.webp" alt="" aria-hidden="true" style="left:42%;top:10%;width:clamp(60px,6vw,96px);--r:-12deg;--d:7s">
   <img class="fl" src="assets/proj/gem-pink.webp" alt="" aria-hidden="true" style="right:3%;top:12%;width:clamp(70px,7vw,120px);--r:10deg;--d:9s;--dl:-2s">
-  <img class="fl" src="assets/proj/cr-heart.webp" alt="" aria-hidden="true" style="left:21%;bottom:27%;width:clamp(48px,4.4vw,80px);--r:-8deg;--d:8s;--dl:-4s">
+  <img class="fl" src="assets/proj/cr-heart.webp" alt="" aria-hidden="true" style="left:calc(21% - 25px);bottom:27%;width:clamp(48px,4.4vw,80px);--r:-8deg;--d:8s;--dl:-4s">
   <div class="hero-copy">
     <h1 id="heroTitle"><span class="w1">Powerful.</span> <span class="w2">Memorable.</span> <span class="w3">Skilled.</span></h1>
     <div class="hero-qa aim">
@@ -2976,7 +3019,7 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
   <div class="hero-stage">
     <div class="hero-sun" aria-hidden="true"></div>
     <figure class="hero-figure">
-      <div class="hero-photo"><img src="assets/proj/portrait-blue.webp" alt="Lindsay Morton"></div>
+      <div class="hero-photo"><img src="assets/proj/portrait-blue-clean.webp" alt="Lindsay Morton"></div>
       <figcaption class="hero-tag">Always curious. Always building. ✳</figcaption>
     </figure>
   </div>
@@ -3031,7 +3074,7 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
       <div class="shelf" aria-hidden="true"><img loading="lazy" decoding="async" src="assets/proj/door-halftone.webp" alt=""></div>
     </div>
     <div class="side side-about">
-      <figure class="frame-big framed" aria-hidden="true"><span class="ph ph-cut"><img loading="lazy" decoding="async" src="assets/proj/portrait-lime.webp" alt=""></span><img loading="lazy" decoding="async" class="fr" src="assets/proj/pink-frame.webp" alt=""></figure>
+      <figure class="frame-big framed" aria-hidden="true"><span class="ph ph-cut"><img loading="lazy" decoding="async" src="assets/proj/portrait-lime-clean.webp" alt=""></span><img loading="lazy" decoding="async" class="fr" src="assets/proj/pink-frame.webp" alt=""></figure>
       <div class="card study-card">
         <span class="sc-tab" aria-hidden="true">Room No. 01</span>
         <span class="sc-stamp" aria-hidden="true">15+ yrs<br><small>in growth</small></span>
@@ -3107,7 +3150,7 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
     <span class="cl" style="--x:50%;--len:clamp(40px,5vw,80px);--w:clamp(110px,12vw,190px);--d:.9s;--sw:3deg"><img loading="lazy" decoding="async" src="assets/proj/cloud3.webp" alt=""></span>
     <span class="cl" style="--x:74%;--len:clamp(80px,11vw,160px);--w:clamp(100px,11vw,170px);--d:1.35s;--sw:-2.5deg"><img loading="lazy" decoding="async" src="assets/proj/cloud4.webp" alt=""></span>
   </div>
-  <div class="connect-art"><div class="connect-sun" aria-hidden="true"></div><div class="connect-photo"><img decoding="async" src="assets/proj/portrait-pink.webp" alt="Lindsay Morton" loading="lazy"></div><span class="connect-tag" aria-hidden="true">Say hi ✳</span></div>
+  <div class="connect-art"><div class="connect-sun" aria-hidden="true"></div><div class="connect-photo"><img decoding="async" src="assets/proj/portrait-pink-clean.webp" alt="Lindsay Morton" loading="lazy"></div><span class="connect-tag" aria-hidden="true">Say hi ✳</span></div>
   <div class="connect-copy">
     <h2 id="connectTitle"><span class="fw" style="--i:0">Float</span> <span class="fw" style="--i:1">A</span> <em><span class="fw" style="--i:2">Note.</span></em></h2>
     <p class="connect-lede">Always interested in connecting with people building interesting things.</p>
@@ -3267,7 +3310,7 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
     <span class="cl" style="--x:50%;--len:clamp(40px,5vw,80px);--w:clamp(110px,12vw,190px);--d:.9s;--sw:3deg"><img loading="lazy" decoding="async" src="assets/proj/cloud3.webp" alt=""></span>
     <span class="cl" style="--x:74%;--len:clamp(80px,11vw,160px);--w:clamp(100px,11vw,170px);--d:1.35s;--sw:-2.5deg"><img loading="lazy" decoding="async" src="assets/proj/cloud4.webp" alt=""></span>
   </div>
-  <div class="connect-art"><div class="connect-sun" aria-hidden="true"></div><div class="connect-photo"><img decoding="async" src="assets/proj/portrait-pink.webp" alt="Lindsay Morton" loading="lazy"></div><span class="connect-tag" aria-hidden="true">Say hi ✳</span></div>
+  <div class="connect-art"><div class="connect-sun" aria-hidden="true"></div><div class="connect-photo"><img decoding="async" src="assets/proj/portrait-pink-clean.webp" alt="Lindsay Morton" loading="lazy"></div><span class="connect-tag" aria-hidden="true">Say hi ✳</span></div>
   <div class="connect-copy">
     <h2 id="connectTitle2"><span class="fw" style="--i:0">Let’s</span> <span class="fw" style="--i:1">build</span> <em><span class="fw" style="--i:2">something.</span></em></h2>
     <p class="connect-lede">Ideas are my favorite thing. Send me yours: a project, a role, a brand that needs a pull.</p>
@@ -3316,7 +3359,7 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
 <template id="tpl-about">
   <div class="paper story">
     <div class="story-top">
-      <figure class="frame-sm framed" aria-hidden="true"><span class="ph ph-cut"><img loading="lazy" decoding="async" src="assets/proj/portrait-lime.webp" alt=""></span><img loading="lazy" decoding="async" class="fr" src="assets/proj/pink-frame.webp" alt=""></figure>
+      <figure class="frame-sm framed" aria-hidden="true"><span class="ph ph-cut"><img loading="lazy" decoding="async" src="assets/proj/portrait-lime-clean.webp" alt=""></span><img loading="lazy" decoding="async" class="fr" src="assets/proj/pink-frame.webp" alt=""></figure>
       <div>
         <span class="kick">Meet Lindsay</span>
         <h2>Powerful. Strategic. Visionary.</h2>
@@ -5584,6 +5627,9 @@ var SOL_DEALS = {"easy":["c_2?H@CI6AMB8=5>OS9RZLWaF14J^VG;`<N\\UK3TE]QXYDP07:b["
     var wrap = document.createElement("div"); wrap.className = "sol-win";
     wrap.innerHTML = '<div class="sol-win-card"><p class="sol-win-h">You did it!</p><p>' + G.moves + " moves · " + fmt(G.secs) + " · score " + score() + '</p><button type="button" class="btn">Deal again</button></div>';
     root.appendChild(wrap); wrap.querySelector("button").addEventListener("click", function () { wrap.remove(); newGame(G.mode); });
+    /* a congrats sticker pops out: the YAY! or the smart Lego */
+    var st = document.createElement("img"); st.className = "sol-yay"; st.alt = ""; st.src = Math.random() < .5 ? "assets/proj/pr-yay.webp" : "assets/proj/vx-smart.webp";
+    root.appendChild(st); setTimeout(function () { st.classList.add("bye"); }, 5200); setTimeout(function () { st.remove(); }, 6000);
     if (reduce) return;
     var cv = document.createElement("canvas"), W = board.clientWidth, H = board.clientHeight, dpr = Math.min(2, devicePixelRatio || 1);
     cv.width = W * dpr; cv.height = H * dpr; cv.className = "sol-cascade"; board.appendChild(cv);

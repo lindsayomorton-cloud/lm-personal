@@ -1174,3 +1174,6 @@ html.in-vx .drift{opacity:0!important;visibility:hidden!important}
 .book li.bk-now span::before{content:"";width:.55em;height:.55em;border-radius:50%;background:#ec2b7a;box-shadow:0 0 6px #ec2b7a;animation:bkLive 1.2s ease-in-out infinite}
 @keyframes bkLive{50%{opacity:.25}}
 @media (max-width:900px){.brew-river{display:none!important}}
+/* portrait backdrops: flat color, no bright center */
+.connect-photo{background:#f57c24!important}
+.framed .ph.ph-cut{background:#fe7bbf!important}

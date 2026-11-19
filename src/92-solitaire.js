@@ -412,6 +412,9 @@
     var wrap = document.createElement("div"); wrap.className = "sol-win";
     wrap.innerHTML = '<div class="sol-win-card"><p class="sol-win-h">You did it!</p><p>' + G.moves + " moves · " + fmt(G.secs) + " · score " + score() + '</p><button type="button" class="btn">Deal again</button></div>';
     root.appendChild(wrap); wrap.querySelector("button").addEventListener("click", function () { wrap.remove(); newGame(G.mode); });
+    /* a congrats sticker pops out: the YAY! or the smart Lego */
+    var st = document.createElement("img"); st.className = "sol-yay"; st.alt = ""; st.src = Math.random() < .5 ? "assets/proj/pr-yay.webp" : "assets/proj/vx-smart.webp";
+    root.appendChild(st); setTimeout(function () { st.classList.add("bye"); }, 5200); setTimeout(function () { st.remove(); }, 6000);
     if (reduce) return;
     var cv = document.createElement("canvas"), W = board.clientWidth, H = board.clientHeight, dpr = Math.min(2, devicePixelRatio || 1);
     cv.width = W * dpr; cv.height = H * dpr; cv.className = "sol-cascade"; board.appendChild(cv);

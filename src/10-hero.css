@@ -422,3 +422,37 @@ html body .hero .hero-daisy{left:clamp(240px,56vw,1000px)!important;top:auto!imp
   .hero h1 .w2{font-size:.82em!important}
   html body .hero-figure{height:min(74svh,84%)!important;right:-3%!important}
 }
+/* ===== narrow screens (under 900px): one tidy first screen =====
+   words up top, a smaller arched photo under them, daisies along the bottom, all inside the first view */
+@media (max-width:899px){
+  .hero{display:flex!important;flex-direction:column!important;min-height:100svh!important;max-height:none!important}
+  .hero-copy{order:1!important;padding:clamp(84px,13vw,110px) 22px 0!important;z-index:6!important;position:relative}
+  .hero h1{font-size:clamp(40px,12.4vw,92px)!important;line-height:.9!important;margin:0!important}
+  .hero h1 .w2{font-size:min(.86em,8vw)!important;padding-left:.4em!important}
+  html body .hero h1 .w3{padding-left:1.1em!important}
+  .hero-stage{order:2!important;flex:1;padding:14px 22px 18px!important;display:flex!important;align-items:flex-end;justify-content:center;min-height:0}
+  html body .hero-figure,html.hero-go body .hero-figure{position:relative!important;inset:auto!important;top:auto!important;right:auto!important;bottom:auto!important;
+    width:auto!important;height:min(42svh,72vw)!important;aspect-ratio:4/5;margin:0 auto!important;translate:0 0!important}
+  html:not(.hero-go) body .hero-figure{translate:0 110vh!important}
+  .hero-photo{width:100%!important;height:100%!important;aspect-ratio:auto!important}
+  .hero-tag{font-size:12px!important;padding:7px 12px!important;bottom:-10px!important}
+  .hero-sun{width:min(52vw,320px)!important;left:4%!important;top:auto!important;bottom:22%!important}
+  .hero-daisies{width:100vw!important;max-height:30svh;object-fit:cover;object-position:0 100%;z-index:2!important}
+  html body .hero .hero-daisy{width:clamp(110px,26vw,190px)!important;left:auto!important;right:3%!important;bottom:2%!important;translate:0 0!important;margin:0!important;z-index:7!important}
+  .hero .fl{display:none!important}
+}
+@media (max-width:899px){
+  html body .hero-figure,html.hero-go body .hero-figure{height:min(54svh,92vw,calc(100svh - 300px))!important;z-index:4!important}
+  .hero-tag{z-index:8!important}
+  .hero-daisies{max-height:24svh}
+}
+@media (max-width:899px){
+  .hero-stage{position:relative;z-index:5!important}
+  .hero h1{font-size:clamp(40px,min(12.4vw,9.4svh),92px)!important}
+}
+@media (max-width:899px){.hero-stage{align-items:center!important}}
+/* the bunny takes his time again */
+.rabbit.go{animation-duration:6.4s!important}.rabbit.go span{animation-duration:6.4s!important}.rabbit.go.fast{animation-duration:4.8s!important}.rabbit.go.fast span{animation-duration:4.8s!important}
+/* Skilled arrives sooner */
+html.hero-go .hero h1 .w3{transition-delay:.85s!important}
+@media (max-width:899px){.hero-stage{align-items:flex-start!important;padding-top:30px!important}}
