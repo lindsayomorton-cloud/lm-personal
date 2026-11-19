@@ -165,13 +165,13 @@
       if (k < 1) requestAnimationFrame(frame); else { root.style.scrollBehavior = ""; quit(); }
     })(t1);
   }
-  if (!reduce) { var heroEl = document.querySelector(".hero"); if (heroEl) heroEl.addEventListener("mousemove", function () { if (Date.now() - t0 > 3000) window.__heroHover = true; }); }
+  if (!reduce) { var heroEl = document.querySelector(".hero"); if (heroEl) heroEl.addEventListener("mousemove", function () { if (Date.now() - t0 > 2000) window.__heroHover = true; }); }
   if (reduce) { if (rabbit) rabbit.remove(); }
   /* he waits until the loading screen is completely gone and the hero is on screen */
   /* he runs about two seconds after the page opens (or sooner, the moment you start scrolling) */
   else (function wait() {
     var hb = document.querySelector(".hero").getBoundingClientRect(), heroUp = root.classList.contains("tall") || (hb.bottom > innerHeight * .5 && hb.top < innerHeight * .5);
-    if (hideLoader.fading && heroUp && (Date.now() - t0 > 6500 || holdScroll.t || window.__heroHover)) { if (holdScroll.t) rabbit.classList.add("fast"); runRabbit(); } else setTimeout(wait, 100);
+    if (hideLoader.fading && heroUp && (Date.now() - t0 > 4000 || holdScroll.t || window.__heroHover)) { if (holdScroll.t) rabbit.classList.add("fast"); runRabbit(); } else setTimeout(wait, 100);
   })();
   /* if you try to scroll before he has run, the page holds still while he dashes across (a little quicker),
      then dives, and the site carries you down into the vortex */

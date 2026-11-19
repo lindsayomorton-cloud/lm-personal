@@ -2817,7 +2817,6 @@ a.hi.note-landed{animation:noteLand 1.2s cubic-bezier(.2,1.6,.4,1)}
       <p class="qa1"><b class="qa-k">Ideas?</b> <span class="qa-bar"><span class="sr">I spin them into universes.</span><span class="qa-letters" aria-hidden="true"><i style="--i:0">I</i><i style="--i:1">&nbsp;</i><i style="--i:2">s</i><i style="--i:3">p</i><i style="--i:4">i</i><i style="--i:5">n</i><i style="--i:6">&nbsp;</i><i style="--i:7">t</i><i style="--i:8">h</i><i style="--i:9">e</i><i style="--i:10">m</i><i style="--i:11">&nbsp;</i><i style="--i:12">i</i><i style="--i:13">n</i><i style="--i:14">t</i><i style="--i:15">o</i><i style="--i:16">&nbsp;</i><i style="--i:17">u</i><i style="--i:18">n</i><i style="--i:19">i</i><i style="--i:20">v</i><i style="--i:21">e</i><i style="--i:22">r</i><i style="--i:23">s</i><i style="--i:24">e</i><i style="--i:25">s</i><i style="--i:26">.</i></span></span></p>
       <p class="qa2"><b class="qa-k">Brands?</b> <span class="sr">I magnetize them.</span><span class="qa-words" aria-hidden="true"><i style="--i:0">I</i> <i style="--i:1">magnetize</i> <i style="--i:2">them.</i></span></p>
     </div>
-    <div class="hero-actions"><a class="btn" href="#doors">View projects ↓</a><a class="hero-link" href="#" data-room="about">Get to know me →</a></div>
   </div>
   <div class="hero-stage">
     <div class="hero-sun" aria-hidden="true"></div>
@@ -3489,13 +3488,13 @@ var FRAMES = { lime: "assets/proj/frame-lime-orig.webp", blush: "assets/proj/fra
       if (k < 1) requestAnimationFrame(frame); else { root.style.scrollBehavior = ""; quit(); }
     })(t1);
   }
-  if (!reduce) { var heroEl = document.querySelector(".hero"); if (heroEl) heroEl.addEventListener("mousemove", function () { if (Date.now() - t0 > 3000) window.__heroHover = true; }); }
+  if (!reduce) { var heroEl = document.querySelector(".hero"); if (heroEl) heroEl.addEventListener("mousemove", function () { if (Date.now() - t0 > 2000) window.__heroHover = true; }); }
   if (reduce) { if (rabbit) rabbit.remove(); }
   /* he waits until the loading screen is completely gone and the hero is on screen */
   /* he runs about two seconds after the page opens (or sooner, the moment you start scrolling) */
   else (function wait() {
     var hb = document.querySelector(".hero").getBoundingClientRect(), heroUp = root.classList.contains("tall") || (hb.bottom > innerHeight * .5 && hb.top < innerHeight * .5);
-    if (hideLoader.fading && heroUp && (Date.now() - t0 > 6500 || holdScroll.t || window.__heroHover)) { if (holdScroll.t) rabbit.classList.add("fast"); runRabbit(); } else setTimeout(wait, 100);
+    if (hideLoader.fading && heroUp && (Date.now() - t0 > 4000 || holdScroll.t || window.__heroHover)) { if (holdScroll.t) rabbit.classList.add("fast"); runRabbit(); } else setTimeout(wait, 100);
   })();
   /* if you try to scroll before he has run, the page holds still while he dashes across (a little quicker),
      then dives, and the site carries you down into the vortex */
