@@ -515,3 +515,14 @@ html.bunny-zoom .hero h1{text-shadow:none}
 .daisy-call .tag-hole{right:34px;width:14px;height:14px;margin-top:-7px}
 .daisy-call .tag-string{position:absolute;right:-34px;top:50%;width:52px;height:2px;background:#e9e3ee;rotate:22deg;transform-origin:0 50%;box-shadow:0 1px 0 rgba(0,0,0,.2)}
 @media (max-width:899px){.daisy-call{font-size:26px!important;padding:.4em 1.3em .45em .9em!important}.daisy-call .tag-hole{right:26px;width:10px;height:10px;margin-top:-5px}.daisy-call .tag-string{display:none}}
+/* tag on the stem, in an orange-red-pink gradient */
+.daisy-call::before{background:linear-gradient(120deg,#ff8a1f 0%,#ff4a3d 45%,#ec2b7a 100%)!important}
+.daisy-call:hover::before{background:linear-gradient(120deg,#ffa04a 0%,#ff6152 45%,#f2479a 100%)!important}
+.daisy-call{color:#fff!important;text-shadow:0 2px 0 rgba(90,10,30,.45)!important;transform-origin:100% 50%!important;
+  filter:drop-shadow(0 8px 10px rgba(60,10,40,.4)) drop-shadow(0 0 22px rgba(255,120,60,.85)) drop-shadow(0 0 40px rgba(236,43,122,.55))!important}
+.daisy-call .tag-hole{background:#3a0a18}
+.daisy-call .tag-string{right:-30px;width:34px;rotate:0deg;background:#f6efe8}
+@keyframes tagSwing{0%,100%{rotate:-7deg;translate:-50% -100%}50%{rotate:3deg;translate:-50% -100%}}
+/* while the tag is calling, the headline steps back to half strength */
+.hero h1{transition:opacity .6s ease}
+html.daisy-calling .hero h1{opacity:.5}

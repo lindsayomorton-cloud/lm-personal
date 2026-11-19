@@ -612,6 +612,17 @@ html.bunny-zoom .hero h1{text-shadow:none}
 .daisy-call .tag-hole{right:34px;width:14px;height:14px;margin-top:-7px}
 .daisy-call .tag-string{position:absolute;right:-34px;top:50%;width:52px;height:2px;background:#e9e3ee;rotate:22deg;transform-origin:0 50%;box-shadow:0 1px 0 rgba(0,0,0,.2)}
 @media (max-width:899px){.daisy-call{font-size:26px!important;padding:.4em 1.3em .45em .9em!important}.daisy-call .tag-hole{right:26px;width:10px;height:10px;margin-top:-5px}.daisy-call .tag-string{display:none}}
+/* tag on the stem, in an orange-red-pink gradient */
+.daisy-call::before{background:linear-gradient(120deg,#ff8a1f 0%,#ff4a3d 45%,#ec2b7a 100%)!important}
+.daisy-call:hover::before{background:linear-gradient(120deg,#ffa04a 0%,#ff6152 45%,#f2479a 100%)!important}
+.daisy-call{color:#fff!important;text-shadow:0 2px 0 rgba(90,10,30,.45)!important;transform-origin:100% 50%!important;
+  filter:drop-shadow(0 8px 10px rgba(60,10,40,.4)) drop-shadow(0 0 22px rgba(255,120,60,.85)) drop-shadow(0 0 40px rgba(236,43,122,.55))!important}
+.daisy-call .tag-hole{background:#3a0a18}
+.daisy-call .tag-string{right:-30px;width:34px;rotate:0deg;background:#f6efe8}
+@keyframes tagSwing{0%,100%{rotate:-7deg;translate:-50% -100%}50%{rotate:3deg;translate:-50% -100%}}
+/* while the tag is calling, the headline steps back to half strength */
+.hero h1{transition:opacity .6s ease}
+html.daisy-calling .hero h1{opacity:.5}
 
 /* ============ Jump-in link bar ============ */
 .jump{position:relative;z-index:50;background:var(--night);padding:18px clamp(16px,4vw,56px) 22px}
@@ -962,6 +973,21 @@ html.vq-go .vq-lock .vq-dol{animation:vqDolOnce 1.6s cubic-bezier(.45,0,.55,1) 2
   clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);filter:drop-shadow(0 0 6px #fff);opacity:0;animation:vxSpk 1.5s ease-out var(--dl) forwards}
 .vx-burst b:nth-child(3n){background:#ceff32}.vx-burst b:nth-child(3n+1){background:#fe7bbf}
 @keyframes vxSpk{0%{opacity:0;transform:translate(0,0) scale(.2) rotate(0)}25%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1) rotate(180deg)}}
+/* gems that leap with the dolphin, arcing up and over like spray */
+.dol-gems{position:fixed;width:0;height:0;z-index:96;pointer-events:none}
+.dol-gems img{position:absolute;left:0;top:0;translate:-50% -50%;opacity:0;filter:drop-shadow(0 0 8px rgba(255,255,255,.8));animation:dolGem 1.5s cubic-bezier(.3,.6,.4,1) var(--dl) forwards}
+@keyframes dolGem{0%{opacity:0;transform:translate(0,0) scale(.3) rotate(0)}15%{opacity:1}50%{transform:translate(calc(var(--dx) * .5),calc(-1 * var(--up))) scale(1) rotate(calc(var(--r) * .5))}85%{opacity:1}100%{opacity:0;transform:translate(var(--dx),20px) scale(.6) rotate(var(--r))}}
+/* sparkles poof out of "puzzle." as the dolphin dives into it */
+.pz-poof{position:fixed;width:0;height:0;z-index:97;pointer-events:none}
+.pz-flash{position:absolute;left:0;top:0;width:340px;height:200px;translate:-50% -50%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.95) 0,rgba(120,240,255,.6) 35%,rgba(120,240,255,0) 70%);animation:pzFlash .7s ease-out forwards}
+@keyframes pzFlash{0%{opacity:0;scale:.3}25%{opacity:1}100%{opacity:0;scale:1.4}}
+.pz-poof b{position:absolute;left:0;top:0;width:var(--z);height:var(--z);translate:-50% -50%;background:#fff;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);filter:drop-shadow(0 0 6px #fff);opacity:0;animation:pzSpk 1.3s ease-out var(--dl) forwards}
+.pz-poof b:nth-child(3n){background:#7ff3ff}.pz-poof b:nth-child(3n+1){background:#fe7bbf}.pz-poof b:nth-child(4n){background:#ceff32}
+@keyframes pzSpk{0%{opacity:0;transform:translate(0,0) scale(.3)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1) rotate(180deg)}}
+/* balloons drift in from the edges and get smaller and smaller down the vortex */
+.vx-balloons{position:fixed;left:50%;top:50%;width:0;height:0;z-index:94;pointer-events:none}
+.vx-balloons img{position:absolute;left:0;top:0;height:auto;translate:-50% -50%;opacity:0;filter:drop-shadow(0 10px 16px rgba(20,0,60,.35));animation:vxBalloon 4.2s cubic-bezier(.4,0,.6,1) var(--dl) forwards}
+@keyframes vxBalloon{0%{opacity:0;transform:translate(var(--sx),var(--sy)) scale(1.15) rotate(var(--r))}12%{opacity:1}45%{transform:translate(var(--mx),var(--my)) scale(.75) rotate(calc(var(--r) * -.5))}85%{opacity:.9}100%{opacity:0;transform:translate(0,0) scale(.05) rotate(calc(var(--r) * 2))}}
 
 /* ============ Doors: three doors on the wallpaper, each with a shelf of flowers ============ */
 /* the wallpaper belongs to the doors alone, so it never peeks through anywhere else */
@@ -3973,10 +3999,40 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   /* the question spins up out of the wormhole first; once "puzzle." lands, everything else pours in */
   function startQuote() {
     if (startQuote.done) return; startQuote.done = true; root.classList.add("vq-go");
-    setTimeout(vxBurst, 3300);   /* the dolphin lands at 4.3s: smoke and sparkles puff up a second before he's fully down */
+    setTimeout(vxBurst, 3300);
+    setTimeout(dolGems, 2700);   /* gems leap up alongside the dolphin's jump */
+    setTimeout(puzzlePoof, 4250);   /* he dives into "puzzle.": sparkles poof out of the word and balloons drift in and shrink away into the vortex */   /* the dolphin lands at 4.3s: smoke and sparkles puff up a second before he's fully down */
     setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); }, 4900);   /* the chair, teacup and the rest pour in the moment the dolphin splashes down */
   }
   /* a puff of smoke and a spray of sparkles as everything else pours into the vortex */
+  function dolGems() {
+    if (reduce) return;
+    var dol = document.querySelector(".vq-lock .vq-dol"), r = dol ? dol.getBoundingClientRect() : null;
+    var G = document.createElement("div"); G.className = "dol-gems"; G.setAttribute("aria-hidden", "true");
+    G.style.left = (r ? r.left + r.width * .6 : innerWidth / 2) + "px"; G.style.top = (r ? r.top + r.height * .7 : innerHeight / 2) + "px";
+    var pics = ["gem-star3-pink", "gem-flower-blue", "gem-star3-yellow", "cr-heart", "gem-star-glass", "gem-pink", "gem-star3-blue"], h = "";
+    for (var k = 0; k < 9; k++) { var dx = 40 + k * 34 + Math.random() * 30, up = 120 + Math.random() * 150;
+      h += '<img src="assets/proj/' + pics[k % pics.length] + '.webp" alt="" style="width:' + Math.round(28 + Math.random() * 26) + 'px;--dx:' + dx.toFixed(0) + 'px;--up:' + up.toFixed(0) + 'px;--dl:' + (k * .09).toFixed(2) + 's;--r:' + Math.round(-200 + Math.random() * 400) + 'deg">'; }
+    G.innerHTML = h; document.body.appendChild(G); setTimeout(function () { G.remove(); }, 2600);
+  }
+  function puzzlePoof() {
+    if (reduce) return;
+    var w = [].slice.call(document.querySelectorAll(".vq-lock .vw")).pop(), r = w ? w.getBoundingClientRect() : { left: innerWidth / 2, top: innerHeight / 2, width: 0, height: 0 };
+    var P = document.createElement("div"); P.className = "pz-poof"; P.setAttribute("aria-hidden", "true");
+    P.style.left = (r.left + r.width / 2) + "px"; P.style.top = (r.top + r.height / 2) + "px";
+    var h = '<i class="pz-flash"></i>';
+    for (var k = 0; k < 26; k++) { var an = k / 26 * Math.PI * 2 + Math.random() * .3, d = 70 + Math.random() * 190;
+      h += '<b style="--dx:' + (Math.cos(an) * d * 1.3).toFixed(0) + 'px;--dy:' + (Math.sin(an) * d).toFixed(0) + 'px;--z:' + (12 + Math.random() * 22).toFixed(0) + 'px;--dl:' + (Math.random() * .2).toFixed(2) + 's"></b>'; }
+    P.innerHTML = h; document.body.appendChild(P); setTimeout(function () { P.remove(); }, 2000);
+    /* balloons float in from the edges, then shrink away down the middle of the vortex */
+    var B = document.createElement("div"); B.className = "vx-balloons"; B.setAttribute("aria-hidden", "true");
+    var pics = ["holo-heart", "holo-star-blue", "holo-star-puffy", "holo-star-teal", "holo-star-dark", "holo-heart", "holo-star-puffy", "holo-star-blue", "holo-star-teal", "holo-heart"], hb = "";
+    pics.forEach(function (pic, i) {
+      var an = i / pics.length * Math.PI * 2 + .3, sx = Math.cos(an) * 60, sy = Math.sin(an) * 52 + 10;
+      hb += '<img src="assets/proj/' + pic + '.webp" alt="" style="width:' + Math.round(110 + Math.random() * 70) + 'px;--sx:' + sx.toFixed(1) + 'vw;--sy:' + sy.toFixed(1) + 'vh;--mx:' + (sx * .45).toFixed(1) + 'vw;--my:' + (sy * .4).toFixed(1) + 'vh;--dl:' + (.15 + i * .18).toFixed(2) + 's;--r:' + Math.round(-30 + Math.random() * 60) + 'deg">';
+    });
+    B.innerHTML = hb; document.body.appendChild(B); setTimeout(function () { B.remove(); }, 6500);
+  }
   function vxBurst() {
     if (reduce) return;
     var B = document.createElement("div"); B.className = "vx-burst"; B.setAttribute("aria-hidden", "true");
@@ -5192,7 +5248,9 @@ window.__mail = function () {
   b.setAttribute("aria-label", "Click me to let the bunny out");
   function place() {
     var h = hero.getBoundingClientRect(), d = dz.getBoundingClientRect();
-    b.style.left = (d.left - h.left + d.width * .5) + "px"; b.style.top = (d.top - h.top + d.height * .46) + "px";   /* sits right on the flower head */
+    /* the tag hangs off the daisy's stem: its string end ties on at the stem, the tag sways out to the left */
+    var stemX = d.left - h.left + d.width * .5, stemY = d.top - h.top + d.height * .6, tw = b.offsetWidth || 220;
+    b.style.left = (stemX - tw / 2 - 18) + "px"; b.style.top = (stemY + (b.offsetHeight || 60) / 2) + "px";
   }
   function go() {
     if (window.__daisyGo) return; window.__daisyGo = true;

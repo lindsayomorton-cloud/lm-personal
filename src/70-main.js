@@ -304,10 +304,40 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   /* the question spins up out of the wormhole first; once "puzzle." lands, everything else pours in */
   function startQuote() {
     if (startQuote.done) return; startQuote.done = true; root.classList.add("vq-go");
-    setTimeout(vxBurst, 3300);   /* the dolphin lands at 4.3s: smoke and sparkles puff up a second before he's fully down */
+    setTimeout(vxBurst, 3300);
+    setTimeout(dolGems, 2700);   /* gems leap up alongside the dolphin's jump */
+    setTimeout(puzzlePoof, 4250);   /* he dives into "puzzle.": sparkles poof out of the word and balloons drift in and shrink away into the vortex */   /* the dolphin lands at 4.3s: smoke and sparkles puff up a second before he's fully down */
     setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); }, 4900);   /* the chair, teacup and the rest pour in the moment the dolphin splashes down */
   }
   /* a puff of smoke and a spray of sparkles as everything else pours into the vortex */
+  function dolGems() {
+    if (reduce) return;
+    var dol = document.querySelector(".vq-lock .vq-dol"), r = dol ? dol.getBoundingClientRect() : null;
+    var G = document.createElement("div"); G.className = "dol-gems"; G.setAttribute("aria-hidden", "true");
+    G.style.left = (r ? r.left + r.width * .6 : innerWidth / 2) + "px"; G.style.top = (r ? r.top + r.height * .7 : innerHeight / 2) + "px";
+    var pics = ["gem-star3-pink", "gem-flower-blue", "gem-star3-yellow", "cr-heart", "gem-star-glass", "gem-pink", "gem-star3-blue"], h = "";
+    for (var k = 0; k < 9; k++) { var dx = 40 + k * 34 + Math.random() * 30, up = 120 + Math.random() * 150;
+      h += '<img src="assets/proj/' + pics[k % pics.length] + '.webp" alt="" style="width:' + Math.round(28 + Math.random() * 26) + 'px;--dx:' + dx.toFixed(0) + 'px;--up:' + up.toFixed(0) + 'px;--dl:' + (k * .09).toFixed(2) + 's;--r:' + Math.round(-200 + Math.random() * 400) + 'deg">'; }
+    G.innerHTML = h; document.body.appendChild(G); setTimeout(function () { G.remove(); }, 2600);
+  }
+  function puzzlePoof() {
+    if (reduce) return;
+    var w = [].slice.call(document.querySelectorAll(".vq-lock .vw")).pop(), r = w ? w.getBoundingClientRect() : { left: innerWidth / 2, top: innerHeight / 2, width: 0, height: 0 };
+    var P = document.createElement("div"); P.className = "pz-poof"; P.setAttribute("aria-hidden", "true");
+    P.style.left = (r.left + r.width / 2) + "px"; P.style.top = (r.top + r.height / 2) + "px";
+    var h = '<i class="pz-flash"></i>';
+    for (var k = 0; k < 26; k++) { var an = k / 26 * Math.PI * 2 + Math.random() * .3, d = 70 + Math.random() * 190;
+      h += '<b style="--dx:' + (Math.cos(an) * d * 1.3).toFixed(0) + 'px;--dy:' + (Math.sin(an) * d).toFixed(0) + 'px;--z:' + (12 + Math.random() * 22).toFixed(0) + 'px;--dl:' + (Math.random() * .2).toFixed(2) + 's"></b>'; }
+    P.innerHTML = h; document.body.appendChild(P); setTimeout(function () { P.remove(); }, 2000);
+    /* balloons float in from the edges, then shrink away down the middle of the vortex */
+    var B = document.createElement("div"); B.className = "vx-balloons"; B.setAttribute("aria-hidden", "true");
+    var pics = ["holo-heart", "holo-star-blue", "holo-star-puffy", "holo-star-teal", "holo-star-dark", "holo-heart", "holo-star-puffy", "holo-star-blue", "holo-star-teal", "holo-heart"], hb = "";
+    pics.forEach(function (pic, i) {
+      var an = i / pics.length * Math.PI * 2 + .3, sx = Math.cos(an) * 60, sy = Math.sin(an) * 52 + 10;
+      hb += '<img src="assets/proj/' + pic + '.webp" alt="" style="width:' + Math.round(110 + Math.random() * 70) + 'px;--sx:' + sx.toFixed(1) + 'vw;--sy:' + sy.toFixed(1) + 'vh;--mx:' + (sx * .45).toFixed(1) + 'vw;--my:' + (sy * .4).toFixed(1) + 'vh;--dl:' + (.15 + i * .18).toFixed(2) + 's;--r:' + Math.round(-30 + Math.random() * 60) + 'deg">';
+    });
+    B.innerHTML = hb; document.body.appendChild(B); setTimeout(function () { B.remove(); }, 6500);
+  }
   function vxBurst() {
     if (reduce) return;
     var B = document.createElement("div"); B.className = "vx-burst"; B.setAttribute("aria-hidden", "true");
@@ -1523,7 +1553,9 @@ window.__mail = function () {
   b.setAttribute("aria-label", "Click me to let the bunny out");
   function place() {
     var h = hero.getBoundingClientRect(), d = dz.getBoundingClientRect();
-    b.style.left = (d.left - h.left + d.width * .5) + "px"; b.style.top = (d.top - h.top + d.height * .46) + "px";   /* sits right on the flower head */
+    /* the tag hangs off the daisy's stem: its string end ties on at the stem, the tag sways out to the left */
+    var stemX = d.left - h.left + d.width * .5, stemY = d.top - h.top + d.height * .6, tw = b.offsetWidth || 220;
+    b.style.left = (stemX - tw / 2 - 18) + "px"; b.style.top = (stemY + (b.offsetHeight || 60) / 2) + "px";
   }
   function go() {
     if (window.__daisyGo) return; window.__daisyGo = true;

@@ -347,3 +347,18 @@ html.vq-go .vq-lock .vq-dol{animation:vqDolOnce 1.6s cubic-bezier(.45,0,.55,1) 2
   clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);filter:drop-shadow(0 0 6px #fff);opacity:0;animation:vxSpk 1.5s ease-out var(--dl) forwards}
 .vx-burst b:nth-child(3n){background:#ceff32}.vx-burst b:nth-child(3n+1){background:#fe7bbf}
 @keyframes vxSpk{0%{opacity:0;transform:translate(0,0) scale(.2) rotate(0)}25%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1) rotate(180deg)}}
+/* gems that leap with the dolphin, arcing up and over like spray */
+.dol-gems{position:fixed;width:0;height:0;z-index:96;pointer-events:none}
+.dol-gems img{position:absolute;left:0;top:0;translate:-50% -50%;opacity:0;filter:drop-shadow(0 0 8px rgba(255,255,255,.8));animation:dolGem 1.5s cubic-bezier(.3,.6,.4,1) var(--dl) forwards}
+@keyframes dolGem{0%{opacity:0;transform:translate(0,0) scale(.3) rotate(0)}15%{opacity:1}50%{transform:translate(calc(var(--dx) * .5),calc(-1 * var(--up))) scale(1) rotate(calc(var(--r) * .5))}85%{opacity:1}100%{opacity:0;transform:translate(var(--dx),20px) scale(.6) rotate(var(--r))}}
+/* sparkles poof out of "puzzle." as the dolphin dives into it */
+.pz-poof{position:fixed;width:0;height:0;z-index:97;pointer-events:none}
+.pz-flash{position:absolute;left:0;top:0;width:340px;height:200px;translate:-50% -50%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.95) 0,rgba(120,240,255,.6) 35%,rgba(120,240,255,0) 70%);animation:pzFlash .7s ease-out forwards}
+@keyframes pzFlash{0%{opacity:0;scale:.3}25%{opacity:1}100%{opacity:0;scale:1.4}}
+.pz-poof b{position:absolute;left:0;top:0;width:var(--z);height:var(--z);translate:-50% -50%;background:#fff;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);filter:drop-shadow(0 0 6px #fff);opacity:0;animation:pzSpk 1.3s ease-out var(--dl) forwards}
+.pz-poof b:nth-child(3n){background:#7ff3ff}.pz-poof b:nth-child(3n+1){background:#fe7bbf}.pz-poof b:nth-child(4n){background:#ceff32}
+@keyframes pzSpk{0%{opacity:0;transform:translate(0,0) scale(.3)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1) rotate(180deg)}}
+/* balloons drift in from the edges and get smaller and smaller down the vortex */
+.vx-balloons{position:fixed;left:50%;top:50%;width:0;height:0;z-index:94;pointer-events:none}
+.vx-balloons img{position:absolute;left:0;top:0;height:auto;translate:-50% -50%;opacity:0;filter:drop-shadow(0 10px 16px rgba(20,0,60,.35));animation:vxBalloon 4.2s cubic-bezier(.4,0,.6,1) var(--dl) forwards}
+@keyframes vxBalloon{0%{opacity:0;transform:translate(var(--sx),var(--sy)) scale(1.15) rotate(var(--r))}12%{opacity:1}45%{transform:translate(var(--mx),var(--my)) scale(.75) rotate(calc(var(--r) * -.5))}85%{opacity:.9}100%{opacity:0;transform:translate(0,0) scale(.05) rotate(calc(var(--r) * 2))}}
