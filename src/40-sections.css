@@ -1179,3 +1179,4 @@ html.in-vx .drift{opacity:0!important;visibility:hidden!important}
 .framed .ph.ph-cut{background:#c9b8e8!important}
 .tv-sound{position:absolute;left:50%;bottom:16%;translate:-50% 0;z-index:9;font:800 13px/1 var(--body);padding:.6em 1em;border-radius:999px;border:2px solid #15302c;background:#ceff32;color:#15302c;cursor:pointer;animation:tvChip 1.4s ease-in-out infinite}
 @keyframes tvChip{50%{scale:1.08}}
+.dolphin.tv-dol{margin-left:-125px!important}
