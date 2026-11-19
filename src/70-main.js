@@ -1522,7 +1522,7 @@ window.__mail = function () {
   b.setAttribute("aria-label", "Click me to let the bunny out");
   function place() {
     var h = hero.getBoundingClientRect(), d = dz.getBoundingClientRect();
-    b.style.left = (d.left - h.left + d.width * (innerWidth < 900 ? .5 : .9)) + "px"; b.style.top = (d.top - h.top + d.height * .12) + "px";
+    b.style.left = (d.left - h.left + d.width * .5) + "px"; b.style.top = (d.top - h.top + d.height * .3) + "px";   /* sits right on the flower head */
   }
   function go() {
     if (window.__daisyGo) return; window.__daisyGo = true;
@@ -1530,9 +1530,13 @@ window.__mail = function () {
     if (window.__poof) window.__poof(dz);
   }
   b.addEventListener("click", go); dz.addEventListener("click", go);
+  /* if the bunny comes out any other way (they scrolled first), the button and glow go away too */
+  function bunnyOut() { return root.classList.contains("bunny-on") || root.classList.contains("vx-past") || !!document.querySelector(".rabbit.go") || !document.querySelector(".rabbit"); }
+  function hide() { root.classList.remove("daisy-calling"); if (b.isConnected) { b.classList.add("bye"); setTimeout(function () { b.remove(); }, 500); } }
+  var watch = setInterval(function () { if (window.__daisyGo || bunnyOut()) { if (bunnyOut()) { clearInterval(watch); hide(); } } }, 150);
   (function wait() {
     if (root.classList.contains("hero-go") && dz.classList.contains("grow")) setTimeout(function () {
-      if (window.__daisyGo) return;
+      if (window.__daisyGo || bunnyOut()) return;
       root.classList.add("daisy-calling"); setTimeout(function () { hero.appendChild(b); place(); }, 650);
       addEventListener("resize", place);
     }, 1400);
