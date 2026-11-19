@@ -112,3 +112,7 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
 @keyframes solSpk{0%{opacity:0;transform:translate(0,0) scale(.3)}30%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(160deg)}}
 @media (prefers-reduced-motion:reduce){.sol-overlay .sol-table,.sol-overlay .sol-bar{transition:opacity .2s;transform:none}}
 .sol-burst{z-index:6500}
+
+/* keep the sound button clear of the game controls at every size */
+.sol-overlay .sol-bar{padding-left:clamp(64px,6vw,78px)}
+@media (max-width:700px){.sol-overlay .sol-bar{padding-left:10px;padding-bottom:62px}}
