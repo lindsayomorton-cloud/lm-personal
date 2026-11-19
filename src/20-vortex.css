@@ -366,3 +366,8 @@ html.vq-go .vq-lock .vq-dol{animation:vqDolOnce 1.6s cubic-bezier(.45,0,.55,1) 2
 .dol-gems img,.vx-balloons img{max-width:none!important}
 /* once you're past the vortex, none of its floating pieces linger over the next sections */
 html.vx-past #vxFloat,html.vx-past .vx-float,html.vx-past .vx-enter,html.vx-past .vx-balloons,html.vx-past .dol-gems{visibility:hidden!important;opacity:0!important}
+
+/* smoother dive out of the vortex: the zoom layer is ready on the GPU before it moves, and the blur is gone
+   (blurring a full-screen layer at 7x every frame was the stutter; the white flash already softens the landing) */
+html.vx-go .vx-view{will-change:transform,clip-path,opacity}
+html.vx-zoom .vx-view{filter:brightness(1.6) saturate(1.3)!important;transition:transform .9s cubic-bezier(.55,0,.85,.45),filter .9s ease-in!important}

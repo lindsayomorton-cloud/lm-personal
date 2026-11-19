@@ -148,7 +148,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
       var unz = setInterval(function () { if (root.classList.contains("vx-past")) { clearInterval(unz); root.classList.remove("bunny-zoom"); } }, 200);
     }, dur * .55);
   }
-  if (rabbit) rabbit.addEventListener("animationend", function (e) { if (e.target === rabbit) { poof(rabbit); root.classList.remove("bunny-on"); rabbit.remove(); vxLive(); pullIn(); } });
+  if (rabbit) rabbit.addEventListener("animationend", function (e) { if (e.target === rabbit) { poof(rabbit); root.classList.remove("bunny-on"); rabbit.remove(); vxLive(); } });   /* the page scroll starts on its own timer, once the camera push has fully settled */
   /* the vortex starts opening from his hole as his dive is ending, not after */
   if (rabbit) rabbit.addEventListener("animationstart", function (e) {
     if (e.target !== rabbit) return;
@@ -1478,7 +1478,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   })();
 })();
 
-/* if someone just watches the vortex for a while, carry them on down to the doors */
+/* if someone just watches the vortex, carry them on down to the doors about four seconds after the quote lands */
 (function () {
   var root = document.documentElement, doors = document.getElementById("doors"), vx = document.getElementById("vortex");
   if (!doors || !vx) return;
@@ -1488,7 +1488,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     t = setTimeout(function () {
       var r = vx.getBoundingClientRect();
       if (root.classList.contains("vx-go") && doors.getBoundingClientRect().top > innerHeight * .4 && r.bottom > 0) dive();
-    }, 11000);
+    }, 4000);   /* time to read the quote, then on through */
   }
   /* the way out: zoom into the middle of the vortex as if falling through it, flash, then land right on the doors */
   function dive() {
