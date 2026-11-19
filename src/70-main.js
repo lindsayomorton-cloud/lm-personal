@@ -260,7 +260,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
       var fall = it[0] === "vx-chair" || it[0] === "vx-teacup2";
       if (fall) { out = false; ang = -Math.PI / 2 + (it[0] === "vx-chair" ? -.35 : .35); R = 85; }
       s.className = "vb" + (it[1] > 100 ? " big" : "");
-      s.style.cssText = "--anim:" + (fall ? "vbFallIn" : out ? "vbOut1" : "vbIn1") + ";--w:" + Math.round(it[1] * 1.5) + "px;--tx:" + (Math.cos(ang) * R).toFixed(1) + "vw;--ty:" + (Math.sin(ang) * R * .8).toFixed(1) + "vh;--s:" + (out ? 2.2 + rnd() * 1.4 : 1).toFixed(2) + ";--dur:" + (out ? 4.6 : 5) + "s;--del:" + (.3 + j * .24 + rnd() * .2).toFixed(2) + "s;--rt:" + Math.round(-200 + rnd() * 400) + "deg";
+      s.style.cssText = "--anim:" + (fall ? "vbFallIn" : out ? "vbOut1" : "vbIn1") + ";--w:" + Math.round(it[1] * 1.5) + "px;--tx:" + (Math.cos(ang) * R).toFixed(1) + "vw;--ty:" + (Math.sin(ang) * R * .8).toFixed(1) + "vh;--s:" + (out ? 2.2 + rnd() * 1.4 : 1).toFixed(2) + ";--dur:" + (out ? 4.6 : 5) + "s;--del:" + (.3 + j * .18 + rnd() * .2).toFixed(2) + "s;--rt:" + Math.round(-200 + rnd() * 400) + "deg";
       s.innerHTML = '<img src="assets/proj/' + it[0] + '.webp" alt="">';
       box.appendChild(s);
     });
@@ -1478,7 +1478,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   })();
 })();
 
-/* if someone just watches the vortex, carry them on down to the doors about four seconds after the quote lands */
+/* if someone just watches the vortex, carry them on down to the doors once everything has poured through */
 (function () {
   var root = document.documentElement, doors = document.getElementById("doors"), vx = document.getElementById("vortex");
   if (!doors || !vx) return;
@@ -1488,7 +1488,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     t = setTimeout(function () {
       var r = vx.getBoundingClientRect();
       if (root.classList.contains("vx-go") && doors.getBoundingClientRect().top > innerHeight * .4 && r.bottom > 0) dive();
-    }, 4000);   /* time to read the quote, then on through */
+    }, 8500);   /* long enough for the whole shower (chair, teacup, Van on his seahorse, the jellyfish and the rest) to play out, then on through */
   }
   /* the way out: zoom into the middle of the vortex as if falling through it, flash, then land right on the doors */
   function dive() {
