@@ -4427,7 +4427,8 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
 
   /* ---------- full-screen pages ---------- */
   var full = $("full"), fullFrame = $("fullFrame");
-  function openFull(href, name, from) { fullFrame.src = href; $("fullTitle").textContent = name; $("fullOpen").href = href; openModal(full, from); }
+  /* live sites on their own domains open in a new tab (many refuse to be shown inside another page); copies kept here open in the viewer */
+  function openFull(href, name, from) { if (/^https?:\/\//.test(href) && href.indexOf(location.host) < 0) { window.open(href, "_blank", "noopener"); return; } fullFrame.src = href; $("fullTitle").textContent = name; $("fullOpen").href = href; openModal(full, from); }
   full.onclose = function () { fullFrame.src = "about:blank"; };
   document.addEventListener("click", function (e) { var a = e.target.closest("a[data-full]"); if (!a) return; e.preventDefault(); openFull(a.getAttribute("href"), a.dataset.full, a); });
 
