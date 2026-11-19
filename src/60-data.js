@@ -76,4 +76,4 @@ var ART = [
   { src: "assets/art/whimsical-keyhole-garden-painting.webp", t: "Keyhole garden", a: "A tiny bedroom and garden inside a keyhole", frame: "lime" },
   { src: "assets/art/vibrant-impasto-floral-yin-yang-canvas.webp", t: "Floral yin yang", a: "Pink yin yang ringed with textured roses", frame: "blush" }
 ];
-var FRAMES = { lime: "assets/proj/frame-lime.webp", blush: "assets/proj/frame-blush.webp", oval: "assets/proj/frame-oval.webp", pink: "assets/proj/pink-frame.webp" };
+var FRAMES = { lime: "assets/proj/frame-lime-orig.webp", blush: "assets/proj/frame-blush-orig.webp", oval: "assets/proj/frame-oval-orig.webp", pink: "assets/proj/pink-frame-orig.webp" };

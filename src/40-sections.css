@@ -1110,9 +1110,9 @@ html.tv-raised .like-tv.tv-lift{z-index:620;position:relative}
 .art-bouquet{left:calc(50% + clamp(70px,7vw,120px))!important;right:auto!important;bottom:-2%!important;top:auto!important;width:clamp(110px,9vw,170px)!important}
 @media (max-width:900px){.art-bouquet{width:24vw!important;left:56%!important}}
 /* brighter frames with a soft colored glow underneath */
-.art .pf .pfr{filter:saturate(1.45) brightness(1.1) contrast(1.05)}
+.art .pf .pfr{filter:none!important}
 .art .pf{filter:drop-shadow(0 16px 18px rgba(0,0,0,.28))!important}
-.art .pf::after{content:"";position:absolute;left:8%;right:8%;bottom:-6%;height:18%;z-index:-1;border-radius:50%;filter:blur(18px);opacity:.85;background:var(--glow,#fe7bbf)}
+.art .pf::after{display:none;content:"";position:absolute;left:8%;right:8%;bottom:-6%;height:18%;z-index:-1;border-radius:50%;filter:blur(18px);opacity:.85;background:var(--glow,#fe7bbf)}
 .art .pf.lime{--glow:#ceff32}.art .pf.blush{--glow:#fe7bbf}.art .pf.oval{--glow:#fe7bbf}.art .pf.pink,.art .pf:not(.lime):not(.blush):not(.oval){--glow:#fe7bbf}
 /* the closing clouds hang from behind the old-internet window: the two sections share one layer so the window covers the string tops */
 .oldweb,.connect.connect-repeat{z-index:auto!important;isolation:auto!important}
