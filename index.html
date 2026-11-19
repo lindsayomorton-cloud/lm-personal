@@ -869,15 +869,8 @@ body{background:linear-gradient(180deg,var(--cream) 0,var(--cream) 85vh,#1b1a4a 
 .jump{background:linear-gradient(180deg,#1b1a4a 0%,#0d0b24 60%,#07050f 100%)!important}
 .jump-in a{border-color:rgba(206,220,255,.25)}
 body{background:linear-gradient(180deg,#1b1a4a 0,#0d0b24 60vh,#120f12 180vh) 0 0/100% 200vh no-repeat,var(--cream)!important}
-/* the dolphin's leap is quicker and he dives deep down into the vortex, shrinking away as he goes */
-html.vq-go .vq-lock .vq-dol{animation:vqDolDeep 1.6s cubic-bezier(.4,0,.6,1) 2.7s 1 both!important}
-@keyframes vqDolDeep{
-  0%{opacity:0;translate:0 30%;rotate:-40deg;scale:1}
-  6%{opacity:1}
-  35%{translate:60% -80%;rotate:-14deg;scale:1}
-  55%{translate:130% -60%;rotate:20deg;scale:.95}
-  85%{opacity:1;translate:200% 160%;rotate:55deg;scale:.55}
-  100%{opacity:0;translate:215% 320%;rotate:62deg;scale:.25}}
+/* the dolphin's leap is quicker; he still dives down behind the blue "puzzle." chip */
+html.vq-go .vq-lock .vq-dol{animation:vqDolOnce 1.6s cubic-bezier(.45,0,.55,1) 2.7s 1 both!important}
 
 /* ============ Doors: three doors on the wallpaper, each with a shelf of flowers ============ */
 /* the wallpaper belongs to the doors alone, so it never peeks through anywhere else */
