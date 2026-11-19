@@ -552,6 +552,12 @@ html.daisy-calling .hero .hero-daisy{pointer-events:auto!important;cursor:pointe
 .daisy-call:hover{background:#ff8a1f!important}
 @keyframes callGlow{0%,100%{box-shadow:4px 4px 0 #15302c,0 0 0 6px rgba(255,106,0,.35),0 0 30px 8px rgba(255,140,0,.75)}50%{box-shadow:4px 4px 0 #15302c,0 0 0 14px rgba(255,106,0,.18),0 0 70px 26px rgba(255,150,30,.95)}}
 @keyframes daisyCall{0%,100%{filter:drop-shadow(0 0 14px #fff) drop-shadow(0 0 34px rgba(255,170,40,.9)) drop-shadow(0 0 60px rgba(206,255,50,.7))}50%{filter:drop-shadow(0 0 24px #fff) drop-shadow(0 0 60px rgba(255,140,0,1)) drop-shadow(0 0 100px rgba(254,123,191,.95))}}
+/* headline sits higher on wider screens */
+@media (min-width:900px){.hero h1{translate:0 -7svh}}
+/* Click me: pink-to-orange */
+.daisy-call{background:linear-gradient(120deg,#ec2b7a 0%,#ff4f6d 45%,#ff7a00 100%)!important}
+.daisy-call::after{background:#ff7a00!important}
+.daisy-call:hover{background:linear-gradient(120deg,#fe7bbf 0%,#ff8a1f 100%)!important}
 
 /* ============ Jump-in link bar ============ */
 .jump{position:relative;z-index:50;background:var(--night);padding:18px clamp(16px,4vw,56px) 22px}
@@ -3890,7 +3896,8 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   /* the question spins up out of the wormhole first; once "puzzle." lands, everything else pours in */
   function startQuote() {
     if (startQuote.done) return; startQuote.done = true; root.classList.add("vq-go");
-    setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); vxBurst(); }, 4900);   /* the chair, teacup and the rest pour in the moment the dolphin splashes down */
+    setTimeout(vxBurst, 3300);   /* the dolphin lands at 4.3s: smoke and sparkles puff up a second before he's fully down */
+    setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); }, 4900);   /* the chair, teacup and the rest pour in the moment the dolphin splashes down */
   }
   /* a puff of smoke and a spray of sparkles as everything else pours into the vortex */
   function vxBurst() {
@@ -5108,7 +5115,7 @@ window.__mail = function () {
   b.setAttribute("aria-label", "Click me to let the bunny out");
   function place() {
     var h = hero.getBoundingClientRect(), d = dz.getBoundingClientRect();
-    b.style.left = (d.left - h.left + d.width / 2) + "px"; b.style.top = (d.top - h.top + d.height * .12) + "px";
+    b.style.left = (d.left - h.left + d.width * (innerWidth < 900 ? .5 : .9)) + "px"; b.style.top = (d.top - h.top + d.height * .12) + "px";
   }
   function go() {
     if (window.__daisyGo) return; window.__daisyGo = true;

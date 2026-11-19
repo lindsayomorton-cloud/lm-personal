@@ -478,3 +478,9 @@ html.daisy-calling .hero .hero-daisy{pointer-events:auto!important;cursor:pointe
 .daisy-call:hover{background:#ff8a1f!important}
 @keyframes callGlow{0%,100%{box-shadow:4px 4px 0 #15302c,0 0 0 6px rgba(255,106,0,.35),0 0 30px 8px rgba(255,140,0,.75)}50%{box-shadow:4px 4px 0 #15302c,0 0 0 14px rgba(255,106,0,.18),0 0 70px 26px rgba(255,150,30,.95)}}
 @keyframes daisyCall{0%,100%{filter:drop-shadow(0 0 14px #fff) drop-shadow(0 0 34px rgba(255,170,40,.9)) drop-shadow(0 0 60px rgba(206,255,50,.7))}50%{filter:drop-shadow(0 0 24px #fff) drop-shadow(0 0 60px rgba(255,140,0,1)) drop-shadow(0 0 100px rgba(254,123,191,.95))}}
+/* headline sits higher on wider screens */
+@media (min-width:900px){.hero h1{translate:0 -7svh}}
+/* Click me: pink-to-orange */
+.daisy-call{background:linear-gradient(120deg,#ec2b7a 0%,#ff4f6d 45%,#ff7a00 100%)!important}
+.daisy-call::after{background:#ff7a00!important}
+.daisy-call:hover{background:linear-gradient(120deg,#fe7bbf 0%,#ff8a1f 100%)!important}

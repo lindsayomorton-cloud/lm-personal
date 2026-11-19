@@ -303,7 +303,8 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   /* the question spins up out of the wormhole first; once "puzzle." lands, everything else pours in */
   function startQuote() {
     if (startQuote.done) return; startQuote.done = true; root.classList.add("vq-go");
-    setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); vxBurst(); }, 4900);   /* the chair, teacup and the rest pour in the moment the dolphin splashes down */
+    setTimeout(vxBurst, 3300);   /* the dolphin lands at 4.3s: smoke and sparkles puff up a second before he's fully down */
+    setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); }, 4900);   /* the chair, teacup and the rest pour in the moment the dolphin splashes down */
   }
   /* a puff of smoke and a spray of sparkles as everything else pours into the vortex */
   function vxBurst() {
@@ -1521,7 +1522,7 @@ window.__mail = function () {
   b.setAttribute("aria-label", "Click me to let the bunny out");
   function place() {
     var h = hero.getBoundingClientRect(), d = dz.getBoundingClientRect();
-    b.style.left = (d.left - h.left + d.width / 2) + "px"; b.style.top = (d.top - h.top + d.height * .12) + "px";
+    b.style.left = (d.left - h.left + d.width * (innerWidth < 900 ? .5 : .9)) + "px"; b.style.top = (d.top - h.top + d.height * .12) + "px";
   }
   function go() {
     if (window.__daisyGo) return; window.__daisyGo = true;
