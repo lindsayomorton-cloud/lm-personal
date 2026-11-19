@@ -498,3 +498,4 @@
 @keyframes neonHum{0%,100%{filter:drop-shadow(0 0 6px rgba(255,255,255,.35)) brightness(1)}50%{filter:drop-shadow(0 0 14px rgba(254,123,191,.55)) brightness(1.12)}}
 /* the disco ball's chain starts right at the underside of the Study's shelf */
 .door-disco.study-disco img{margin-top:clamp(8px,1.2vw,20px)!important}
+.framed .ph.ph-art img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
