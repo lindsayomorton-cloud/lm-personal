@@ -251,7 +251,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
     /* everything shares one long cycle and gets its own slot in it, so only a few are moving at any moment */
     var items = [];
-    for (var i = 0; i < 10; i++) { var gs = 34 + rnd() * 30; items.push([G[i % G.length], G[i % G.length] === "gem-plumbob" ? gs * .5 : gs]); }
+    for (var i = 0; i < 6; i++) { var gs = 34 + rnd() * 30; items.push([G[i % G.length], G[i % G.length] === "gem-plumbob" ? gs * .5 : gs]); }
     [["vx-chair", 130], ["vx-teacup2", 170], ["vx-bee", 110], ["vx-shop", 170], ["vx-smart", 160], ["vx-rainbow", 160]].forEach(function (t, j) { items.splice(1 + j * 2, 0, t); });
     var cycle = 64, n = items.length;
     items.forEach(function (it, j) {
@@ -260,7 +260,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
       var fall = it[0] === "vx-chair" || it[0] === "vx-teacup2";
       if (fall) { out = false; ang = -Math.PI / 2 + (it[0] === "vx-chair" ? -.35 : .35); R = 85; }
       s.className = "vb" + (it[1] > 100 ? " big" : "");
-      s.style.cssText = "--anim:" + (fall ? "vbFallIn" : out ? "vbOut1" : "vbIn1") + ";--w:" + Math.round(it[1] * 1.5) + "px;--tx:" + (Math.cos(ang) * R).toFixed(1) + "vw;--ty:" + (Math.sin(ang) * R * .8).toFixed(1) + "vh;--s:" + (out ? 2.2 + rnd() * 1.4 : 1).toFixed(2) + ";--dur:" + (out ? 4.6 : 5) + "s;--del:" + (.3 + j * .18 + rnd() * .2).toFixed(2) + "s;--rt:" + Math.round(-200 + rnd() * 400) + "deg";
+      s.style.cssText = "--anim:" + (fall ? "vbFallIn" : out ? "vbOut1" : "vbIn1") + ";--w:" + Math.round(it[1] * 1.5) + "px;--tx:" + (Math.cos(ang) * R).toFixed(1) + "vw;--ty:" + (Math.sin(ang) * R * .8).toFixed(1) + "vh;--s:" + (out ? 2.2 + rnd() * 1.4 : 1).toFixed(2) + ";--dur:" + (out ? 5.4 : 6) + "s;--del:" + (.3 + j * .55 + rnd() * .2).toFixed(2) + "s;--rt:" + Math.round(-200 + rnd() * 400) + "deg";
       s.innerHTML = '<img src="assets/proj/' + it[0] + '.webp" alt="">';
       box.appendChild(s);
     });
@@ -1489,7 +1489,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     t = setTimeout(function () {
       var r = vx.getBoundingClientRect();
       if (root.classList.contains("vx-go") && doors.getBoundingClientRect().top > innerHeight * .4 && r.bottom > 0) dive();
-    }, 8500);   /* long enough for the whole shower (chair, teacup, Van on his seahorse, the jellyfish and the rest) to play out, then on through */
+    }, 12500);   /* long enough for the whole shower (chair, teacup, Van on his seahorse, the jellyfish and the rest) to play out, then on through */
   }
   /* the way out: zoom into the middle of the vortex as if falling through it, flash, then land right on the doors */
   function dive() {
