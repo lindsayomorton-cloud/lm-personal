@@ -4556,7 +4556,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     function show(i, autoplay) {
       var c = CH[i]; tv.classList.toggle("on-list", !c[0]); num.textContent = "CH " + c[2];
       var now = $("tvNow"), yt = $("tvYT"); if (now) now.textContent = "CH " + c[2] + " · " + c[1]; if (yt) { yt.hidden = !c[0]; if (c[0]) yt.href = "https://www.youtube.com/watch?v=" + c[0]; }
-      vid.innerHTML = c[0] ? '<iframe src="https://www.youtube-nocookie.com/embed/' + c[0] + '?rel=0&modestbranding=1&playsinline=1&enablejsapi=1' + (autoplay ? "&autoplay=1" + (canSound() ? "" : "&mute=1") : "") + (location.origin && location.origin !== "null" ? "&origin=" + encodeURIComponent(location.origin) : "") + '" referrerpolicy="strict-origin-when-cross-origin" title="' + c[1] + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>' : "";
+      vid.innerHTML = c[0] ? '<iframe src="https://www.youtube-nocookie.com/embed/' + c[0] + '?rel=0&modestbranding=1&playsinline=1&enablejsapi=1&start=2' + (autoplay ? "&autoplay=1" + (canSound() ? "" : "&mute=1") : "") + (location.origin && location.origin !== "null" ? "&origin=" + encodeURIComponent(location.origin) : "") + '" referrerpolicy="strict-origin-when-cross-origin" title="' + c[1] + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>' : "";
     }
     /* talk to the YouTube player so it plays the instant you hover */
     function cmd(f, args) { var fr = vid.querySelector("iframe"); if (fr && fr.contentWindow) fr.contentWindow.postMessage(JSON.stringify({ event: "command", func: f, args: args || [] }), "*"); }
@@ -4569,7 +4569,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
       if (d.event === "onReady" || d.event === "initialDelivery" || d.event === "infoDelivery") ytReady = true;
       if (d.info && typeof d.info.playerState === "number") {
         ytState = d.info.playerState;
-        if (ytState === 1 && !primed && !tvLive) { primed = true; cmd("pauseVideo"); cmd("seekTo", [0, true]); setTimeout(function () { if (!tvLive) cmd("unMute"); }, 150); }
+        if (ytState === 1 && !primed && !tvLive) { primed = true; cmd("pauseVideo"); cmd("seekTo", [2, true]);   /* the commercial gets going 2 seconds in */ setTimeout(function () { if (!tvLive) cmd("unMute"); }, 150); }
       }
     });
     vid.addEventListener("load", function () {
