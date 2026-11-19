@@ -4092,14 +4092,14 @@ var FRAMES = { lime: "assets/proj/frame-lime-orig.webp", blush: "assets/proj/fra
       var now = $("tvNow"), yt = $("tvYT"); if (now) now.textContent = "CH " + c[2] + " · " + c[1]; if (yt) { yt.hidden = !c[0]; if (c[0]) yt.href = "https://www.youtube.com/watch?v=" + c[0]; }
       vid.innerHTML = c[0] ? '<iframe src="https://www.youtube-nocookie.com/embed/' + c[0] + '?rel=0&modestbranding=1&playsinline=1&enablejsapi=1' + (autoplay ? "&autoplay=1" : "") + (location.origin && location.origin !== "null" ? "&origin=" + encodeURIComponent(location.origin) : "") + '" referrerpolicy="strict-origin-when-cross-origin" title="' + c[1] + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>' : "";
     }
-    /* talk to the YouTube player: play instantly and run the clip a bit faster */
+    /* talk to the YouTube player so it plays the instant you hover */
     function cmd(f, args) { var fr = vid.querySelector("iframe"); if (fr && fr.contentWindow) fr.contentWindow.postMessage(JSON.stringify({ event: "command", func: f, args: args || [] }), "*"); }
-    function fast() { [0, 250, 700, 1500, 3000].forEach(function (t) { setTimeout(function () { cmd("setPlaybackRate", [1.5]); }, t); }); }
+    function fast() {}
     vid.addEventListener("load", function () { cmd("addEventListener", ["onReady"]); }, true);
     /* the player loads well before the TV is on screen, so it's ready the moment you hover */
     (function () { var bey = $("beyond") || tv; if (!("IntersectionObserver" in window)) { show(0, false); return; }
       new IntersectionObserver(function (es, ob) { if (es[0].isIntersecting) { ob.disconnect(); if (!vid.innerHTML) show(0, false); } }, { rootMargin: "1200px 0px" }).observe(bey); })();
-    /* hovering the TV starts the commercial playing (faster than normal) and stops Boy Meets World */
+    /* hovering the TV starts the commercial playing and stops Boy Meets World */
     var tvLive = false;
     tv.closest(".like-tv").addEventListener("pointerenter", function () {
       if (tvLive) return; tvLive = true;
