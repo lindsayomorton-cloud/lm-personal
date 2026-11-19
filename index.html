@@ -3830,7 +3830,9 @@ var FRAMES = { lime: "assets/proj/frame-lime-orig.webp", blush: "assets/proj/fra
         t2 = false; var y = scrollY, H = innerHeight + 260;
         drift.forEach(function (o) {
           var pos = ((+o.dataset.y * H - y * +o.dataset.sp) % H + H) % H - 130;
-          o.style.transform = "translateY(" + pos.toFixed(1) + "px) rotate(" + (y / 1000 * +o.dataset.rot).toFixed(1) + "deg)";
+          /* flowers only sway a little (never upside down); gems and stars can spin */
+          var rot = /fl-|flower|bloom|daisy|peony|tulip/i.test(o.getAttribute("src") || "") ? Math.sin(y / 700 + pos / 300) * 14 : y / 1000 * +o.dataset.rot;
+          o.style.transform = "translateY(" + pos.toFixed(1) + "px) rotate(" + rot.toFixed(1) + "deg)";
         });
       });
     }, { passive: true });
