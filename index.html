@@ -544,6 +544,14 @@ html.daisy-calling .hero .hero-daisy{pointer-events:auto!important;cursor:pointe
 @keyframes callIn{from{opacity:0;scale:.3}}
 @keyframes callBob{50%{translate:-50% calc(-100% - 8px)}}
 @media (prefers-reduced-motion:reduce){.daisy-call{animation:none}html.daisy-calling .hero-daisy{animation:none!important;filter:drop-shadow(0 0 14px #fff)}}
+/* Click me: bright orange, bigger, with a strong pulsing glow; the daisy glows harder too */
+.daisy-call{background:#ff6a00!important;color:#fff!important;border-color:#fff!important;font-size:clamp(18px,1.6vw,24px)!important;padding:.85em 1.35em!important;
+  text-shadow:0 1px 0 rgba(120,30,0,.45);box-shadow:4px 4px 0 #15302c,0 0 0 6px rgba(255,106,0,.35),0 0 36px 10px rgba(255,140,0,.85)!important;
+  animation:callIn .55s cubic-bezier(.2,1.6,.4,1) both,callBob 1.6s ease-in-out .55s infinite,callGlow 1.1s ease-in-out .55s infinite!important}
+.daisy-call::after{background:#ff6a00!important;border-color:#fff!important}
+.daisy-call:hover{background:#ff8a1f!important}
+@keyframes callGlow{0%,100%{box-shadow:4px 4px 0 #15302c,0 0 0 6px rgba(255,106,0,.35),0 0 30px 8px rgba(255,140,0,.75)}50%{box-shadow:4px 4px 0 #15302c,0 0 0 14px rgba(255,106,0,.18),0 0 70px 26px rgba(255,150,30,.95)}}
+@keyframes daisyCall{0%,100%{filter:drop-shadow(0 0 14px #fff) drop-shadow(0 0 34px rgba(255,170,40,.9)) drop-shadow(0 0 60px rgba(206,255,50,.7))}50%{filter:drop-shadow(0 0 24px #fff) drop-shadow(0 0 60px rgba(255,140,0,1)) drop-shadow(0 0 100px rgba(254,123,191,.95))}}
 
 /* ============ Jump-in link bar ============ */
 .jump{position:relative;z-index:50;background:var(--night);padding:18px clamp(16px,4vw,56px) 22px}
