@@ -1409,3 +1409,7 @@ window.__mail = function () {
   var books = Array.prototype.slice.call(document.querySelectorAll("details.book"));
   books.forEach(function (b) { b.addEventListener("toggle", function () { if (b.open) books.forEach(function (o) { if (o !== b && o.open) o.open = false; }); }); });
 })();
+
+/* the solitaire invitation fades up when you reach the very bottom */
+(function () { var o = document.getElementById("solo"); if (!o) return; if (!("IntersectionObserver" in window)) { o.classList.add("in"); return; }
+  new IntersectionObserver(function (es, ob) { if (es[0].isIntersecting) { o.classList.add("in"); ob.disconnect(); } }, { threshold: .3 }).observe(o); })();
