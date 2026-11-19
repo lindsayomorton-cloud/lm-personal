@@ -2,7 +2,7 @@
 (function () {
   var PROFILE = [
     "LINDSAY MORTON — Marketing executive. Birmingham, Alabama. LinkedIn: linkedin.com/in/lindsayoneal.",
-    "15+ years building brands, launching products and accelerating growth across B2B technology, AI, SaaS, healthcare technology and consumer businesses. Former Chief Growth Officer and VP of Marketing.",
+    "In social media, demand generation and content creation since 2010 and product marketing since 2011, building brands, launching products and accelerating growth across B2B technology, AI, SaaS, healthcare technology and consumer businesses. Former Chief Growth Officer and VP of Marketing.",
     "",
     "EXPERIENCE (newest first)",
     "KLAAR — Vice President of Marketing (2026). AI-enabled predictive performance management software. Led brand narrative, website, product positioning, demand generation, digital growth and go-to-market planning for an emerging software category. Rebranded the company and launched its AI within one month. Directed a refreshed website and market narrative; aligned product, commercial and event marketing.",
@@ -11,7 +11,8 @@
     "INDEPENDENT — Fractional CMO and consulting (2019–2020). Growth, customer engagement and communications programs.",
     "PASSPORT — Vice President of Marketing, Digital Growth (2013–2019). Consumer business with digital and physical customer channels. Built the digital acquisition engine; led brand and website modernization; contributed to 5x sales growth and 7x website traffic growth. Established paid search, SEO, lifecycle marketing, testing and customer research programs.",
     "SUCCESSEHS — Product Marketing Specialist (2011–2013). Healthcare technology (EHR), later acquired by Greenway Health. Positioning, competitive intelligence, sales enablement and buyer education; buyer personas increased campaign engagement 40%. National conference programs doubled booth traffic and generated 300+ qualified leads.",
-    "Earlier: agency marketing, technology publishing and editorial production.",
+    "TECHLI.COM — Co-founder & Editor (2010–2011). Startup and technology news site; led editorial operations and a global team of writers; grew pageviews 200% month over month.",
+    "SOCIALKATY — Social Media Manager (2010–2011). One of the first social-media-only agencies, serving Chicago tech startups; ran social strategy for 8 B2B and B2C clients and brought in clients of her own.",
     "",
     "EXPERTISE: brand strategy and positioning; category creation; integrated marketing; demand generation; ABM and targeted campaigns; product marketing and launches; revenue and pipeline growth; digital, SEO/AEO and paid media; marketing operations and attribution; AI-enabled marketing; partnerships, channels and referral programs; events and field marketing; executive and investor communications; team and agency leadership; budget, CAC and ROI ownership; pricing and packaging collaboration.",
     "APPROXIMATE YEARS BY AREA: brand and positioning 12+; demand generation 11+; HubSpot and marketing operations 10+; VP-level and executive leadership 10; lifecycle and email 9; SEO and website 9; product marketing 8; paid media 8; events and field marketing 7; partnerships and channels 3 (Trak, where partner channels reached 50% of revenue); AI-enabled marketing about 3.",

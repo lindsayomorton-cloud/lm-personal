@@ -1017,6 +1017,8 @@ html.vq-go .vq-lock .vq-dol{animation:vqDolOnce 1.6s cubic-bezier(.45,0,.55,1) 2
 @keyframes vxBalloon{0%{opacity:0;transform:translate(var(--sx),var(--sy)) scale(1.15) rotate(var(--r))}12%{opacity:1}45%{transform:translate(var(--mx),var(--my)) scale(.75) rotate(calc(var(--r) * -.5))}85%{opacity:.9}100%{opacity:0;transform:translate(0,0) scale(.05) rotate(calc(var(--r) * 2))}}
 /* these live in zero-size anchors, so they must not be capped at 100% width */
 .dol-gems img,.vx-balloons img{max-width:none!important}
+/* once you're past the vortex, none of its floating pieces linger over the next sections */
+html.vx-past #vxFloat,html.vx-past .vx-float,html.vx-past .vx-enter,html.vx-past .vx-balloons,html.vx-past .dol-gems{visibility:hidden!important;opacity:0!important}
 
 /* ============ Doors: three doors on the wallpaper, each with a shelf of flowers ============ */
 /* the wallpaper belongs to the doors alone, so it never peeks through anywhere else */
@@ -2711,6 +2713,7 @@ html.in-vx .drift{opacity:0!important;visibility:hidden!important}
 .art-main{pointer-events:none}
 .art-main .art-mainb,.art-main button,.art-main a{pointer-events:auto}
 .art-wall button.art-up{z-index:12}
+@media (max-width:599px){.brew-view:not(.cave){aspect-ratio:1/1}}
 
 /* ============ Pop-up windows ============ */
 .modal{position:fixed;inset:0;display:grid;place-items:center;padding:16px;background:rgba(18,8,36,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:fadeIn .3s ease}
@@ -3352,7 +3355,6 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
     <h2 id="connectTitle"><span class="fw" style="--i:0">Float</span> <span class="fw" style="--i:1">A</span> <em><span class="fw" style="--i:2">Note.</span></em></h2>
     <p class="connect-lede">Always interested in connecting with people building interesting things.</p>
     <div class="connect-actions"><a class="btn" href="mailto:lindsayomorton@gmail.com">Email me <span aria-hidden="true">→</span></a><a class="btn ghost" href="https://www.linkedin.com/in/lindsayoneal" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
-    <p class="connect-mail">lindsayomorton@gmail.com</p>
   </div>
 </section>
 
@@ -3470,7 +3472,7 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
     <div>
       <h2 id="ideaTitle"><span class="a">Got an</span> <span class="b">idea<i>?</i></span></h2>
       <p class="idea-lede">Ideas are my favorite thing. Send me yours: a project, a role, a brand that needs a pull. I read every one.</p>
-      <p class="idea-mail">Rather email? <b id="mailAddr">lindsayomorton@gmail.com</b> <button type="button" class="copy-btn" id="copyMail">Copy</button></p>
+      <p class="idea-mail">Rather email? <a class="copy-btn" href="mailto:lindsayomorton@gmail.com">Email me ✉</a></p>
     </div>
     <div><button type="button" class="idea-open" id="ideaOpen">Tell me your idea <span aria-hidden="true">✳</span></button></div>
   </div>
@@ -3510,7 +3512,6 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
     <h2 id="connectTitle2"><span class="fw" style="--i:0">Let’s</span> <span class="fw" style="--i:1">build</span> <em><span class="fw" style="--i:2">something.</span></em></h2>
     <p class="connect-lede">Ideas are my favorite thing. Send me yours: a project, a role, a brand that needs a pull.</p>
     <div class="connect-actions"><a class="btn" href="mailto:lindsayomorton@gmail.com">Email me <span aria-hidden="true">→</span></a><a class="btn ghost" href="https://www.linkedin.com/in/lindsayoneal" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
-    <p class="connect-mail">lindsayomorton@gmail.com</p>
   </div>
 </section>
 
@@ -3558,7 +3559,7 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
       <div>
         <span class="kick">Meet Lindsay</span>
         <h2>Powerful. Strategic. Visionary.</h2>
-        <p class="story-lede">For 15+ years I've led brand, demand generation and go-to-market for B2B technology, AI, SaaS, healthcare and consumer businesses.</p>
+        <p class="story-lede">I've led social, content and demand generation since 2010, and product marketing since 2011, for B2B technology, AI, SaaS, healthcare and consumer businesses.</p>
         <ul class="stats" aria-label="Selected results"><li><b>$20M</b>first-year inbound pipeline</li><li><b>4×</b>top-of-funnel growth in under six months</li><li><b>50%</b>of revenue from partner channels I built</li><li><b>$55M</b>revenue at a business I helped scale</li></ul>
         <div class="row-btns"><button class="btn" id="dlResume" type="button">Download résumé (PDF) ↓</button><a class="btn ghost" href="https://www.linkedin.com/in/lindsayoneal" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
         <p class="note" id="dlNote" hidden></p>
@@ -3568,7 +3569,7 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
   <div class="paper">
     <div class="ask-grid">
       <div class="ask-head"><h3>Ask my résumé<span class="dot">.</span></h3><p>Ask anything about my experience, or paste a job description and get a version of my résumé tailored to it.</p></div>
-      <div class="years"><h4>Years of experience</h4><ul><li style="--c:#ceff32;--from:13%"><span class="n">13+<small>yrs</small></span><span class="sk"><b>Demand generation</b><em>Since 2013</em></span><span class="bar" aria-hidden="true"><i></i></span></li><li style="--c:#ec2b7a;--from:0%"><span class="n">15+<small>yrs</small></span><span class="sk"><b>Product marketing</b><em>Since 2011</em></span><span class="bar" aria-hidden="true"><i></i></span></li><li style="--c:#b89cff;--from:13%"><span class="n">13+<small>yrs</small></span><span class="sk"><b>Paid media</b><em>Since 2013</em></span><span class="bar" aria-hidden="true"><i></i></span></li></ul><p class="yr-scale" aria-hidden="true"><span>2011</span><span>Today</span></p></div>
+      <div class="years"><h4>Years of experience</h4><ul><li style="--c:#fe7bbf;--from:0%"><span class="n">16+<small>yrs</small></span><span class="sk"><b>Social &amp; content creation</b><em>Since 2010</em></span><span class="bar" aria-hidden="true"><i></i></span></li><li style="--c:#ceff32;--from:0%"><span class="n">16+<small>yrs</small></span><span class="sk"><b>Demand generation</b><em>Since 2010</em></span><span class="bar" aria-hidden="true"><i></i></span></li><li style="--c:#ec2b7a;--from:0%"><span class="n">15+<small>yrs</small></span><span class="sk"><b>Product marketing</b><em>Since 2011</em></span><span class="bar" aria-hidden="true"><i></i></span></li><li style="--c:#b89cff;--from:13%"><span class="n">13+<small>yrs</small></span><span class="sk"><b>Paid media</b><em>Since 2013</em></span><span class="bar" aria-hidden="true"><i></i></span></li></ul><p class="yr-scale" aria-hidden="true"><span>2010</span><span>Today</span></p></div>
       <div class="bot" id="bot">
         <div class="bot-tabs" role="tablist" aria-label="Assistant mode">
           <button class="bot-tab" role="tab" id="tabAsk" aria-selected="true" aria-controls="paneAsk" type="button">Ask about my experience</button>
@@ -4291,8 +4292,8 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     /* Van's Cove centers its own game when embedded, so only the Sanctuary needs the zoom */
     var fixed = /sanctuary/.test(src), focus = .5;
     if (W < 520 && fixed) {
-      var k = (H - off) / 900, x = Math.min(0, Math.max(W - 1440 * k, W / 2 - 1440 * k * focus));
-      f.style.width = "1440px"; f.style.height = "900px"; f.style.transform = "translateX(" + x.toFixed(1) + "px) scale(" + k.toFixed(4) + ")"; return;
+      /* the Sanctuary only has a wide layout: show the whole page, scaled to fit the phone, instead of a cropped corner */
+      var k2 = W / 1280; f.style.width = "1280px"; f.style.height = Math.round((H - off) / k2) + "px"; f.style.transform = "scale(" + k2.toFixed(4) + ")"; return;
     }
     var base = W < 520 ? 430 : 1440;
     f.style.width = base + "px"; f.style.height = Math.round((H - off) * base / W) + "px";
@@ -4864,9 +4865,9 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     var nm = f.name.value.trim(), em = f.email.value.trim(), msg = f.msg.value.trim();
     if (!nm || !em || !msg || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) { note.textContent = "Please add your name, a valid email and a message."; return; }
     location.href = "mailto:" + addr + "?subject=" + encodeURIComponent("Hello from " + nm) + "&body=" + encodeURIComponent(msg + "\n\n" + nm + "\n" + em);
-    note.textContent = "Your email app should open with this message ready to send. If it doesn't, email " + addr + ".";
+    note.textContent = "Your email app should open with this message ready to send. If it doesn't, use the Email me button.";
   });
-  $("copyMail").addEventListener("click", function () {
+  if ($("copyMail")) $("copyMail").addEventListener("click", function () {
     var b = this; function done() { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1800); }
     try { navigator.clipboard.writeText(addr).then(done, function () { var r = document.createRange(); r.selectNodeContents($("mailAddr")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }); } catch (err) {}
   });
@@ -5343,7 +5344,7 @@ window.__mail = function () {
 (function () {
   var PROFILE = [
     "LINDSAY MORTON — Marketing executive. Birmingham, Alabama. LinkedIn: linkedin.com/in/lindsayoneal.",
-    "15+ years building brands, launching products and accelerating growth across B2B technology, AI, SaaS, healthcare technology and consumer businesses. Former Chief Growth Officer and VP of Marketing.",
+    "In social media, demand generation and content creation since 2010 and product marketing since 2011, building brands, launching products and accelerating growth across B2B technology, AI, SaaS, healthcare technology and consumer businesses. Former Chief Growth Officer and VP of Marketing.",
     "",
     "EXPERIENCE (newest first)",
     "KLAAR — Vice President of Marketing (2026). AI-enabled predictive performance management software. Led brand narrative, website, product positioning, demand generation, digital growth and go-to-market planning for an emerging software category. Rebranded the company and launched its AI within one month. Directed a refreshed website and market narrative; aligned product, commercial and event marketing.",
@@ -5352,7 +5353,8 @@ window.__mail = function () {
     "INDEPENDENT — Fractional CMO and consulting (2019–2020). Growth, customer engagement and communications programs.",
     "PASSPORT — Vice President of Marketing, Digital Growth (2013–2019). Consumer business with digital and physical customer channels. Built the digital acquisition engine; led brand and website modernization; contributed to 5x sales growth and 7x website traffic growth. Established paid search, SEO, lifecycle marketing, testing and customer research programs.",
     "SUCCESSEHS — Product Marketing Specialist (2011–2013). Healthcare technology (EHR), later acquired by Greenway Health. Positioning, competitive intelligence, sales enablement and buyer education; buyer personas increased campaign engagement 40%. National conference programs doubled booth traffic and generated 300+ qualified leads.",
-    "Earlier: agency marketing, technology publishing and editorial production.",
+    "TECHLI.COM — Co-founder & Editor (2010–2011). Startup and technology news site; led editorial operations and a global team of writers; grew pageviews 200% month over month.",
+    "SOCIALKATY — Social Media Manager (2010–2011). One of the first social-media-only agencies, serving Chicago tech startups; ran social strategy for 8 B2B and B2C clients and brought in clients of her own.",
     "",
     "EXPERTISE: brand strategy and positioning; category creation; integrated marketing; demand generation; ABM and targeted campaigns; product marketing and launches; revenue and pipeline growth; digital, SEO/AEO and paid media; marketing operations and attribution; AI-enabled marketing; partnerships, channels and referral programs; events and field marketing; executive and investor communications; team and agency leadership; budget, CAC and ROI ownership; pricing and packaging collaboration.",
     "APPROXIMATE YEARS BY AREA: brand and positioning 12+; demand generation 11+; HubSpot and marketing operations 10+; VP-level and executive leadership 10; lifecycle and email 9; SEO and website 9; product marketing 8; paid media 8; events and field marketing 7; partnerships and channels 3 (Trak, where partner channels reached 50% of revenue); AI-enabled marketing about 3.",

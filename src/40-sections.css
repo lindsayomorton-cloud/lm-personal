@@ -1189,3 +1189,4 @@ html.in-vx .drift{opacity:0!important;visibility:hidden!important}
 .art-main{pointer-events:none}
 .art-main .art-mainb,.art-main button,.art-main a{pointer-events:auto}
 .art-wall button.art-up{z-index:12}
+@media (max-width:599px){.brew-view:not(.cave){aspect-ratio:1/1}}

@@ -562,8 +562,8 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     /* Van's Cove centers its own game when embedded, so only the Sanctuary needs the zoom */
     var fixed = /sanctuary/.test(src), focus = .5;
     if (W < 520 && fixed) {
-      var k = (H - off) / 900, x = Math.min(0, Math.max(W - 1440 * k, W / 2 - 1440 * k * focus));
-      f.style.width = "1440px"; f.style.height = "900px"; f.style.transform = "translateX(" + x.toFixed(1) + "px) scale(" + k.toFixed(4) + ")"; return;
+      /* the Sanctuary only has a wide layout: show the whole page, scaled to fit the phone, instead of a cropped corner */
+      var k2 = W / 1280; f.style.width = "1280px"; f.style.height = Math.round((H - off) / k2) + "px"; f.style.transform = "scale(" + k2.toFixed(4) + ")"; return;
     }
     var base = W < 520 ? 430 : 1440;
     f.style.width = base + "px"; f.style.height = Math.round((H - off) * base / W) + "px";
@@ -1135,9 +1135,9 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     var nm = f.name.value.trim(), em = f.email.value.trim(), msg = f.msg.value.trim();
     if (!nm || !em || !msg || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) { note.textContent = "Please add your name, a valid email and a message."; return; }
     location.href = "mailto:" + addr + "?subject=" + encodeURIComponent("Hello from " + nm) + "&body=" + encodeURIComponent(msg + "\n\n" + nm + "\n" + em);
-    note.textContent = "Your email app should open with this message ready to send. If it doesn't, email " + addr + ".";
+    note.textContent = "Your email app should open with this message ready to send. If it doesn't, use the Email me button.";
   });
-  $("copyMail").addEventListener("click", function () {
+  if ($("copyMail")) $("copyMail").addEventListener("click", function () {
     var b = this; function done() { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1800); }
     try { navigator.clipboard.writeText(addr).then(done, function () { var r = document.createRange(); r.selectNodeContents($("mailAddr")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }); } catch (err) {}
   });

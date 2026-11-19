@@ -89,7 +89,7 @@ main{min-width:0}
   </div>
   <div class="ct">
    <span>Birmingham, AL</span>
-   <b id="em">lindsayomorton@gmail.com</b>
+   <b id="em">Email me</b>
    <a href="https://www.linkedin.com/in/lindsayoneal" target="_blank" rel="noopener noreferrer">linkedin.com/in/lindsayoneal ↗</a>
    <button type="button" id="cp">Copy email</button>
    <button type="button" class="dl" id="dl">Download PDF ↓</button>
@@ -210,7 +210,7 @@ function buildPDF(){
   function head(t){ y+=6; need(24); doc.setDrawColor(239,74,134); doc.setLineWidth(1.2); doc.line(M,y,W-M,y); y+=14; text(t.toUpperCase(),10,"bold",[239,74,134],4); }
   text("LINDSAY MORTON",24,"bold",[21,48,44],2);
   text(F.role.replace("·","|"),11,"bold",[21,48,44],2);
-  text("Birmingham, AL  |  lindsayomorton@gmail.com  |  linkedin.com/in/lindsayoneal",9.5,"normal",[80,90,88],4);
+  text("Birmingham, AL  |  linkedin.com/in/lindsayoneal  |  linsmeetsworld.com",9.5,"normal",[80,90,88],4);
   head("Profile"); text(F.profile,10,"normal",null,2);
   head("Selected results"); text(F.nums.map(function(k){return NUMS[k][0]+" "+NUMS[k][1]}).join("   •   "),10,"normal",null,2);
   head("Experience");

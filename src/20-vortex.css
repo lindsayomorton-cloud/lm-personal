@@ -364,3 +364,5 @@ html.vq-go .vq-lock .vq-dol{animation:vqDolOnce 1.6s cubic-bezier(.45,0,.55,1) 2
 @keyframes vxBalloon{0%{opacity:0;transform:translate(var(--sx),var(--sy)) scale(1.15) rotate(var(--r))}12%{opacity:1}45%{transform:translate(var(--mx),var(--my)) scale(.75) rotate(calc(var(--r) * -.5))}85%{opacity:.9}100%{opacity:0;transform:translate(0,0) scale(.05) rotate(calc(var(--r) * 2))}}
 /* these live in zero-size anchors, so they must not be capped at 100% width */
 .dol-gems img,.vx-balloons img{max-width:none!important}
+/* once you're past the vortex, none of its floating pieces linger over the next sections */
+html.vx-past #vxFloat,html.vx-past .vx-float,html.vx-past .vx-enter,html.vx-past .vx-balloons,html.vx-past .dol-gems{visibility:hidden!important;opacity:0!important}
