@@ -390,3 +390,7 @@ html.hero-go .hero-sky .cl.drop{animation:clDrop .9s cubic-bezier(.3,.1,.2,1) ca
 /* the LM: soft white at rest, neon chartreuse on hover */
 .logo .lm-mark{fill:rgba(255,255,255,.3)!important;transition:fill .25s ease,filter .25s ease}
 .logo:hover .lm-mark,.logo:focus-visible .lm-mark{fill:#ceff32!important;filter:drop-shadow(0 0 8px rgba(206,255,50,.8))}
+
+/* the blooming daisy stands big right on the far edge of the daisy field, covering where it ends */
+html body .hero .hero-daisy{left:clamp(240px,56vw,1000px)!important;top:auto!important;bottom:-7%!important;margin-left:0!important;translate:-50% 0!important;width:clamp(220px,24vw,460px)!important;z-index:3!important}
+@media (max-width:899px){html body .hero .hero-daisy{left:auto!important;right:-6%!important;translate:0 0!important;width:46vw!important}}

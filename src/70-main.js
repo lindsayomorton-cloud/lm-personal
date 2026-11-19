@@ -81,7 +81,7 @@
     rabbit.style.setProperty("--y", (heroB - h.top - ht * .92) + "px");
     /* he stops right in front of the blooming daisy under the photo, then dives */
     var dz = document.querySelector(".hero-daisy");
-    if (dz && side) { var dr = dz.getBoundingClientRect(); rabbit.style.setProperty("--x1", (dr.left + dr.width / 2 - h.left - w / 2) + "px"); rabbit.style.setProperty("--y", (dr.bottom - h.top - ht * .95) + "px"); }
+    if (dz && side) { var dr = dz.getBoundingClientRect(); rabbit.style.setProperty("--x1", (dr.left + dr.width / 2 - h.left - w / 2) + "px"); rabbit.style.setProperty("--y", (Math.min(dr.bottom, heroB - 8) - h.top - ht * .95) + "px"); }
     /* sparkles that ride along with him */
     if (!rabbit.querySelector(".rb-sp")) { var sp = ""; for (var q = 0; q < 10; q++) sp += '<i class="rb-sp" style="--sx:' + Math.round(-30 + Math.random() * 130) + '%;--sy:' + Math.round(-30 + Math.random() * 110) + '%;--sz:' + Math.round(10 + Math.random() * 16) + 'px;--sd:' + (Math.random() * 1.6).toFixed(2) + 's"></i>'; rabbit.insertAdjacentHTML("beforeend", sp); }
     rabbit.classList.add("go"); root.classList.add("bunny-on");

@@ -1,4 +1,4 @@
-<title>Lindsay Morton</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>[hidden]{display:none!important}</style></head><body><title>Lindsay Morton</title>
 <meta name="description" content="Lindsay Morton: brand, demand generation and go-to-market leader, building ideas that deserve to spread.">
 <link rel="preload" as="image" href="assets/proj/vx-slow.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -464,6 +464,10 @@ html.hero-go .hero-sky .cl.drop{animation:clDrop .9s cubic-bezier(.3,.1,.2,1) ca
 /* the LM: soft white at rest, neon chartreuse on hover */
 .logo .lm-mark{fill:rgba(255,255,255,.3)!important;transition:fill .25s ease,filter .25s ease}
 .logo:hover .lm-mark,.logo:focus-visible .lm-mark{fill:#ceff32!important;filter:drop-shadow(0 0 8px rgba(206,255,50,.8))}
+
+/* the blooming daisy stands big right on the far edge of the daisy field, covering where it ends */
+html body .hero .hero-daisy{left:clamp(240px,56vw,1000px)!important;top:auto!important;bottom:-7%!important;margin-left:0!important;translate:-50% 0!important;width:clamp(220px,24vw,460px)!important;z-index:3!important}
+@media (max-width:899px){html body .hero .hero-daisy{left:auto!important;right:-6%!important;translate:0 0!important;width:46vw!important}}
 
 /* ============ Jump-in link bar ============ */
 .jump{position:relative;z-index:50;background:var(--night);padding:18px clamp(16px,4vw,56px) 22px}
@@ -2797,6 +2801,7 @@ a.hi.note-landed{animation:noteLand 1.2s cubic-bezier(.2,1.6,.4,1)}
   <div class="rabbit" id="rabbit" aria-hidden="true"><span></span></div>
   <img class="hero-foil" src="assets/proj/hero-foil.webp" alt="" aria-hidden="true">
   <img class="hero-daisies" src="assets/proj/daisies3.webp" alt="" aria-hidden="true">
+  <img class="hero-daisy" data-src="assets/proj/daisy-bloom.gif" alt="" aria-hidden="true">
   <img class="fl" src="assets/proj/gem-star-glass.webp" alt="" aria-hidden="true" style="left:44%;top:30%;width:40px;--r:-18deg;--d:6s">
   <img class="fl" src="assets/proj/gem-star3-yellow.webp" alt="" aria-hidden="true" style="left:3%;top:58%;width:44px;--r:14deg;--d:7.5s">
   <img class="fl" src="assets/proj/cr-star-rpink.webp" alt="" aria-hidden="true" style="left:42%;top:10%;width:clamp(60px,6vw,96px);--r:-12deg;--d:7s">
@@ -2814,7 +2819,7 @@ a.hi.note-landed{animation:noteLand 1.2s cubic-bezier(.2,1.6,.4,1)}
   </div>
   <div class="hero-stage">
     <div class="hero-sun" aria-hidden="true"></div>
-    <figure class="hero-figure"><img class="hero-daisy" data-src="assets/proj/daisy-bloom.gif" alt="" aria-hidden="true">
+    <figure class="hero-figure">
       <div class="hero-photo"><img src="assets/proj/portrait-blue.webp" alt="Lindsay Morton"></div>
       <figcaption class="hero-tag">Always curious. Always building. ✳</figcaption>
     </figure>
@@ -3398,7 +3403,7 @@ var FRAMES = { lime: "assets/proj/frame-lime-orig.webp", blush: "assets/proj/fra
     rabbit.style.setProperty("--y", (heroB - h.top - ht * .92) + "px");
     /* he stops right in front of the blooming daisy under the photo, then dives */
     var dz = document.querySelector(".hero-daisy");
-    if (dz && side) { var dr = dz.getBoundingClientRect(); rabbit.style.setProperty("--x1", (dr.left + dr.width / 2 - h.left - w / 2) + "px"); rabbit.style.setProperty("--y", (dr.bottom - h.top - ht * .95) + "px"); }
+    if (dz && side) { var dr = dz.getBoundingClientRect(); rabbit.style.setProperty("--x1", (dr.left + dr.width / 2 - h.left - w / 2) + "px"); rabbit.style.setProperty("--y", (Math.min(dr.bottom, heroB - 8) - h.top - ht * .95) + "px"); }
     /* sparkles that ride along with him */
     if (!rabbit.querySelector(".rb-sp")) { var sp = ""; for (var q = 0; q < 10; q++) sp += '<i class="rb-sp" style="--sx:' + Math.round(-30 + Math.random() * 130) + '%;--sy:' + Math.round(-30 + Math.random() * 110) + '%;--sz:' + Math.round(10 + Math.random() * 16) + 'px;--sd:' + (Math.random() * 1.6).toFixed(2) + 's"></i>'; rabbit.insertAdjacentHTML("beforeend", sp); }
     rabbit.classList.add("go"); root.classList.add("bunny-on");
@@ -4823,3 +4828,4 @@ window.__mail = function () {
 
 
 </script>
+</body></html>
