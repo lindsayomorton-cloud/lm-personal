@@ -1190,3 +1190,15 @@ html.in-vx .drift{opacity:0!important;visibility:hidden!important}
 .art-main .art-mainb,.art-main button,.art-main a{pointer-events:auto}
 .art-wall button.art-up{z-index:12}
 @media (max-width:599px){.brew-view:not(.cave){aspect-ratio:1/1}}
+
+/* manager review quotes in the Study, above the stats */
+.mgr-rev{margin:18px 0 22px;padding:16px 18px 14px;border-radius:18px;background:#efe8fb}
+.mgr-rev .mr-kick{display:block;font:800 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#ec2b7a}
+.mgr-rev .mr-pull{margin:8px 0 12px;font:italic 400 clamp(22px,2.3vw,32px)/1.15 var(--serif);color:#15302c}
+.mgr-rev .mr-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mgr-rev blockquote{margin:0;background:#fff;border-radius:12px;padding:12px 14px;box-shadow:0 1px 0 #d9c9ef,4px 4px 0 #ffe14d;font-size:14px;line-height:1.5;color:#15302c}
+.mgr-rev blockquote:first-child{rotate:-.5deg}.mgr-rev blockquote:last-child{rotate:.5deg}
+.mgr-rev .mr-lbl{display:block;margin-bottom:5px;font:800 11px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:#ec2b7a}
+.mgr-rev mark{background:#ffe97a;color:inherit;font-weight:700;padding:0 2px;border-radius:3px}
+.mgr-rev figcaption{margin-top:10px;font-size:12px;color:#4b5a57}
+@media (max-width:760px){.mgr-rev .mr-cards{grid-template-columns:1fr}.mgr-rev blockquote{rotate:none!important}}

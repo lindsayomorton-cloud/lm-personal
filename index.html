@@ -2722,6 +2722,18 @@ html.in-vx .drift{opacity:0!important;visibility:hidden!important}
 .art-wall button.art-up{z-index:12}
 @media (max-width:599px){.brew-view:not(.cave){aspect-ratio:1/1}}
 
+/* manager review quotes in the Study, above the stats */
+.mgr-rev{margin:18px 0 22px;padding:16px 18px 14px;border-radius:18px;background:#efe8fb}
+.mgr-rev .mr-kick{display:block;font:800 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#ec2b7a}
+.mgr-rev .mr-pull{margin:8px 0 12px;font:italic 400 clamp(22px,2.3vw,32px)/1.15 var(--serif);color:#15302c}
+.mgr-rev .mr-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mgr-rev blockquote{margin:0;background:#fff;border-radius:12px;padding:12px 14px;box-shadow:0 1px 0 #d9c9ef,4px 4px 0 #ffe14d;font-size:14px;line-height:1.5;color:#15302c}
+.mgr-rev blockquote:first-child{rotate:-.5deg}.mgr-rev blockquote:last-child{rotate:.5deg}
+.mgr-rev .mr-lbl{display:block;margin-bottom:5px;font:800 11px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:#ec2b7a}
+.mgr-rev mark{background:#ffe97a;color:inherit;font-weight:700;padding:0 2px;border-radius:3px}
+.mgr-rev figcaption{margin-top:10px;font-size:12px;color:#4b5a57}
+@media (max-width:760px){.mgr-rev .mr-cards{grid-template-columns:1fr}.mgr-rev blockquote{rotate:none!important}}
+
 /* ============ Pop-up windows ============ */
 .modal{position:fixed;inset:0;display:grid;place-items:center;padding:16px;background:rgba(18,8,36,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:fadeIn .3s ease}
 .modal[hidden]{display:none}
@@ -3568,6 +3580,15 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
         <span class="kick">Meet Lindsay Morton</span>
         <h2>Powerful. Strategic. Visionary.</h2>
         <p class="story-lede">I've led social, content and demand generation since 2010, and product marketing since 2011, for B2B technology, AI, SaaS, healthcare and consumer businesses.</p>
+        <figure class="mgr-rev" aria-label="From my latest manager review">
+          <span class="mr-kick">From my latest manager review</span>
+          <p class="mr-pull">“She moves at a pace most of the org cannot match.”</p>
+          <div class="mr-cards">
+            <blockquote><span class="mr-lbl">Strengths</span>“Her peers were unusually specific. They called her strategic and a natural leader, a clear communicator they learn from, collaborative without being a pushover, someone who asks for clarification rather than nodding along to keep the peace, and a mentor to the people she works with. I would add three things from my own seat: she builds rather than delegates upward, <mark>she moves at a pace most of the org cannot match</mark>, and her instinct when the data turns against her is to design the test that settles it.”</blockquote>
+            <blockquote><span class="mr-lbl">Impact</span>“Lindsay built the front door of this company. The vivun.com rebrand shipped in April off the prototype she drove, the Meet Hero site went from nothing in March to a full production property by launch, and today she owns and actively maintains over two hundred pages across six live domains, including the desktop launch pages and the Windows page she shipped within days of being asked. When I reviewed the MeetHero work in May I called it a phenomenal body of work, and I still think that undersells it, because she ran it like a product: structured review, feedback from sales, design and exec, and a measured result.”</blockquote>
+          </div>
+          <figcaption>Manager assessment, Vivun, July 2026</figcaption>
+        </figure>
         <ul class="stats" aria-label="Selected results"><li><b>$20M</b>first-year inbound pipeline</li><li><b>4×</b>top-of-funnel growth in under six months</li><li><b>50%</b>of revenue from partner channels I built</li><li><b>$55M</b>revenue at a business I helped scale</li></ul>
         <div class="row-btns"><button class="btn" id="dlResume" type="button">Download résumé (PDF) ↓</button><a class="btn ghost" href="https://www.linkedin.com/in/lindsayoneal" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
         <p class="note" id="dlNote" hidden></p>
