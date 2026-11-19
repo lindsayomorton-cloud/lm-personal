@@ -530,6 +530,20 @@ html body .hero .hero-daisy{left:clamp(240px,56vw,1000px)!important;top:auto!imp
 /* Skilled arrives sooner */
 html.hero-go .hero h1 .w3{transition-delay:.85s!important}
 @media (max-width:899px){.hero-stage{align-items:flex-start!important;padding-top:30px!important}}
+/* the daisy glows and calls you over */
+html .hero .hero-daisy{transition:width .7s cubic-bezier(.2,1.4,.4,1)}
+html.daisy-calling .hero .hero-daisy{pointer-events:auto!important;cursor:pointer;width:clamp(300px,31vw,560px)!important;
+  animation:heroDaisyUp 1s cubic-bezier(.2,1.4,.4,1) both,heroDaisySway 5s ease-in-out 1.1s infinite,daisyCall 1.6s ease-in-out infinite!important}
+@media (max-width:899px){html.daisy-calling .hero .hero-daisy{width:clamp(160px,40vw,260px)!important}}
+@keyframes daisyCall{0%,100%{filter:drop-shadow(0 0 10px rgba(255,255,255,.9)) drop-shadow(0 0 24px rgba(206,255,50,.75))}50%{filter:drop-shadow(0 0 18px #fff) drop-shadow(0 0 44px rgba(254,123,191,.95))}}
+.daisy-call{position:absolute;z-index:40;translate:-50% -100%;font:800 clamp(15px,1.3vw,19px)/1 var(--body);padding:.75em 1.15em;border-radius:999px;border:2.5px solid #15302c;background:#ceff32;color:#15302c;box-shadow:4px 4px 0 #ec2b7a,0 0 26px rgba(206,255,50,.8);cursor:pointer;white-space:nowrap;
+  animation:callIn .55s cubic-bezier(.2,1.6,.4,1) both,callBob 1.6s ease-in-out .55s infinite;transition:opacity .35s,scale .35s}
+.daisy-call::after{content:"";position:absolute;left:50%;bottom:-9px;width:14px;height:14px;background:#ceff32;border-right:2.5px solid #15302c;border-bottom:2.5px solid #15302c;translate:-50% 0;rotate:45deg}
+.daisy-call:hover{background:#fff}
+.daisy-call.bye{opacity:0;scale:.4}
+@keyframes callIn{from{opacity:0;scale:.3}}
+@keyframes callBob{50%{translate:-50% calc(-100% - 8px)}}
+@media (prefers-reduced-motion:reduce){.daisy-call{animation:none}html.daisy-calling .hero-daisy{animation:none!important;filter:drop-shadow(0 0 14px #fff)}}
 
 /* ============ Jump-in link bar ============ */
 .jump{position:relative;z-index:50;background:var(--night);padding:18px clamp(16px,4vw,56px) 22px}
@@ -3757,7 +3771,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   /* he runs about two seconds after the page opens (or sooner, the moment you start scrolling) */
   else (function wait() {
     var hb = document.querySelector(".hero").getBoundingClientRect(), heroUp = root.classList.contains("tall") || (hb.bottom > innerHeight * .5 && hb.top < innerHeight * .5);
-    if (hideLoader.fading && heroUp && (Date.now() - t0 > 4000 || holdScroll.t || window.__heroHover)) { if (holdScroll.t) rabbit.classList.add("fast"); runRabbit(); } else setTimeout(wait, 100);
+    if (hideLoader.fading && heroUp && (window.__daisyGo || holdScroll.t)) { if (holdScroll.t) rabbit.classList.add("fast"); runRabbit(); } else setTimeout(wait, 100);
   })();
   /* if you try to scroll before he has run, the page holds still while he dashes across (a little quicker),
      then dives, and the site carries you down into the vortex */
@@ -4375,8 +4389,13 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     });
     function startTV() {
       if (tvLive) return; tvLive = true;
-      /* reload the channel with autoplay on, so it starts the instant you hover */
-      show(ch, true);
+      /* the player is already loaded: tell it to play right away; if it hasn't started a moment later, reload it with autoplay */
+      var started = false;
+      function onMsg(e) { if (!/youtube/.test(e.origin)) return; try { var d = JSON.parse(e.data); if (d.info && d.info.playerState === 1) started = true; } catch (er) {} }
+      addEventListener("message", onMsg);
+      var fr = vid.querySelector("iframe");
+      if (fr && canSound()) { try { fr.contentWindow.postMessage(JSON.stringify({ event: "listening" }), "*"); } catch (er) {} cmd("playVideo"); setTimeout(function () { removeEventListener("message", onMsg); if (!started) show(ch, true); }, 900); }
+      else { removeEventListener("message", onMsg); show(ch, true); }
       if (!canSound()) {
         var chip = document.createElement("button"); chip.type = "button"; chip.className = "tv-sound"; chip.textContent = "🔊 Tap for sound";
         tv.appendChild(chip);
@@ -4930,9 +4949,10 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   /* a friendly "tap for sound" pill until the visitor's first tap (hovering and scrolling don't count for browsers) */
   var pill = null, active = navigator.userActivation && navigator.userActivation.hasBeenActive;
   var off = false; try { off = localStorage.getItem("doorSound") === "off"; } catch (e) {}
-  if (!active && !off) {
+  if (false) {   /* no separate sound pill: the daisy's "Click me" is the first tap */
     pill = document.createElement("button"); pill.type = "button"; pill.className = "snd-pill"; pill.innerHTML = "🔊 Tap anywhere for sound";
-    setTimeout(function () { if (pill) document.body.appendChild(pill); }, 1800);
+    /* the hero's own "Click me" by the daisy asks first; this pill only shows if they skip it and scroll on without tapping */
+    (function later() { if (!pill) return; if (document.documentElement.classList.contains("vx-past")) document.body.appendChild(pill); else setTimeout(later, 500); })();
   }
   function unlock() {
     ["pointerdown", "keydown", "touchend"].forEach(function (ev) { removeEventListener(ev, unlock, true); });
@@ -5068,6 +5088,33 @@ window.__mail = function () {
   dock.querySelectorAll(".sd-step").forEach(function (b) { b.addEventListener("click", function () { window.__setVolume(window.__getVolume() + parseFloat(b.dataset.d)); if (!on()) main.click(); paint(); }); });
   document.addEventListener("lm-sound", paint);
   paint();
+})();
+
+/* ===== the daisy calls you: it glows, a "Click me" pops up beside it, and your click lets the bunny out
+   (that click is also what lets the browser play sound, so the music starts with him) ===== */
+(function () {
+  var root = document.documentElement, hero = document.querySelector(".hero"), dz = document.querySelector(".hero-daisy");
+  if (!hero || !dz) { window.__daisyGo = true; return; }
+  var b = document.createElement("button"); b.type = "button"; b.className = "daisy-call"; b.innerHTML = 'Click me <span aria-hidden="true">✿</span>';
+  b.setAttribute("aria-label", "Click me to let the bunny out");
+  function place() {
+    var h = hero.getBoundingClientRect(), d = dz.getBoundingClientRect();
+    b.style.left = (d.left - h.left + d.width / 2) + "px"; b.style.top = (d.top - h.top + d.height * .12) + "px";
+  }
+  function go() {
+    if (window.__daisyGo) return; window.__daisyGo = true;
+    root.classList.remove("daisy-calling"); b.classList.add("bye"); setTimeout(function () { b.remove(); }, 500);
+    if (window.__poof) window.__poof(dz);
+  }
+  b.addEventListener("click", go); dz.addEventListener("click", go);
+  (function wait() {
+    if (root.classList.contains("hero-go") && dz.classList.contains("grow")) setTimeout(function () {
+      if (window.__daisyGo) return;
+      root.classList.add("daisy-calling"); setTimeout(function () { hero.appendChild(b); place(); }, 650);
+      addEventListener("resize", place);
+    }, 1400);
+    else setTimeout(wait, 100);
+  })();
 })();
 
 /* ============ "Ask my résumé": answers only from Lindsay's real profile ============ */

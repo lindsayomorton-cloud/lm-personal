@@ -193,7 +193,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   /* he runs about two seconds after the page opens (or sooner, the moment you start scrolling) */
   else (function wait() {
     var hb = document.querySelector(".hero").getBoundingClientRect(), heroUp = root.classList.contains("tall") || (hb.bottom > innerHeight * .5 && hb.top < innerHeight * .5);
-    if (hideLoader.fading && heroUp && (Date.now() - t0 > 4000 || holdScroll.t || window.__heroHover)) { if (holdScroll.t) rabbit.classList.add("fast"); runRabbit(); } else setTimeout(wait, 100);
+    if (hideLoader.fading && heroUp && (window.__daisyGo || holdScroll.t)) { if (holdScroll.t) rabbit.classList.add("fast"); runRabbit(); } else setTimeout(wait, 100);
   })();
   /* if you try to scroll before he has run, the page holds still while he dashes across (a little quicker),
      then dives, and the site carries you down into the vortex */
@@ -811,8 +811,13 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     });
     function startTV() {
       if (tvLive) return; tvLive = true;
-      /* reload the channel with autoplay on, so it starts the instant you hover */
-      show(ch, true);
+      /* the player is already loaded: tell it to play right away; if it hasn't started a moment later, reload it with autoplay */
+      var started = false;
+      function onMsg(e) { if (!/youtube/.test(e.origin)) return; try { var d = JSON.parse(e.data); if (d.info && d.info.playerState === 1) started = true; } catch (er) {} }
+      addEventListener("message", onMsg);
+      var fr = vid.querySelector("iframe");
+      if (fr && canSound()) { try { fr.contentWindow.postMessage(JSON.stringify({ event: "listening" }), "*"); } catch (er) {} cmd("playVideo"); setTimeout(function () { removeEventListener("message", onMsg); if (!started) show(ch, true); }, 900); }
+      else { removeEventListener("message", onMsg); show(ch, true); }
       if (!canSound()) {
         var chip = document.createElement("button"); chip.type = "button"; chip.className = "tv-sound"; chip.textContent = "🔊 Tap for sound";
         tv.appendChild(chip);
@@ -1366,9 +1371,10 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   /* a friendly "tap for sound" pill until the visitor's first tap (hovering and scrolling don't count for browsers) */
   var pill = null, active = navigator.userActivation && navigator.userActivation.hasBeenActive;
   var off = false; try { off = localStorage.getItem("doorSound") === "off"; } catch (e) {}
-  if (!active && !off) {
+  if (false) {   /* no separate sound pill: the daisy's "Click me" is the first tap */
     pill = document.createElement("button"); pill.type = "button"; pill.className = "snd-pill"; pill.innerHTML = "🔊 Tap anywhere for sound";
-    setTimeout(function () { if (pill) document.body.appendChild(pill); }, 1800);
+    /* the hero's own "Click me" by the daisy asks first; this pill only shows if they skip it and scroll on without tapping */
+    (function later() { if (!pill) return; if (document.documentElement.classList.contains("vx-past")) document.body.appendChild(pill); else setTimeout(later, 500); })();
   }
   function unlock() {
     ["pointerdown", "keydown", "touchend"].forEach(function (ev) { removeEventListener(ev, unlock, true); });
@@ -1504,4 +1510,31 @@ window.__mail = function () {
   dock.querySelectorAll(".sd-step").forEach(function (b) { b.addEventListener("click", function () { window.__setVolume(window.__getVolume() + parseFloat(b.dataset.d)); if (!on()) main.click(); paint(); }); });
   document.addEventListener("lm-sound", paint);
   paint();
+})();
+
+/* ===== the daisy calls you: it glows, a "Click me" pops up beside it, and your click lets the bunny out
+   (that click is also what lets the browser play sound, so the music starts with him) ===== */
+(function () {
+  var root = document.documentElement, hero = document.querySelector(".hero"), dz = document.querySelector(".hero-daisy");
+  if (!hero || !dz) { window.__daisyGo = true; return; }
+  var b = document.createElement("button"); b.type = "button"; b.className = "daisy-call"; b.innerHTML = 'Click me <span aria-hidden="true">✿</span>';
+  b.setAttribute("aria-label", "Click me to let the bunny out");
+  function place() {
+    var h = hero.getBoundingClientRect(), d = dz.getBoundingClientRect();
+    b.style.left = (d.left - h.left + d.width / 2) + "px"; b.style.top = (d.top - h.top + d.height * .12) + "px";
+  }
+  function go() {
+    if (window.__daisyGo) return; window.__daisyGo = true;
+    root.classList.remove("daisy-calling"); b.classList.add("bye"); setTimeout(function () { b.remove(); }, 500);
+    if (window.__poof) window.__poof(dz);
+  }
+  b.addEventListener("click", go); dz.addEventListener("click", go);
+  (function wait() {
+    if (root.classList.contains("hero-go") && dz.classList.contains("grow")) setTimeout(function () {
+      if (window.__daisyGo) return;
+      root.classList.add("daisy-calling"); setTimeout(function () { hero.appendChild(b); place(); }, 650);
+      addEventListener("resize", place);
+    }, 1400);
+    else setTimeout(wait, 100);
+  })();
 })();
