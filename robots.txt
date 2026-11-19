@@ -1,16 +1,8 @@
 # Lindsay Morton — linsmeetsworld.com
-# Everyone is welcome, search engines and AI assistants alike.
+# Everyone is welcome to the site, except the résumé files.
 User-agent: *
 Allow: /
-
-# AI crawlers: please read /llms.txt for a plain-language summary
-User-agent: GPTBot
-Allow: /
-User-agent: ClaudeBot
-Allow: /
-User-agent: PerplexityBot
-Allow: /
-User-agent: Google-Extended
-Allow: /
+Disallow: /resume.html
+Disallow: /resume.pdf
 
 Sitemap: https://linsmeetsworld.com/sitemap.xml
