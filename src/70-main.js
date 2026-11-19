@@ -1519,7 +1519,7 @@ window.__mail = function () {
 (function () {
   var root = document.documentElement, hero = document.querySelector(".hero"), dz = document.querySelector(".hero-daisy");
   if (!hero || !dz) { window.__daisyGo = true; return; }
-  var b = document.createElement("button"); b.type = "button"; b.className = "daisy-call"; b.innerHTML = 'Click me <span aria-hidden="true">✿</span>';
+  var b = document.createElement("button"); b.type = "button"; b.className = "daisy-call"; b.innerHTML = '<span class="tag-t">Click Me</span><i class="tag-hole" aria-hidden="true"></i><i class="tag-string" aria-hidden="true"></i>';
   b.setAttribute("aria-label", "Click me to let the bunny out");
   function place() {
     var h = hero.getBoundingClientRect(), d = dz.getBoundingClientRect();
