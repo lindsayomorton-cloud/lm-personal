@@ -1185,3 +1185,7 @@ html.in-vx .drift{opacity:0!important;visibility:hidden!important}
   .art-wall button{transition:transform .45s cubic-bezier(.2,1.25,.4,1),filter .45s!important}
   .art-wall button:hover,.art-wall button:focus-visible{transform:translateY(-10px) scale(1.75) rotate(0)!important;z-index:80!important;position:relative;filter:drop-shadow(0 30px 40px rgba(10,30,10,.55))}
 }
+/* the big painting's empty box no longer sits over the two paintings beside it, so they can be hovered and clicked */
+.art-main{pointer-events:none}
+.art-main .art-mainb,.art-main button,.art-main a{pointer-events:auto}
+.art-wall button.art-up{z-index:12}

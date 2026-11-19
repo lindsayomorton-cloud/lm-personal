@@ -1554,7 +1554,7 @@ window.__mail = function () {
   function place() {
     var h = hero.getBoundingClientRect(), d = dz.getBoundingClientRect();
     /* the tag hangs off the daisy's stem: its string end ties on at the stem, the tag sways out to the left */
-    var stemX = d.left - h.left + d.width * .5, stemY = d.top - h.top + d.height * .6, tw = b.offsetWidth || 220;
+    var stemX = d.left - h.left + d.width * .5, stemY = d.top - h.top + d.height * .68, tw = b.offsetWidth || 220;
     b.style.left = (stemX - tw / 2 - 18) + "px"; b.style.top = (stemY + (b.offsetHeight || 60) / 2) + "px";
   }
   function go() {

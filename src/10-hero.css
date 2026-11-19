@@ -526,3 +526,5 @@ html.bunny-zoom .hero h1{text-shadow:none}
 /* while the tag is calling, the headline steps back to half strength */
 .hero h1{transition:opacity .6s ease}
 html.daisy-calling .hero h1{opacity:.5}
+@media (min-width:900px){.daisy-call{font-size:clamp(24px,2vw,32px)!important;padding:.4em 1.35em .45em .95em!important}.daisy-call .tag-hole{right:26px;width:11px;height:11px;margin-top:-5.5px}}
+@media (max-width:899px){.daisy-call{font-size:21px!important}}
