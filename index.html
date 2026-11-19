@@ -3035,6 +3035,7 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
 @keyframes solYayBob{50%{translate:-50% calc(-50% - 12px);rotate:4deg}}
 .sol-win-card{margin-top:clamp(140px,22vw,260px)}
 @media (prefers-reduced-motion:reduce){.sol-yay{animation:none}}
+.sol-fan{cursor:pointer}.sol-fan:hover i:nth-child(3){translate:-50% -16px}
 
 
 </style>
@@ -5847,6 +5848,10 @@ var SOL_DEALS = {"easy":["c_2?H@CI6AMB8=5>OS9RZLWaF14J^VG;`<N\\UK3TE]QXYDP07:b["
   }
   addEventListener("keydown", function (e) { if (e.key === "Escape" && overlay && !overlay.hidden) close(); });
   if (play) play.addEventListener("click", start);
+  /* the fanned bunny cards open the game too */
+  var fan = host.querySelector(".sol-fan");
+  if (fan) { fan.setAttribute("role", "button"); fan.tabIndex = 0; fan.setAttribute("aria-label", "Play solitaire"); fan.removeAttribute("aria-hidden");
+    fan.addEventListener("click", start); fan.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); start(); } }); }
   window.__sol = { faceSVG: faceSVG, get G() { return G; }, play: function (a) { return commit(a); } };
 })();
 

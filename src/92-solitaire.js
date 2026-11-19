@@ -458,5 +458,9 @@
   }
   addEventListener("keydown", function (e) { if (e.key === "Escape" && overlay && !overlay.hidden) close(); });
   if (play) play.addEventListener("click", start);
+  /* the fanned bunny cards open the game too */
+  var fan = host.querySelector(".sol-fan");
+  if (fan) { fan.setAttribute("role", "button"); fan.tabIndex = 0; fan.setAttribute("aria-label", "Play solitaire"); fan.removeAttribute("aria-hidden");
+    fan.addEventListener("click", start); fan.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); start(); } }); }
   window.__sol = { faceSVG: faceSVG, get G() { return G; }, play: function (a) { return commit(a); } };
 })();
