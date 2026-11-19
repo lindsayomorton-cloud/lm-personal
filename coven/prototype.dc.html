@@ -951,7 +951,7 @@ class Component extends DCLogic {
     this.afterNav();
     const yr = new Date().getFullYear(), stdOffset = Math.max(new Date(yr, 0, 1).getTimezoneOffset(), new Date(yr, 6, 1).getTimezoneOffset());
     this.setDusk(39, -(stdOffset / 60) * 15, false);
-    try { navigator.geolocation.getCurrentPosition(p => this.setDusk(p.coords.latitude, p.coords.longitude, true), () => {}, { timeout: 8000, maximumAge: 3600000 }); } catch (e) {}
+    try { if (window.top === window) navigator.geolocation.getCurrentPosition(p => this.setDusk(p.coords.latitude, p.coords.longitude, true), () => {}, { timeout: 8000, maximumAge: 3600000 }); } catch (e) {}
     this.duskTimer = setInterval(() => this.setDusk(this.duskLat, this.duskLng, this.duskExact), 60000);
   }
   catColor(slug) { return { 'crystals-stones': 'var(--orchid)', 'candles-incense': 'var(--peach)', 'herbs-oils': 'var(--moss)', 'tarot-oracle-decks': 'var(--lavender)', 'altar-ritual-tools': 'var(--aurora)', 'jewelry-talismans': 'var(--sky)', 'art-crafts': 'var(--orchid)', 'books-journals': 'var(--peach)', 'tarot-readings': 'var(--lavender)', 'astrology': 'var(--sky)', 'spellwork-rituals': 'var(--orchid)', 'energy-work': 'var(--aurora)', 'classes-mentoring': 'var(--moss)', 'custom-commissions': 'var(--peach)' }[slug] || 'var(--lavender)'; }

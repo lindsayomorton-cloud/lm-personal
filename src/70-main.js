@@ -310,7 +310,7 @@
     /* once the hero is gone, the vortex drops beneath the doors, so the doors slide up over it exactly with your scroll */
     root.classList.toggle("vx-past", r.top < 0);
     if (r.top < 0) view.style.clipPath = "none";
-    else { var hd = window.__holeDoc, at = hd ? hd.x.toFixed(0) + "px " + (hd.y - scrollY).toFixed(0) + "px" : "50% 55%"; view.style.clipPath = "circle(" + (a * a * 160).toFixed(2) + "vmax at " + at + ")"; }
+    else { var hd = window.__holeDoc, at = hd ? hd.x.toFixed(0) + "px " + (hd.y - scrollY).toFixed(0) + "px" : "50% 55%"; view.style.clipPath = "circle(" + (!hd && a < .2 ? 0 : a * a * 160).toFixed(2) + "vmax at " + at + ")"; }
     return { p: clamp(-r.top / Math.max(1, r.height - H)), o: inView || (r.top > 0 && a > 0) ? 1 : 0 };
   }
   var cur = null, running = false;
@@ -749,21 +749,29 @@
   (function () {
     var tv = document.querySelector(".like-tv:not(.like-radio) .tv"); if (!tv) return;
     var vid = tv.querySelector(".tv-vid"), num = tv.querySelector(".tv-chnum"), ch = 0;
-    var CH = [["AZJSjrox_2s", "Pure Moods", 3], ["MXSUF_aGv5U", "Boy Meets World", 4], ["I2OHc4OvjVc", "FernGully", 5], ["wL6pCdpNPNI", "Sabrina the Teenage Witch", 6], [null, "My picks", 7]];
+    var CH = [["sVvw0VjpBDU", "Pure Moods", 3], ["MXSUF_aGv5U", "Boy Meets World", 4], ["I2OHc4OvjVc", "FernGully", 5], ["wL6pCdpNPNI", "Sabrina the Teenage Witch", 6], [null, "My picks", 7]];
     function show(i, autoplay) {
       var c = CH[i]; tv.classList.toggle("on-list", !c[0]); num.textContent = "CH " + c[2];
       var now = $("tvNow"), yt = $("tvYT"); if (now) now.textContent = "CH " + c[2] + " · " + c[1]; if (yt) { yt.hidden = !c[0]; if (c[0]) yt.href = "https://www.youtube.com/watch?v=" + c[0]; }
-      vid.innerHTML = c[0] ? '<iframe src="https://www.youtube-nocookie.com/embed/' + c[0] + '?rel=0&modestbranding=1&playsinline=1' + (autoplay ? "&autoplay=1" : "") + (location.origin && location.origin !== "null" ? "&origin=" + encodeURIComponent(location.origin) : "") + '" referrerpolicy="strict-origin-when-cross-origin" title="' + c[1] + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>' : "";
+      vid.innerHTML = c[0] ? '<iframe src="https://www.youtube-nocookie.com/embed/' + c[0] + '?rel=0&modestbranding=1&playsinline=1&enablejsapi=1' + (autoplay ? "&autoplay=1" : "") + (location.origin && location.origin !== "null" ? "&origin=" + encodeURIComponent(location.origin) : "") + '" referrerpolicy="strict-origin-when-cross-origin" title="' + c[1] + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>' : "";
     }
-    whenSeen(tv, function () { if (!vid.innerHTML) show(0, false); }, .2);
-    /* hovering the TV starts the commercial playing and stops Boy Meets World */
+    /* talk to the YouTube player: play instantly and run the clip a bit faster */
+    function cmd(f, args) { var fr = vid.querySelector("iframe"); if (fr && fr.contentWindow) fr.contentWindow.postMessage(JSON.stringify({ event: "command", func: f, args: args || [] }), "*"); }
+    function fast() { [0, 250, 700, 1500, 3000].forEach(function (t) { setTimeout(function () { cmd("setPlaybackRate", [1.5]); }, t); }); }
+    vid.addEventListener("load", function () { cmd("addEventListener", ["onReady"]); }, true);
+    /* the player loads well before the TV is on screen, so it's ready the moment you hover */
+    (function () { var bey = $("beyond") || tv; if (!("IntersectionObserver" in window)) { show(0, false); return; }
+      new IntersectionObserver(function (es, ob) { if (es[0].isIntersecting) { ob.disconnect(); if (!vid.innerHTML) show(0, false); } }, { rootMargin: "1200px 0px" }).observe(bey); })();
+    /* hovering the TV starts the commercial playing (faster than normal) and stops Boy Meets World */
     var tvLive = false;
     tv.closest(".like-tv").addEventListener("pointerenter", function () {
-      if (tvLive) return; tvLive = true; show(ch, true); if (window.__bmwStop) window.__bmwStop();
+      if (tvLive) return; tvLive = true;
+      if (vid.querySelector("iframe")) { cmd("playVideo"); fast(); setTimeout(function () { cmd("playVideo"); }, 600); } else { show(ch, true); fast(); }
+      if (window.__bmwStop) window.__bmwStop();
     });
     function change() {
       ch = (ch + 1) % CH.length; tv.classList.add("flip");
-      setTimeout(function () { show(ch, true); }, 220);
+      setTimeout(function () { show(ch, true); fast(); }, 220);
       setTimeout(function () { tv.classList.remove("flip"); }, 650);
     }
     all(".tv-knob, .tv-chbtn", tv).forEach(function (b) { b.addEventListener("click", function (e) { e.stopPropagation(); change(); }); });
