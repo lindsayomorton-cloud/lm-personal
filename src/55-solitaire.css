@@ -76,3 +76,17 @@
 .sol-card.hint-dst .sol-in::after{border:5px dashed #15302c;box-shadow:0 0 0 3px #ceff32}
 @keyframes solRing{50%{inset:-3px}}
 .sol-live:not(:empty){display:inline-block;background:rgba(21,48,44,.86);color:#fff;text-shadow:none;padding:.5em .9em;border-radius:999px;position:relative;z-index:5}
+/* the game opens big, over a dimmed site: the table on top, the controls underneath */
+html.sol-on,html.sol-on body{overflow:hidden!important}
+.sol-overlay{position:fixed;inset:0;z-index:5000;display:flex;align-items:stretch;justify-content:center;padding:clamp(6px,1.4vw,18px);background:rgba(12,8,30,.78);opacity:0;transition:opacity .25s ease}
+.sol-overlay.show{opacity:1}
+.sol-overlay[hidden]{display:none}
+.sol-overlay .sol-table{flex:1;max-width:1600px;display:flex;flex-direction:column;gap:clamp(6px,1vw,12px);padding:clamp(8px,1.2vw,16px);min-height:0}
+.sol-overlay .sol-board{flex:1;min-height:0;height:auto}
+.sol-overlay .sol-bar{margin:0;order:3}
+.sol-overlay .sol-live{order:2;margin:0;align-self:center;min-height:0}
+.sol-overlay .sol-live:empty{display:none}
+.sol-win-ctl{display:flex;gap:6px}
+.sol-bar .sol-x{background:var(--ink)!important;color:#fff!important}
+.sol-bar .sol-x:hover{background:#ec2b7a!important}
+.sol-overlay.is-fs{padding:0}.sol-overlay.is-fs .sol-table{max-width:none;border-radius:0}

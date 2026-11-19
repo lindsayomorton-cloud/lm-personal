@@ -49,7 +49,7 @@
   function label(c, up) { return up === false ? "Face-down card" : RANKNAME[SOL.rank(c)] + " of " + SUITS[SOL.suit(c)] + ", " + (SOL.red(c) ? "red" : "black"); }
 
   /* ---------- game state ---------- */
-  var G = null, hist = [], fut = [], els = {}, timerT = null, worker = null, reqId = 0, hintStage = 0, hintFor = -1, hintAct = null, busy = false, finishing = false;
+  var overlay = null, G = null, hist = [], fut = [], els = {}, timerT = null, worker = null, reqId = 0, hintStage = 0, hintFor = -1, hintAct = null, busy = false, finishing = false;
   function blank(mode, idx) {
     var deck = SOL.decode(SOL_DEALS[mode][idx]);
     var st = SOL.deal(deck, MODES[mode].draw);
@@ -77,17 +77,29 @@
   /* ---------- build the table ---------- */
   var root, board, bar, live, statMoves, statTime, statScore, btn = {}, pileEls = {};
   function build() {
-    host.classList.add("open");
-    host.innerHTML = '<div class="sol-table"><div class="sol-bar" role="toolbar" aria-label="Solitaire controls">'
+    overlay = document.createElement("div"); overlay.className = "sol-overlay"; overlay.setAttribute("role", "dialog"); overlay.setAttribute("aria-modal", "true"); overlay.setAttribute("aria-label", "Solitaire");
+    document.body.appendChild(overlay);
+    overlay.innerHTML = '<div class="sol-table"><div class="sol-board" aria-label="Solitaire table"></div><p class="sol-live" aria-live="polite"></p><div class="sol-bar" role="toolbar" aria-label="Solitaire controls">'
       + '<div class="sol-modes" role="radiogroup" aria-label="Difficulty">' + Object.keys(MODES).map(function (m) { return '<button type="button" role="radio" data-mode="' + m + '">' + MODES[m].label + "</button>"; }).join("") + "</div>"
       + '<div class="sol-acts"><button type="button" data-a="new">New game</button><button type="button" data-a="restart">Restart</button><button type="button" data-a="undo" aria-label="Undo">↶ Undo</button><button type="button" data-a="redo" aria-label="Redo">Redo ↷</button>'
       + '<button type="button" data-a="hint">💡 Hint</button><button type="button" data-a="shuffle">🔀 Shuffle <b class="sol-left"></b></button><button type="button" data-a="finish" class="sol-finish" hidden>Finish ✨</button></div>'
+      + '<div class="sol-win-ctl"><button type="button" class="sol-fs" aria-label="Full screen">⛶ Full screen</button><button type="button" class="sol-x" aria-label="Close solitaire">✕ Close</button></div>'
       + '<div class="sol-stats"><span>Moves <b data-s="moves">0</b></span><span>Time <b data-s="time">0:00</b></span><span>Score <b data-s="score">0</b></span></div></div>'
-      + '<div class="sol-board" aria-label="Solitaire table"></div><p class="sol-live" aria-live="polite"></p></div>';
-    root = host.querySelector(".sol-table"); board = host.querySelector(".sol-board"); live = host.querySelector(".sol-live");
-    statMoves = host.querySelector('[data-s="moves"]'); statTime = host.querySelector('[data-s="time"]'); statScore = host.querySelector('[data-s="score"]');
-    host.querySelectorAll("[data-a]").forEach(function (b) { btn[b.dataset.a] = b; b.addEventListener("click", function () { act(b.dataset.a); }); });
-    host.querySelectorAll("[data-mode]").forEach(function (b) { b.addEventListener("click", function () { if (G.mode !== b.dataset.mode) newGame(b.dataset.mode); }); });
+      + '</div>';
+    overlay.querySelector(".sol-x").addEventListener("click", close);
+    /* full screen, where the browser allows it */
+    var fs = overlay.querySelector(".sol-fs"), canFS = !!(overlay.requestFullscreen || overlay.webkitRequestFullscreen) && (document.fullscreenEnabled || document.webkitFullscreenEnabled);
+    if (!canFS) fs.hidden = true;
+    fs.addEventListener("click", function () {
+      var on = document.fullscreenElement || document.webkitFullscreenElement;
+      try { if (on) (document.exitFullscreen || document.webkitExitFullscreen).call(document); else { var r = (overlay.requestFullscreen || overlay.webkitRequestFullscreen).call(overlay); if (r && r.catch) r.catch(function () { say("Your browser didn't allow full screen here."); }); } } catch (e) { say("Your browser didn't allow full screen here."); }
+    });
+    document.addEventListener("fullscreenchange", function () { var on = !!document.fullscreenElement; fs.textContent = on ? "⤢ Exit full screen" : "⛶ Full screen"; overlay.classList.toggle("is-fs", on); setTimeout(layout, 60); });
+    overlay.addEventListener("click", function (e) { if (e.target === overlay) close(); });
+    root = overlay.querySelector(".sol-table"); board = overlay.querySelector(".sol-board"); live = overlay.querySelector(".sol-live");
+    statMoves = overlay.querySelector('[data-s="moves"]'); statTime = overlay.querySelector('[data-s="time"]'); statScore = overlay.querySelector('[data-s="score"]');
+    overlay.querySelectorAll("[data-a]").forEach(function (b) { btn[b.dataset.a] = b; b.addEventListener("click", function () { act(b.dataset.a); }); });
+    overlay.querySelectorAll("[data-mode]").forEach(function (b) { b.addEventListener("click", function () { if (G.mode !== b.dataset.mode) newGame(b.dataset.mode); }); });
     /* empty-pile outlines: stock, waste, four foundations (ghosted suit), seven columns */
     function slot(cls, html) { var d = document.createElement("div"); d.className = "sol-slot " + cls; d.innerHTML = html || ""; board.appendChild(d); return d; }
     pileEls.stock = slot("stock", '<span class="sol-recycle" aria-hidden="true">↻</span>'); pileEls.stock.setAttribute("role", "button"); pileEls.stock.tabIndex = 0;
@@ -119,19 +131,22 @@
   }
   function layout(dragging) {
     if (!G) return;
-    var W = board.clientWidth, gap = Math.max(4, Math.min(16, W * .014)), cw = (W - gap * 8) / 7, ch = cw * 1.4;
-    M = { W: W, gap: gap, cw: cw, ch: ch, x: function (i) { return gap + i * (cw + gap); }, top: gap, tab: gap * 2 + ch + Math.max(8, ch * .12) };
+    var W = board.clientWidth, Hb = board.clientHeight || 600, gap = Math.max(4, Math.min(16, W * .014)), cw = (W - gap * 8) / 7;
+    /* big as the screen allows: the top row plus about three and a half cards of columns must fit the height */
+    cw = Math.max(36, Math.min(cw, (Hb - gap * 4) / (1.4 * 3.9), 190)); var ch = cw * 1.4, x0 = (W - (cw * 7 + gap * 6)) / 2;
+    M = { W: W, H: Hb, gap: gap, cw: cw, ch: ch, x: function (i) { return x0 + i * (cw + gap); }, top: gap, tab: gap * 2 + ch + Math.max(8, ch * .12) };
     root.style.setProperty("--cw", cw + "px");
     var st = G.st, loc = locate(st);
     /* each column squeezes its overlap if it would get very long */
-    var maxTab = Math.max(ch * 3.6, (innerHeight || 800) * .62), fd = ch * .13, fuBase = ch * .27, colFu = [];
+    var maxTab = Math.max(ch * 2.2, Hb - (gap * 2 + ch + Math.max(8, ch * .12)) - gap), fd = ch * .13, fuBase = ch * .27, colFu = [];
     st.t.forEach(function (col, i) { var n = col.c.length, up = n - col.d, need = col.d * fd + Math.max(0, up - 1) * fuBase + ch; colFu[i] = need > maxTab && up > 1 ? Math.max(ch * .17, (maxTab - ch - col.d * fd) / (up - 1)) : fuBase; });
     var bottom = M.tab + ch;
     pileEls.stock.style.cssText = pos(M.x(0), M.top); pileEls.waste.style.cssText = pos(M.x(1), M.top);
     pileEls.stock.classList.toggle("empty", !st.s.length); pileEls.stock.classList.toggle("can-recycle", !st.s.length && st.w.length > 0);
     pileEls.f.forEach(function (e, i) { e.style.cssText = pos(M.x(3 + i), M.top); });
     pileEls.t.forEach(function (e, i) { e.style.cssText = pos(M.x(i), M.tab); });
-    var wn = st.w.length, fan = G.st.draw === 3 ? Math.min(3, wn) : 1;
+    /* the waste always fans out its last three cards, like the classic game; only the top one can be played */
+    var wn = st.w.length, fan = Math.min(3, wn);
     for (var c = 0; c < 52; c++) {
       var L = loc[c], el = els[c], x, y, z;
       if (L.p === "s") { x = M.x(0); y = M.top; z = 10 + L.i; }
@@ -148,7 +163,7 @@
       el.tabIndex = movable ? 0 : -1; el.setAttribute("role", movable ? "button" : "img"); el.setAttribute("aria-label", label(c, L.up));
       el.classList.toggle("buried", L.p === "s" && L.i < st.s.length - 2);
     }
-    board.style.height = (bottom + gap * 2) + "px";
+
     paint();
   }
   function pos(x, y) { return "transform:translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px,0);width:" + M.cw.toFixed(1) + "px;height:" + M.ch.toFixed(1) + "px"; }
@@ -162,7 +177,7 @@
   function fmt(t) { return Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0"); }
   function paint() {
     statMoves.textContent = G.moves; statTime.textContent = fmt(G.secs); statScore.textContent = score();
-    host.querySelectorAll("[data-mode]").forEach(function (b) { b.setAttribute("aria-checked", b.dataset.mode === G.mode); });
+    overlay.querySelectorAll("[data-mode]").forEach(function (b) { b.setAttribute("aria-checked", b.dataset.mode === G.mode); });
     btn.undo.disabled = !hist.length; btn.redo.disabled = !fut.length;
     var left = MODES[G.mode].rescues - G.rescues;
     btn.shuffle.querySelector(".sol-left").textContent = left === Infinity ? "" : "(" + Math.max(0, left) + ")";
@@ -417,13 +432,26 @@
 
   /* ---------- the "Play me" invitation ---------- */
   var play = host.querySelector(".sol-play");
+  var lastFocus = null;
   function start() {
-    build();
-    if (!restore()) G = blank("easy", pickIdx("easy"));
-    layout(); if (!hist.length && G.moves === 0) dealIn(); tick();
+    lastFocus = document.activeElement;
+    var first = !overlay;
+    if (first) build();
+    overlay.hidden = false; document.documentElement.classList.add("sol-on");
+    requestAnimationFrame(function () { overlay.classList.add("show"); });
+    if (first) { if (!restore()) G = blank("easy", pickIdx("easy")); }
+    layout(); if (first && !hist.length && G.moves === 0) dealIn(); tick();
     if (G.status === "won") say("Last game: won. Tap New game to play again.");
-    host.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    setTimeout(function () { var x = overlay.querySelector(".sol-x"); if (x) x.focus({ preventScroll: true }); }, 50);
+    if (play) play.innerHTML = 'Back to my game <span aria-hidden="true">&#9824;</span>';
   }
+  function close() {
+    if (!overlay) return;
+    try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {} overlay.classList.remove("show"); clearInterval(timerT); persist();
+    setTimeout(function () { overlay.hidden = true; document.documentElement.classList.remove("sol-on"); }, reduce ? 0 : 250);
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+  addEventListener("keydown", function (e) { if (e.key === "Escape" && overlay && !overlay.hidden) close(); });
   if (play) play.addEventListener("click", start);
   window.__sol = { faceSVG: faceSVG, get G() { return G; }, play: function (a) { return commit(a); } };
 })();
