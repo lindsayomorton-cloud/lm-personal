@@ -4075,7 +4075,7 @@ var FRAMES = { lime: "assets/proj/frame-lime-orig.webp", blush: "assets/proj/fra
     function show(i, autoplay) {
       var c = CH[i]; tv.classList.toggle("on-list", !c[0]); num.textContent = "CH " + c[2];
       var now = $("tvNow"), yt = $("tvYT"); if (now) now.textContent = "CH " + c[2] + " · " + c[1]; if (yt) { yt.hidden = !c[0]; if (c[0]) yt.href = "https://www.youtube.com/watch?v=" + c[0]; }
-      vid.innerHTML = c[0] ? '<iframe src="https://www.youtube-nocookie.com/embed/' + c[0] + '?rel=0&modestbranding=1&playsinline=1' + (autoplay ? "&autoplay=1" : "") + '" title="' + c[1] + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>' : "";
+      vid.innerHTML = c[0] ? '<iframe src="https://www.youtube-nocookie.com/embed/' + c[0] + '?rel=0&modestbranding=1&playsinline=1' + (autoplay ? "&autoplay=1" : "") + (location.origin && location.origin !== "null" ? "&origin=" + encodeURIComponent(location.origin) : "") + '" referrerpolicy="strict-origin-when-cross-origin" title="' + c[1] + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>' : "";
     }
     whenSeen(tv, function () { if (!vid.innerHTML) show(0, false); }, .2);
     /* hovering the TV starts the commercial playing and stops Boy Meets World */
