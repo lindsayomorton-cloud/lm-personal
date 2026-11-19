@@ -1,0 +1,1142 @@
+/* ============ Let's connect ============ */
+.connect{position:relative;z-index:52;overflow-x:clip;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center;gap:clamp(36px,6vw,96px);
+  padding:calc(clamp(72px,9vw,130px) + clamp(120px,14vw,230px)) var(--gutter) clamp(110px,12vw,170px);
+  background:linear-gradient(180deg,#bfe3f5 0%,#e3f1f4 70%,#f5f0e1 100%)}
+.connect-sky{position:absolute;inset:0 0 auto 0;z-index:4;pointer-events:none}
+.connect-sky .cl:not(.drop){visibility:hidden}
+.connect-art,.connect-copy{opacity:0;transform:translateY(24px);transition:opacity .7s ease 1.15s,transform .7s cubic-bezier(.2,.8,.2,1) 1.15s}
+.connect-copy{transition-delay:1.4s}
+.connect.in .connect-art,.connect.in .connect-copy{opacity:1;transform:none}
+.connect-art{position:relative;justify-self:center;width:min(420px,100%)}
+.connect-sun{position:absolute;left:-14%;top:-8%;width:78%;aspect-ratio:1;border-radius:50%;background:var(--acid)}
+.connect-photo{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:999px 999px 28px 28px;border:10px solid var(--cream);box-shadow:16px 16px 0 var(--ink);transform:rotate(-2deg)}
+.connect-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.connect-tag{position:absolute;right:-6px;bottom:34px;background:var(--acid);font-weight:700;font-size:15px;padding:12px 20px;border-radius:999px;box-shadow:0 0 0 3px var(--cream);transform:rotate(4deg)}
+.connect h2{margin:0;font:700 clamp(56px,8.4vw,132px)/.9 var(--display);letter-spacing:-.045em}
+.connect h2 em{display:block;font-style:normal;color:var(--pink)}
+.connect-lede{max-width:440px;margin:28px 0 34px;font-size:clamp(18px,1.6vw,22px);line-height:1.45}
+.connect-actions{display:flex;flex-wrap:wrap;gap:12px}
+.connect .btn{padding:16px 28px;font-size:17px}
+.connect-mail{margin:22px 0 0;font-size:15px;letter-spacing:.02em;opacity:.85}
+/* narrower screens: portrait and headline side by side, so the whole invitation fits on one screen */
+@media (max-width:800px){
+  .connect{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:22px clamp(16px,4vw,32px);align-items:center;
+    padding:calc(clamp(110px,22vw,170px)) var(--gutter) clamp(56px,10vw,90px)}
+  .connect-art{width:100%;max-width:260px}
+  .connect-photo{border-width:6px;box-shadow:8px 8px 0 var(--ink)}
+  .connect-tag{right:-8px;bottom:14px;font-size:12px;padding:8px 12px}
+  .connect h2{font-size:clamp(40px,10vw,76px)}
+  .connect-lede{margin:14px 0 0;font-size:16px}
+  .connect .btn{padding:12px 18px;font-size:15px}
+  .connect-actions{margin-top:18px}
+  .connect-mail{margin-top:12px;font-size:13px;word-break:break-all}
+}
+@media (max-width:520px){
+  .connect{grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);padding-top:150px}
+  .connect-copy{display:contents}
+  .connect h2{grid-column:2;grid-row:1;align-self:center;font-size:clamp(36px,11vw,52px)}
+  .connect-art{grid-column:1;grid-row:1}
+  .connect-lede,.connect-actions,.connect-mail{grid-column:1/-1}
+  .connect-lede{margin:0}
+  .connect-actions{margin-top:0}
+}
+@media (max-width:700px){.connect-sky .cl:nth-child(4){left:auto;right:2%}}
+
+/* ============ On my mind ticker ============ */
+.mind{position:relative;z-index:46;display:flex;background:var(--acid);border-block:2px solid var(--ink);overflow:hidden}
+.mind-label{flex:none;display:flex;align-items:center;padding:0 clamp(16px,3vw,32px);background:var(--ink);color:var(--acid);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.mind-win{flex:1;min-width:0;overflow:hidden;padding-block:18px}
+.mind-track{display:flex;width:max-content;gap:28px;align-items:center;white-space:nowrap;font-weight:700;font-size:clamp(18px,2vw,26px);letter-spacing:-.01em;animation:mindRun 40s linear infinite}
+.mind-track b{color:var(--pink);font-weight:400}
+.mind:hover .mind-track{animation-play-state:paused}
+@keyframes mindRun{to{transform:translateX(-50%)}}
+@media (max-width:520px){.mind-label{font-size:11px;padding:0 12px}}
+
+/* ============ Shared big section headings ============ */
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:25px;margin-bottom:clamp(40px,5vw,72px)}
+.sec-head h2{margin:0;font:800 clamp(60px,9vw,150px)/.85 var(--display);letter-spacing:-.05em}
+.sec-head p{margin:0;max-width:340px;font-size:clamp(16px,1.4vw,19px);line-height:1.55}
+@media (max-width:800px){.sec-head{display:block}.sec-head p{margin-top:16px}}
+
+/* ============ Now brewing: The Coven ============ */
+.brew{position:relative;z-index:57;padding:clamp(96px,11vw,170px) var(--gutter) clamp(100px,11vw,170px);background:linear-gradient(#efe4ff,#e3d6ff)}
+.brew .sec-head h2{white-space:nowrap;font-size:min(8.6vw,140px)}
+.brew-list{position:relative;z-index:2;display:grid;gap:clamp(36px,5vw,64px)}
+.brew-box{position:relative;z-index:2;border:2px solid var(--ink);border-radius:28px;overflow:hidden;background:var(--cream);box-shadow:10px 10px 0 var(--ink)}
+.winbar{display:flex;align-items:center;gap:7px;padding:12px 18px;background:var(--cream);border-bottom:2px solid var(--ink);line-height:1}
+.winbar i{width:12px;height:12px;border-radius:50%;border:2px solid var(--ink);background:var(--pink)}
+.winbar i+i{background:var(--acid)}
+.winbar i+i+i{background:#a98bff}
+.winbar span{margin-left:10px;font:700 13px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+.brew-view{position:relative;overflow:hidden;background:#ece7ff;aspect-ratio:1440/900}
+/* Van's Cove: the preview sits lower so the cave edge has room at the top */
+.brew-view.cave{background:linear-gradient(#140f36,#1b1440 15%)}
+.brew-view.cave iframe{top:15%}
+.brew-view .cave-top{position:absolute;left:0;top:0;z-index:2;width:100%;height:auto;pointer-events:none}
+.brew-view iframe{position:absolute;left:0;top:0;width:1440px;height:900px;border:0;transform-origin:0 0;pointer-events:none}
+.brew-open{all:unset;position:absolute;inset:0;z-index:3;cursor:pointer;display:flex;align-items:flex-end;justify-content:flex-end;padding:clamp(12px,2vw,24px)}
+.brew-open span{font:800 clamp(13px,1.2vw,16px)/1 var(--body);background:var(--acid);border:2px solid var(--ink);border-radius:999px;padding:10px 16px;box-shadow:3px 3px 0 var(--ink);transform:translateY(6px);opacity:.92;transition:transform .25s,opacity .25s}
+.brew-open:hover span,.brew-open:focus-visible span{transform:none;opacity:1}
+.brew-river{position:absolute;right:1%;bottom:clamp(-130px,-8vw,-60px);z-index:1;width:clamp(360px,50vw,820px);height:auto;transform:scaleX(-1);pointer-events:none;
+  filter:drop-shadow(0 12px 18px rgba(0,0,0,.3));clip-path:inset(0 0 0 100%);transition:clip-path 1s cubic-bezier(.3,.7,.3,1)}
+.brew.in .brew-river{clip-path:inset(0)}
+/* narrow screens: the river is big and winds behind the whole last box, spilling onto the lawn */
+@media (max-width:900px){.brew-river{max-width:none;width:170vw;right:-50vw;bottom:-22vw;transform:scaleX(-1) rotate(-8deg)}}
+@media (max-width:600px){.brew-box{border-radius:18px;box-shadow:6px 6px 0 var(--ink)}}
+
+/* the private project: plain, dark and quiet */
+.brew-locked{background:#16121f}
+.brew-locked .winbar{background:#16121f;border-bottom-color:#2a2436}
+.brew-locked .winbar i{background:#2a2436;border-color:#3a3348}
+.brew-locked .winbar span{opacity:1;color:#8c84a0}
+.lock-view{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:center;padding:clamp(24px,3.5vw,40px) clamp(20px,4vw,48px);color:#d8d2e6}
+.case-stamp,.lock-view::before{display:none}
+.case-left{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0}
+.case-hat{width:40px;height:auto}
+.lock-eyebrow{font:700 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#e0242f}
+.case-left h3{margin:0;font:800 clamp(34px,4vw,54px)/.95 var(--display);letter-spacing:-.04em;color:#fff}
+.case-sub{margin:0;font-size:16px;line-height:1.5;color:#c9c2d8}
+.lock-lab{margin:8px 0 0;font:700 11px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:#8c84a0}
+.lock-list{list-style:none;margin:0;padding:0;font-size:14px;line-height:1.6;color:#c9c2d8}
+.lock-list li{display:inline}
+.lock-list li+li::before{content:" · ";color:#5d5670}
+.lock-form{display:flex;flex-direction:column;gap:10px;min-width:0}
+.lock-form .lock-lab{margin:0}
+.lock-entry{display:flex;gap:8px}
+.lock-entry input,.lock-letters input{min-width:0;border:1px solid #3a3348;background:#0f0c16;border-radius:10px;padding:12px 14px;color:#fff;font:600 16px var(--body)}
+.lock-entry input{flex:1}
+.lock-entry input::placeholder{color:#6d6680;font-weight:500}
+.lock-entry input:focus,.lock-letters input:focus{outline:none;border-color:#e0242f}
+.lock-letters{display:flex;gap:6px}
+.lock-letters input{width:42px;text-align:center;text-transform:uppercase;font-size:18px;padding:9px 0}
+.lock-form button[type=submit]{border:0;background:#e0242f;color:#fff;border-radius:10px;padding:12px 18px;font:700 15px var(--body);white-space:nowrap}
+.lock-form button[type=submit]:hover,.lock-form button[type=submit]:focus-visible{background:#ff3b47;outline:none}
+.lock-form button[type=submit]:disabled{opacity:.6}
+.lock-hint{align-self:flex-start;border:0;background:none;color:#8c84a0;font:italic 14px var(--body);padding:0;text-decoration:underline;text-underline-offset:3px}
+.lock-hint:hover,.lock-hint[aria-expanded="true"]{color:#fff}
+.lock-clue{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.lock-clue[hidden]{display:none}
+.lock-clue p{margin:0;width:100%;font:italic 15px var(--body);color:#c9c2d8}
+.lock-note{min-height:1.2em;margin:0;font-size:13px;font-weight:600;color:#ff6b74}
+.lock-form.shake{animation:lockShake .4s}
+@keyframes lockShake{25%{translate:-8px 0}50%{translate:8px 0}75%{translate:-4px 0}}
+@media (max-width:760px){.lock-view{grid-template-columns:1fr}}
+@media (max-width:420px){.lock-entry{flex-direction:column}}
+
+/* ============ My art: a moss lawn with framed paintings ============ */
+.art{position:relative;z-index:56;padding:clamp(96px,10vw,160px) var(--gutter);color:var(--ink);
+  background:radial-gradient(80% 70% at 50% 40%,#0000 60%,#16301a55 100%),url(assets/proj/moss-mid.jpg) 0 0/420px repeat #62893a}
+.art-clip{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:9}
+.art-head{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;padding:22px 28px;background:var(--cream);border-radius:24px;box-shadow:0 18px 40px -16px rgba(0,0,0,.5)}
+.art-head h2{margin:0;font:800 clamp(56px,9vw,140px)/.85 var(--display);letter-spacing:-.05em}
+.art-head p{margin:0;max-width:34ch;font-size:clamp(17px,1.5vw,20px);line-height:1.55;opacity:.8}
+
+/* a painting in a frame: the art sits inside the frame's opening */
+.pf{position:relative;display:block;width:100%;aspect-ratio:696/900;filter:drop-shadow(0 18px 20px rgba(0,0,0,.45))}
+.pf .pa{position:absolute;left:21.5%;top:18%;width:57%;height:64%;object-fit:cover;transition:opacity .25s ease}
+.pf .pfr{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.pf.lime .pa{left:20.4%;top:17%;width:59.6%;height:66.2%}
+.pf.blush .pa{left:21%;top:16.5%;width:58%;height:67.2%}
+.pf.oval .pa{left:18.7%;top:14%;width:62.1%;height:71.5%;border-radius:50%}
+
+.art-main{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;margin:clamp(20px,3vw,40px) auto 0}
+.art-mainb{all:unset;position:relative;cursor:zoom-in;display:block;width:min(680px,88vw,calc((100svh - 120px) * .7733));transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.art-mainb:hover,.art-mainb:focus-visible{transform:scale(1.28) rotate(-1deg);z-index:6}
+.art-mainb:focus-visible{outline:3px solid var(--acid);outline-offset:6px}
+.art-peony{position:absolute;right:-34%;bottom:-10%;z-index:4;width:74%;pointer-events:none;transform-origin:50% 100%;transform:scale(0) rotate(-20deg);opacity:0;
+  transition:transform 1.1s cubic-bezier(.2,1.8,.4,1) .3s,opacity .3s .3s;filter:saturate(1.35) brightness(1.05) drop-shadow(0 0 3px #fff) drop-shadow(0 14px 18px rgba(0,0,0,.4))}
+.art.bloom .art-peony{transform:scale(1) rotate(8deg);opacity:1;animation:peonyBreathe 4s ease-in-out 1.5s infinite}
+@keyframes peonyBreathe{50%{scale:1.05;rotate:3deg}}
+.art-cap{margin:14px 0 0;padding:8px 18px;background:var(--cream);border-radius:999px;font:800 clamp(17px,1.6vw,22px)/1.1 var(--display);letter-spacing:-.02em;box-shadow:0 6px 14px #0003}
+
+.art-wall{position:relative;z-index:3;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-items:center;align-items:center;gap:clamp(18px,3vw,40px) clamp(18px,3vw,44px);width:100%;max-width:min(1060px,96vw);margin:clamp(26px,3vw,44px) auto 0}
+.art-wall button{all:unset;position:relative;z-index:1;cursor:pointer;display:block;transition:transform .25s ease}
+.art-wall button{transition:transform .35s cubic-bezier(.2,1.4,.4,1)}
+.art-wall button:hover,.art-wall button:focus-visible{transform:scale(1.9) rotate(0)!important;z-index:7}
+/* the little burst that pops out of a painting on hover */
+.pop-bit{position:fixed;z-index:200;pointer-events:none;height:auto;will-change:transform,opacity;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25))}
+.art-wall button:nth-child(1){width:92%;transform:rotate(-3deg);align-self:end}
+.art-wall button:nth-child(2){width:62%;transform:translateY(-14px) rotate(2deg)}
+.art-wall button:nth-child(3){width:80%;transform:rotate(-1.5deg);align-self:start}
+.art-wall button:nth-child(4){width:68%;transform:translateY(-34px) rotate(2.5deg)}
+.art-wall button:nth-child(5){width:100%;transform:translateY(-44px) rotate(-2deg)}
+.art-wall button:nth-child(6){width:58%;transform:translateY(-54px) rotate(3deg);align-self:start}
+
+
+/* meadow patches and the bouquet that grow up from the lawn's edges */
+.art-patch{position:absolute;z-index:8;bottom:calc(clamp(110px,12vw,220px) * -.45);width:clamp(260px,34vw,560px);height:auto;pointer-events:none;
+  filter:drop-shadow(0 10px 14px rgba(0,0,0,.25));scale:1 0;transform-origin:50% 100%;transition:scale .7s cubic-bezier(.25,1.6,.45,1)}
+.art-patch.l{left:-3%}
+.art-patch.r{right:-3%;transform:scaleX(-1);transition-delay:.2s}
+.art.in .art-patch{scale:1 1}
+.art-bouquet{position:absolute;right:-1%;bottom:0;width:clamp(170px,19vw,320px);transform-origin:50% 100%;transform:translateY(105%);opacity:0;
+  transition:transform 1.1s cubic-bezier(.25,1.4,.45,1) .25s,opacity .3s;filter:drop-shadow(0 14px 18px rgba(0,0,0,.35))}
+.art.bloom .art-bouquet{transform:translateY(12%) rotate(5deg);opacity:1}
+.art-bee{position:absolute;left:0;bottom:6%;width:clamp(150px,13vw,230px);opacity:0;transition:opacity .4s;animation:beeArt 46s ease-in-out infinite}
+.art.bloom .art-bee{opacity:1}
+/* the bee drifts down to the meadow on the left, visits the one on the right, then leaves off the right edge and takes its time coming back */
+@keyframes beeArt{0%{translate:-25vw -70vh}14%{translate:10vw -4vh}19%{translate:14vw -1vh}22%{translate:18vw -5vh}34%{translate:70vw -3vh}39%{translate:74vw 0}44%{translate:80vw -6vh}54%,100%{translate:115vw -40vh}}
+
+/* holographic balloons that float up after you scroll past The Coven */
+.balloons{position:absolute;left:0;right:0;top:0;height:100vh;height:100svh;z-index:30;pointer-events:none}
+.balloons img{position:absolute;bottom:-20vh;width:calc(clamp(90px,10vw,160px) * var(--k));height:auto;opacity:0;filter:drop-shadow(0 14px 18px rgba(0,0,0,.3))}
+.balloons.go img{animation:balloonUp 5.5s cubic-bezier(.3,.1,.5,1) var(--d) forwards}
+@keyframes balloonUp{0%{opacity:0;transform:translateY(0) rotate(var(--r))}10%{opacity:1}35%{transform:translateY(-45vh) translateX(2vw) rotate(calc(var(--r) * -1))}70%{transform:translateY(-95vh) translateX(-2vw) rotate(var(--r))}90%{opacity:1}100%{opacity:0;transform:translateY(-150vh) rotate(0)}}
+
+@media (max-width:700px){
+  .art-patch{width:56vw;bottom:-14vw}
+  .art-wall{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .art-wall button:nth-child(n+7){display:none}
+  .art-bouquet{width:34vw}
+}
+@media (max-width:600px){.art-peony{right:-14%;width:46%}}
+
+/* ============ Beyond work ============ */
+.beyond{position:relative;z-index:50;overflow:hidden;background:var(--cream);padding:clamp(96px,11vw,170px) var(--gutter) clamp(100px,11vw,170px)}
+.likes{display:flex;flex-direction:column;gap:clamp(20px,2.4vw,32px)}
+.like{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-rows:1fr auto auto 1fr;column-gap:clamp(28px,5vw,80px);
+  height:clamp(280px,24vw,360px);border-radius:28px;overflow:hidden;cursor:pointer;outline:none;transition:transform .35s ease}
+.like:hover{transform:translateY(-8px)}
+.like:nth-child(1){background:var(--blush)}
+.like:nth-child(2){background:var(--acid);grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+.like:nth-child(3){background:var(--coral)}
+.like-art{position:relative;grid-row:1/span 4;overflow:hidden}
+.like-art>img{display:block;width:100%;height:100%;object-fit:cover}
+.like:nth-child(2) .like-art{grid-column:2}
+.like h3{grid-row:2;align-self:end;margin:0 0 10px;padding-right:clamp(24px,4vw,60px);font:800 clamp(28px,2.8vw,44px)/1 var(--display);letter-spacing:-.04em}
+.like small{grid-row:3;padding-right:clamp(24px,4vw,60px);font-size:clamp(16px,1.4vw,20px);line-height:1.5}
+.like small::after{content:" · hover to peek";opacity:.6}
+.like:nth-child(2) h3,.like:nth-child(2) small{grid-column:1;padding-right:0;padding-left:clamp(24px,4vw,60px)}
+.like:focus-visible .like-art{outline:3px solid var(--acid);outline-offset:3px}
+.peek{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:clamp(18px,3vw,40px);background:rgba(40,16,74,.86);color:var(--cream);opacity:0;transform:translateY(14px);transition:opacity .35s ease,transform .35s ease;pointer-events:none}
+.like:hover .peek,.like:focus-visible .peek,.like.open .peek{opacity:1;transform:none}
+.peek ul{list-style:none;margin:0;padding:0;display:grid;gap:clamp(8px,1.2vw,14px);width:100%;max-width:440px}
+.peek li{display:flex;justify-content:space-between;align-items:baseline;gap:14px;border-bottom:1px solid #fbf2e633;padding-bottom:8px}
+.peek b{font:800 clamp(17px,1.6vw,24px)/1.15 var(--display);letter-spacing:-.02em}
+.peek span{font-size:13px;opacity:.75;white-space:nowrap}
+@media (hover:none){.like small::after{content:" · tap to peek"}}
+@media (max-width:760px){
+  .like,.like:nth-child(2){height:auto;grid-template-columns:1fr;grid-template-rows:auto auto auto}
+  .like-art,.like:nth-child(2) .like-art{grid-column:1;grid-row:1;height:220px}
+  .like h3,.like:nth-child(2) h3{grid-column:1;grid-row:2;margin:18px 0 6px;padding-inline:22px}
+  .like small,.like:nth-child(2) small{grid-column:1;grid-row:3;padding:0 22px 24px}
+}
+@media (max-width:600px){.beyond .fl,.brew .fl{display:none}}
+
+/* ============ Got an idea? ============ */
+.idea{position:relative;z-index:50;overflow:hidden;color:var(--cream);padding-top:clamp(70px,9vw,140px);
+  background:radial-gradient(60% 70% at 15% 20%,#ec2b7a55,transparent 70%),radial-gradient(50% 60% at 90% 90%,#ceff3233,transparent 70%),#2b1a52}
+.idea-in{opacity:0;translate:0 16px;transition:opacity .8s ease,translate .8s ease;position:relative;z-index:2;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,6vw,90px);align-items:center;
+  padding:0 clamp(25px,6vw,90px) clamp(40px,6vw,80px) calc(clamp(130px,13vw,220px) + 4%)}
+.idea h2{margin:0 0 22px;font:800 1em/.82 var(--display);letter-spacing:-.05em}
+.idea h2 .a{display:block;font-size:clamp(44px,6vw,92px)}
+.idea h2 .b{display:block;white-space:nowrap;font-size:clamp(84px,11vw,170px);color:transparent;-webkit-text-stroke:3px var(--acid)}
+.idea h2 i{display:inline-block;font-style:normal;color:var(--pink);-webkit-text-stroke:0;animation:wig 2.6s ease-in-out infinite}
+@keyframes wig{0%,100%{transform:rotate(14deg)}50%{transform:rotate(-6deg) translateY(-6px)}}
+.idea-lede{margin:0 0 18px;max-width:34ch;font-size:clamp(18px,1.6vw,22px);line-height:1.5}
+.idea-mail{margin:0;font-size:15px;opacity:.85}
+.idea-mail b{user-select:all}
+.copy-btn{margin-left:6px;border:2px solid var(--cream);background:transparent;color:var(--cream);border-radius:999px;padding:4px 12px;font:700 13px var(--body)}
+.copy-btn:hover{background:var(--acid);color:var(--ink);border-color:var(--acid)}
+.idea-open{border:3px solid var(--ink);background:var(--acid);color:var(--ink);border-radius:999px;padding:clamp(20px,2.4vw,30px) clamp(30px,3.6vw,52px);
+  font:800 clamp(22px,2.4vw,34px)/1 var(--display);letter-spacing:-.02em;box-shadow:8px 8px 0 var(--pink);transform:rotate(-2deg);transition:transform .2s,box-shadow .2s}
+.idea-open:hover,.idea-open:focus-visible{transform:rotate(0) translate(-3px,-3px);box-shadow:11px 11px 0 var(--pink)}
+.idea-open span{display:inline-block;animation:wig 2.6s ease-in-out infinite}
+/* the phone drops in on its cord, then the flowers spring up */
+.phone{position:absolute;top:0;left:2%;z-index:3;width:clamp(130px,13vw,220px);height:auto;pointer-events:none;transform-origin:50% 0;
+  translate:0 -110%;transition:translate 1s cubic-bezier(.3,1.35,.5,1);animation:sway 4.5s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.idea.in .phone{translate:0 0}
+/* the phone and the words arrive together */
+.idea.in .idea-in{opacity:1;translate:0 0}
+.idea-flowers{position:relative;z-index:2;width:min(88%,1200px);margin:clamp(40px,5vw,80px) auto 0;line-height:0;scale:1 0;transform-origin:50% 100%;transition:scale .9s cubic-bezier(.25,1.6,.45,1) 1.1s}
+.idea-flowers img{display:block;width:100%}
+.idea.in .idea-flowers{scale:1 1}
+@media (max-width:860px){
+  .idea-in{grid-template-columns:1fr;padding-left:calc(22vw + 8px)}
+  .phone{width:22vw;left:0}
+}
+@media (max-width:599px){
+  .idea-in{padding:0 22px 40px}
+  .phone{width:72px;left:auto;right:4%}
+  .idea h2 .a{font-size:40px}
+  .idea h2 .b{font-size:84px}
+  .idea-lede,.idea-mail{max-width:calc(100% - 84px);font-size:17px}
+  .idea-mail{font-size:14px}
+}
+
+/* ============ Footer ============ */
+.foot{position:relative;z-index:50;display:flex;justify-content:space-between;gap:20px;padding:24px var(--gutter);background:#038c40;color:var(--cream);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+@media (max-width:800px){.foot{padding:25px 30px}}
+
+/* ============ Gems that drift past the screen edges as you scroll ============ */
+.drift{position:fixed;inset:0;z-index:40;pointer-events:none;overflow:hidden;transition:opacity .9s ease}
+.drift img{position:absolute;top:0;height:auto;max-width:none;will-change:transform;opacity:.95;filter:drop-shadow(0 12px 14px rgba(0,0,0,.35))}
+.drift img[src*="bees"]{filter:drop-shadow(0 0 2px var(--cream)) drop-shadow(0 0 6px rgba(251,242,230,.9))}
+html.in-doors .drift{opacity:0;visibility:hidden}
+@media (max-width:700px){.drift img{width:min(40px,11vw)!important}.drift img:nth-child(3n){display:none}}
+
+/* Before you fall through the vortex, the rest of the page stays hidden */
+.after-vx{transition:opacity .9s ease}
+html:not(.vx-done) .after-vx,html:not(.vx-done) .drift{opacity:0;visibility:hidden}
+
+/* large screens: keep Let's connect compact under its clouds */
+@media (min-width:1200px){
+  .connect{padding-top:clamp(300px,23vw,420px);padding-inline:max(var(--gutter),calc((100% - 1400px) / 2));grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}
+  .connect-art{width:min(380px,100%)}
+  .connect h2{font-size:clamp(56px,5vw,104px)}
+}
+
+/* large screens: the flower strip above the footer stays a modest size */
+@media (min-width:1200px){.idea-flowers{width:min(70%,900px)}}
+
+/* wide (901-1199px): room for the hanging clouds, then the invitation */
+@media (min-width:901px) and (max-width:1199px){.connect{padding-top:clamp(280px,27vw,340px)}}
+
+/* My art: the big painting rises to overlap the white title bar, and the river spills over the bar's top edge */
+.art-main{margin-top:calc(-1 * clamp(40px,5vw,80px))!important;z-index:4}
+.art-head{z-index:3}
+.brew-river{z-index:5;bottom:clamp(-260px,-15vw,-120px)}
+@media (max-width:900px){.art-main{margin-top:-28px!important}}
+
+/* Got an idea? fits in one screen, flowers included */
+@media (min-width:901px){
+  .idea{min-height:100svh;max-height:100svh;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box;padding-top:clamp(40px,6vh,90px)}
+  .idea-in{flex:1;align-items:center;padding-bottom:0}
+  .idea h2{font-size:clamp(40px,min(4.8vw,9vh),74px)}
+  .idea-lede{font-size:clamp(16px,min(1.5vw,2.6vh),22px)}
+  .idea-flowers{margin-top:0;width:min(70%,900px,calc(38vh * 2.6))}
+  .phone{height:min(80vh,100%);width:auto}
+}
+
+/* the footer flowers sit to the left */
+.idea-flowers{margin-left:0!important;margin-right:auto!important}
+
+/* Now brewing: hovering a preview makes it glow and invites a click */
+.brew-box:not(.brew-locked){transition:box-shadow .35s ease,transform .35s ease}
+.brew-box:not(.brew-locked):hover,.brew-box:not(.brew-locked):focus-within{transform:translateY(-4px);
+  box-shadow:10px 10px 0 var(--ink),0 0 0 3px var(--acid),0 0 60px 10px rgba(206,255,50,.55),0 0 120px 30px rgba(239,74,134,.35)}
+.brew-open::before{content:"▶  Click to play";position:absolute;left:50%;top:50%;translate:-50% -50%;scale:.85;opacity:0;
+  font:800 clamp(18px,2.2vw,30px)/1 var(--display);color:var(--ink);background:var(--acid);border:3px solid var(--ink);border-radius:999px;
+  padding:.7em 1.3em;box-shadow:6px 6px 0 var(--pink),0 0 40px rgba(206,255,50,.8);transition:opacity .3s,scale .3s cubic-bezier(.2,1.6,.4,1)}
+.brew-open::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 50%,rgba(206,255,50,.18),transparent 70%);opacity:0;transition:opacity .35s}
+.brew-open:hover::before,.brew-open:focus-visible::before{opacity:1;scale:1;animation:playPulse 1.6s ease-in-out .3s infinite}
+.brew-open:hover::after,.brew-open:focus-visible::after{opacity:1}
+@keyframes playPulse{50%{scale:1.06}}
+@media (hover:none){.brew-open::before{opacity:1;scale:.8;top:auto;bottom:16px;translate:-50% 0;font-size:16px}}
+
+@media (min-width:901px){.idea h2 .a{font-size:clamp(48px,5vw,90px)}.idea h2 .b{font-size:clamp(90px,9.5vw,170px)}}
+
+/* Got an idea?: the phone hangs right beside the words (placed by script), and the meadow is smaller and sits higher */
+@media (min-width:901px){
+  .phone{height:min(70vh,100%)}
+  .idea{justify-content:center}
+  .idea-in{flex:0 0 auto}
+  .idea-flowers{width:min(46%,620px,calc(28vh * 2.6))!important;margin-top:clamp(10px,2vh,30px)!important}
+}
+
+/* Let's connect scales up with the screen: bigger photo, headline, words and buttons on large screens */
+@media (min-width:901px){
+  .connect h2{font-size:clamp(84px,9.6vw,200px)}
+  .connect-lede{max-width:min(36ch,92%);font-size:clamp(20px,1.75vw,32px);margin:clamp(24px,2.4vw,44px) 0 clamp(28px,2.8vw,52px)}
+  .connect .btn{padding:clamp(16px,1.4vw,26px) clamp(28px,2.4vw,46px);font-size:clamp(17px,1.35vw,24px)}
+  .connect-actions{gap:clamp(12px,1.2vw,22px)}
+  .connect-mail{font-size:clamp(15px,1.1vw,19px)}
+  .connect-art{width:min(clamp(380px,32vw,640px),100%)}
+}
+
+/* less dead space between Let's connect, the ticker and Now brewing */
+.connect{padding-bottom:clamp(36px,4vw,70px)!important}
+.brew{padding-top:clamp(48px,5vw,90px)!important}
+/* things appear sooner once they're on screen */
+.connect-art,.connect-copy{transition-delay:.25s!important}
+.connect-copy{transition-delay:.4s!important}
+.idea-flowers{transition-delay:.3s!important}
+
+/* Got an idea?: one group — the button sits right under the words, beside the phone */
+@media (min-width:901px){
+  .idea-in{grid-template-columns:minmax(0,1fr)!important;justify-items:start;gap:clamp(20px,2.6vh,34px)!important;max-width:1240px}
+  .idea-in>div:last-child{margin-top:4px}
+  .idea-open{font-size:clamp(20px,1.7vw,28px)}
+}
+
+/* ============ Stealth mode, in her Y2K chrome-and-glass look ============ */
+.brew-box.brew-locked{--st-font:Arial,Helvetica,sans-serif;border:0;border-radius:clamp(22px,2.6vw,40px);padding:5px;overflow:visible;
+  background:linear-gradient(145deg,#fff 0%,#9e9bdc 9%,#fff 16%,#5b79bb 33%,#eafaff 47%,#fff 52%,#7567b9 73%,#d9edff 91%,#fff);
+  box-shadow:0 14px 25px #30245f66,0 0 0 2px #dceaff,0 0 15px #fff8;color:#fff}
+.brew-locked .winbar{display:flex;align-items:center;gap:clamp(10px,1.4vw,18px);height:auto;padding:12px clamp(16px,2.2vw,28px) 13px;border:0;border-bottom:3px solid #f1eaff;
+  border-radius:calc(clamp(22px,2.6vw,40px) - 6px) calc(clamp(22px,2.6vw,40px) - 6px) 12px 12px;
+  background:linear-gradient(130deg,#adadf5,#f4f8ff 22%,#77a0da 49%,#f5f6ff 61%,#4168ae 75%,#b9cdf5)}
+.brew-locked .winbar i{width:clamp(14px,1.5vw,22px);height:clamp(14px,1.5vw,22px);border-radius:50%;border:1px solid #fff;box-shadow:inset 0 -3px 4px #081d6f88,0 2px 4px #213a8388;
+  background:radial-gradient(circle at 33% 20%,#fff 0,transparent 25%),linear-gradient(#f8e4ff,var(--c) 55%,#eff8ff)!important}
+.brew-locked .winbar i:nth-child(1){--c:#f64bc2}.brew-locked .winbar i:nth-child(2){--c:#2389e9}.brew-locked .winbar i:nth-child(3){--c:#38cc58}
+.brew-locked .winbar span{color:#071e62!important;opacity:1;font:italic 900 clamp(13px,1.5vw,20px) var(--st-font);letter-spacing:.08em;text-transform:uppercase}
+.brew-locked .lock-view{position:relative;overflow:hidden;margin-top:4px;border-radius:calc(clamp(22px,2.6vw,40px) - 8px);isolation:isolate;
+  padding:clamp(24px,3.4vw,52px) clamp(22px,3.6vw,56px) clamp(28px,3.6vw,54px);gap:clamp(20px,3.4vw,52px);align-items:end;
+  background:linear-gradient(110deg,#183f9840,#253e8620),radial-gradient(ellipse at 13% 90%,#b68df3,transparent 46%),radial-gradient(ellipse at 90% 96%,#bd91f7,transparent 42%),radial-gradient(ellipse at 75% 20%,#345fc0,transparent 65%),linear-gradient(135deg,#8c91dc,#487fce 50%,#6294dd);
+  box-shadow:inset 0 0 0 1px #fff,inset 0 3px 10px #162e77a0}
+.brew-locked .lock-view::before{content:"";display:block!important;position:absolute;inset:0;z-index:-1;background:url(assets/stealth/pattern.webp) repeat;opacity:.85;pointer-events:none}
+.st-d{position:absolute;z-index:-1;pointer-events:none;user-select:none;height:auto}
+.st-planet{width:clamp(110px,15%,220px);right:2.5%;top:0;z-index:0;filter:drop-shadow(0 5px 8px #173a8f44)}
+.st-half{width:22%;right:16%;top:3%;opacity:.38}
+.st-orbit{width:30%;right:0;top:12%;opacity:.9;transform:rotate(-8deg)}
+.st-flare{width:9%;right:4%;top:24%;animation:stGlim 4s ease-in-out infinite}
+.st-corner{width:clamp(60px,8%,110px);left:-1%;bottom:-3%;z-index:0}
+.st-ring{position:absolute;z-index:-1;left:2%;bottom:0;width:96%;height:40%;border-bottom:3px solid #d8edff;border-radius:0 0 65% 50%;transform:rotate(-6deg);box-shadow:0 4px 8px #d398fa88;opacity:.7;pointer-events:none}
+@keyframes stGlim{50%{opacity:.45;transform:scale(.85)}}
+.brew-locked .case-left{gap:10px;position:relative;z-index:1}
+.brew-locked .lock-eyebrow,.brew-locked .lock-lab{display:inline-block;align-self:flex-start;color:#071d60;background:#cfb6ff;padding:6px 20px 6px 14px;margin:0;
+  clip-path:polygon(4% 0,100% 0,96% 100%,0 100%);font:italic 900 clamp(11px,1.05vw,15px)/1.2 var(--st-font);letter-spacing:.03em;text-transform:uppercase}
+.brew-locked .lock-eyebrow{background:#dfff00;font-size:clamp(12px,1.2vw,17px)}
+.st-h{margin:2px 0 0!important;line-height:0}
+.st-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.st-title{display:block;width:min(560px,100%);height:auto;filter:drop-shadow(0 4px 3px #15327544)}
+.brew-locked .case-sub{color:#fff;font:italic 600 clamp(16px,1.6vw,22px)/1.35 var(--st-font);text-shadow:0 2px 4px #17376b;margin:0 0 8px}
+.brew-locked .lock-list{color:#fff;font:600 clamp(14px,1.2vw,17px)/1.6 var(--st-font);text-shadow:0 2px 4px #17376b}
+.brew-locked .lock-list li+li::before{content:"  ✦  ";color:#dcff00;text-shadow:none;white-space:pre}
+.brew-locked .lock-form{position:relative;z-index:1;gap:12px}
+.brew-locked .lock-entry{gap:12px}
+.brew-locked .lock-entry input,.brew-locked .lock-letters input{border:2px solid #f1f5ff;border-radius:20px;color:#fff;font:italic 600 clamp(16px,1.4vw,20px) var(--st-font);
+  background:linear-gradient(130deg,#243f9955,#c7d5ff55,#4f76c277);box-shadow:0 0 0 2px #9db4ed,inset 0 0 10px #fff8,0 4px 8px #152e6f55;padding:13px 18px}
+.brew-locked .lock-entry input::placeholder{color:#f4f7ff;opacity:1}
+.brew-locked .lock-entry input:focus,.brew-locked .lock-letters input:focus{border-color:#f1f5ff;box-shadow:0 0 0 4px #e1ff00,inset 0 0 10px #fff8}
+.brew-locked .lock-letters input{width:46px;padding:10px 0;border-radius:14px}
+.brew-locked .lock-form button[type=submit]{cursor:pointer;border:2px solid #fff;border-radius:50px;padding:12px 24px;color:#091d61;font:italic 900 clamp(15px,1.4vw,20px) var(--st-font);
+  background:linear-gradient(#eaff55,#b8ed00 48%,#f7ff9e 50%,#c4fb00 78%,#95e3e0);box-shadow:0 0 0 3px #a2bbde,0 5px 8px #1c3f9f88,inset 0 0 6px #fff;transition:transform .15s,filter .15s;text-transform:uppercase}
+.brew-locked .lock-form button[type=submit]:hover,.brew-locked .lock-form button[type=submit]:focus-visible{filter:brightness(1.13);transform:translateY(-2px);background:linear-gradient(#eaff55,#b8ed00 48%,#f7ff9e 50%,#c4fb00 78%,#95e3e0)}
+.brew-locked .lock-hint{color:#fff;font:italic 600 clamp(14px,1.2vw,17px) var(--st-font);text-shadow:0 2px 4px #17376b;text-underline-offset:4px}
+.brew-locked .lock-clue p{color:#fff;font-family:var(--st-font)}
+.brew-locked .lock-note{color:#dfff00;text-shadow:0 1px 3px #17376b}
+@media (max-width:760px){
+  .st-planet{width:26%}.st-orbit{width:46%;top:6%}.st-half{display:none}.st-flare{top:8%;width:14%}.st-corner{width:16%}.st-ring{opacity:.4}
+  .brew-locked .lock-entry{flex-direction:column}
+  .brew-locked .lock-list li{display:block}.brew-locked .lock-list li::before,.brew-locked .lock-list li+li::before{content:"✦  ";color:#dcff00;white-space:pre}
+}
+@media (prefers-reduced-motion:reduce){.st-flare{animation:none}}
+/* narrow screens: the river runs BEHIND the boxes, so it never covers a button */
+@media (max-width:900px){.brew-box{position:relative;z-index:6}}
+/* phones: previews are taller boxes so the game and its logo get the room */
+@media (max-width:599px){.brew-view{aspect-ratio:4/5}.brew-view.cave iframe{top:12%}}
+@media (max-width:900px){.brew-river{z-index:0!important}.brew-box{z-index:6!important}}
+
+/* the clue: a glowing glass card that pops in where the hint link was */
+.brew-locked .lock-hint[hidden]{display:none}
+.brew-locked .lock-clue:not([hidden]){display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;margin-top:2px;padding:16px 18px 18px;border-radius:22px;
+  background:linear-gradient(135deg,rgba(255,255,255,.32),rgba(207,182,255,.28) 50%,rgba(98,148,221,.32));border:2px solid #fff;
+  box-shadow:0 0 0 3px #dfff00,0 0 28px rgba(223,255,0,.55),inset 0 0 14px rgba(255,255,255,.6);animation:cluePop .5s cubic-bezier(.2,1.6,.4,1) both}
+.brew-locked .lock-clue p{width:100%;margin:0;color:#fff;font:italic 900 clamp(20px,2vw,28px)/1.1 var(--st-font);letter-spacing:.01em;text-shadow:0 2px 0 #22488b,0 4px 8px #0e2b75}
+.brew-locked .lock-clue p::before{content:"✦ ";color:#dfff00}
+.brew-locked .lock-letters{gap:8px}
+.brew-locked .lock-letters input{width:clamp(44px,4vw,56px);height:clamp(50px,4.6vw,62px);font-size:clamp(22px,2vw,28px);font-weight:900;font-style:normal;background:rgba(255,255,255,.22);box-shadow:0 0 0 2px #9db4ed,inset 0 0 10px #fff8}
+@keyframes cluePop{0%{opacity:0;scale:.85;translate:0 8px}100%{opacity:1;scale:1;translate:0 0}}
+
+/* My art: the painting overlaps only the bar's empty bottom strip, so "My art" and the sentence are never covered */
+@media (min-width:901px){
+  .art-head{padding-bottom:calc(clamp(40px,5vw,80px) + 22px)!important;align-items:flex-start}
+  .art-head p{align-self:flex-end;max-width:min(34ch,30vw)}
+}
+@media (max-width:900px){.art-head{padding-bottom:46px!important}}
+/* the river's shadow is no longer cut off in a hard rectangle */
+.brew.in .brew-river{clip-path:inset(-60px)!important}
+/* the bouquet grows up out of the grass and pops */
+.art .art-bouquet{transform:translateY(40%) scale(.05);opacity:0;transition:none!important}
+.art.bloom .art-bouquet{transform:translateY(12%) rotate(5deg) scale(1);opacity:1}
+.art.bloom .art-bouquet{opacity:1;animation:bouquetGrow 1.3s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes bouquetGrow{0%{transform:translateY(40%) rotate(0) scale(.05);opacity:0}15%{opacity:1}70%{transform:translateY(10%) rotate(7deg) scale(1.12)}100%{transform:translateY(12%) rotate(5deg) scale(1)}}
+@media (prefers-reduced-motion:reduce){.art.bloom .art-bouquet{animation:none}}
+/* Got an idea?: the meadow is centered */
+.idea-flowers{margin-left:auto!important;margin-right:auto!important}
+/* the peony grows up from its stem and pops, like the bouquet */
+.art .art-peony{transform:none!important;opacity:0;scale:.05;rotate:-20deg;transition:none!important;animation:none!important}
+.art.peony-in .art-peony{opacity:1;scale:1;rotate:8deg;animation:peonyPop 1.2s cubic-bezier(.2,1.5,.4,1) both,peonyBreathe 4s ease-in-out 1.4s infinite!important}
+@keyframes peonyPop{0%{opacity:0;scale:.05;rotate:-20deg}15%{opacity:1}70%{scale:1.14;rotate:11deg}100%{opacity:1;scale:1;rotate:8deg}}
+@keyframes peonyBreathe{0%,100%{scale:1;rotate:8deg}50%{scale:1.05;rotate:3deg}}
+@media (prefers-reduced-motion:reduce){.art.peony-in .art-peony{animation:none!important}}
+
+/* ============ Stealth mode, rebuilt on her own artwork: the glossy browser window, chrome title and iridescent pill buttons ============ */
+.brew-box.brew-locked{position:relative;padding:0;border:0;border-radius:clamp(18px,2.4vw,34px);overflow:hidden;box-shadow:0 18px 40px -14px rgba(48,36,95,.6);
+  background:#8aa4ee url(assets/stealth/window.webp) center/100% 100% no-repeat;aspect-ratio:2/1}
+.brew-locked .winbar{position:absolute;left:12.5%;top:3.2%;z-index:3;height:auto;padding:0;background:none!important;border:0!important;border-radius:0}
+.brew-locked .winbar i{display:none}
+.brew-locked .winbar span{color:#fff!important;font:italic 900 clamp(11px,1.15vw,17px) var(--st-font);letter-spacing:.14em;text-shadow:0 1px 3px rgba(20,30,110,.6)}
+.brew-locked .lock-view{position:absolute;inset:16% 5% 9% 4.5%;margin:0;padding:clamp(10px,1.6vw,26px) clamp(14px,2.2vw,34px);background:none!important;box-shadow:none!important;border-radius:0;overflow:visible;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center;gap:clamp(16px,3vw,48px)}
+.brew-locked .lock-view::before,.brew-locked .st-d,.brew-locked .st-ring{display:none!important}
+.brew-locked .st-title{width:min(560px,100%);filter:drop-shadow(0 4px 6px rgba(20,30,110,.35))}
+.brew-locked .lock-form{align-self:center;margin-right:clamp(40px,9%,120px)}
+/* the iridescent pill buttons */
+.brew-locked .lock-form button[type=submit],.brew-locked .lock-form button[type=submit]:hover,.brew-locked .lock-form button[type=submit]:focus-visible{
+  background:url(assets/stealth/pill.webp) center/100% 100% no-repeat!important;border:0!important;box-shadow:none!important;
+  padding:clamp(14px,1.4vw,20px) clamp(30px,2.8vw,44px);border-radius:999px;color:#14205e;text-shadow:0 1px 0 rgba(255,255,255,.6);
+  font:italic 900 clamp(15px,1.35vw,20px) var(--st-font);letter-spacing:.04em;filter:drop-shadow(0 6px 8px rgba(28,63,159,.35))}
+.brew-locked .lock-form button[type=submit]:hover,.brew-locked .lock-form button[type=submit]:focus-visible{transform:translateY(-2px) scale(1.03);filter:drop-shadow(0 8px 12px rgba(28,63,159,.45)) brightness(1.08)}
+/* the input matches the glass of the window */
+.brew-locked .lock-entry input{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.85);box-shadow:inset 0 0 12px rgba(255,255,255,.5),0 4px 10px rgba(28,63,159,.25)}
+@media (max-width:1100px){.brew-box.brew-locked{aspect-ratio:auto}.brew-locked .lock-view{position:relative;inset:auto;padding:clamp(56px,8vw,90px) clamp(22px,5vw,48px) clamp(34px,6vw,60px)}.brew-locked .lock-form{margin-right:0}}
+@media (max-width:760px){.brew-box.brew-locked{background-size:cover;background-position:85% 0}.brew-locked .winbar{left:clamp(64px,19vw,90px);top:14px}.brew-locked .lock-view{padding-top:64px}}
+.brew-locked .winbar{left:15.6%;top:9.6%;translate:0 -50%}
+.brew-locked .lock-form button[type=submit]{min-width:9.5em}
+@media (max-width:900px){.brew-locked .lock-view{grid-template-columns:1fr}}
+@media (max-width:760px){.brew-box.brew-locked{background-size:auto 100%;background-position:0 0}.brew-locked .winbar{display:none}.brew-locked .lock-view{padding-top:clamp(70px,12vh,110px)}}
+/* art balloons: each wanders up on its own line */
+.balloons.go img{animation:balloonUp var(--fd,5.5s) cubic-bezier(.3,.1,.5,1) var(--d) forwards}
+@keyframes balloonUp{0%{opacity:0;transform:translateY(0) rotate(var(--r))}10%{opacity:1}35%{transform:translate(var(--fx1,2vw),-45vh) rotate(calc(var(--r) * -1))}70%{transform:translate(var(--fx2,-2vw),-95vh) rotate(var(--r))}90%{opacity:1}100%{opacity:0;transform:translate(var(--fx3,0),-150vh) rotate(0)}}
+
+/* On the screen: the recommendations play inside the felt TV */
+.like-tv .like-art{display:grid;place-items:center;overflow:visible;padding:clamp(6px,1vw,14px)}
+.like-tv .tv{position:relative;height:100%;max-width:100%;aspect-ratio:3/2}
+.tv .tv-frame{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;filter:drop-shadow(0 10px 16px rgba(120,20,70,.25))}
+.tv .tv-screen{position:absolute;left:16.5%;top:27%;width:56%;height:54%;z-index:1;border-radius:18% / 22%;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;padding:4% 7%;color:var(--cream);
+  background:radial-gradient(120% 90% at 50% 40%,#3d1d8a 0%,#1b0b45 70%,#0e0626 100%)}
+.tv .tv-screen::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,.05) 0 1px,transparent 1px 3px);mix-blend-mode:screen;animation:tvRoll 6s linear infinite}
+@keyframes tvRoll{to{background-position:0 60px}}
+.tv .tv-ch{display:block;margin-bottom:.5em;font:800 clamp(8px,.7vw,11px)/1 var(--body);letter-spacing:.18em;color:var(--acid);text-shadow:0 0 8px rgba(206,255,50,.7)}
+.tv .tv-screen ul{list-style:none;margin:0;padding:0;display:grid;gap:clamp(2px,.4vw,6px)}
+.tv .tv-screen li{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-bottom:1px solid #fbf2e622;padding-bottom:2px;
+  opacity:0;translate:0 6px;animation:tvLine .4s ease calc(var(--k,0) * .12s) both;animation-play-state:paused}
+.tv .tv-screen li:nth-child(1){--k:1}.tv .tv-screen li:nth-child(2){--k:2}.tv .tv-screen li:nth-child(3){--k:3}.tv .tv-screen li:nth-child(4){--k:4}.tv .tv-screen li:nth-child(5){--k:5}.tv .tv-screen li:nth-child(6){--k:6}
+.like-tv.on .tv-screen li{animation-play-state:running}
+@keyframes tvLine{to{opacity:1;translate:0 0}}
+.tv .tv-screen b{font:800 clamp(10px,1.05vw,16px)/1.1 var(--display);letter-spacing:-.01em;text-shadow:0 0 10px rgba(239,74,134,.6)}
+.tv .tv-screen span{font-size:clamp(8px,.7vw,11px);opacity:.75;white-space:nowrap}
+.like-tv:hover .tv-screen{box-shadow:inset 0 0 30px rgba(255,79,176,.45)}
+.like-tv small::after{content:none!important}
+@media (max-width:760px){.like-tv .like-art{height:auto!important;padding:16px 10px 0}.like-tv .tv{height:auto;width:100%}.tv .tv-screen b{font-size:clamp(11px,3.4vw,15px)}.tv .tv-screen span,.tv .tv-ch{font-size:clamp(8px,2.4vw,10px)}}
+@media (max-width:760px){
+  .tv .tv-screen{padding:3% 6%}
+  .tv .tv-screen b{font-size:clamp(9px,2.9vw,13px)!important;line-height:1.05}
+  .tv .tv-screen span{display:none}
+  .tv .tv-screen ul{gap:1px}
+  .tv .tv-ch{font-size:7px!important;margin-bottom:.35em}
+}
+
+/* Van's Cove in Now brewing: its logo rides on the crystal banner */
+.brew-view .cave-logo{position:absolute;left:50%;top:1%;z-index:3;width:min(34%,300px);height:auto;translate:-50% 0;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(10,6,40,.5))}
+/* the peony beside the dog painting, smaller */
+.art-peony{width:50%!important;right:-24%!important}
+@media (max-width:600px){.art-peony{width:34%!important;right:-10%!important}}
+
+/* TV and radio cards: the set is big and centered, showing only the picks (no labels) */
+.like-tv .like-art{padding:clamp(4px,.6vw,10px)!important}
+.like-tv .tv{height:100%;width:auto;max-width:100%}
+.tv .tv-screen span,.tv .tv-ch{display:none!important}
+.tv .tv-screen{align-items:center;text-align:center;justify-content:center}
+.tv .tv-screen ul{width:100%}
+.tv .tv-screen li{justify-content:center;border-bottom:0;padding:0}
+.tv .tv-screen b{font-size:clamp(12px,1.35vw,20px)}
+.like-tv{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)!important}
+/* the cardboard radio: its window is the wide oval at the top */
+.like-radio .tv{aspect-ratio:1448/1086}
+.like-radio .tv-screen{left:15%;top:22%;width:70%;height:41%;border-radius:22% / 34%;
+  background:radial-gradient(120% 100% at 50% 40%,#3a2614 0%,#1d1209 75%,#120a05 100%);color:#ffe2b0}
+.like-radio .tv-screen b{text-shadow:0 0 10px rgba(255,170,60,.7)}
+.like-radio .tv-frame{filter:drop-shadow(0 10px 16px rgba(80,40,10,.3))}
+@media (max-width:760px){.like-tv{grid-template-columns:1fr!important}.like-tv .tv{width:100%;height:auto}.tv .tv-screen b{font-size:clamp(11px,3.6vw,15px)!important}}
+/* Float A Note. drifts down word by word, like a note falling from the clouds */
+.connect h2 .fw{display:inline-block;opacity:0;translate:0 -1.4em;rotate:-6deg}
+.connect.in h2 .fw{animation:noteFall .9s cubic-bezier(.3,1.4,.5,1) calc(.35s + var(--i) * .35s) both}
+@keyframes noteFall{0%{opacity:0;translate:0 -1.4em;rotate:-8deg}60%{opacity:1;translate:0 .08em;rotate:3deg}100%{opacity:1;translate:0 0;rotate:0deg}}
+.connect-copy{transition-delay:0s!important;opacity:1!important;transform:none!important}
+.connect-lede,.connect-actions,.connect-mail{opacity:0;transition:opacity .6s ease 1.6s}
+.connect.in .connect-lede,.connect.in .connect-actions,.connect.in .connect-mail{opacity:1}
+/* hovered painting: as tall and wide as the screen allows, centered */
+.art-wall button:hover,.art-wall button:focus-visible,.art-mainb:hover,.art-mainb:focus-visible{transform:none!important}
+.art-wall button,.art-mainb{transition:transform .45s cubic-bezier(.2,.9,.25,1)!important}
+.art-wall button.big,.art-mainb.big{transform:translate(var(--gx),var(--gy)) scale(var(--gk)) rotate(0)!important;z-index:60!important;position:relative}
+.art{isolation:auto}
+/* the TV and radio are huge: taller cards, the set taking most of the width */
+.like-tv{height:clamp(440px,42vw,720px)!important;grid-template-columns:minmax(0,2.2fr) minmax(0,1fr)!important}
+.like-tv .like-art{padding:clamp(10px,1.4vw,24px)!important}
+.tv .tv-screen b{font-size:clamp(16px,1.9vw,32px)!important}
+.tv .tv-screen ul{gap:clamp(4px,.7vw,12px)!important}
+@media (max-width:760px){.like-tv{height:auto!important;grid-template-columns:1fr!important}.tv .tv-screen b{font-size:clamp(13px,4.2vw,20px)!important}}
+/* TV and radio: just the set, huge and centered (the titles stay for screen readers only) */
+.like-tv{grid-template-columns:1fr!important;grid-template-rows:1fr!important;place-items:center}
+.like-tv .like-art{grid-column:1!important;grid-row:1!important;width:100%;height:100%}
+.like-tv h3,.like-tv small{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);padding:0!important;margin:0!important}
+@media (max-width:760px){.like-tv .like-art{padding:18px 8px!important}.tv .tv-screen b{font-size:clamp(11px,3.5vw,16px)!important}.tv .tv-screen ul{gap:2px!important}}
+/* TV and radio sit straight on the page: no colored card behind them */
+.like.like-tv{background:transparent!important;overflow:visible}
+.like-tv:hover{transform:translateY(-6px) rotate(-1deg)}
+/* second "on my mind" ticker after Beyond work: pink, running the other way */
+.mind-2{background:var(--pink);margin-top:0}
+.mind-2 .mind-track{animation-direction:reverse;color:#fff}
+.mind-2 .mind-track b{color:var(--acid)}
+.mind-2 .mind-label{background:var(--acid);color:var(--ink)}
+
+/* TV channels: CH 3 = the Pure Moods commercial, CH 4 = the picks; static flashes between them */
+.tv .tv-screen{transition:opacity .15s}
+.tv .tv-ch-video{padding:0!important;background:#000!important;display:block!important}
+.tv .tv-ch-video::after{z-index:2;pointer-events:none}
+.tv-vid,.tv-vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.tv-chnum{position:absolute;right:6%;top:6%;z-index:3;font:800 clamp(10px,1.1vw,18px)/1 var(--body);letter-spacing:.1em;color:#7dff7a;text-shadow:0 0 8px #3f3;pointer-events:none;opacity:0;transition:opacity .3s}
+.tv.flip .tv-chnum{opacity:1}
+.tv .tv-ch-list{opacity:0;pointer-events:none}
+.tv.on-list .tv-ch-list{opacity:1;pointer-events:auto}
+.tv.on-list .tv-ch-video{opacity:0;pointer-events:none}
+.tv-static{position:absolute;inset:0;z-index:4;opacity:0;pointer-events:none;
+  background:repeating-radial-gradient(circle at 17% 32%,#fff 0 1px,#000 1px 2px),repeating-linear-gradient(0deg,#ddd 0 1px,#222 1px 3px);background-size:7px 7px,100% 100%;mix-blend-mode:normal}
+.tv.flip .tv-static{animation:staticFlash .6s steps(6) both}
+.tv.on-list .tv-static{display:none}
+@keyframes staticFlash{0%,100%{opacity:0}10%,85%{opacity:1;background-position:0 0,0 0}50%{background-position:3px 5px,0 2px}}
+.tv-knob{position:absolute;z-index:5;right:13%;top:30%;width:13%;height:30%;border:0;background:transparent;cursor:pointer;border-radius:30%}
+.tv-knob:hover{box-shadow:0 0 0 3px rgba(206,255,50,.8),0 0 24px rgba(206,255,50,.8)}
+.tv-chbtn{position:absolute;z-index:5;left:50%;bottom:-2%;translate:-50% 0;border:2px solid var(--ink);background:var(--acid);color:var(--ink);border-radius:999px;padding:.5em 1.1em;font:800 clamp(12px,1.1vw,16px)/1 var(--body);cursor:pointer;box-shadow:3px 3px 0 var(--pink)}
+.tv-chbtn:hover{translate:-50% -2px}
+/* the TV rising up to fill the screen */
+.like-tv:not(.like-radio) .tv{cursor:zoom-in}
+.tv.tv-up{position:fixed!important;z-index:520;max-width:none!important;aspect-ratio:auto!important;cursor:default;transition:left .5s cubic-bezier(.2,1,.3,1),top .5s cubic-bezier(.2,1,.3,1),width .5s cubic-bezier(.2,1,.3,1),height .5s cubic-bezier(.2,1,.3,1)}
+.tv.tv-up .tv-screen b{font-size:clamp(18px,2.4vw,40px)!important}
+.tv.tv-up .tv-chbtn{font-size:clamp(14px,1.4vw,20px);bottom:1%}
+.tv-shade{position:fixed;inset:0;z-index:510;background:rgba(18,8,36,.78);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .4s ease;cursor:zoom-out}
+.tv-shade.on{opacity:1;pointer-events:auto}
+.like-tv.tv-lift,.like-tv.tv-lift:hover{transform:none!important;z-index:520}
+.likes,.beyond{transform:none}
+html.tv-raised .beyond{z-index:600!important}
+html.tv-raised .like-tv.tv-lift{z-index:620;position:relative}
+.tv.tv-up{z-index:630}
+/* family photo, pinned up like a polaroid */
+.family-pic{margin:clamp(10px,2vw,30px) auto;width:min(520px,82%);padding:14px 14px 56px;background:#fff;rotate:-2.5deg;box-shadow:0 22px 40px -18px rgba(21,48,44,.45);position:relative;transition:rotate .35s ease,scale .35s ease}
+.family-pic:hover{rotate:0deg;scale:1.03}
+.family-pic::before{content:"";position:absolute;left:50%;top:-14px;width:110px;height:30px;translate:-50% 0;rotate:3deg;background:rgba(206,255,50,.75)}
+.family-pic img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 40%}
+
+#tvSlot .tv-screen li{animation-play-state:running!important}
+/* "she would let me in I swear..." as a glowing lime sticker so it can't be missed */
+.lock-hint{display:inline-flex!important;align-items:center;gap:.4em;align-self:flex-start;text-decoration:none!important;cursor:pointer;
+  background:#dfff00!important;color:#14205e!important;text-shadow:none!important;border:2px solid #fff!important;border-radius:999px;padding:.45em 1em!important;
+  font:italic 900 clamp(14px,1.2vw,17px)/1.1 Arial,sans-serif!important;rotate:-2deg;box-shadow:0 0 0 3px #a2bbde,0 0 22px rgba(223,255,0,.85),0 6px 12px rgba(20,32,94,.35);animation:hintGlow 2.2s ease-in-out infinite}
+.lock-hint::before{content:"🗝"}
+.lock-hint:hover,.lock-hint:focus-visible{rotate:0deg;scale:1.05;outline:none}
+@keyframes hintGlow{50%{box-shadow:0 0 0 3px #a2bbde,0 0 36px rgba(223,255,0,1),0 6px 12px rgba(20,32,94,.35)}}
+@media (prefers-reduced-motion:reduce){.lock-hint{animation:none}}
+
+/* a stack of thin books under the TV: tap a spine to open it */
+.bookstack{display:flex;flex-direction:column;gap:6px;width:min(860px,100%);margin:clamp(10px,2vw,30px) auto 0;padding-bottom:10px}
+.book{position:relative;width:var(--w);margin-left:var(--x);rotate:var(--r);transition:rotate .3s ease,translate .3s ease}
+.book summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;height:clamp(52px,5vw,66px);padding:0 22px;border-radius:6px 10px 10px 6px;
+  background:linear-gradient(180deg,rgba(255,255,255,.25),transparent 30%,transparent 70%,rgba(0,0,0,.18)),var(--c);color:var(--ink);
+  box-shadow:inset 6px 0 0 rgba(0,0,0,.15),inset 0 -3px 0 rgba(0,0,0,.12),0 6px 0 #f3ead9,0 8px 0 rgba(21,48,44,.15),0 10px 18px -8px rgba(21,48,44,.4)}
+.book summary::-webkit-details-marker{display:none}
+.bk-ic{font-size:clamp(20px,2vw,28px);filter:drop-shadow(0 1px 0 rgba(0,0,0,.2))}
+.bk-t{font:800 clamp(17px,1.7vw,24px)/1 var(--display);letter-spacing:.02em;text-transform:uppercase}
+.bk-band{margin-left:auto;align-self:stretch;width:46px;border-left:3px double rgba(255,255,255,.55);border-right:3px double rgba(255,255,255,.55);opacity:.8}
+.book:hover{rotate:0deg;translate:8px 0}
+.book[open]{rotate:0deg}
+.book ul{list-style:none;margin:0 6px 10px;padding:14px 22px 16px;background:#fffdf7;border-radius:0 0 10px 10px;box-shadow:0 10px 20px -12px rgba(21,48,44,.4);display:grid;gap:8px;animation:bookOpen .35s ease both}
+.book li{display:flex;justify-content:space-between;align-items:baseline;gap:14px;border-bottom:1px dashed rgba(21,48,44,.2);padding-bottom:6px}
+.book li b{font:800 clamp(16px,1.4vw,20px)/1.2 var(--display)}
+.book li span{font-size:13px;opacity:.7;white-space:nowrap}
+@keyframes bookOpen{from{opacity:0;translate:0 -8px}to{opacity:1;translate:0 0}}
+@media (max-width:600px){.book{width:100%;margin-left:0}.bk-band{display:none}}
+
+/* ============ the book stack, styled: cloth-bound spines, foil titles, page edges, gem stickers ============ */
+.bookstack{gap:0;perspective:1200px;padding-top:8px}
+.book{--h:clamp(56px,5.4vw,74px)}
+.book:nth-child(1){--h:clamp(62px,6vw,82px);--c:#e2447f}
+.book:nth-child(2){--h:clamp(70px,6.6vw,92px);--c:#cfe000}
+.book:nth-child(3){--h:clamp(52px,5vw,68px);--c:#6c46c9}
+.book:nth-child(4){--h:clamp(64px,6.2vw,86px);--c:#ee6a2c}
+.book summary{position:relative;height:var(--h);padding:0 0 0 clamp(18px,2vw,28px);gap:clamp(12px,1.4vw,20px);border-radius:4px 3px 3px 4px;overflow:visible;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.32) 0,rgba(255,255,255,.08) 18%,transparent 40%,transparent 72%,rgba(0,0,0,.22) 100%),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,rgba(0,0,0,.04) 2px 4px),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 2px,rgba(0,0,0,.035) 2px 3px),
+    var(--c);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.18),0 2px 0 rgba(0,0,0,.12),0 14px 22px -14px rgba(21,48,44,.55)}
+/* the page block peeking out at the right end */
+.book summary::after{content:"";position:absolute;right:-10px;top:5px;bottom:5px;width:14px;border-radius:0 3px 3px 0;z-index:-1;
+  background:repeating-linear-gradient(0deg,#fffaf0 0 2px,#e9dfcc 2px 3px);box-shadow:2px 2px 4px rgba(0,0,0,.15)}
+/* gold foil bands near both ends */
+.book summary::before{content:"";position:absolute;left:clamp(56px,5vw,72px);top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,#fff2b0,#d9a72b 45%,#fff2b0 55%,#b8861d);box-shadow:6px 0 0 -1px rgba(217,167,43,.9)}
+.bk-band{width:clamp(70px,8vw,110px)!important;border:0!important;opacity:1!important;margin-left:auto;align-self:stretch;
+  background:linear-gradient(90deg,transparent 0 14px,#d9a72b 14px 17px,transparent 17px 22px,#d9a72b 22px 25px,transparent 25px),
+    linear-gradient(180deg,rgba(255,255,255,.18),rgba(0,0,0,.12))}
+.bk-ic{width:clamp(30px,3vw,44px);height:auto;flex:none;margin-left:-6px;rotate:-10deg;filter:drop-shadow(0 3px 4px rgba(0,0,0,.3));transition:rotate .3s ease,scale .3s ease}
+.book:hover .bk-ic{rotate:12deg;scale:1.15}
+.bk-t{display:flex;align-items:baseline;gap:.6em;font:800 clamp(18px,1.9vw,28px)/1 var(--display)!important;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--ink);text-shadow:0 1px 0 rgba(255,255,255,.25),0 -1px 0 rgba(0,0,0,.2)}
+.bk-t em{font:italic 400 .72em/1 var(--serif);letter-spacing:0;text-transform:none;opacity:.85}
+.bk-vol{font:700 11px var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--ink);opacity:.7;margin-left:auto;margin-right:10px;white-space:nowrap}
+.book:nth-child(2) .bk-t,.book:nth-child(2) .bk-vol{color:#15302c}
+.book:nth-child(2) summary::before{background:linear-gradient(180deg,#3a5a50,#15302c);box-shadow:6px 0 0 -1px #15302c}
+.book:nth-child(2) .bk-band{background:linear-gradient(90deg,transparent 0 14px,#15302c 14px 17px,transparent 17px 22px,#15302c 22px 25px,transparent 25px),linear-gradient(180deg,rgba(255,255,255,.18),rgba(0,0,0,.08))}
+.book:hover{translate:14px 0}
+.book[open] summary{border-radius:4px 3px 0 0}
+.book ul{margin:0 10px 12px 14px;border-radius:0 0 8px 8px;background:#fffdf7 repeating-linear-gradient(180deg,transparent 0 31px,rgba(239,74,134,.12) 31px 32px);border-left:3px solid var(--c)}
+@media (max-width:600px){.bk-vol,.bk-t em{display:none}.book summary::before{left:48px}}
+@media (max-width:600px){.book summary::before{display:none}.bk-band{width:44px!important}.book summary::after{right:-6px;width:9px}}
+
+/* family polaroids rising out of the books, settling in the margins either side */
+.beyond{position:relative}
+.polaroids{position:absolute;inset:0;pointer-events:none;z-index:3}
+.pol{position:absolute;margin:0;width:clamp(120px,12vw,200px);padding:8px 8px 28px;background:#fff;box-shadow:0 14px 26px -10px rgba(21,48,44,.45);
+  left:50%;top:78%;opacity:0;translate:-50% 0;scale:.3;rotate:0deg;pointer-events:auto;transition:scale .3s ease}
+.pol img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.pol:hover{scale:1.12!important;z-index:5}
+.polaroids.go .pol{animation:polFly 1.8s cubic-bezier(.25,.9,.3,1) calc(.2s + var(--i) * .35s) both,polBob 6s ease-in-out calc(2s + var(--i) * .35s) infinite}
+.pol-left{--tx:calc(-50vw + 2vw + var(--i) * 1.2vw)}
+.pol-right{--tx:calc(50vw - clamp(120px,12vw,200px) - 2vw - var(--i) * 1vw)}
+.pol:nth-child(1){--ty:18%}.pol:nth-child(2){--ty:22%}.pol:nth-child(3){--ty:44%}.pol:nth-child(4){--ty:48%}.pol:nth-child(5){--ty:70%}.pol:nth-child(6){--ty:72%}
+@keyframes polFly{0%{opacity:0;left:50%;top:80%;translate:-50% 0;scale:.25;rotate:0deg}25%{opacity:1;top:60%;scale:.8}100%{opacity:1;left:50%;top:var(--ty);translate:var(--tx) 0;scale:1;rotate:var(--r)}}
+@keyframes polBob{0%,100%{margin-top:0}50%{margin-top:-10px}}
+/* the books and TV stay above, clear of the photos, in the middle column */
+.beyond .likes,.beyond .bookstack,.beyond .sec-head{position:relative;z-index:4}
+@media (max-width:1100px){.pol{width:clamp(90px,14vw,130px)}}
+@media (max-width:760px){.polaroids{display:none}}
+@media (prefers-reduced-motion:reduce){.polaroids.go .pol{animation:none;opacity:1;top:var(--ty);translate:var(--tx) 0;rotate:var(--r);scale:1}}
+
+/* polaroids v2: drop in from above, then drift up and off the sides as you scroll through */
+.polaroids{--off:0}
+.pol{animation:none!important;left:50%;top:var(--ty);opacity:0;scale:1;rotate:var(--r);translate:var(--tx) -120vh;
+  transition:translate 1.3s cubic-bezier(.25,1.25,.4,1) calc(var(--i) * .14s),opacity .4s ease calc(var(--i) * .14s),scale .3s ease;
+  transform:translate(calc(var(--dir) * var(--off) * (35vw + var(--i) * 3vw)),calc(var(--off) * -1 * (70vh + var(--i) * 12vh))) rotate(calc(var(--off) * var(--dir) * 40deg))}
+.pol-left{--dir:-1}.pol-right{--dir:1}
+.polaroids.in .pol{opacity:1;translate:var(--tx) 0}
+.pol img{animation:polBob 6s ease-in-out calc(var(--i) * -1s) infinite}
+@keyframes polBob{0%,100%{translate:0 0}50%{translate:0 -8px}}
+
+/* ============ book stack v3: vintage hardcovers with a cloth texture, a cream title label, gilt ornaments, a ribbon bookmark ============ */
+.book summary{padding-left:clamp(14px,1.6vw,22px)!important}
+.book summary::before{display:none!important}
+.bk-ic{margin-left:0;width:clamp(34px,3.2vw,48px)}
+.bk-t{position:relative;padding:.42em .9em .38em;border-radius:6px;background:#fffaf0;color:#15302c!important;text-shadow:none!important;
+  box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3.5px #c99a2e,0 2px 4px rgba(0,0,0,.25);font-size:clamp(15px,1.5vw,22px)!important;letter-spacing:.08em}
+.bk-t::before,.bk-t::after{content:"\2726";color:#c99a2e;font-size:.6em;letter-spacing:0}
+.bk-t em{color:var(--c);opacity:1;filter:brightness(.75)}
+.book:nth-child(2) .bk-t em{color:#7f8a00}
+.bk-vol{color:#fff!important;opacity:.85;text-shadow:0 1px 1px rgba(0,0,0,.3)}
+.book:nth-child(2) .bk-vol{color:#15302c!important;text-shadow:none}
+/* cloth weave + a printed pattern per book */
+.book:nth-child(1) summary{background:
+  linear-gradient(180deg,rgba(255,255,255,.3),transparent 25%,transparent 70%,rgba(0,0,0,.25)),
+  radial-gradient(circle at 6px 6px,rgba(255,255,255,.22) 1.6px,transparent 2px) 0 0/14px 14px,var(--c)!important}
+.book:nth-child(2) summary{background:
+  linear-gradient(180deg,rgba(255,255,255,.3),transparent 25%,transparent 70%,rgba(0,0,0,.2)),
+  repeating-linear-gradient(90deg,rgba(21,48,44,.08) 0 6px,transparent 6px 14px),var(--c)!important}
+.book:nth-child(3) summary{background:
+  linear-gradient(180deg,rgba(255,255,255,.3),transparent 25%,transparent 70%,rgba(0,0,0,.28)),
+  repeating-linear-gradient(45deg,rgba(255,255,255,.08) 0 3px,transparent 3px 9px),var(--c)!important}
+.book:nth-child(4) summary{background:
+  linear-gradient(180deg,rgba(255,255,255,.3),transparent 25%,transparent 70%,rgba(0,0,0,.25)),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.1) 0 2px,transparent 2px 8px),var(--c)!important}
+/* gilt end bands */
+.bk-band{background:linear-gradient(90deg,transparent 0 12px,#f3d07a 12px 14px,#b9862a 14px 16px,transparent 16px 22px,#f3d07a 22px 24px,#b9862a 24px 26px,transparent 26px),linear-gradient(180deg,rgba(255,255,255,.2),rgba(0,0,0,.12))!important}
+/* ribbon bookmark hanging out of each book */
+.book summary .bk-band::after{content:"";position:absolute;right:clamp(40px,4.5vw,64px);bottom:-22px;width:12px;height:30px;z-index:-1;
+  background:linear-gradient(90deg,#b8002e,#e8204e 50%,#b8002e);clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);transition:height .3s ease}
+.book:nth-child(2) summary .bk-band::after{background:linear-gradient(90deg,#3a1a8a,#6c46c9 50%,#3a1a8a)}
+.book:nth-child(3) summary .bk-band::after{background:linear-gradient(90deg,#b8a000,#ceff32 50%,#b8a000)}
+.book:nth-child(4) summary .bk-band::after{background:linear-gradient(90deg,#0b6e6a,#18a39d 50%,#0b6e6a)}
+.book:hover summary .bk-band::after{height:42px}
+.book summary{overflow:visible}
+@media (max-width:600px){.bk-t::before,.bk-t::after{display:none}.book summary .bk-band::after{right:14px}}
+
+/* Beyond work: a cozy wood-panelled den with a shag rug */
+.beyond{background:#7a3f12 url(assets/proj/beyond-room.webp) center bottom/cover no-repeat!important}
+.beyond .sec-head h2{color:#fff4e0!important;text-shadow:0 3px 0 rgba(60,25,5,.45),0 8px 30px rgba(40,15,0,.5)}
+.beyond .sec-head h2 .dot{color:var(--acid)!important}
+.beyond .pol{box-shadow:0 18px 30px -10px rgba(40,15,0,.6)}
+/* paper accents that zip into the den when Beyond work arrives */
+.accents{position:absolute;inset:0;pointer-events:none;z-index:2}
+.acc{position:absolute;width:clamp(calc(var(--w) * .6),calc(var(--w) / 14.4 * 1vw),calc(var(--w) * 1.2));height:auto;opacity:0;
+  translate:calc(var(--d) * 60vw) -20vh;rotate:calc(var(--d) * 540deg);scale:.4;filter:drop-shadow(0 10px 10px rgba(40,15,0,.45));
+  transition:translate 1.1s cubic-bezier(.2,1.3,.4,1) calc(.15s + var(--i) * .12s),rotate 1.1s cubic-bezier(.2,1.3,.4,1) calc(.15s + var(--i) * .12s),scale 1.1s cubic-bezier(.2,1.3,.4,1) calc(.15s + var(--i) * .12s),opacity .3s ease calc(.15s + var(--i) * .12s)}
+.accents.in .acc{opacity:1;translate:0 0;rotate:var(--r);scale:1}
+.accents.in .acc{animation:accWiggle 4s ease-in-out calc(1.5s + var(--i) * .3s) infinite}
+@keyframes accWiggle{50%{transform:rotate(calc(var(--d) * 8deg)) scale(1.06)}}
+@media (max-width:760px){.acc{width:calc(var(--w) * .45)}}
+@media (prefers-reduced-motion:reduce){.acc{opacity:1;translate:none;rotate:var(--r);scale:1;transition:none}.accents.in .acc{animation:none}}
+.acc{width:var(--w)!important;max-width:9vw}
+@media (max-width:760px){.acc{width:calc(var(--w) * .5)!important;max-width:none}}
+
+/* "change is scary" ribbon: a lime band that draws itself left to right, text riding along it, then keeps gently wiggling */
+.wiggle{position:relative;z-index:51;background:#2a1846;padding:clamp(10px,2vw,30px) 0 0;overflow:hidden;line-height:0}
+.wiggle svg{display:block;width:100%;height:clamp(150px,17vw,260px);overflow:visible}
+.wig-band{fill:none;stroke:#ceff32;stroke-width:58;stroke-linecap:round;stroke-dasharray:1000;stroke-dashoffset:1000;filter:drop-shadow(0 6px 0 rgba(0,0,0,.25))}
+.wig-text{font:800 30px/1 var(--body);letter-spacing:.14em;fill:#15302c;opacity:0}
+.wiggle.go .wig-band{animation:wigDraw 2.6s cubic-bezier(.45,0,.25,1) both}
+.wiggle.go .wig-text{animation:wigText .6s ease 1.2s both,wigFlow 26s linear 1.8s infinite}
+.wiggle.go svg{animation:wigWobble 5s ease-in-out 2.6s infinite}
+@keyframes wigDraw{to{stroke-dashoffset:0}}
+@keyframes wigText{to{opacity:1}}
+@keyframes wigWobble{50%{transform:translateY(-6px) skewY(-.6deg)}}
+@media (max-width:700px){.wig-band{stroke-width:70}.wig-text{font-size:38px}}
+@media (prefers-reduced-motion:reduce){.wig-band{stroke-dashoffset:0}.wig-text{opacity:1}.wiggle.go *{animation:none!important}}
+/* the dolphin's leap: rises out of the heading, arcs across, dives back in, then gone */
+#beyondTitle{position:relative}
+.bw-word{position:relative;display:inline-block}
+.dolphin{position:absolute;left:-2.4em;top:.15em;width:1.3em;height:auto;opacity:0;pointer-events:none;offset-path:path("M0,40 C40,-140 220,-140 260,40");offset-rotate:auto;offset-distance:0%;
+  filter:drop-shadow(0 6px 10px rgba(20,40,120,.4)) drop-shadow(0 0 10px rgba(140,180,255,.6));z-index:-1}
+.dolphin.leap{animation:dolLeap 1.9s cubic-bezier(.45,.05,.55,.95) 1 forwards}
+@keyframes dolLeap{0%{offset-distance:0%;opacity:0;scale:.8}8%{opacity:1}50%{scale:1.05}92%{opacity:1}100%{offset-distance:100%;opacity:0;scale:.8}}
+@media (prefers-reduced-motion:reduce){.dolphin{display:none}}
+/* the photo holders: purple glitter polaroid frames and a pink digital camera */
+.pol{padding:0!important;background:none!important;box-shadow:none!important;filter:drop-shadow(0 16px 20px rgba(40,15,0,.5))}
+.pol .pf-fr{position:relative;z-index:2;display:block;width:100%;height:auto;animation:none!important}
+.pol .pf-ph{position:absolute;z-index:1;object-fit:cover;animation:none!important;aspect-ratio:auto!important}
+.pf-glitter{aspect-ratio:534/670}
+.pf-glitter .pf-ph{left:8.5%;top:7%;width:83.5%;height:85%}
+.pf-camera{aspect-ratio:735/480;width:clamp(170px,16vw,260px)!important}
+.pf-camera .pf-ph{left:7.6%;top:21%;width:59.2%;height:67.5%}
+/* dolphin: sits in front so it shows */
+.dolphin{z-index:3!important;width:1.1em}
+/* dolphin v2: a simple arc with transforms (no motion path), starting inside "Beyond" and diving into "work" */
+.dolphin{offset-path:none!important;filter:none!important;left:-3.2em!important;top:.1em!important;width:1em!important;transform-origin:50% 50%;opacity:0}
+.dolphin.leap{animation:dolLeap2 1.9s cubic-bezier(.4,0,.6,1) 1 forwards!important}
+@keyframes dolLeap2{
+  0%{opacity:0;transform:translate(0,.4em) rotate(-55deg) scale(.8)}
+  10%{opacity:1}
+  30%{transform:translate(.9em,-.9em) rotate(-25deg) scale(1)}
+  50%{transform:translate(1.9em,-1.25em) rotate(10deg) scale(1.05)}
+  72%{transform:translate(2.8em,-.8em) rotate(45deg) scale(1)}
+  92%{opacity:1}
+  100%{opacity:0;transform:translate(3.4em,.45em) rotate(75deg) scale(.8)}}
+.pf-camera .pf-ph{left:7.8%!important;top:21.7%!important;width:58.8%!important;height:66.5%!important}
+.beyond .sec-head{position:relative}
+.dol-box{position:absolute;left:0;top:0;width:min(780px,62vw);height:100%;pointer-events:none;font:800 clamp(60px,9vw,150px)/.85 var(--display);z-index:5}
+.dol-box .dolphin{position:absolute;left:1.4em!important;top:.05em!important;width:1em!important}
+.pf-stars{aspect-ratio:428/524}.pf-stars .pf-ph{left:12%;top:10.5%;width:80.5%;height:67.6%}
+.pf-stickers{aspect-ratio:700/788}.pf-stickers .pf-ph{left:8%;top:5.2%;width:74.1%;height:68.7%}
+.pf-canon{aspect-ratio:700/1061;width:clamp(110px,10vw,160px)!important}.pf-canon .pf-ph{left:13.6%;top:6.3%;width:54.1%;height:47.8%}
+.pol .pf-fr{aspect-ratio:auto!important;height:auto!important;object-fit:fill!important}
+/* the ribbon now runs behind the meadow at the bottom of Got an idea? */
+.idea .wiggle{position:absolute;left:0;right:0;bottom:clamp(20px,4vh,60px);z-index:1;background:none;padding:0;overflow:visible;pointer-events:none}
+.idea-flowers{position:relative;z-index:2}
+.idea-in{position:relative;z-index:3}
+/* the ribbon in a light violet, and a bigger meadow in front of it */
+.wig-band{stroke:#c9b2ff!important}
+.wig-text{fill:#2b1060!important}
+@media (min-width:901px){.idea-flowers{width:min(62%,880px,calc(38vh * 2.6))!important}}
+@media (max-width:900px){.idea-flowers{width:100%!important}}
+/* "Beyond work." sits centered in the gap between the two meadow patches at the top */
+.beyond{padding-top:clamp(14px,2vw,30px)!important}
+.beyond .sec-head{display:flex;justify-content:center;text-align:center;margin-bottom:clamp(20px,3vw,50px)}
+.beyond .sec-head h2{font-size:clamp(48px,6.4vw,110px)!important;max-width:min(42vw,700px);white-space:nowrap}
+.dol-box{left:50%!important;translate:-50% 0;width:min(42vw,700px)!important}
+@media (max-width:760px){.beyond{padding-top:clamp(60px,14vw,90px)!important}.beyond .sec-head h2{max-width:none;font-size:clamp(44px,12vw,64px)!important}}
+/* the TV sits right on top of the book stack, bigger, with no button underneath */
+.likes .like-tv .tv-chbtn{display:none}
+#tvSlot .tv-chbtn{display:inline-block}
+.likes{gap:0!important}
+.likes .like-tv{height:auto!important;padding:0!important;margin:0 auto;width:min(1000px,100%)}
+.likes .like-tv .like-art{padding:0!important;height:auto!important}
+.likes .like-tv .tv{width:100%;height:auto!important;aspect-ratio:3/2}
+.bookstack{margin-top:clamp(-46px,-3.2vw,-20px)!important;position:relative;z-index:5}
+@media (max-width:760px){.bookstack{margin-top:-14px!important}}
+/* the meadow patches hang along the TOP edge of the art garden, flipped so the grass grows down */
+.art-patch{bottom:auto!important;top:calc(clamp(60px,6vw,110px) * -.35);transform-origin:50% 0!important;rotate:180deg}
+.art-patch.l{transform:scaleX(-1)}
+.art-patch.r{transform:none}
+@media (max-width:760px){.art-patch{top:-6vw}}
+/* Beyond work's heading moves back to its own spot now that the gap is gone */
+.beyond{padding-top:clamp(60px,7vw,110px)!important}
+.art-patch{top:-10px!important;z-index:9}
+.art{overflow:visible}
+.art-patch{rotate:none!important;transform-origin:50% 0!important}
+.art-patch.l{transform:scaleY(-1)!important}
+.art-patch.r{transform:scale(-1,-1)!important}
+.art .art-patch{scale:1 1!important;opacity:1}
+.art-patch{transform-origin:50% 50%!important;transition:none!important}
+/* hero photo: bigger */
+@media (min-width:900px){.hero-figure{height:min(62svh,100%)!important;right:6%!important;translate:0 -48%!important}html.hero-go .hero-figure{translate:0 -48%!important}}
+/* glittering star border along the seam between the art garden and Beyond work */
+.beyond{overflow:visible!important}
+.star-border{position:absolute;left:-2%;width:104%;top:0;translate:0 -50%;height:auto;z-index:12;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(40,15,0,.35))}
+/* disco ball on a chain: drops from the star border, bounces, sways and throws light */
+.disco{position:absolute;left:78%;top:0;width:clamp(110px,10vw,170px);z-index:11;pointer-events:none;translate:0 -110%;transform-origin:50% 0}
+.disco img{display:block;width:100%;height:auto;filter:drop-shadow(0 18px 20px rgba(40,15,0,.45))}
+.disco.drop{animation:discoDrop 1.4s cubic-bezier(.3,1.5,.5,1) both,discoSway 5s ease-in-out 1.4s infinite}
+@keyframes discoDrop{0%{translate:0 -110%}100%{translate:0 0}}
+@keyframes discoSway{0%,100%{rotate:-3deg}50%{rotate:3deg}}
+.disco i{position:absolute;width:clamp(10px,1vw,18px);aspect-ratio:1;background:#fff;opacity:0;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #c9e6ff)}
+.disco.drop i{animation:discoGlint 1.8s ease-in-out infinite}
+.disco i:nth-of-type(1){left:28%;top:62%;animation-delay:1.5s!important}
+.disco i:nth-of-type(2){left:64%;top:58%;animation-delay:1.9s!important}
+.disco i:nth-of-type(3){left:46%;top:76%;animation-delay:2.3s!important}
+.disco i:nth-of-type(4){left:76%;top:80%;animation-delay:2.7s!important}
+.disco i:nth-of-type(5){left:18%;top:84%;animation-delay:3.1s!important}
+.disco i:nth-of-type(6){left:56%;top:92%;animation-delay:3.5s!important}
+@keyframes discoGlint{0%,100%{opacity:0;scale:.3}50%{opacity:1;scale:1.2;rotate:45deg}}
+@media (max-width:760px){.disco{left:72%;width:90px}}
+@media (prefers-reduced-motion:reduce){.disco{translate:none}.disco.drop,.disco.drop i{animation:none}}
+/* the meadows at the top of My art spill up over the edge of Now brewing */
+.art{z-index:58!important}
+.art-patch{top:calc(-1 * clamp(50px,5vw,90px))!important;z-index:20!important}
+
+/* stacking at the section seams: Now brewing < My art (its meadows spill up, river still on top) < Beyond work (garland spans both) */
+.brew{z-index:57!important}
+.art{z-index:58!important}
+.brew-river{z-index:3!important}
+.beyond{z-index:59!important}
+.star-border{z-index:30!important}
+.art{z-index:58!important}.brew{z-index:57!important}
+.art-patch.r{right:auto!important;left:30%!important}
+@media (max-width:760px){.art-patch.r{left:44%!important}}
+
+/* paper chain: hung over the glitter garland, framing Beyond work */
+.paper-chain{position:absolute;left:-1%;width:102%;top:clamp(-30px,-2vw,-14px);height:auto;z-index:31;pointer-events:none;filter:drop-shadow(0 8px 12px rgba(40,15,0,.4));transform-origin:50% 0;animation:chainSway 7s ease-in-out infinite}
+@keyframes chainSway{0%,100%{rotate:0deg}50%{rotate:.5deg}}
+@media (max-width:760px){.paper-chain{width:140%;left:-20%}}
+
+/* pink tinsel fringe: two swags back to back where the glitter garland was */
+.fringe{position:absolute;left:-1%;width:102%;top:0;translate:0 -38%;z-index:30;display:flex;pointer-events:none;filter:drop-shadow(0 8px 12px rgba(40,10,30,.4))}
+.fringe img{width:50%;height:auto;display:block;transform-origin:50% 0;animation:fringeSway 5.5s ease-in-out infinite}
+.fringe img+img{transform:scaleX(-1);margin-left:-1.5%;animation-duration:6.3s;animation-delay:-2s}
+@keyframes fringeSway{0%,100%{rotate:0deg}50%{rotate:.6deg}}
+.paper-chain{top:clamp(10px,2vw,40px)!important;z-index:32!important}
+/* chain frames the room: content sits below its top swag, photos hang over the side links */
+.fringe{translate:0 -52%!important}
+.fringe img{width:50%}
+@media (min-width:761px){.beyond{padding-top:clamp(190px,24vw,420px)!important}}
+.polaroids{z-index:34!important}
+.disco{z-index:33!important}
+
+/* meadows split: one hugs each side; a flower pops up out of each */
+.art-patch.r{left:auto!important;right:0!important}
+@media (max-width:760px){.art-patch.r{left:auto!important;right:0!important}}
+.patch-pop{position:absolute;z-index:21;pointer-events:none;width:clamp(90px,10vw,170px);top:clamp(30px,4vw,80px);opacity:0;scale:.05;filter:drop-shadow(0 10px 12px rgba(30,40,10,.35))}
+.pp-l{left:clamp(140px,17vw,320px);rotate:-12deg}
+.pp-r{right:clamp(120px,15vw,300px);rotate:10deg;width:clamp(80px,8.5vw,150px)}
+.art.pops-in .pp-l{animation:ppPop 1.1s cubic-bezier(.2,1.6,.4,1) both,ppSwayL 4.6s ease-in-out 1.2s infinite}
+.art.pops-in .pp-r{animation:ppPop 1.1s cubic-bezier(.2,1.6,.4,1) .45s both,ppSwayR 5.3s ease-in-out 1.7s infinite}
+@keyframes ppPop{0%{opacity:0;scale:.05;translate:0 40px}20%{opacity:1}70%{scale:1.18;translate:0 -10px}100%{opacity:1;scale:1;translate:0 0}}
+@keyframes ppSwayL{0%,100%{opacity:1;scale:1;rotate:-12deg}50%{opacity:1;scale:1.05;rotate:-4deg}}
+@keyframes ppSwayR{0%,100%{opacity:1;scale:1;rotate:10deg}50%{opacity:1;scale:1.06;rotate:2deg}}
+.patch-pop{top:calc(-1 * clamp(130px,12vw,220px))!important}
+.pp-l{left:clamp(150px,16vw,300px)!important}
+.pp-r{right:clamp(60px,7vw,140px)!important}
+
+/* glitter garland back on Beyond work; content back up under it */
+@media (min-width:761px){.beyond{padding-top:clamp(60px,7vw,110px)!important}}
+/* fringe hangs just under the glitter garland; a gem hides where the two swags meet */
+.fringe{translate:0 0!important;top:clamp(-10px,-.5vw,0px)!important;z-index:29!important}
+.fringe img:not(.fringe-gem){flex:none}
+.fringe-gem{position:absolute;left:50%;top:14%;width:clamp(70px,7vw,120px)!important;translate:-50% -50%;margin:0!important;transform:none!important;z-index:2;filter:drop-shadow(0 6px 10px rgba(80,0,40,.45)) drop-shadow(0 0 14px rgba(255,120,200,.6));animation:gemTwinkle 3.2s ease-in-out infinite!important}
+@keyframes gemTwinkle{0%,100%{scale:1;rotate:-6deg}50%{scale:1.08;rotate:6deg}}
+@media (min-width:761px){.beyond{padding-top:clamp(150px,15vw,260px)!important}}
+.fringe-gem{width:clamp(90px,9vw,160px)!important;top:24%!important;z-index:31}
+.fringe{z-index:31!important}
+@media (min-width:761px){.beyond{padding-top:clamp(230px,24vw,420px)!important}}
+/* the felt river flows over the meadow: brew stops being its own layer so the river can sit above the art section */
+.brew{z-index:auto!important;isolation:auto!important}
+.brew-river{z-index:60!important}
+.brew-box,.brew>*:not(.brew-river){position:relative}
+@media (min-width:901px){.brew-river{translate:0 calc(-1 * clamp(70px,9vw,150px))}}
+
+/* dolphin v3: big, hidden behind the TV, leaps up over it and dives back down behind it, every so often */
+.likes .like-tv .like-art{position:relative}
+.likes .like-tv .tv{position:relative;z-index:2}
+.dolphin.tv-dol{position:absolute!important;z-index:1!important;left:22%!important;top:30%!important;width:26%!important;height:auto;opacity:1!important;transform:none!important;offset-path:none!important;pointer-events:none;
+  translate:0 0;rotate:-35deg;filter:drop-shadow(0 10px 14px rgba(20,30,90,.35))!important;animation:none!important}
+.dolphin.tv-dol.leap{animation:tvDol 7s cubic-bezier(.45,0,.55,1) infinite!important}
+@keyframes tvDol{
+  0%{translate:0 0;rotate:-40deg}
+  8%{translate:20% -80%;rotate:-28deg}
+  16%{translate:85% -118%;rotate:0deg}
+  24%{translate:150% -80%;rotate:32deg}
+  32%{translate:175% 0;rotate:48deg}
+  33%,100%{translate:175% 10%;rotate:48deg}
+}
+@media (prefers-reduced-motion:reduce){.dolphin.tv-dol.leap{animation:none!important}}
+/* meadows: bigger and brighter on the light moss */
+.art-patch{width:clamp(340px,46vw,820px)!important;filter:brightness(1.22) saturate(1.45) contrast(1.05) drop-shadow(0 10px 14px rgba(30,50,0,.3))!important}
+@media (max-width:760px){.art-patch{width:70vw!important}}
+.patch-pop{width:clamp(110px,12vw,200px)!important}
+/* fringe pulled up so its top rides over the bottom edge of the grass */
+.fringe{translate:0 -36%!important;z-index:31!important}
+@media (min-width:761px){.beyond{padding-top:clamp(170px,18vw,320px)!important}}
+
+/* the silver star line replaces the glitter garland */
+.star-border{filter:drop-shadow(0 6px 8px rgba(40,15,0,.45))!important;translate:0 -45%!important}
+.star-border{z-index:32!important}
+.art-bouquet{bottom:clamp(150px,15vw,280px)!important}
+.star-border{display:none!important}
+/* fringe hangs higher on the grass; the seam gem is bigger */
+.fringe{translate:0 -50%!important}
+.fringe-gem{width:clamp(130px,13vw,230px)!important;top:20%!important}
+@media (min-width:761px){.beyond{padding-top:clamp(120px,13vw,240px)!important}}
+/* My art: subtitle right under the title; the dog painting hangs to the right of the title, over the cream card and the moss */
+.art-head{flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;gap:10px!important}
+.art-head p{align-self:flex-start!important;max-width:34ch!important}
+@media (min-width:901px){
+  .art-head{padding-right:52%!important;min-height:clamp(220px,20vw,300px)}
+  .art-main{align-items:flex-end!important;margin-top:calc(-1 * clamp(200px,18vw,280px))!important;padding-right:clamp(20px,5vw,90px)}
+  .art-mainb{width:min(560px,44vw,calc((100svh - 120px) * .7733))!important}
+}
+.beyond{padding-bottom:clamp(16px,2vw,32px)!important}
+.beyond .likes{margin-bottom:0!important;padding-bottom:0!important}
+@media (min-width:901px){.art-head{min-height:0!important;padding-bottom:clamp(70px,7vw,120px)!important}.art-main{margin-top:calc(-1 * clamp(110px,10vw,170px))!important}}
+
+/* daisy sprouting from the fringe gem */
+.fringe-daisy{position:absolute;left:50%;top:20%;width:clamp(150px,14vw,250px)!important;height:auto;margin:0!important;transform:none!important;flex:none;
+  translate:-50% -91%;z-index:1;pointer-events:none;opacity:0;scale:.2;transform-origin:50% 92%!important;filter:drop-shadow(0 6px 8px rgba(30,40,0,.3));animation:none!important}
+.fringe-daisy.grow{animation:daisyUp 1.1s cubic-bezier(.2,1.4,.4,1) both,daisySwayG 5s ease-in-out 1.2s infinite!important}
+@keyframes daisyUp{0%{opacity:0;scale:.2}20%{opacity:1}100%{opacity:1;scale:1}}
+@keyframes daisySwayG{0%,100%{opacity:1;scale:1;rotate:-3deg}50%{opacity:1;scale:1;rotate:3deg}}
+.fringe-gem{z-index:3!important}
+/* dog painting rides higher over the card; the other paintings move up into the moss beside it */
+@media (min-width:901px){
+  .art-head{padding-bottom:clamp(30px,3vw,50px)!important}
+  .art-main{margin-top:calc(-1 * clamp(150px,13vw,230px))!important}
+}
+.beyond{overflow-x:clip!important;overflow-y:visible!important}
+.fringe-daisy{width:clamp(220px,19vw,340px)!important;translate:-50% calc(-90% - clamp(30px,3.5vw,60px))!important}
+
+/* ============ The old internet: a retro browser window on a starry tiled background ============ */
+.oldweb{position:relative;z-index:50;overflow:hidden;padding:clamp(70px,9vw,150px) var(--gutter);color:#1a0f33;
+  background:#1b0b3d radial-gradient(circle at 50% 40%,#3a1878 0,#1b0b3d 70%)}
+.ow-stars{position:absolute;inset:0;pointer-events:none;opacity:.9;
+  background:radial-gradient(1.5px 1.5px at 20px 30px,#fff,transparent),radial-gradient(1px 1px at 70px 90px,#ffe9a8,transparent),radial-gradient(2px 2px at 130px 50px,#bfe6ff,transparent),radial-gradient(1px 1px at 160px 140px,#fff,transparent),radial-gradient(1.5px 1.5px at 40px 160px,#ffb3e0,transparent);
+  background-size:180px 180px;animation:owTwinkle 4s ease-in-out infinite alternate}
+@keyframes owTwinkle{from{opacity:.45}to{opacity:1}}
+.ow-win{position:relative;max-width:980px;margin:0 auto;background:#c0c0c0;border:3px solid;border-color:#fff #404040 #404040 #fff;box-shadow:12px 12px 0 #ec2b7a,0 30px 60px -20px #000;
+  transform:rotate(-1deg) translateY(40px);opacity:0;transition:transform 1s cubic-bezier(.2,1.4,.4,1),opacity .6s}
+.oldweb.in .ow-win{transform:rotate(-1deg);opacity:1}
+.ow-bar{display:flex;align-items:center;gap:6px;padding:6px 10px;background:linear-gradient(90deg,#000080,#1084d0);color:#fff;font:20px/1 "VT323",monospace;letter-spacing:.04em}
+.ow-bar i{width:14px;height:14px;background:#c0c0c0;border:2px solid;border-color:#fff #404040 #404040 #fff}
+.ow-bar span{margin-left:10px;background:#fff;color:#000080;padding:2px 10px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border:2px solid;border-color:#404040 #fff #fff #404040}
+.ow-body{margin:10px;padding:clamp(26px,4vw,56px);background:#fffdf4 radial-gradient(circle,#ffe1f0 1px,transparent 1.5px) 0 0/22px 22px;border:2px solid;border-color:#404040 #fff #fff #404040}
+.ow-h{margin:0 0 .5em;font:400 clamp(40px,6vw,92px)/.9 "VT323",monospace;letter-spacing:-.01em;color:#1a0f33;text-shadow:3px 3px 0 #b5f2ff,6px 6px 0 #ffb3e0}
+.ow-p{margin:0 0 1.2em;max-width:44ch;font-size:clamp(18px,1.6vw,23px);line-height:1.55}
+.ow-belief{margin:0;font:800 clamp(22px,2.4vw,36px)/1.3 var(--display);letter-spacing:-.02em;max-width:30ch}
+.ow-belief b{display:inline-block;padding:0 .25em;border-radius:.2em;font-weight:800;transform:rotate(-2deg);box-shadow:3px 3px 0 #1a0f33}
+.ow-belief .b1{background:#ceff32}.ow-belief .b2{background:#fe7bbf;transform:rotate(1.5deg)}.ow-belief .b3{background:#7fe3ff;transform:rotate(-1deg)}
+.oldweb.in .ow-belief b{animation:owPop .6s cubic-bezier(.2,1.8,.4,1) both}
+.oldweb.in .ow-belief .b1{animation-delay:1s}.oldweb.in .ow-belief .b2{animation-delay:1.25s}.oldweb.in .ow-belief .b3{animation-delay:1.5s}
+@keyframes owPop{0%{scale:.3;opacity:0}100%{scale:1;opacity:1}}
+@media (prefers-reduced-motion:reduce){.ow-win{transform:rotate(-1deg);opacity:1;transition:none}.oldweb.in .ow-belief b{animation:none}}
+/* smaller Float A Note portrait */
+@media (min-width:901px){.connect-art{width:min(clamp(280px,23vw,440px),100%)!important;justify-self:center}}
+@media (max-width:900px){.connect-art{width:min(280px,72%)!important;margin:0 auto}}
+/* the lavender "make the internet fun again" ribbon is now the top border of the old-internet section */
+.oldweb{padding-top:clamp(150px,16vw,260px)!important}
+.oldweb .wiggle.ow-border{position:absolute!important;left:0;right:0;top:calc(-1 * clamp(40px,4vw,70px));bottom:auto!important;z-index:2;background:none!important;padding:0!important;overflow:visible!important;pointer-events:none}
+.oldweb{overflow:visible!important;z-index:53!important}.oldweb .ow-stars{overflow:hidden}.oldweb .wiggle.ow-border{top:calc(-1 * clamp(80px,8vw,130px))!important}
+/* the old-internet speech and the closing Float A Note share one continuous sky gradient */
+.oldweb{background:linear-gradient(180deg,#a9d8f0 0%,#bfe3f5 100%)!important}
+.oldweb .ow-stars{opacity:.55;filter:invert(.15) brightness(1.4)}
+.connect.connect-repeat{background:linear-gradient(180deg,#bfe3f5 0%,#e3f1f4 70%,#f5f0e1 100%)!important}
+
+/* the Playroom's paper wildflowers now line the whole width under the phone's bouquet */
+.idea-bed{position:absolute;left:50%;bottom:0;width:100vw;translate:-50% 0;height:62%;z-index:-1;pointer-events:none;
+  background:url(assets/proj/door-texas.webp) 50% 100%/auto 100% repeat-x;filter:drop-shadow(0 6px 8px rgba(20,0,30,.3))}
+
+/* the sun rises from behind the browser window; two paper clouds are strung to it */
+.oldweb .ow-win{z-index:2}
+.ow-rig{--sw:clamp(220px,24vw,400px);position:absolute;left:50%;top:clamp(150px,16vw,260px);width:var(--sw);height:var(--sw);margin-left:calc(var(--sw) / -2);z-index:1;pointer-events:none;transform:translateY(0)}
+.oldweb.in .ow-rig{animation:owRise 2.6s cubic-bezier(.2,.8,.25,1) .5s both}
+@keyframes owRise{from{transform:translateY(0)}to{transform:translateY(-62%)}}
+.ow-sun{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 40% 38%,#f6ff7a,#e4f000 55%,#d2e000);box-shadow:0 0 60px 20px rgba(230,250,60,.55),0 0 140px 50px rgba(255,240,120,.35)}
+.oldweb.in .ow-sun{animation:owGlow 4s ease-in-out 3s infinite alternate}
+@keyframes owGlow{to{box-shadow:0 0 80px 30px rgba(230,250,60,.7),0 0 180px 70px rgba(255,240,120,.45)}}
+.ow-str{position:absolute;top:24%;width:clamp(90px,11vw,170px);height:clamp(26px,3vw,46px);border-bottom:2px solid rgba(40,40,70,.55);border-radius:0 0 50% 50%}
+.ow-str.l{right:96%}.ow-str.r{left:96%}
+.ow-cl{position:absolute;top:calc(24% - clamp(6px,1vw,16px));width:clamp(120px,13vw,220px);transform-origin:50% 0;animation:owSwing 5s ease-in-out infinite alternate}
+.ow-cl.l{right:calc(96% + clamp(90px,11vw,170px) - clamp(14px,2vw,30px))}.ow-cl.r{left:calc(96% + clamp(90px,11vw,170px) - clamp(14px,2vw,30px));animation-duration:6s;animation-direction:alternate-reverse}
+.ow-cl img{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 10px rgba(20,40,80,.25))}
+@keyframes owSwing{from{rotate:-3deg}to{rotate:3deg}}
+@media (max-width:760px){.ow-rig{--sw:170px}.ow-str{width:50px}.ow-cl{width:90px}.ow-cl.l{right:calc(96% + 40px)}.ow-cl.r{left:calc(96% + 40px)}}
+@media (prefers-reduced-motion:reduce){.oldweb.in .ow-rig{animation:none;transform:translateY(-62%)}}
+
+/* the former Playroom paper wildflowers line the bottom of the art garden, just above the fringe */
+.art-bed{position:absolute;left:0;right:0;bottom:clamp(40px,5vw,90px);height:clamp(90px,11vw,180px);z-index:8;pointer-events:none;
+  background:url(assets/proj/door-texas.webp) 50% 100%/auto 100% repeat-x;filter:drop-shadow(0 6px 8px rgba(20,40,0,.3))}
+/* dusk-to-dawn: Got an idea? → the old internet → Float A Note flow as one gradient */
+.idea{background:radial-gradient(60% 70% at 15% 20%,#ec2b7a55,transparent 70%),linear-gradient(180deg,#2b1a52 0%,#3d2470 70%,#5a3a92 100%)!important}
+.oldweb{background:linear-gradient(180deg,#5a3a92 0%,#9b80d0 30%,#c9b9ee 55%,#bfe3f5 100%)!important}
+.connect.connect-repeat{background:linear-gradient(180deg,#bfe3f5 0%,#e3f1f4 70%,#f5f0e1 100%)!important}
+/* TV dolphin: 75px further left, one leap only, then gone */
+.dolphin.tv-dol{margin-left:-75px!important}
+.dolphin.tv-dol.leap{animation:tvDolOnce 2.4s cubic-bezier(.45,0,.55,1) 1 forwards!important}
+@keyframes tvDolOnce{
+  0%{translate:0 0;rotate:-40deg;opacity:1}
+  25%{translate:20% -80%;rotate:-28deg}
+  50%{translate:85% -118%;rotate:0deg}
+  75%{translate:150% -80%;rotate:32deg}
+  97%{translate:175% 0;rotate:48deg;opacity:1}
+  100%{translate:175% 10%;rotate:48deg;opacity:0;visibility:hidden}
+}
+.art-wall button.art-up{position:absolute!important;align-self:auto!important;margin:0!important}
+.art-wall button.art-up:nth-child(1){transform:rotate(-3deg)}.art-wall button.art-up:nth-child(2){transform:rotate(2.5deg)}
+/* Float A Note: one-line heading, balanced sizing, cleaner arch frame */
+@media (min-width:901px){
+  .connect{grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr)!important;gap:clamp(40px,5vw,90px)!important}
+  .connect h2{font-size:clamp(52px,6.2vw,128px)!important;white-space:nowrap}
+  .connect-art{width:min(clamp(260px,21vw,400px),100%)!important}
+  .connect-lede{max-width:40ch}
+}
+.connect h2 em{display:inline!important}
+.connect-photo{border:8px solid #fffaf0!important;box-shadow:0 0 0 3px var(--ink),12px 14px 0 3px var(--pink),0 24px 40px -16px rgba(20,30,60,.45)!important;transform:rotate(-2.5deg)!important}
+.connect-sun{left:-18%!important;top:-6%!important;width:70%!important}
+@media (max-width:900px){.connect h2{font-size:clamp(34px,10vw,64px)!important;white-space:nowrap}}
+@media (min-width:901px){.connect h2{font-size:clamp(56px,8.6vw,180px)!important}.connect-art{width:min(clamp(280px,25vw,480px),100%)!important}.connect-lede{font-size:clamp(18px,1.5vw,24px)!important}}
+/* paintings: a gentle lift on hover instead of filling the screen */
+.art-wall button.big,.art-mainb.big{transform:translateY(-8px) scale(1.12) rotate(0)!important;z-index:20!important}
+.art-mainb.big{transform:translateY(-6px) scale(1.04) rotate(0)!important}
+.art-wall button:hover,.art-wall button:focus-visible{transform:translateY(-8px) scale(1.12) rotate(0)!important}
+.art-wall button,.art-mainb{transition:transform .35s cubic-bezier(.2,1.3,.4,1)!important}
+/* TV dolphin: starts higher behind the TV and leaps higher */
+.dolphin.tv-dol{top:12%!important}
+@keyframes tvDolOnce{
+  0%{translate:0 0;rotate:-40deg;opacity:1}
+  25%{translate:20% -85%;rotate:-28deg}
+  50%{translate:85% -122%;rotate:0deg}
+  75%{translate:150% -85%;rotate:32deg}
+  97%{translate:175% 0;rotate:48deg;opacity:1}
+  100%{translate:175% 10%;rotate:48deg;opacity:0;visibility:hidden}
+}
+.connect.connect-repeat{z-index:54!important}
+.art-bouquet.by-oval{right:auto!important;bottom:auto!important}
+/* all nine paintings on the wall; four across below the dog so no row sits alone */
+@media (min-width:901px){.art-wall{grid-template-columns:repeat(4,minmax(0,1fr))!important;max-width:min(1200px,94vw)!important}}
+.art-wall button:nth-child(7){width:84%;transform:translateY(-20px) rotate(-2deg)}
+.art-wall button:nth-child(8){width:76%;transform:translateY(10px) rotate(2.5deg)}
+.art-wall button:nth-child(9){width:70%;transform:translateY(-30px) rotate(-1.5deg)}
+/* the bee hovers over the daisy growing from the fringe gem */
+.art-bee{animation:beeDaisy 3.2s ease-in-out infinite!important;left:calc(50% + 30px)!important;bottom:clamp(90px,9vw,150px)!important;width:clamp(110px,9vw,160px)!important}
+@keyframes beeDaisy{0%,100%{translate:0 0;rotate:-6deg}25%{translate:-26px -14px;rotate:4deg}50%{translate:-8px -26px;rotate:-2deg}75%{translate:16px -10px;rotate:6deg}}
+@media (min-width:901px){.art-wall button:nth-child(7){grid-column:2}}
+
+/* Space Camp photos: crop to the faces */
+.pol .pf-ph[src*="sc-gyro"]{object-position:50% 40%}.pol .pf-ph[src*="sc-binder"]{object-position:42% 35%}
+.pol .pf-ph[src*="sc-suits"]{object-position:55% 40%}.pol .pf-ph[src*="sc-hose"]{object-position:62% 30%}.pol .pf-ph[src*="sc-me"]{object-position:50% 30%}
+@media (min-width:901px){.art-wall button:nth-child(7){grid-column:1!important;transform:translate(-30px,-20px) rotate(-2deg)!important}}
+@media (min-width:901px){.art-wall button:nth-child(8){transform:translate(-90px,10px) rotate(2.5deg)!important}.art-wall button:nth-child(9){grid-column:4!important;transform:translate(40px,-30px) rotate(-1.5deg)!important}}
+.fringe-daisy.grow{animation:daisyUp .55s cubic-bezier(.2,1.5,.4,1) both,daisySwayG 5s ease-in-out .6s infinite!important}
+/* the single peony stands small to the right of the fringe daisy */
+.art-bouquet{left:calc(50% + clamp(70px,7vw,120px))!important;right:auto!important;bottom:-2%!important;top:auto!important;width:clamp(110px,9vw,170px)!important}
+@media (max-width:900px){.art-bouquet{width:24vw!important;left:56%!important}}
+/* brighter frames with a soft colored glow underneath */
+.art .pf .pfr{filter:saturate(1.45) brightness(1.1) contrast(1.05)}
+.art .pf{filter:drop-shadow(0 16px 18px rgba(0,0,0,.28))!important}
+.art .pf::after{content:"";position:absolute;left:8%;right:8%;bottom:-6%;height:18%;z-index:-1;border-radius:50%;filter:blur(18px);opacity:.85;background:var(--glow,#fe7bbf)}
+.art .pf.lime{--glow:#ceff32}.art .pf.blush{--glow:#fe7bbf}.art .pf.oval{--glow:#fe7bbf}.art .pf.pink,.art .pf:not(.lime):not(.blush):not(.oval){--glow:#fe7bbf}
+/* the closing clouds hang from behind the old-internet window: the two sections share one layer so the window covers the string tops */
+.oldweb,.connect.connect-repeat{z-index:auto!important;isolation:auto!important}
+.oldweb .ow-win{z-index:60!important}
+.connect-repeat .connect-sky{z-index:5!important}
+/* snake gutters: from Got an idea? to the bottom, drawn over the backgrounds, under the content */
+.snake-lanes{position:absolute;left:0;right:0;z-index:52;pointer-events:none}
+.snake-rail{position:absolute;top:0;bottom:0;width:clamp(72px,7vw,120px)}
+.snake-rail.l{left:0}.snake-rail.r{right:0}
+.snake-rail canvas{position:sticky;top:0;display:block;width:100%;height:100vh;image-rendering:pixelated;filter:drop-shadow(0 0 6px rgba(236,43,122,.55))}
+/* the violet "make the internet fun again" ribbon stays on top of everything */
+.oldweb .wiggle.ow-border{z-index:80!important}
+.art-bouquet{left:calc(50% + clamp(150px,13vw,240px))!important;width:clamp(200px,17vw,320px)!important;bottom:0!important}
+.art .pf .pfr{filter:none!important}
+/* the closing portrait: cut-out photo on a Neon Petal pink glow */
+.connect-photo{background:radial-gradient(110% 80% at 50% 30%,#ceff32 0,#e6f59a 35%,#fe7bbf 85%)!important}
+.connect-photo img{object-fit:cover;object-position:50% 10%}
+@media (min-width:901px){.connect-repeat h2{font-size:clamp(48px,6.4vw,140px)!important}}
+@media (min-width:901px){.connect-repeat h2{font-size:clamp(44px,5.2vw,120px)!important}}
+
+/* the edge gems belong to the rest of the page: they stay out of the vortex, and they always drift a little even when you aren't scrolling */
+html.in-vx .drift{opacity:0!important;visibility:hidden!important}
+.drift img{animation:driftBob 6s ease-in-out infinite}
+.drift img:nth-child(2n){animation-duration:7.5s;animation-delay:-2s}
+.drift img:nth-child(3n){animation-duration:5.2s;animation-delay:-4s}
+@keyframes driftBob{0%,100%{translate:0 0;rotate:0deg}50%{translate:10px -16px;rotate:8deg}}
+@media (prefers-reduced-motion:reduce){.drift img{animation:none}}

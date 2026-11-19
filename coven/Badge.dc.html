@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="uploads/the-coven/docs/design/theme.css">
+</helmet>
+<sc-if value="{{ isWaiting }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-1) var(--space-3);border-radius:var(--radius-pill);border:1px solid color-mix(in srgb, var(--warning) 50%, transparent);color:var(--warning);font-family:var(--font-body);font-size:12px;line-height:1.3;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:var(--warning)"></span>{{ text }}</span></sc-if>
+<sc-if value="{{ isInfo }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-1) var(--space-3);border-radius:var(--radius-pill);border:1px solid color-mix(in srgb, var(--sky) 50%, transparent);color:var(--sky);font-family:var(--font-body);font-size:12px;line-height:1.3;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:var(--sky)"></span>{{ text }}</span></sc-if>
+<sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-1) var(--space-3);border-radius:var(--radius-pill);border:1px solid color-mix(in srgb, var(--mint) 50%, transparent);color:var(--mint);font-family:var(--font-body);font-size:12px;line-height:1.3;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:var(--mint)"></span>{{ text }}</span></sc-if>
+<sc-if value="{{ isProblem }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-1) var(--space-3);border-radius:var(--radius-pill);border:1px solid color-mix(in srgb, var(--danger) 50%, transparent);color:var(--danger);font-family:var(--font-body);font-size:12px;line-height:1.3;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:var(--danger)"></span>{{ text }}</span></sc-if>
+<sc-if value="{{ isFeatured }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;padding:var(--space-1) var(--space-3);border-radius:var(--radius-pill);background:var(--bloom);color:var(--on-bloom);box-shadow:var(--glow-bloom);font-family:var(--font-body);font-size:12px;line-height:1.3;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap">{{ text }}</span></sc-if>
+<sc-if value="{{ isTag }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;padding:var(--space-1) var(--space-3);border-radius:var(--radius-pill);border:1px solid color-mix(in srgb, {{ tagColor }} 45%, transparent);color:{{ tagColor }};font-family:var(--font-body);font-size:14px;line-height:1.5;font-weight:500;white-space:nowrap">{{ text }}</span></sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;240px&quot;,&quot;height&quot;:&quot;48px&quot;},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;waiting&quot;,&quot;info&quot;,&quot;done&quot;,&quot;problem&quot;,&quot;featured&quot;,&quot;tag&quot;],&quot;default&quot;:&quot;waiting&quot;,&quot;tsType&quot;:&quot;'waiting'|'info'|'done'|'problem'|'featured'|'tag'&quot;},&quot;text&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Awaiting payment&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const v = this.props.variant || 'waiting';
+    return {
+      text: this.props.text ?? 'Awaiting payment',
+      isWaiting: v === 'waiting', isInfo: v === 'info', isDone: v === 'done',
+      isProblem: v === 'problem', isFeatured: v === 'featured', isTag: v === 'tag',
+      tagColor: this.props.color || 'var(--lavender)'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400&family=Figtree:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="uploads/the-coven/docs/design/theme.css">
+<style>
+:root{--font-fraunces:"Fraunces";--font-figtree:"Figtree";--ink:#110F31;--ink-soft:#4A4470;--paper:#EDE9FF;--paper-deep:#E0D9FB}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);-webkit-font-smoothing:antialiased}
+a{color:var(--ink)}
+a:hover{color:var(--violet)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</helmet>
+<section aria-labelledby="cp-title" style="position:relative;overflow:hidden;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:clamp(20px, 4vh, 48px) clamp(20px, 5vw, 72px);color:var(--ink);background:radial-gradient(ellipse at 15% 0%, color-mix(in srgb, var(--lavender) 45%, transparent), transparent 50%), radial-gradient(ellipse at 100% 100%, color-mix(in srgb, var(--mint) 35%, transparent), transparent 45%), var(--paper)">
+
+
+<div style="position:relative;width:100%;max-width:1440px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(28px, 4vw, 64px)">
+
+<div style="flex:1 1 300px;max-width:420px;display:flex;flex-direction:column;gap:var(--space-4)">
+<span style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--violet)">Selected project</span>
+<h2 id="cp-title" style="margin:0;font-family:var(--font-display);font-weight:500;font-size:clamp(44px, 5.5vw, 80px);line-height:0.95;letter-spacing:-0.02em">The <span style="font-style:italic;color:var(--violet)">Coven</span></h2>
+<p style="margin:0;font-family:var(--font-display);font-size:clamp(19px, 1.7vw, 22px);line-height:1.4;text-wrap:pretty">The marketplace for energy healers, tarot girlies and witchy baddies.</p>
+<p style="margin:0;font-size:16px;line-height:1.6;color:var(--ink-soft);text-wrap:pretty">Invite-only.</p>
+<a href="prototype.dc.html#/" target="_blank" rel="noopener" style="align-self:flex-start;margin-top:var(--space-2);display:inline-flex;align-items:center;min-height:48px;padding:0 var(--space-6);border-radius:999px;background:var(--ink);color:var(--moonlight);font-weight:700;text-decoration:none;transition:transform 200ms ease, box-shadow 200ms ease" style-hover="transform:translateY(-2px);box-shadow:0 12px 28px color-mix(in srgb, var(--ink) 30%, transparent);color:var(--moonlight)">Try it ↗</a>
+</div>
+
+<div style="flex:2.4 1 520px;min-width:0;height:max(540px, calc(100svh - 2 * clamp(20px, 4vh, 48px)));display:flex;flex-direction:column;gap:clamp(10px, 1.6vh, 16px)">
+<div style="flex:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-3)">
+<div role="tablist" aria-label="Before and after" style="flex:none;display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--paper-deep)">
+<sc-for list="{{ modes }}" as="m" hint-placeholder-count="0"><button type="button" role="tab" aria-selected="{{ m.selected }}" onClick="{{ m.pick }}" style="min-height:40px;padding:0 var(--space-6);border-radius:999px;border:0;background:{{ m.bg }};color:{{ m.color }};font-family:var(--font-body);font-size:15px;font-weight:700;cursor:pointer;transition:background 250ms ease, color 250ms ease">{{ m.label }}</button></sc-for>
+</div>
+
+<p aria-live="polite" style="flex:1 1 240px;margin:0;font-size:15px;line-height:1.4;font-weight:500;color:var(--ink-soft);text-align:right">{{ headline }}</p>
+</div>
+
+<div style="position:relative;flex:1;min-height:0;width:100%">
+
+<div style="position:absolute;inset:0;overflow:hidden;border-radius:20px;border:1px solid color-mix(in srgb, var(--ink) 18%, transparent);background:repeating-linear-gradient(0deg, transparent 0 31px, color-mix(in srgb, var(--ink) 5%, transparent) 31px 32px), #F8F6FF;box-shadow:inset 0 0 0 6px #fff, 0 20px 50px color-mix(in srgb, var(--ink) 14%, transparent);opacity:{{ beforeOp }};transform:scale({{ beforeScale }});transition:opacity 500ms ease, transform 600ms cubic-bezier(.2,.7,.2,1);pointer-events:none">
+<div style="position:absolute;inset:clamp(12px, 2.5vw, 28px)">
+<sc-for list="{{ mess }}" as="b" hint-placeholder-count="0">
+<div style="position:absolute;left:{{ b.x }};top:{{ b.y }};max-width:min(260px, 38%);text-align:left;opacity:{{ b.op }};transform:translateY({{ b.ty }}) rotate({{ b.rot }});transition:opacity 400ms ease {{ b.delay }}, transform 500ms cubic-bezier(.2,.7,.2,1) {{ b.delay }}">
+<div style="display:flex;flex-direction:column;gap:6px;padding:12px 14px;border-radius:18px;background:{{ b.bg }};color:{{ b.color }};box-shadow:0 6px 18px color-mix(in srgb, var(--ink) 14%, transparent);border:1px solid color-mix(in srgb, var(--ink) 10%, transparent)">
+<span style="font-size:11px;font-weight:700;letter-spacing:0.04em;color:{{ b.metaColor }}">{{ b.meta }}</span>
+<span style="font-size:15px;line-height:1.4">{{ b.text }}</span>
+<span style="font-size:11px;color:{{ b.metaColor }}">{{ b.foot }}</span>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;opacity:{{ afterOp }};transform:scale({{ afterScale }});transition:opacity 500ms ease, transform 600ms cubic-bezier(.2,.7,.2,1)">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column;width:100%;text-align:left;border-radius:20px;overflow:hidden;border:1px solid var(--night);background:var(--night);box-shadow:0 40px 90px color-mix(in srgb, var(--night) 45%, transparent), 0 12px 32px color-mix(in srgb, var(--night) 30%, transparent)">
+<div style="flex:none;height:38px;display:flex;align-items:center;gap:8px;padding:0 14px;background:var(--dusk);border-bottom:1px solid var(--outline)">
+<span style="width:10px;height:10px;border-radius:50%;background:var(--bloom)"></span><span style="width:10px;height:10px;border-radius:50%;background:var(--peach)"></span><span style="width:10px;height:10px;border-radius:50%;background:var(--mint)"></span>
+<span style="margin-left:10px;flex:1;min-width:0;height:22px;border-radius:999px;background:var(--twilight);color:var(--mist);font-size:12px;display:flex;align-items:center;padding:0 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">thecoven.example{{ url }}</span>
+</div>
+<div id="cp-view" style="position:relative;flex:1;min-height:200px;overflow:hidden">
+<iframe id="cp-iframe" title="The Coven prototype, playing a demo" tabindex="-1" src="{{ src }}" onLoad="{{ onLoad }}" style="position:absolute;top:0;left:0;width:1280px;height:{{ ifrH }};border:0;transform:{{ ifrTransform }};transform-origin:top left;pointer-events:none"></iframe>
+<div aria-hidden="true" style="position:absolute;left:{{ cur.x }};top:{{ cur.y }};width:28px;height:28px;pointer-events:none;opacity:{{ cur.op }};transition:left 850ms cubic-bezier(.45,.05,.25,1), top 850ms cubic-bezier(.45,.05,.25,1), opacity 300ms ease;z-index:3">
+<span style="position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:50%;border:2px solid var(--mint);opacity:{{ cur.ringOp }};transform:scale({{ cur.ringScale }});transition:transform 450ms ease, opacity 450ms ease"></span>
+<svg viewBox="0 0 24 24" width="26" height="26" style="position:absolute;left:-3px;top:-2px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))"><path d="M3 2 L3 19 L8 14.5 L11.5 22 L14.5 20.6 L11 13.4 L18 13.4 Z" style="fill:var(--moonlight);stroke:var(--night);stroke-width:1.4;stroke-linejoin:round"></path></svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="flex:none;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:var(--space-2) var(--space-6);min-height:32px">
+<sc-for list="{{ steps }}" as="s" hint-placeholder-count="0"><span style="display:inline-flex;align-items:center;gap:var(--space-2);font-size:14px;font-weight:700;color:{{ s.color }};transition:color 300ms ease"><span style="width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:{{ s.dotBg }};color:{{ s.dotColor }};transition:background 300ms ease">{{ s.n }}</span>{{ s.label }}</span></sc-for>
+
+</div>
+</div>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  MESS = [
+    { x: '2%', y: '6%', rot: '-3deg', meta: 'Message request', text: 'do u do aura cleanses or is it just vibes', foot: 'Unread', kind: 'in' },
+    { x: '54%', y: '2%', rot: '2deg', meta: '@auraqueen_real', text: 'venmo me first babe', foot: 'Seen', kind: 'out' },
+    { x: '30%', y: '30%', rot: '-1deg', meta: 'Payment sent', text: '$33.33 to @auraqueen_reall', foot: 'Wrong account, probably', kind: 'pay' },
+    { x: '58%', y: '38%', rot: '3deg', meta: 'Search', text: 'is she a witch or a bot', foot: 'About 4,000,000 results', kind: 'note' },
+    { x: '4%', y: '52%', rot: '2deg', meta: 'You', text: 'sent!! did u get it?', foot: 'Seen 3 days ago', kind: 'in' },
+    { x: '12%', y: '72%', rot: '-2deg', meta: 'Group chat', text: 'anyone know a reiki girl who isn\u2019t a scam', foot: '12 replies, 0 answers', kind: 'note' },
+    { x: '58%', y: '70%', rot: '-3deg', meta: 'Message request', text: 'Psychic readings 24/7! DM for a promo code', foot: 'Hard pass', kind: 'out' }
+  ];
+  STEPS = ['Find', 'Trust', 'Pay'];
+  state = { mode: 'before', step: -1, viewW: 900, viewH: 500, src: null, cur: { x: 40, y: 40, op: 0, click: false }, messIn: false };
+  componentDidMount() {
+    this.measure = () => { const v = document.getElementById('cp-view'); if (v && (v.clientWidth !== this.state.viewW || v.clientHeight !== this.state.viewH)) this.setState({ viewW: v.clientWidth, viewH: v.clientHeight }); };
+    if (typeof ResizeObserver !== 'undefined') { this.ro = new ResizeObserver(this.measure); const v = document.getElementById('cp-view'); if (v) this.ro.observe(v); }
+    window.addEventListener('resize', this.measure); this.measure();
+    this.reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.cycle();
+  }
+  componentWillUnmount() { this.token = (this.token || 0) + 1; clearTimeout(this.bt); if (this.ro) this.ro.disconnect(); window.removeEventListener('resize', this.measure); }
+  wait(ms, tk) { return new Promise((res, rej) => setTimeout(() => (tk === this.token ? res() : rej('stop')), ms)); }
+  reload() {
+    try { localStorage.setItem('coven-proto-role', 'member'); } catch (e) {}
+    return new Promise(res => { this.loadRes = res; this.setState({ src: 'prototype.dc.html?as=member&d=' + Date.now() + '#/vendors' }); });
+  }
+  cycle() {
+    const tk = this.token = (this.token || 0) + 1;
+    clearTimeout(this.bt);
+    this.setState({ mode: 'before', step: -1, messIn: false, cur: { ...this.state.cur, op: 0 } });
+    const loaded = this.reload();
+    setTimeout(() => { if (tk === this.token) this.setState({ messIn: true }); }, 60);
+    if (this.reduced) return;
+    this.bt = setTimeout(() => { if (tk === this.token) loaded.then(() => this.demo(tk)); }, 6500);
+  }
+  scroller(w) { const d = w.document; return d.body && d.body.scrollHeight > d.body.clientHeight + 1 && w.getComputedStyle(d.body).overflowY !== 'visible' ? d.body : (d.scrollingElement || d.documentElement); }
+  win() { try { return document.getElementById('cp-iframe').contentWindow; } catch (e) { return null; } }
+  tidy() { const w = this.win(); if (!w || !w.document.body) return; w.document.body.querySelectorAll('*').forEach(el => { if (w.getComputedStyle(el).position === 'fixed' && (el.textContent || '').includes('Viewing as')) el.style.display = 'none'; }); }
+  find(text, tag) {
+    const w = this.win(); if (!w || !w.document.body) return null; let best = null, len = Infinity;
+    w.document.body.querySelectorAll('*').forEach(el => { if (el.closest('[aria-hidden="true"]')) return; if (tag && el.tagName !== tag) return; const t = el.textContent || ''; if (!t.includes(text)) return; const r = el.getBoundingClientRect(); if (!r.width || !r.height) return; if (t.length < len) { best = el; len = t.length; } });
+    return best;
+  }
+  async findWait(text, tag, tk) { for (let i = 0; i < 16; i++) { const el = this.find(text, tag); if (el) return el; await this.wait(200, tk); } return null; }
+  async moveTo(el, tk, at = 0.4) {
+    const w = this.win(); if (!w || !el) return;
+    const sc = this.scroller(w), r0 = el.getBoundingClientRect(); sc.scrollTop = Math.max(0, r0.top + sc.scrollTop - w.innerHeight * at); await this.wait(80, tk);
+    const r = el.getBoundingClientRect(), s = Math.min(1, this.state.viewW / 1280);
+    this.setState({ cur: { x: (r.left + Math.min(r.width * 0.5, 120)) * s, y: (r.top + r.height * 0.55) * s, op: 1, click: false } });
+    await this.wait(950, tk);
+  }
+  async click(el, tk) { this.setState(st => ({ cur: { ...st.cur, click: true } })); await this.wait(180, tk); if (el) el.click(); await this.wait(350, tk); this.setState(st => ({ cur: { ...st.cur, click: false } })); }
+  async demo(tk) {
+    try {
+      this.tidy(); this.setState({ mode: 'after', step: 0 }); { const w0 = this.win(); if (w0) this.scroller(w0).scrollTop = 0; } await this.wait(700, tk);
+      const w = this.win();
+      let el = await this.findWait("Vera's Hearth", null, tk); await this.moveTo(el, tk, 0.3);
+      if (el) { const W = w.MouseEvent || MouseEvent; el.dispatchEvent(new W('mouseover', { bubbles: true, relatedTarget: w.document.body })); }
+      await this.wait(2400, tk); await this.click(null, tk);
+      w.location.hash = '#/vendor/veras-hearth'; this.scroller(w).scrollTop = 0; this.setState({ step: 1 }); await this.wait(700, tk);
+      el = await this.findWait('Invited by', 'P', tk); await this.moveTo(el, tk, 0.35); await this.wait(2600, tk);
+      w.location.hash = '#/order/o2'; this.setState({ step: 2 }); await this.wait(800, tk);
+      el = await this.findWait('Venmo', 'BUTTON', tk); await this.moveTo(el, tk, 0.45); await this.click(el, tk); await this.wait(500, tk);
+      el = await this.findWait('Mark payment sent', 'BUTTON', tk); await this.moveTo(el, tk, 0.55); await this.click(el, tk); await this.wait(900, tk);
+      this.setState({ step: 3 });
+      el = await this.findWait('Payment sent', 'H2', tk) || await this.findWait('Payment sent', null, tk); await this.moveTo(el, tk, 0.3); await this.wait(3200, tk);
+      this.cycle();
+    } catch (e) {}
+  }
+  renderVals() {
+    const { mode, step, viewW, viewH, cur, messIn } = this.state, after = mode === 'after', s = Math.min(1, viewW / 1280);
+    const urls = ['/vendors', '/vendor/veras-hearth', '/order/o2', '/order/o2'];
+    const kinds = { in: ['#FFFFFF', 'var(--ink)', 'var(--ink-soft)'], out: ['color-mix(in srgb, var(--lavender) 35%, #fff)', 'var(--ink)', 'var(--ink-soft)'], pay: ['color-mix(in srgb, var(--peach) 40%, #fff)', 'var(--ink)', 'var(--ink-soft)'], note: ['color-mix(in srgb, var(--mint) 35%, #fff)', 'var(--ink)', 'var(--ink-soft)'] };
+    return {
+      modes: [['before', 'Before'], ['after', 'After']].map(([k, l]) => ({ label: l, selected: String(mode === k), bg: mode === k ? 'var(--ink)' : 'transparent', color: mode === k ? 'var(--moonlight)' : 'var(--ink)',
+        pick: () => { if (k === 'before') this.cycle(); else if (!after) { const tk = this.token = this.token + 1; clearTimeout(this.bt); (this.state.src ? Promise.resolve() : this.reload()).then(() => this.demo(tk)); } } })),
+      headline: after ? 'Your coven, one tap away.' : 'Finding your witch, the hard way.',
+      beforeOp: after ? 0 : 1, beforeScale: after ? 0.96 : 1, beforeHidden: String(after), afterOp: after ? 1 : 0, afterScale: after ? 1 : 1.03, afterHidden: String(!after),
+      mess: this.MESS.map((b, i) => { const k = kinds[b.kind]; return { ...b, bg: k[0], color: k[1], metaColor: k[2], op: messIn ? 1 : 0, ty: messIn ? '0px' : '14px', delay: (i * 220) + 'ms' }; }),
+      steps: this.STEPS.map((l, i) => { const on = after && i === Math.min(step, 2), done = after && i < step; return { n: i + 1, label: l, color: on ? 'var(--ink)' : 'var(--ink-soft)', dotBg: on || done ? 'var(--ink)' : 'var(--paper-deep)', dotColor: on || done ? 'var(--moonlight)' : 'var(--ink-soft)' }; }),
+      url: urls[Math.max(0, step)],
+      src: this.state.src || 'about:blank', onLoad: () => { if (this.state.src && this.loadRes) { const r = this.loadRes; this.loadRes = null; setTimeout(() => { this.tidy(); r(); }, 900); } },
+      ifrTransform: 'scale(' + s.toFixed(4) + ')', ifrH: (viewH / s) + 'px',
+      cur: { x: cur.x + 'px', y: cur.y + 'px', op: cur.op, ringOp: cur.click ? 1 : 0, ringScale: cur.click ? 1.6 : 0.6 }
+    };
+  }
+}
+</script>
+</body>
+</html>

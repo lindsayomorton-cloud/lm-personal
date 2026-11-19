@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="uploads/the-coven/docs/design/theme.css">
+</helmet>
+<div aria-hidden="true" onMouseEnter="{{ enter }}" onMouseLeave="{{ leave }}" style="position:relative;width:100%;height:100%;min-height:inherit;overflow:hidden;border-radius:{{ radius }};background:radial-gradient(ellipse at 50% 120%, color-mix(in srgb, {{ tint }} 30%, transparent), transparent 60%), linear-gradient(170deg, var(--dusk) 0%, var(--twilight) 70%, color-mix(in srgb, {{ tint }} 18%, var(--twilight)) 100%);isolation:isolate">
+<span style="position:absolute;left:{{ halo.x }};top:{{ halo.y }};width:70%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%) scale({{ haloScale }});background:radial-gradient(circle, color-mix(in srgb, {{ tint }} 55%, transparent), transparent 65%);opacity:{{ haloOpacity }};transition:transform 600ms cubic-bezier(.2,.7,.2,1), opacity 600ms ease"></span>
+<div style="position:absolute;inset:0;transform:translate({{ starShift }});transition:transform 900ms cubic-bezier(.2,.7,.2,1)">
+<sc-for list="{{ stars }}" as="s" hint-placeholder-count="10"><span style="position:absolute;left:{{ s.x }};top:{{ s.y }};width:{{ s.size }};height:{{ s.size }};border-radius:50%;background:{{ s.color }};opacity:{{ s.o }};box-shadow:0 0 6px {{ s.color }}"></span></sc-for>
+</div>
+<div style="position:absolute;left:{{ m.x }};top:{{ m.y }};width:{{ m.w }};aspect-ratio:1;transform:translate(-50%,-50%) translateY({{ lift }}) rotate({{ m.rot }}) scale({{ motifScale }});transition:transform 600ms cubic-bezier(.2,.7,.2,1)">
+<sc-if value="{{ isMoon }}" hint-placeholder-val="{{ true }}">
+<span style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 40%, var(--moonlight), var(--lavender) 70%);-webkit-mask:radial-gradient(circle at 72% 38%, transparent 47%, #000 48%);mask:radial-gradient(circle at 72% 38%, transparent 47%, #000 48%);filter:drop-shadow(0 0 18px color-mix(in srgb, var(--lavender) 60%, transparent))"></span>
+</sc-if>
+<sc-if value="{{ isOrb }}" hint-placeholder-val="{{ false }}">
+<span style="position:absolute;inset:14%;border-radius:50%;background:radial-gradient(circle at 34% 30%, var(--moonlight) 0%, {{ tint }} 45%, color-mix(in srgb, {{ tint }} 40%, var(--night)) 100%);box-shadow:0 0 40px color-mix(in srgb, {{ tint }} 50%, transparent)"></span>
+<span style="position:absolute;inset:34% -6%;border-radius:50%;border:1.5px solid color-mix(in srgb, var(--moonlight) 70%, transparent);transform:rotate(-14deg)"></span>
+</sc-if>
+<sc-if value="{{ isArch }}" hint-placeholder-val="{{ false }}">
+<span style="position:absolute;left:18%;right:18%;top:0;bottom:0;border-radius:999px 999px 6px 6px;border:1.5px solid color-mix(in srgb, {{ tint }} 80%, var(--moonlight));background:linear-gradient(to bottom, color-mix(in srgb, {{ tint }} 22%, transparent), transparent 80%)"></span>
+<svg viewBox="0 0 24 24" style="position:absolute;left:38%;top:24%;width:24%;fill:var(--moonlight);filter:drop-shadow(0 0 8px var(--moonlight))"><path d="M12 0C12.9 7.7 16.3 11.1 24 12C16.3 12.9 12.9 16.3 12 24C11.1 16.3 7.7 12.9 0 12C7.7 11.1 11.1 7.7 12 0Z"></path></svg>
+<span style="position:absolute;left:30%;right:30%;bottom:16%;height:1.5px;background:color-mix(in srgb, {{ tint }} 80%, var(--moonlight))"></span>
+</sc-if>
+<sc-if value="{{ isPhases }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;gap:6%">
+<span style="flex:1;aspect-ratio:1;border-radius:50%;border:1.5px solid var(--lavender);box-shadow:inset 6px 0 0 0 var(--lavender)"></span>
+<span style="flex:1.4;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 35%, var(--moonlight), var(--lavender));box-shadow:0 0 24px color-mix(in srgb, var(--lavender) 60%, transparent)"></span>
+<span style="flex:1;aspect-ratio:1;border-radius:50%;border:1.5px solid var(--lavender);box-shadow:inset -6px 0 0 0 var(--lavender)"></span>
+</div>
+</sc-if>
+<sc-if value="{{ isConstellation }}" hint-placeholder-val="{{ false }}">
+<svg viewBox="0 0 100 100" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+<polyline points="8,70 30,42 54,56 76,22 94,38" style="fill:none;stroke:{{ tint }};stroke-width:1.2;stroke-dasharray:2 4"></polyline>
+<circle cx="8" cy="70" r="2.6" style="fill:var(--moonlight)"></circle><circle cx="30" cy="42" r="3.4" style="fill:var(--moonlight)"></circle><circle cx="54" cy="56" r="2.4" style="fill:var(--moonlight)"></circle><circle cx="76" cy="22" r="4" style="fill:var(--moonlight)"></circle><circle cx="94" cy="38" r="2.2" style="fill:var(--moonlight)"></circle>
+</svg>
+</sc-if>
+</div>
+<svg viewBox="0 0 400 60" preserveAspectRatio="none" style="position:absolute;left:0;right:0;bottom:0;width:100%;height:22%;transform:translateY({{ hillShift }});transition:transform 700ms cubic-bezier(.2,.7,.2,1)">
+<path d="M0 60 L0 34 C 60 14, 120 18, 180 30 S 300 50, 400 22 L400 60 Z" style="fill:color-mix(in srgb, var(--night) 70%, {{ tint }})"></path>
+<path d="M0 60 L0 46 C 80 30, 160 50, 250 40 S 360 32, 400 44 L400 60 Z" style="fill:var(--night);opacity:0.85"></path>
+</svg>
+<span style="position:absolute;inset:0;box-shadow:inset 0 0 60px color-mix(in srgb, var(--night) 70%, transparent);pointer-events:none"></span>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;360px&quot;,&quot;height&quot;:&quot;270px&quot;},&quot;tint&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;var(--violet)&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;seed&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Sage &amp; lavender moon candle&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;motif&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;moon&quot;,&quot;orb&quot;,&quot;arch&quot;,&quot;phases&quot;,&quot;constellation&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;hovered&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;radius&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;0&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { h: false };
+  renderVals() {
+    const seed = String(this.props.seed ?? 'coven');
+    let n = 2166136261;
+    for (let i = 0; i < seed.length; i++) { n ^= seed.charCodeAt(i); n = Math.imul(n, 16777619); }
+    const rnd = () => { n = Math.imul(n ^ (n >>> 15), 2246822507); n = Math.imul(n ^ (n >>> 13), 3266489909); n ^= n >>> 16; return (n >>> 0) / 4294967296; };
+    const motifs = ['moon', 'orb', 'arch', 'phases', 'constellation'];
+    const motif = this.props.motif || motifs[Math.floor(rnd() * motifs.length)];
+    const h = this.props.hovered ?? this.state.h;
+    const cols = ['var(--moonlight)', 'var(--lavender)', 'var(--mint)', 'var(--aurora)'];
+    const stars = Array.from({ length: 14 }, () => ({ x: (rnd() * 96 + 2).toFixed(1) + '%', y: (rnd() * 62 + 3).toFixed(1) + '%', size: (rnd() < 0.2 ? 3 : rnd() < 0.5 ? 2 : 1.5) + 'px', color: cols[Math.floor(rnd() * cols.length)], o: (0.45 + rnd() * 0.5).toFixed(2) }));
+    const left = rnd() < 0.5;
+    const w = { moon: 34, orb: 40, arch: 30, phases: 54, constellation: 60 }[motif];
+    return {
+      tint: this.props.tint || 'var(--violet)',
+      radius: this.props.radius || '0',
+      stars,
+      halo: { x: left ? '34%' : '66%', y: '42%' },
+      m: { x: motif === 'phases' || motif === 'constellation' ? '50%' : (left ? '36%' : '64%'), y: motif === 'arch' ? '46%' : '40%', w: w + '%', rot: motif === 'moon' ? (-20 + rnd() * 30).toFixed(0) + 'deg' : '0deg' },
+      isMoon: motif === 'moon', isOrb: motif === 'orb', isArch: motif === 'arch', isPhases: motif === 'phases', isConstellation: motif === 'constellation',
+      lift: h ? '-6%' : '0%', motifScale: h ? 1.06 : 1, haloScale: h ? 1.18 : 1, haloOpacity: h ? 1 : 0.7,
+      starShift: h ? (left ? '-6px,-4px' : '6px,-4px') : '0,0', hillShift: h ? '4%' : '0%',
+      enter: () => this.setState({ h: true }), leave: () => this.setState({ h: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

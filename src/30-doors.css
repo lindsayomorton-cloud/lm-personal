@@ -1,0 +1,498 @@
+/* ============ Doors: three doors on the wallpaper, each with a shelf of flowers ============ */
+/* the wallpaper belongs to the doors alone, so it never peeks through anywhere else */
+.doors{position:relative;isolation:isolate;padding-bottom:clamp(40px,6vw,80px);background:var(--wallpaper)}
+.doors::before{content:"";position:absolute;inset:0 0 auto 0;height:min(45vh,420px);background:linear-gradient(var(--pink),rgba(239,74,134,.6) 35%,rgba(239,74,134,0));pointer-events:none;z-index:-1}
+.doors-top{display:flex;justify-content:flex-end;padding:28px 16px 0}
+.snd{border:2px solid var(--cream);background:rgba(21,48,44,.85);color:var(--cream);font-weight:700;font-size:13px;border-radius:999px;padding:8px 14px}
+
+.door-row{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:center;column-gap:3vw;padding-right:4vw}
+
+/* the wall area that holds one door */
+.wall{--dw:clamp(280px,min(31vw,(100svh - 90px) / 1.72),600px);position:relative;display:flex;justify-content:center;align-items:flex-end;padding:36px 16px 24px;overflow-x:clip}
+
+/* the door: a painted frame, a leaf that swings open, and a name plate */
+.door{all:unset;box-sizing:border-box;position:relative;z-index:1;display:block;width:var(--dw);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.door-frame{position:relative;display:block;width:100%;aspect-ratio:1152/2048;filter:drop-shadow(0 0 30px rgba(20,5,20,.6)) drop-shadow(16px 30px 26px rgba(20,5,20,.6))}
+.door-jamb{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;filter:var(--hf)}
+.door-hole{position:absolute;left:11.46%;right:11.11%;top:6.64%;bottom:0;overflow:hidden;perspective:1800px;display:grid;place-items:center;
+  background:radial-gradient(120% 70% at 50% 35%,var(--acid),var(--pink) 55%,#3d1866)}
+.door-glow{padding-left:38%;font-weight:800;font-size:clamp(30px,3.4vw,48px);color:var(--ink)}
+.door-leaf{position:absolute;inset:0;z-index:3;transform-origin:0 50%;transition:transform .7s cubic-bezier(.3,.9,.2,1)}
+.door-leaf>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--hf)}
+.wall.open-a-crack .door:not([aria-expanded="true"]) .door-leaf{transform:rotateY(-28deg);box-shadow:-6px 0 18px rgba(0,0,0,.22)}
+.wall.open-a-crack .door:not([aria-expanded="true"]):hover .door-leaf{transform:rotateY(-36deg)}
+.plate{position:absolute;z-index:5;left:50%;top:44%;width:72%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 10px 14px;
+  background:var(--cream);border-radius:999px 999px 16px 16px;text-align:center;line-height:1;
+  box-shadow:inset 0 0 0 3px var(--cream),inset 0 0 0 5px #c99a3e,0 8px 16px rgba(0,0,0,.3)}
+.plate::before,.plate::after{content:"";position:absolute;bottom:9px;width:6px;height:6px;border-radius:50%;background:#c99a3e}
+.plate::before{left:12px}.plate::after{right:12px}
+.plate-no{font:800 11px var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--pink)}
+.plate b{font:800 clamp(18px,1.9vw,27px)/1 var(--display);letter-spacing:-.03em;white-space:nowrap}
+.plate em{font-size:clamp(11px,1vw,13.5px);font-weight:600;line-height:1.25;opacity:.75}
+.plate-n{margin-top:4px;padding-top:5px;border-top:1.5px solid rgba(21,48,44,.2);font:800 10.5px var(--body);letter-spacing:.12em;text-transform:uppercase}
+
+/* the shelf of flowers under each door springs up when the door is reached */
+.shelf{position:absolute;left:50%;bottom:18px;width:calc(var(--dw) * 1.35);transform:translateX(-50%);z-index:6;line-height:0;pointer-events:none;
+  scale:1 0;transform-origin:50% 100%;transition:scale .9s cubic-bezier(.25,1.6,.45,1)}
+.wall.shelf-in .shelf{scale:1 1}
+.shelf img{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 10px rgba(30,8,30,.35))}
+.shelf::after{content:"";position:absolute;left:-3%;right:-3%;top:calc(100% - 8px);height:clamp(14px,1.5vw,22px);border-radius:4px;
+  background:linear-gradient(#fffaf2 0 22%,#f3e3cc 22% 70%,#dcc3a0);box-shadow:inset 0 -2px 0 #c99a3e,0 22px 26px -6px rgba(30,8,30,.6),0 6px 8px rgba(30,8,30,.3)}
+.shelf::before{content:"";position:absolute;left:8%;right:8%;top:calc(100% + clamp(6px,1.5vw,14px));height:clamp(26px,3vw,44px);filter:drop-shadow(0 6px 6px rgba(40,20,30,.25));
+  background:linear-gradient(135deg,#e9d4b4 0 50%,transparent 50%) left/clamp(22px,2.6vw,38px) 100% no-repeat,linear-gradient(225deg,#e9d4b4 0 50%,transparent 50%) right/clamp(22px,2.6vw,38px) 100% no-repeat}
+
+/* little things that float out of the door when it opens a crack (hover or focus) */
+.out{position:absolute;z-index:2;pointer-events:none;opacity:0;visibility:hidden;
+  transform:translate(var(--fx,0),var(--fy,0)) scale(.2);transition:opacity .35s ease,transform .45s cubic-bezier(.5,0,.75,0),visibility 0s .45s}
+.out img{display:block;width:100%;height:auto}
+.wall.open-a-crack .out{opacity:1;visibility:visible;transition:none;
+  animation:outPop 1.2s cubic-bezier(.2,1.25,.4,1) calc(var(--ed,.2s) + .6s) both,outBob 5s ease-in-out calc(var(--ed,.2s) + 1.8s) infinite}
+@keyframes outPop{0%{opacity:0;transform:translate(var(--fx,0),var(--fy,0)) scale(.08)}12%{opacity:1}100%{opacity:1;transform:var(--ft,none)}}
+@keyframes outBob{0%,100%{transform:var(--ft,none) translateY(0)}50%{transform:var(--ft,none) translateY(-10px)}}
+.out.bf{width:clamp(56px,5.5vw,84px);filter:drop-shadow(0 6px 8px rgba(0,0,0,.25))}
+.out.gem{width:clamp(40px,4.4vw,66px)}
+.out.badge{width:clamp(90px,9vw,150px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:var(--cream);
+  box-shadow:0 0 0 6px var(--cream),0 0 0 9px #a4181c,0 18px 26px rgba(0,0,0,.3)}
+.out.badge img{width:78%}
+.out.book{width:clamp(90px,8vw,140px)}
+.out.book img{border-radius:3px 8px 8px 3px;box-shadow:inset 6px 0 0 rgba(0,0,0,.18),0 18px 30px -8px rgba(0,0,0,.45),-4px 0 0 #e9dccb}
+.out.logo{width:clamp(90px,9vw,150px);filter:drop-shadow(0 14px 18px rgba(0,0,0,.3))}
+/* the Playroom: what springs out of the door, packed beside it */
+.out.pr-rainbow{width:min(9.5vw,178px)}
+.out.pr-skyline{width:min(13vw,243px)}
+.out.pr-octopus{width:min(8.5vw,159px)}
+.out.pr-rider{width:min(13vw,243px)}
+.out.pr-swimmer{width:min(12vw,225px)}
+.out.pr-fox{width:min(9.5vw,178px)}
+.out.pr-boy{width:min(10vw,187px)}
+.out.pr-jelly{width:min(6vw,112px)}
+.out.pr-diver{width:min(10vw,187px)}
+.out.pr-wildkind{width:min(13vw,243px)}
+.out.pr-smart{width:min(10vw,187px)}
+.out.pr-yay{width:min(11vw,206px)}
+.out.pr-brick{width:min(6.5vw,122px)}
+.out.pr-boy img{width:88%;margin-top:14%}
+.out.pr-jelly{filter:drop-shadow(0 0 12px rgba(120,220,255,.7))}
+.out.pr-wildkind{filter:drop-shadow(0 0 3px #fbf2e6) drop-shadow(0 0 10px rgba(251,242,230,.95))}
+/* the Workshop: Pollinate, 52 Saturdays, The Sanctuary's logo, orb and three decks, and a bee */
+.out.ws-poll{width:clamp(90px,8vw,130px);filter:drop-shadow(0 0 2px #fbf2e6) drop-shadow(0 0 10px rgba(251,242,230,.95))}
+.out.ws-sanc{width:clamp(100px,9.5vw,155px);filter:drop-shadow(0 0 3px #2b1a52) drop-shadow(0 6px 14px rgba(43,26,82,.8))}
+.out.ws-orb{width:clamp(60px,5.5vw,90px)}
+.out.ws-bee{width:clamp(64px,6vw,96px);filter:drop-shadow(0 0 2px var(--cream)) drop-shadow(0 0 6px rgba(251,242,230,.9))}
+.out.ws-deck{width:clamp(50px,4.6vw,76px)}
+.out.bubble{width:clamp(90px,8vw,140px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0 6%,rgba(255,255,255,0) 16%),radial-gradient(circle,rgba(251,246,236,.82) 0 55%,rgba(190,230,255,.6) 100%);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.6),inset -10px -14px 24px rgba(120,200,255,.35),0 10px 30px rgba(0,0,0,.18)}
+.out.bubble img{width:80%}
+
+/* the card beside each door */
+.side{position:relative;z-index:8;justify-self:center;width:100%;max-width:620px}
+.card{position:relative;background:var(--cream);border-radius:28px;box-shadow:0 22px 46px -18px rgba(0,0,0,.5)}
+.card h3{margin:0 0 12px;font:800 72px/.88 var(--display);letter-spacing:-.05em}
+.card p{margin:0 0 14px;max-width:19em;font-size:18px;line-height:1.5;opacity:.82}
+.chips{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-wrap:wrap;gap:7px}
+.chips li{font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1.5px rgba(21,48,44,.18)}
+.step{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--cream);font-weight:700;font-size:15px;padding:11px 20px;border-radius:999px;box-shadow:4px 4px 0 var(--acid);transition:transform .2s,box-shadow .2s}
+.step:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--acid)}
+.step:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+
+/* About: the big framed portrait with the card unrolling beneath it */
+.frame-big{position:relative;z-index:6;margin:0;width:100%;aspect-ratio:696/900;transform:rotate(-2deg);filter:drop-shadow(0 24px 28px rgba(21,48,44,.4))}
+.framed .ph{position:absolute;left:21.5%;right:21.5%;top:18%;bottom:18%;overflow:hidden;background:#f3d9c9}
+.framed .ph img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.framed .fr{position:absolute;inset:0;width:100%;height:100%}
+.side-about .card{margin-top:-34px;padding:48px 37px 37px;clip-path:inset(0 0 100% 0)}
+.side-about.in .card{animation:unroll 1.1s cubic-bezier(.2,.9,.3,1) .4s both}
+@keyframes unroll{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+
+/* Personal and Career: three bubble pictures above a centered card; shown while the door is open a crack */
+.side-pick{opacity:0;transform:translateX(-30px) scale(.97);pointer-events:none;transition:opacity .35s ease,transform .45s cubic-bezier(.2,1.2,.4,1)}
+.door-row:has(.open-a-crack) .side-pick,.side-pick:hover,.side-pick:focus-within{opacity:1;transform:none;pointer-events:auto}
+.bubbles{position:relative;z-index:2;height:170px;margin-bottom:-18px}
+.bubbles img{position:absolute;aspect-ratio:1;height:auto;object-fit:cover;border-radius:50%;border:6px solid #fff;box-shadow:0 14px 24px rgba(0,0,0,.3)}
+.bubbles img:nth-child(1){width:30%;left:6%;bottom:0}
+.bubbles img:nth-child(2){width:30%;left:64%;bottom:6px}
+.bubbles img:nth-child(3){width:46%;left:27%;bottom:14px;z-index:2}
+/* logos and cut-outs sit whole on a colored disc instead of being cropped */
+.bubbles img.bl{object-fit:contain;padding:9%}
+.bubbles img.cream:not(:nth-child(3)),.bubbles img.dusk{padding:3%}
+.bubbles img.cream{background:#fbf2e6}
+/* Playroom: Van on his seahorse, too big for his bubble */
+.bubbles .sea-disc{position:absolute;width:46%;left:27%;bottom:14px;z-index:2;aspect-ratio:1;border-radius:50%;border:6px solid #fff;box-shadow:0 14px 24px rgba(0,0,0,.3);background:radial-gradient(circle at 50% 35%,#7fd3f0,#2a7fc0)}
+.bubbles img.rider-pop{width:56%;left:22%;bottom:6px;z-index:3;border:0;border-radius:0;box-shadow:none;aspect-ratio:auto;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(0,0,0,.35))}
+.bubbles img.dusk{background:radial-gradient(circle at 50% 40%,#5a3478,#24123a)}
+.side-pick .card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:30px 28px 24px;border-radius:24px;box-shadow:0 18px 34px -10px rgba(30,8,30,.5)}
+.side-pick h3{font-size:4vw;margin-bottom:6px}
+.side-pick .chips{justify-content:center;max-height:0;opacity:0;overflow:hidden;margin:0;transition:max-height .45s ease,opacity .35s ease,margin .45s ease}
+.side-pick:hover .chips,.side-pick:focus-within .chips{max-height:120px;opacity:1;margin:0 0 16px}
+
+/* walls rise into place as you scroll to them */
+.rise{transform:translateY(140px) scale(.9) rotate(var(--fr,-2deg));transition:transform 1s cubic-bezier(.2,.9,.25,1)}
+.rise.in{transform:none}
+
+/* tablet and phone: card goes under the door */
+@media (max-width:900px){
+  .door-row{display:flex;flex-direction:column;padding-right:0}
+  .wall{width:100%;align-self:stretch;box-sizing:border-box}
+  .side{width:min(620px,calc(100% - 32px));margin:-30px auto 0}
+  .side-pick{opacity:1;transform:none;pointer-events:auto}
+  .side-pick h3{font-size:clamp(34px,8vw,48px)}
+  .card h3{font-size:clamp(44px,11vw,64px)}
+  .side-about .card{padding:40px 22px 24px}
+  .frame-big{width:min(86%,340px);margin:0 auto}
+  .side-pick .bubbles{width:min(100%,380px);margin-inline:auto}
+}
+@media (min-width:600px) and (max-width:900px){.wall{--dw:clamp(260px,min(64vw,(100svh - 140px) / 1.72),480px)}}
+@media (max-width:599px){
+  .wall{--dw:clamp(220px,min(74vw,(100svh - 160px) / 1.72),360px)}
+  .plate{width:78%;padding:12px 6px 10px;top:40%}
+  .plate b{font-size:16px}
+  .plate em{font-size:11px}
+  .plate-n,.plate::before,.plate::after{display:none}
+  .plate-no{font-size:8px;letter-spacing:.1em}
+  .door-glow{font-size:18px;padding-left:40%}
+  .out.bf{width:46px}.out.gem{width:40px}.out.badge,.out.logo,.out.book,.out.bubble{width:78px}.out.pr-rider{width:120px}.out.pr-boy{width:90px}.out.pr-rainbow{width:80px}.out.pr-fox{width:90px}.out.pr-yay{width:90px}.out.pr-skyline,.out.pr-octopus,.out.pr-brick,.out.pr-jelly,.out.pr-diver,.out.pr-wildkind,.out.pr-swimmer,.out.pr-smart{display:none}.out.pr-rider{right:calc(50% + var(--dw) / 2 - 30px)!important;top:40%!important}.out.pr-fox{top:66%!important}.out.pr-yay{top:46%!important}.out.ws-sanc{width:110px}.out.ws-orb,.out.ws-deck{width:46px}.out.ws-bee,.out.ws-last{display:none}
+  .out.badge{box-shadow:0 0 0 4px var(--cream),0 0 0 6px #a4181c,0 10px 16px rgba(0,0,0,.3)}
+  .bubbles{height:150px}
+  .frame-big{width:min(62%,240px)}
+  .card p{font-size:16px}
+}
+@media (hover:none){.side-pick{opacity:1;transform:none;pointer-events:auto}}
+
+
+/* smaller screens: the Study door shows Lindsay's portrait hanging on the wall above it, and its card steps aside */
+@media (max-width:900px){
+  .door-row:has(.side-about){padding-top:clamp(44px,7vw,64px)}
+  .side-about{order:-1;width:auto;margin:0 auto calc(-1 * clamp(150px,30vw,250px));position:relative;z-index:9}
+  .door-row .wall{--dw:clamp(260px,min(76vw,(100svh - 120px) / 1.72),520px)}
+  .side-about .card{display:none}
+  .side-about .frame-big{width:clamp(200px,48vw,330px);margin:0 auto;transform:rotate(-3deg);transform-origin:50% 0;animation:frameSway 6s ease-in-out infinite}
+  /* the cord and nail it hangs from */
+  .side-about .frame-big::before{content:"";position:absolute;left:50%;top:-34px;width:46%;height:42px;translate:-50% 0;z-index:-1;
+    background:linear-gradient(to top right,transparent calc(50% - 1.5px),#3a2a2a calc(50% - 1.5px),#3a2a2a calc(50% + 1.5px),transparent calc(50% + 1.5px)) 0 0/50% 100% no-repeat,
+               linear-gradient(to top left,transparent calc(50% - 1.5px),#3a2a2a calc(50% - 1.5px),#3a2a2a calc(50% + 1.5px),transparent calc(50% + 1.5px)) 100% 0/50% 100% no-repeat}
+  .side-about .frame-big::after{content:"";position:absolute;left:50%;top:-40px;width:12px;height:12px;translate:-50% 0;border-radius:50%;background:radial-gradient(circle at 35% 35%,#e8d7a8,#8a6a2a)}
+}
+@keyframes frameSway{0%,100%{rotate:-1deg}50%{rotate:1deg}}
+@media (prefers-reduced-motion:reduce){.side-about .frame-big{animation:none}}
+
+/* Playroom: each piece floats in its own small white orb so it stands out from the wallpaper */
+.out[class*=" pr-"]{width:clamp(90px,8vw,132px)!important;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 34% 28%,#fff 0 30%,#f7f2fb 62%,#e6dcf2 100%)!important;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.9),inset -6px -8px 14px rgba(150,120,200,.18),0 10px 22px rgba(60,20,60,.28)!important;filter:none!important}
+.out[class*=" pr-"] img{width:76%!important;height:76%!important;margin:0!important;object-fit:contain;filter:none!important}
+.out.pr-rider img,.out.pr-skyline img,.out.pr-wildkind img,.out.pr-yay img,.out.pr-smart img{width:84%!important}
+
+/* when the card can't sit beside its door, it steps away entirely; the door itself is the way in */
+@media (max-width:900px){.side-pick{display:none!important}.door-row{padding-bottom:clamp(20px,5vw,40px)}}
+
+/* Workshop: each piece sits on a frosted white orb so it reads against the wallpaper */
+.out[class*=" ws-"]:not(.ws-balloon):not(.ws-sanc):not(.ws-decks):not(.ws-bee){width:clamp(84px,8.4vw,136px)!important;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;
+  background:rgba(255,255,255,.58)!important;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.75),0 10px 24px rgba(60,20,60,.22)!important;filter:none!important}
+.out[class*=" ws-"]:not(.ws-balloon):not(.ws-sanc):not(.ws-decks):not(.ws-bee) img{width:74%!important;height:74%!important;object-fit:contain;filter:none!important}
+.out.ws-sanc img,.out.ws-poll img{width:86%!important}
+/* metallic balloons drift up out of the Workshop door */
+.out.ws-balloon{width:clamp(64px,6vw,100px);filter:drop-shadow(0 12px 14px rgba(40,10,50,.3))}
+@keyframes balloonBob{50%{transform:translateY(-12px) rotate(4deg)}}
+
+/* phones: the door fills most of the width, so the orbs tuck in against its frame */
+@media (max-width:599px){
+  .out[class*=" pr-"]{width:62px!important}
+  .out[class*=" ws-"]:not(.ws-balloon):not(.ws-sanc):not(.ws-decks):not(.ws-bee){width:46px!important}
+  .out.ws-balloon{width:48px}
+  .door-row .out[style*="right:calc"]{right:calc(50% + var(--dw) / 2 - 32px)!important}
+  .door-row .out[style*="left:calc"]{left:calc(50% + var(--dw) / 2 - 32px)!important}
+}
+
+/* Playroom fox: no orb, twice the size, nose down in the shelf flowers */
+.out.pr-fox{width:clamp(150px,14vw,230px)!important;top:auto!important;bottom:clamp(30px,4vw,60px);right:calc(50% + var(--dw) * .55)!important;left:auto!important;
+  aspect-ratio:auto!important;border-radius:0!important;background:none!important;box-shadow:none!important;display:block!important;filter:drop-shadow(0 10px 12px rgba(40,10,30,.3))!important;z-index:7}
+.out.pr-fox img{width:100%!important;height:auto!important}
+.wall.open-a-crack .out.pr-fox img{animation:sniff 1.6s ease-in-out infinite;transform-origin:85% 80%}
+@keyframes sniff{0%,100%{rotate:0deg}20%{rotate:4deg}30%{rotate:2deg}40%{rotate:5deg}60%{rotate:0deg}}
+@media (max-width:599px){.out.pr-fox{width:110px!important;right:calc(50% + var(--dw) * .42)!important;bottom:18px}}
+
+/* Workshop: The Sanctuary's orb and name together on a dark ball */
+.out.ws-sanc{background:radial-gradient(circle at 45% 35%,#3a2460,#160c2c 70%)!important;box-shadow:inset 0 0 0 2px rgba(255,220,160,.35),0 0 30px rgba(140,90,255,.45),0 10px 24px rgba(20,0,40,.4)!important;display:flex!important;flex-direction:column;justify-content:center;gap:2%}
+.out.ws-sanc .sanc-orb{width:42%!important;height:auto!important;filter:drop-shadow(0 0 10px rgba(190,120,255,.9))!important}
+.out.ws-sanc .sanc-logo{width:82%!important;height:auto!important}
+/* the three decks together on a glowing pink ball */
+.out.ws-decks{width:clamp(110px,10vw,160px)!important;aspect-ratio:1;border-radius:50%;position:absolute;
+  background:radial-gradient(circle at 50% 45%,#ff9fd6,#e0399a 55%,#7a1660 100%)!important;box-shadow:0 0 34px rgba(255,90,190,.6),inset 0 0 0 2px rgba(255,255,255,.4),0 10px 24px rgba(60,0,40,.35)!important}
+.out.ws-decks img{position:absolute;top:22%;width:34%;height:auto;filter:drop-shadow(0 4px 6px rgba(40,0,30,.45))}
+.out.ws-decks img:nth-child(1){left:12%;rotate:-16deg}
+.out.ws-decks img:nth-child(2){left:33%;top:17%;z-index:2}
+.out.ws-decks img:nth-child(3){left:54%;rotate:16deg}
+@media (max-width:599px){.out.ws-decks{width:64px!important}}
+
+/* balloons hang by the door on strings, then let go and float up the page */
+.out.ws-balloon::after{content:"";position:absolute;left:50%;top:92%;width:1.5px;height:70px;background:linear-gradient(rgba(60,40,70,.7),rgba(60,40,70,0))}
+.wall.open-a-crack .out.ws-balloon{animation:balloonFree 9s cubic-bezier(.45,0,.7,1) calc(var(--ed) + 1.6s) forwards}
+.wall.open-a-crack .out.ws-balloon img{animation:balloonBob 3.4s ease-in-out infinite}
+@keyframes balloonFree{0%{translate:0 0}15%{translate:0 -10px}40%{translate:8px -35vh}70%{translate:-8px -80vh}100%{translate:0 -140vh}}
+
+
+/* large screens: the portrait stays a sensible size above its card, so the row stays balanced with the door */
+@media (min-width:901px){
+  .side-about .frame-big{width:min(100%,360px,(100svh - 380px) * .77);margin:0 auto}
+  .side-about .card{margin-top:-24px}
+}
+
+/* Playroom: YAY! and the Lego rainbow stand on their own, bigger, without orbs */
+.out.pr-yay,.out.pr-rainbow{width:clamp(150px,14vw,230px)!important;aspect-ratio:auto!important;border-radius:0!important;background:none!important;box-shadow:none!important;display:block!important;filter:drop-shadow(0 10px 14px rgba(40,10,30,.35))!important}
+.out.pr-yay img,.out.pr-rainbow img{width:100%!important;height:auto!important}
+@media (max-width:599px){.out.pr-yay,.out.pr-rainbow{width:110px!important}}
+
+/* Workshop: The Sanctuary sits on a dark, glowing ball */
+.out.ws-sanc{width:clamp(110px,10vw,160px)!important;aspect-ratio:1;border-radius:50%;-webkit-backdrop-filter:none;backdrop-filter:none}
+/* the bee: no bubble; it buzzes out of the door, across the page and away */
+.out.ws-bee{width:clamp(80px,7vw,120px)!important;background:none!important;box-shadow:none!important;border-radius:0!important;filter:drop-shadow(0 0 2px var(--cream)) drop-shadow(0 0 6px rgba(251,242,230,.9))!important}
+.out.ws-bee img{width:100%!important;height:auto!important}
+.wall.open-a-crack .out.ws-bee{animation:beeLeave 6s cubic-bezier(.45,.05,.55,.95) calc(var(--ed) + .9s) forwards}
+@keyframes beeLeave{0%{translate:0 0}20%{translate:12vw -6vh}40%{translate:24vw 4vh}60%{translate:38vw -8vh}80%{translate:52vw 2vh}100%{translate:75vw -14vh;opacity:0}}
+
+/* Workshop balloons: bigger, and they let go sooner and rise faster */
+.out.ws-balloon{width:clamp(110px,10vw,170px)!important}
+.wall.open-a-crack .out.ws-balloon{animation:balloonFree 4.5s cubic-bezier(.4,0,.6,1) calc(var(--ed) + .8s) forwards!important}
+@media (max-width:599px){.out.ws-balloon{width:72px!important}}
+/* The Sanctuary: a bigger dark ball, the name fully inside it and brighter, the orb small above */
+.out.ws-sanc{width:clamp(150px,13vw,210px)!important;padding:0 10%;box-sizing:border-box}
+.out.ws-sanc .sanc-orb{width:30%!important}
+.out.ws-sanc .sanc-logo{width:100%!important;filter:brightness(1.35) saturate(1.2) drop-shadow(0 0 6px rgba(255,214,140,.55))!important}
+@media (max-width:599px){.out.ws-sanc{width:96px!important}}
+
+/* The Sanctuary: a proper crystal ball. Its padding was being measured against the whole wall, which squeezed the logo
+   to a speck; now it's a glassy nebula ball with the orb glowing inside and the name set on a gold band */
+.out.ws-sanc{width:clamp(160px,14vw,230px)!important;padding:0!important;gap:0!important;justify-content:center;
+  background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.55) 0 5%,rgba(255,255,255,0) 14%),
+             radial-gradient(circle at 50% 42%,#a46bff 0,#5a2aa8 28%,#2a1450 58%,#120826 100%)!important;
+  box-shadow:inset 0 0 0 3px rgba(255,230,180,.55),inset 0 -18px 30px rgba(0,0,0,.45),0 0 40px rgba(170,110,255,.7),0 14px 26px rgba(20,0,40,.45)!important}
+.out.ws-sanc .sanc-orb{width:44%!important;margin-top:-6%;filter:drop-shadow(0 0 14px rgba(220,170,255,1)) saturate(1.3)!important}
+.out.ws-sanc .sanc-logo{width:84%!important;margin-top:2%;padding:4% 3%;border-radius:999px;background:rgba(18,8,38,.72);
+  filter:brightness(1.4) saturate(1.2) drop-shadow(0 0 6px rgba(255,214,140,.7))!important}
+@media (max-width:599px){.out.ws-sanc{width:100px!important}}
+/* Sanctuary ball: orb and logo both centered on the ball */
+.out.ws-sanc{align-items:center!important}
+.out.ws-sanc .sanc-orb,.out.ws-sanc .sanc-logo{display:block;margin-left:auto!important;margin-right:auto!important;box-sizing:border-box}
+.out.ws-sanc .sanc-logo{width:80%!important}
+
+/* the seam between the vortex and the doors: a shimmering edge, then a poof of smoke and glints */
+.seam{position:absolute;left:0;right:0;top:0;height:0;z-index:40;pointer-events:none}
+.seam .shimmer{position:absolute;left:0;right:0;top:-10px;height:20px;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.0) 30%,rgba(255,255,255,.95) 45%,#ffd6ec 50%,#ceff32 55%,rgba(255,255,255,0) 70%,transparent 100%) 0 0/200% 100% no-repeat,
+    linear-gradient(90deg,#c79bff,#ffd6ec,#9ad0ff,#ffd6ec,#c79bff);
+  filter:blur(1.5px) drop-shadow(0 0 10px rgba(255,214,236,.9));opacity:.85;animation:seamSheen 3.2s linear infinite;
+  -webkit-mask:linear-gradient(transparent,#000 35%,#000 65%,transparent);mask:linear-gradient(transparent,#000 35%,#000 65%,transparent)}
+@keyframes seamSheen{from{background-position:150% 0,0 0}to{background-position:-50% 0,0 0}}
+.seam .puff{position:absolute;left:var(--x);top:0;width:calc(clamp(140px,16vw,260px) * var(--s));aspect-ratio:1.4;translate:-50% -50%;border-radius:50%;opacity:0;
+  background:radial-gradient(closest-side,rgba(255,250,255,.95),rgba(255,214,240,.75) 40%,rgba(210,180,255,.35) 70%,transparent);filter:blur(8px)}
+.seam .glint{position:absolute;left:var(--x);top:var(--y);width:clamp(18px,2vw,30px);aspect-ratio:1;translate:-50% -50%;opacity:0;background:#fff;
+  clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);filter:drop-shadow(0 0 8px #fff) drop-shadow(0 0 14px #ffb8e6)}
+.seam.poof .puff{animation:puff 1.6s cubic-bezier(.2,.7,.3,1) var(--d) both}
+.seam.poof .glint{animation:glint 1.2s ease-out calc(var(--d) + .15s) both}
+@keyframes puff{0%{opacity:0;scale:.2}20%{opacity:1}100%{opacity:0;scale:1.8;transform:translate(var(--dx),-60px)}}
+@keyframes glint{0%{opacity:0;scale:.2;rotate:0deg}35%{opacity:1;scale:1.2}100%{opacity:0;scale:.4;rotate:90deg;transform:translateY(-50px)}}
+@media (prefers-reduced-motion:reduce){.seam .shimmer{animation:none}.seam.poof .puff,.seam.poof .glint{animation:none}}
+.seam{z-index:80!important}
+.seam.poof .puff{animation-duration:2.2s}
+@keyframes puff{0%{opacity:0;scale:.2}18%{opacity:1}60%{opacity:.8}100%{opacity:0;scale:1.9;transform:translate(var(--dx),30px)}}
+.seam .puff{width:calc(clamp(180px,20vw,340px) * var(--s));filter:blur(5px);background:radial-gradient(closest-side,#fff,rgba(255,236,248,.9) 35%,rgba(225,200,255,.5) 65%,transparent)}
+
+/* ============ whimsy: every floating thing moves in its own way (values set per element by script) ============ */
+/* door pop-outs: each bobs, drifts and tilts on its own rhythm */
+.wall.open-a-crack .out{animation:outPop 1.2s cubic-bezier(.2,1.25,.4,1) calc(var(--ed,.2s) + .6s) both,outFloat var(--bd,5s) ease-in-out calc(var(--ed,.2s) + 1.8s + var(--bo,0s)) infinite alternate}
+@keyframes outFloat{0%{transform:var(--ft,none) translate(0,0) rotate(0)}33%{transform:var(--ft,none) translate(var(--bx1,4px),var(--by1,-8px)) rotate(var(--br1,2deg))}66%{transform:var(--ft,none) translate(var(--bx2,-3px),var(--by2,-14px)) rotate(var(--br2,-2deg))}100%{transform:var(--ft,none) translate(var(--bx3,2px),var(--by3,-4px)) rotate(var(--br3,1deg))}}
+/* workshop balloons: each floats up its own crooked path at its own speed */
+.wall.open-a-crack .out.ws-balloon{animation:balloonFree var(--fd,4.5s) cubic-bezier(.4,0,.6,1) calc(var(--ed) + .8s + var(--fo,0s)) forwards!important}
+.wall.open-a-crack .out.ws-balloon img{animation:balloonBob var(--bd,3.4s) ease-in-out infinite}
+@keyframes balloonFree{0%{translate:0 0}15%{translate:var(--fx1,0) -10px}40%{translate:var(--fx2,8px) -35vh}70%{translate:var(--fx3,-8px) -80vh}100%{translate:var(--fx4,0) -140vh}}
+@keyframes balloonBob{50%{transform:translateY(var(--bby,-12px)) rotate(var(--bbr,4deg))}}
+.out.ws-balloon::after{transform-origin:top;animation:stringSway var(--bd,3.4s) ease-in-out infinite alternate}
+@keyframes stringSway{to{transform:rotate(var(--bbr,4deg))}}
+/* workshop balloons: much bigger, and they lift off fast */
+.out.ws-balloon{width:clamp(160px,14vw,250px)!important}
+@media (max-width:599px){.out.ws-balloon{width:110px!important}}
+/* balloons pop out to full size first, then lift off */
+.wall.open-a-crack .out.ws-balloon{animation:outPop .7s cubic-bezier(.2,1.25,.4,1) calc(var(--ed,.2s) + .3s) both,balloonFree var(--fd,2.4s) cubic-bezier(.4,0,.6,1) calc(var(--ed) + 1s + var(--fo,0s)) forwards!important}
+/* nothing coming out of a door gets cut at its column edge: the wall lets things spill over the whole section (the section clips the page edge instead) */
+.wall{overflow:visible!important}
+.doors{overflow-x:clip}
+.door-row{position:relative}
+.door-row .wall{z-index:3}
+
+/* Study card, redone as a library card: lined paper, a file tab, a rubber stamp and three headline numbers */
+.study-card{overflow:visible;padding:clamp(30px,3vw,44px) clamp(26px,3vw,44px) clamp(26px,2.6vw,36px)!important;border-radius:6px 22px 22px 22px!important;
+  background:#fffaf0 repeating-linear-gradient(180deg,transparent 0 33px,rgba(56,130,200,.14) 33px 34px)!important;
+  box-shadow:0 0 0 1px rgba(21,48,44,.08),10px 10px 0 var(--pink),0 30px 50px -20px rgba(30,8,30,.55)!important;rotate:-1deg}
+.study-card::before{content:"";position:absolute;left:clamp(18px,2vw,30px);top:0;bottom:0;width:2px;background:rgba(239,74,134,.45)}
+.sc-tab{position:absolute;left:-2px;top:-30px;padding:7px 18px 9px;border-radius:12px 12px 0 0;background:#fffaf0;color:var(--pink);
+  font:800 12px var(--body);letter-spacing:.18em;text-transform:uppercase;box-shadow:0 -2px 0 rgba(21,48,44,.06)}
+.sc-stamp{position:absolute;right:clamp(16px,2.4vw,34px);top:clamp(18px,2vw,30px);width:clamp(86px,8vw,110px);aspect-ratio:1;border-radius:50%;display:grid;place-content:center;text-align:center;
+  border:3px solid #d93a6a;color:#d93a6a;font:800 clamp(18px,1.7vw,24px)/1 var(--display);text-transform:uppercase;rotate:14deg;opacity:.85;
+  box-shadow:inset 0 0 0 4px #fffaf0,inset 0 0 0 6px #d93a6a;mix-blend-mode:multiply}
+.sc-stamp small{display:block;margin-top:4px;font:700 10px var(--body);letter-spacing:.14em}
+.study-card h3{font-size:clamp(54px,6vw,92px)!important;line-height:.9;margin-bottom:10px}
+.study-card p{max-width:30ch;font-size:clamp(16px,1.25vw,19px)}
+.sc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1vw,14px);margin:16px 0 18px}
+.sc-stats div{background:var(--ink);color:var(--cream);border-radius:14px;padding:12px 12px 10px;rotate:var(--t,0deg)}
+.sc-stats div:nth-child(1){--t:-1.5deg}.sc-stats div:nth-child(2){--t:1deg;background:var(--pink)}.sc-stats div:nth-child(3){--t:-.5deg;background:var(--acid);color:var(--ink)}
+.sc-stats dt{font:800 clamp(24px,2.2vw,34px)/1 var(--display);letter-spacing:-.03em}
+.sc-stats dd{margin:4px 0 0;font:600 12px/1.25 var(--body);opacity:.85}
+.study-card .chips li{background:#fff;border:1.5px solid var(--ink);border-radius:8px 8px 8px 2px;box-shadow:2px 2px 0 var(--ink)}
+.study-card .step{font-size:16px;padding:13px 24px}
+@media (max-width:599px){.sc-stats dd{font-size:10px}.sc-stamp{width:70px;font-size:15px}}
+
+/* Playroom card: a purple sticky note pinned to the wallpaper */
+.note-card{background:url(assets/proj/sticky-note.webp) center/100% 100% no-repeat!important;box-shadow:none!important;border-radius:0!important;
+  aspect-ratio:571/605;width:min(420px,100%);padding:20% 16% 18%!important;box-sizing:border-box;filter:drop-shadow(0 18px 18px rgba(30,8,30,.35));rotate:2deg;
+  display:flex!important;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.note-card h3{color:#2b1060;font-size:clamp(36px,3.6vw,60px)!important;margin-bottom:6px}
+.note-card h3 .dot{color:#ff3e9d}
+.note-card p{color:#2b1060;font-size:clamp(14px,1.15vw,17px);margin-bottom:10px}
+.note-card .chips li{background:rgba(255,255,255,.55);border:0;color:#2b1060}
+.note-card .step{background:#2b1060;color:#fff;box-shadow:3px 3px 0 #ff3e9d}
+/* Workshop card: kraft-paper project board with masking tape */
+.shop-card{background:#e9d3a8 repeating-linear-gradient(90deg,rgba(120,80,30,.05) 0 2px,transparent 2px 7px)!important;border-radius:6px!important;rotate:-1.2deg;
+  box-shadow:0 0 0 1px rgba(90,60,20,.15),10px 10px 0 var(--ink),0 30px 50px -20px rgba(30,8,30,.55)!important;padding-top:clamp(34px,3vw,46px)!important}
+.shop-tape{position:absolute;left:50%;top:-14px;width:120px;height:30px;translate:-50% 0;rotate:-3deg;background:rgba(206,255,50,.8);box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.shop-card h3{font-size:clamp(48px,4.6vw,76px)!important}
+.shop-card .chips li{background:#fff8e6;border:1.5px dashed var(--ink);border-radius:6px}
+/* every pop-out floats free of the layout, so all three doors sit in exactly the same spot */
+.wall>.out{position:absolute!important}
+/* doors line up vertically too: same row height, door anchored to the same spot */
+@media (min-width:901px){.door-row{min-height:clamp(760px,92svh,900px);align-items:center}.wall{align-self:center}}
+@media (min-width:901px){.door-row{height:clamp(760px,92svh,900px);min-height:0}.door-row .side{max-height:100%;align-self:center}}
+
+/* Playroom: the paper chain hangs around the door like a party arch */
+.door-chain{position:absolute;left:50%;translate:-50% 0;width:calc(var(--dw) * 1.36);bottom:calc(24px + var(--dw) * 1.1);z-index:1;pointer-events:none;filter:drop-shadow(0 10px 12px rgba(40,10,30,.4));transform-origin:50% 0;animation:chainSway 7s ease-in-out infinite}
+@keyframes chainSway{0%,100%{rotate:0deg}50%{rotate:.6deg}}
+
+/* Study: a paper-star garland arches over the door */
+.door-arch{position:absolute;left:50%;translate:-50% 0;width:calc(var(--dw) * 1.22);bottom:calc(24px + var(--dw) * .9);z-index:1;pointer-events:none;filter:drop-shadow(0 8px 10px rgba(40,10,30,.35));transform-origin:50% 0;animation:chainSway 8s ease-in-out infinite}
+/* disco ball hangs over the Playroom door */
+.door-disco{left:calc(50% - clamp(55px,5vw,85px))!important;top:0!important;z-index:6!important;width:clamp(110px,10vw,170px)!important}
+.door-disco::before{content:"";position:absolute;left:50%;bottom:96%;width:2px;height:60vh;background:linear-gradient(#ccd,#889);translate:-50% 0}
+.door-disco{top:clamp(30px,4vw,70px)!important}
+.door-disco::before{height:clamp(40px,4.5vw,80px)!important;bottom:97%!important}
+/* disco ball hangs on the wallpaper beside the Playroom door (never over the sign), and lowers in smoothly */
+.door-disco{left:calc(50% + var(--dw) / 2 + clamp(16px,2vw,34px))!important;top:clamp(10px,2vw,40px)!important;z-index:1!important;width:clamp(100px,8.5vw,150px)!important;translate:0 -160%;opacity:0}
+.door-disco::before{height:100vh!important}
+.door-disco.drop{animation:doorDiscoIn 2.2s cubic-bezier(.25,.8,.3,1) both,discoSway 6s ease-in-out 2.2s infinite!important}
+@keyframes doorDiscoIn{0%{translate:0 -160%;opacity:0}15%{opacity:1}100%{translate:0 0;opacity:1}}
+@media (max-width:900px){.door-disco{left:auto!important;right:4%!important;width:84px!important}}
+
+/* Playroom: pop-outs are die-cut stickers that slap onto the wallpaper */
+.pr-wall .out[class*=" pr-"]{background:none!important;box-shadow:none!important;border-radius:0!important;aspect-ratio:auto!important;padding:0!important;display:block!important;backdrop-filter:none!important}
+.pr-wall .out[class*=" pr-"]::before,.pr-wall .out[class*=" pr-"]::after{display:none!important}
+.pr-wall .out[class*=" pr-"] img{width:100%!important;height:auto!important;max-height:none!important;object-fit:contain;
+  filter:drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(4px 7px 6px rgba(40,10,30,.35))!important}
+.pr-wall.open-a-crack .out[class*=" pr-"]{animation:stickerSlap .5s cubic-bezier(.3,1.7,.5,1) calc(var(--ed,.2s) + .5s) both,outBob 5s ease-in-out calc(var(--ed,.2s) + 1.2s) infinite!important}
+@keyframes stickerSlap{0%{opacity:0;transform:var(--ft,none) scale(1.8) rotate(-14deg)}55%{opacity:1;transform:var(--ft,none) scale(.92)}100%{opacity:1;transform:var(--ft,none)}}
+
+/* empty soap bubbles rise out of the Playroom door while it's open */
+.pr-bubbles{position:absolute;left:50%;top:58%;width:0;height:0;z-index:3;pointer-events:none}
+.pr-bub{position:absolute;left:calc(var(--s) / -2);top:0;width:var(--s);aspect-ratio:1;border-radius:50%;opacity:0;
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0 7%,rgba(255,255,255,0) 15%),radial-gradient(circle,rgba(255,255,255,.04) 55%,rgba(255,255,255,.35) 70%,rgba(190,140,255,.5) 80%,rgba(120,230,255,.55) 88%,rgba(255,140,210,.65) 96%,rgba(255,255,255,.15) 100%);
+  box-shadow:0 0 14px rgba(210,170,255,.45)}
+.pr-wall.open-a-crack .pr-bub{animation:bubRise var(--bd) cubic-bezier(.3,.1,.6,1) calc(var(--bl) + .4s) infinite}
+@keyframes bubRise{0%{opacity:0;transform:translate(0,0) scale(.3)}12%{opacity:1}35%{transform:translate(calc(var(--bx) * .35 + 14px),calc(-18vh * var(--bh))) scale(.8)}65%{transform:translate(calc(var(--bx) * .75 - 12px),calc(-38vh * var(--bh))) scale(1)}88%{opacity:.9}100%{opacity:0;transform:translate(var(--bx),calc(-55vh * var(--bh))) scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.pr-wall.open-a-crack .pr-bub{animation:none}}
+
+/* Playroom shelf: a stack of parcels instead of flowers */
+.shelf.shelf-parcels>img{width:58%!important;margin:0 auto -6% auto}
+
+/* disco ball hangs from the underside of the Study's flower shelf, down toward the Playroom */
+.door-row:has(.study-wall),.study-wall{position:relative;z-index:8!important;overflow:visible!important}
+.door-disco.study-disco{left:calc(50% + var(--dw) * .28)!important;right:auto!important;top:calc(100% - 22px)!important;width:clamp(100px,8vw,140px)!important;z-index:9!important;translate:0 0;transform-origin:50% 0}
+.door-disco.study-disco::before{height:clamp(30px,3.5vw,60px)!important;bottom:auto!important;top:calc(-1 * clamp(30px,3.5vw,60px) + 6px)}
+.door-disco.study-disco img{margin-top:clamp(24px,3vw,54px)}
+.door-disco.study-disco.drop{animation:studyDiscoIn 1.8s cubic-bezier(.3,1.4,.5,1) both,discoSway 6s ease-in-out 1.8s infinite!important}
+@keyframes studyDiscoIn{0%{opacity:0;translate:0 -50%;scale:.6}25%{opacity:1}100%{opacity:1;translate:0 0;scale:1}}
+.door-disco.study-disco::before{display:none!important}
+
+/* Playroom card: a bright toy-box card with a YAY! sticker */
+.side-pick .play-card{position:relative;background:#fff!important;border:3px solid var(--ink)!important;border-radius:22px!important;box-shadow:8px 8px 0 #8a5cff,0 18px 34px -10px rgba(30,8,30,.5)!important;rotate:1.2deg;
+  background-image:radial-gradient(circle,#ffe1f0 2px,transparent 2.5px)!important;background-size:20px 20px!important}
+.play-card h3{font-size:clamp(48px,4.6vw,76px)!important}
+.play-card .chips li:nth-child(4n+1){background:#ffd23f}.play-card .chips li:nth-child(4n+2){background:#7fe3ff}.play-card .chips li:nth-child(4n+3){background:#b6f08a}.play-card .chips li:nth-child(4n+4){background:#ff9ccf}
+.play-card .chips li{border:2px solid var(--ink);border-radius:999px;color:var(--ink)}
+.play-sticker{position:absolute;right:-18px;top:-26px;width:clamp(80px,7vw,120px);rotate:12deg;filter:drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(3px 5px 4px rgba(0,0,0,.3))}
+.play-sticker img{display:block;width:100%;height:auto}
+/* Playroom stickers fly out of the door, then slap onto the wallpaper */
+.pr-wall.open-a-crack .out[class*=" pr-"]{animation:stickerOut .75s cubic-bezier(.25,1.35,.45,1) calc(var(--ed,.2s) + .45s) both,outBob 5s ease-in-out calc(var(--ed,.2s) + 1.3s) infinite!important}
+@keyframes stickerOut{
+  0%{opacity:0;transform:translate(var(--sx,0),var(--sy,0)) scale(.12) rotate(-25deg)}
+  15%{opacity:1}
+  75%{opacity:1;transform:var(--ft,none) scale(1.15) rotate(4deg)}
+  100%{opacity:1;transform:var(--ft,none)}}
+/* bubbles burst out of the door fast, then drift up */
+.pr-wall.open-a-crack .pr-bub.burst{animation:bubBurst var(--bd) cubic-bezier(.15,.8,.35,1) calc(var(--bl) + .3s) infinite}
+@keyframes bubBurst{
+  0%{opacity:0;transform:translate(0,0) scale(.2)}
+  6%{opacity:1}
+  18%{transform:translate(var(--px),var(--py)) scale(1)}
+  60%{transform:translate(calc(var(--px) + var(--bx) * .5),calc(var(--py) - 22vh * var(--bh))) scale(1.05)}
+  90%{opacity:.9}
+  100%{opacity:0;transform:translate(calc(var(--px) + var(--bx)),calc(var(--py) - 42vh * var(--bh))) scale(1.15)}}
+/* soft lilac smoke billows out of the doorway */
+.pr-smoke{position:absolute;left:calc(var(--s) / -2);top:calc(var(--s) / -2);width:var(--s);aspect-ratio:1;border-radius:50%;opacity:0;pointer-events:none;
+  background:radial-gradient(circle at 45% 40%,rgba(255,255,255,.85),rgba(236,220,255,.55) 40%,rgba(220,200,255,0) 70%);filter:blur(6px)}
+.pr-wall.open-a-crack .pr-smoke{animation:smokeOut var(--md) ease-out calc(var(--ml) + .25s) both}
+@keyframes smokeOut{0%{opacity:0;transform:translate(0,30px) scale(.3)}20%{opacity:.95}100%{opacity:0;transform:translate(var(--mx),var(--my)) scale(2.2)}}
+@media (prefers-reduced-motion:reduce){.pr-wall.open-a-crack .pr-smoke,.pr-wall.open-a-crack .pr-bub.burst{animation:none}}
+
+.pr-smokes{position:absolute;left:50%;bottom:calc(24px + var(--dw) * .9);width:0;height:0;z-index:0;pointer-events:none}
+.pr-smokes .pr-smoke{left:calc(var(--ox) - var(--s) / 2);top:calc(var(--oy) - var(--s) / 2)}
+.pr-wall .door{z-index:1}
+.pr-smokes .pr-smoke{background:radial-gradient(circle at 45% 40%,rgba(255,255,255,.95),rgba(240,225,255,.75) 40%,rgba(220,200,255,0) 70%)!important}
+/* Playroom smoke: bigger, denser, and billowing well past the door's edges so you can see it */
+.pr-smokes .pr-smoke{width:calc(var(--s) * 1.5)!important;filter:blur(4px)!important;
+  background:radial-gradient(circle at 45% 40%,#fff 0,rgba(250,240,255,.95) 35%,rgba(225,205,255,.6) 55%,rgba(220,200,255,0) 72%)!important}
+.pr-wall.open-a-crack .pr-smokes .pr-smoke{animation:smokeOut2 var(--md) ease-out calc(var(--ml) + .2s) both}
+@keyframes smokeOut2{0%{opacity:0;transform:translate(0,20px) scale(.4)}15%{opacity:1}60%{opacity:.9}100%{opacity:0;transform:translate(calc(var(--mx) * 1.8),calc(var(--my) * 1.4)) scale(2.4)}}
+.out.ws-bee{width:clamp(100px,9vw,150px)!important;height:auto!important;aspect-ratio:auto!important;background:none!important;box-shadow:none!important;border-radius:0!important;display:block!important}.out.ws-bee img{width:100%!important;height:auto!important;filter:drop-shadow(0 6px 8px rgba(40,10,30,.35))}
+.wall.open-a-crack .out.ws-bee{transform:var(--ft,none)!important;opacity:1}
+/* Workshop bees: fly to the shelf flowers, then hover over them */
+.out.ws-bee{width:clamp(80px,7vw,120px)!important}
+.wall.open-a-crack .out.ws-bee{animation:beeToFlowers 2.4s cubic-bezier(.45,.05,.4,1) calc(var(--ed) + .9s) both,beeHoverF 2.6s ease-in-out calc(var(--ed) + 3.3s) infinite!important}
+@keyframes beeToFlowers{0%{translate:0 0}35%{translate:calc(var(--hx) * .3 + 40px) calc(var(--hy) * .2 - 40px)}70%{translate:calc(var(--hx) * .8) calc(var(--hy) * .7 + 20px)}100%{translate:var(--hx) var(--hy)}}
+@keyframes beeHoverF{0%,100%{translate:var(--hx) var(--hy)}25%{translate:calc(var(--hx) - 34px) calc(var(--hy) - 14px)}50%{translate:calc(var(--hx) - 8px) calc(var(--hy) - 28px)}75%{translate:calc(var(--hx) + 26px) calc(var(--hy) - 10px)}}
+
+/* leaving the vortex: a thick bank of smoke and sparkles rides the top edge of the doors as they rise over it */
+.exit-mist{position:absolute;left:-5%;right:-5%;top:calc(-1 * clamp(150px,18vw,260px));height:clamp(260px,30vw,420px);z-index:5;pointer-events:none}
+.exit-mist span[class^="m"]{position:absolute;inset:0;filter:blur(14px)}
+.exit-mist .m1{background:radial-gradient(28% 55% at 8% 62%,#fff 0,rgba(255,255,255,0) 70%),radial-gradient(30% 60% at 30% 58%,rgba(250,235,255,.98) 0,rgba(250,235,255,0) 70%),radial-gradient(26% 52% at 52% 64%,#fff 0,rgba(255,255,255,0) 70%),radial-gradient(30% 60% at 74% 56%,rgba(255,230,245,.98) 0,rgba(255,230,245,0) 70%),radial-gradient(28% 55% at 94% 62%,#fff 0,rgba(255,255,255,0) 70%);animation:mistDrift 9s ease-in-out infinite alternate}
+.exit-mist .m2{top:18%;background:radial-gradient(24% 50% at 18% 70%,rgba(230,210,255,.9) 0,transparent 70%),radial-gradient(24% 50% at 44% 74%,rgba(255,255,255,.95) 0,transparent 70%),radial-gradient(24% 50% at 66% 70%,rgba(220,200,255,.9) 0,transparent 70%),radial-gradient(24% 50% at 88% 74%,rgba(255,255,255,.95) 0,transparent 70%);animation:mistDrift 12s ease-in-out -4s infinite alternate-reverse}
+.exit-mist .m3{top:45%;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.85) 45%,rgba(255,240,250,.6) 70%,rgba(255,255,255,0))}
+@keyframes mistDrift{from{transform:translateX(-3%) scaleY(1)}to{transform:translateX(3%) scaleY(1.12)}}
+.mist-sparks{position:absolute;inset:0;filter:none!important}
+.mist-sparks i{position:absolute;width:var(--z);height:var(--z);translate:-50% -50%;background:#fff;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #ffc2e6);animation:mistTw 2.2s ease-in-out var(--d) infinite}
+.mist-sparks i:nth-child(3n){background:#ffd36b}.mist-sparks i:nth-child(3n+1){background:#ffc2e6}
+@keyframes mistTw{0%,100%{opacity:.2;scale:.4;rotate:0deg}50%{opacity:1;scale:1.2;rotate:45deg}}
+@media (prefers-reduced-motion:reduce){.exit-mist *{animation:none!important}}
+
+/* the cut-out portrait sits on a Neon Petal gradient inside the pink frame */
+.framed .ph.ph-cut{background:radial-gradient(120% 90% at 50% 20%,#ceff32 0,#fe7bbf 45%,#ec2b7a 100%)}
+.framed .ph.ph-cut img{object-fit:cover;object-position:50% 12%}
+
+/* bigger portrait and frame beside the first door (the card got shorter) */
+@media (min-width:901px){.side-about .frame-big{width:min(100%,520px,(100svh - 300px) * .77)!important}}
+@media (max-width:900px){.side-about .frame-big{width:min(100%,420px)!important}}
+
+.exit-mist span[class^="m"]{will-change:transform}
+
+/* Playroom door sign: the neon "Play in Progress" */
+.neon-plate{position:absolute;z-index:5;left:50%;top:40%;width:84%;height:auto;translate:-50% -50%;filter:drop-shadow(0 0 14px rgba(236,43,122,.55))}
+.exit-mist span[class^="m"]{filter:none!important}
+.exit-mist .m1,.exit-mist .m2{background-size:100% 100%}
+
+.door .door-leaf img.neon-plate{position:absolute!important;inset:auto!important;left:50%!important;top:40%!important;width:86%!important;height:auto!important;object-fit:contain!important;translate:-50% -50%;transform:none!important}
+.door .door-leaf img.neon-plate{width:100%!important}
+.shelf.shelf-parcels{display:none!important}
+
+/* Playroom stoop: a row of neon wildflowers that flicker on */
+.shelf.shelf-neon img{filter:drop-shadow(0 0 6px rgba(255,255,255,.35))!important;margin-bottom:-4%}
+.wall.shelf-in .shelf.shelf-neon img{animation:neonOn 1.4s steps(1,end) .3s both,neonHum 3.2s ease-in-out 1.8s infinite}
+@keyframes neonOn{0%{opacity:0}10%{opacity:1}16%{opacity:.2}24%{opacity:1}30%{opacity:.4}38%,100%{opacity:1}}
+@keyframes neonHum{0%,100%{filter:drop-shadow(0 0 6px rgba(255,255,255,.35)) brightness(1)}50%{filter:drop-shadow(0 0 14px rgba(254,123,191,.55)) brightness(1.12)}}

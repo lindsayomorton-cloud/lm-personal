@@ -1,0 +1,67 @@
+/* ============ Base: colors, type, shared pieces ============ */
+:root{
+  --cream:#fbf2e6; --ink:#15302c; --pink:#ec2b7a; --acid:#ceff32; --coral:#ee7c62; --blush:#f7d3ca;
+  --purple:#6834ad; --night:#120f12;
+  --dawn:linear-gradient(165deg,#aaa5d2 0%,#dcc9e2 35%,#f1b89f 76%,#efcdc4 100%);
+  --display:"Bricolage Grotesque","DM Sans",Arial,sans-serif;
+  --serif:"Instrument Serif",Georgia,serif;
+  --body:"DM Sans",Arial,sans-serif;
+  --gutter:clamp(25px,7vw,110px);
+  --wallpaper:url(assets/proj/wallpaper-tile.jpg) 0 0/clamp(360px,40vw,560px) repeat;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:#1c1230}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body)}
+img{max-width:100%}
+a{color:inherit;text-decoration:none}
+button,a{font:inherit}
+button{cursor:pointer}
+::selection{background:var(--pink);color:#fff}
+a:focus-visible,button:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.page{max-width:1600px;margin:auto;overflow:clip}
+
+/* the pink dot after headings */
+.dot{color:var(--pink)}
+
+/* floating gems and stars sprinkled over sections */
+.fl{position:absolute;z-index:4;pointer-events:none;height:auto;max-width:none;transform:rotate(var(--r,0deg));
+  filter:drop-shadow(0 14px 18px rgba(21,48,44,.28));animation:flt var(--d,8s) ease-in-out var(--dl,0s) infinite}
+@keyframes flt{0%,100%{transform:translate(0,0) rotate(var(--r,0deg))}33%{transform:translate(6px,-16px) rotate(calc(var(--r,0deg) + 6deg))}66%{transform:translate(-5px,-6px) rotate(calc(var(--r,0deg) - 4deg))}}
+
+/* paper clouds hanging on strings; they drop in when their section is reached */
+.cl{position:absolute;left:var(--x);top:0;width:calc(var(--w) * 2);transform:translateY(-900px);transform-origin:50% 0}
+.cl::before{content:"";position:absolute;left:50%;top:0;width:2px;height:var(--len);margin-left:-1px;background:linear-gradient(#15302c66,#15302c88)}
+.cl img{display:block;width:100%;height:auto;margin-top:var(--len);filter:drop-shadow(0 10px 12px rgba(30,60,90,.25))}
+.cl.drop{animation:clDrop .9s cubic-bezier(.3,.1,.2,1) var(--d,0s) both,clSway 5s ease-in-out calc(var(--d,0s) + .9s) infinite}
+@keyframes clDrop{from{transform:translateY(-900px)}to{transform:translateY(0)}}
+@keyframes clSway{0%,100%{transform:rotate(0)}50%{transform:rotate(var(--sw))}}
+@media (max-width:700px){.cl{width:calc(var(--w) * 1.5)}.hero-sky .cl:nth-child(2){display:none}}
+
+/* shared pill buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;border:2px solid var(--ink);border-radius:999px;background:var(--ink);color:var(--cream);
+  font-weight:700;padding:14px 24px;box-shadow:5px 5px 0 var(--acid);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--acid)}
+.btn.ghost{background:var(--cream);color:var(--ink)}
+
+/* things that pop up once scrolled into view */
+.pop{transform:translateY(60px) scale(.96);opacity:0;transition:transform .9s cubic-bezier(.2,.9,.25,1),opacity .6s ease}
+.pop.in{transform:none;opacity:1}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .cl{transform:none}
+  .pop{transform:none;opacity:1}
+}
+
+/* ============ Loading screen ============ */
+.loader{position:fixed;inset:0;z-index:1000;overflow:hidden;background:var(--cream);transition:opacity .8s ease,visibility .8s}
+.loader img{display:none;position:absolute;left:50%;top:50%;width:max(130vmax,900px);height:auto;translate:-50% -50%;animation:loaderIn .6s ease-out both,loaderSpin 40s linear infinite}
+.loader.done{opacity:0;visibility:hidden}
+.loader.done img{transform:scale(2.4);transition:transform .8s ease-in}
+@keyframes loaderIn{from{opacity:0;scale:.6}to{opacity:1;scale:1}}
+@keyframes loaderSpin{to{rotate:-360deg}}
+html.tall .loader{position:absolute;height:100vh;bottom:auto}
+/* clouds sway at their own pace */
+.cl.drop{animation-duration:.9s,var(--swd,5s)!important}

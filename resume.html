@@ -1,0 +1,237 @@
+<title>Lindsay Morton Résumé</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&family=Instrument+Serif:ital@1&display=swap">
+<style>
+/* Layout: a single résumé sheet; header band, sidebar of numbers + skills, main column of roles on a timeline */
+:root{--paper:#fbf2e6;--ink:#15302c;--mut:#15302cb3;--line:#15302c22;--pink:#ef4a86;--acid:#dae900;--wall:#2b1a52;
+ --display:"Bricolage Grotesque","DM Sans",system-ui,sans-serif;--body:"DM Sans",system-ui,-apple-system,sans-serif;--serif:"Instrument Serif",Georgia,serif;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--wall);color:var(--ink);font:15.5px/1.55 var(--body)}
+.page{max-width:1080px;margin:clamp(16px,4vw,48px) auto;background:var(--paper);border-radius:28px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.wrap{padding-left:max(16px,clamp(22px,5vw,64px));padding-right:max(16px,clamp(22px,5vw,64px))}
+@media (max-width:1120px){.page{margin-inline:max(12px,env(safe-area-inset-left,0px))}}
+
+/* header */
+.hd{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:clamp(18px,3vw,36px);align-items:center;padding-block:clamp(28px,4vw,48px);border-bottom:2px solid var(--ink)}
+.ph{width:clamp(130px,15vw,200px);aspect-ratio:1;border-radius:50%;overflow:hidden;border:4px solid var(--pink);box-shadow:5px 5px 0 var(--acid)}
+.ph img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;display:block}
+h1{margin:0;font:800 clamp(40px,6vw,76px)/.9 var(--display);letter-spacing:-.045em}
+h1 span{color:var(--pink)}
+.role{margin:10px 0 0;font:700 13px var(--body);letter-spacing:.14em;text-transform:uppercase}
+.tag{margin:6px 0 0;font:italic 400 clamp(19px,1.8vw,24px)/1.2 var(--serif)}
+.tag mark{background:linear-gradient(transparent 55%,var(--acid) 55% 92%,transparent 92%);color:inherit}
+.ct{display:grid;gap:6px;justify-items:end;font-size:14px;text-align:right}
+.ct b{font-weight:700}
+.ct button{border:2px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:9px 16px;font:700 13px var(--body);cursor:pointer;box-shadow:3px 3px 0 var(--acid);margin-top:4px}
+
+/* body */
+.bd{display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);gap:clamp(24px,4vw,56px);padding-block:clamp(26px,3.5vw,44px) clamp(32px,4vw,56px)}
+h2{margin:0 0 14px;font:800 12.5px var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--pink)}
+aside{display:grid;gap:30px;align-content:start;min-width:0}
+.prof p{margin:0;font-size:15px}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.nums div{background:#fff;border-radius:14px;padding:12px 14px;box-shadow:inset 0 0 0 1.5px var(--line)}
+.nums b{display:block;font:800 26px/1 var(--display);letter-spacing:-.03em;margin-bottom:4px}
+.nums div:nth-child(odd) b{color:var(--pink)}
+.nums span{font-size:12.5px;line-height:1.3;display:block}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.chips li{font:700 12.5px var(--body);padding:6px 11px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line)}
+.tools p{margin:0;font-size:14px;color:var(--mut)}
+
+main{min-width:0}
+.jobs{list-style:none;margin:0;padding:0 0 0 26px;border-left:3px solid var(--pink);display:grid;gap:26px}
+.job{position:relative}
+.job::before{content:"";position:absolute;left:-35px;top:6px;width:15px;height:15px;border-radius:50%;background:var(--acid);border:3px solid var(--ink)}
+.jh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 14px}
+.jh h3{margin:0;font:800 clamp(20px,1.9vw,24px)/1.15 var(--display);letter-spacing:-.02em}
+.jh time{font:700 13px var(--body);font-variant-numeric:tabular-nums;background:var(--ink);color:var(--paper);padding:3px 10px;border-radius:999px;white-space:nowrap}
+.jt{margin:2px 0 2px;font-weight:700}
+.jd{margin:0 0 8px;font-size:13.5px;color:var(--mut);font-style:italic}
+.job ul{margin:0;padding-left:18px;display:grid;gap:5px}
+.job li{font-size:14.5px}
+.job li::marker{color:var(--pink)}
+.job li b{font-weight:700}
+.early{margin-top:34px}
+.more{margin:24px 0 0;padding-top:20px;border-top:2px dashed var(--line);font-size:14.5px}
+.more p{margin:0}
+
+/* focus switcher + download bar */
+.bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;padding-block:16px;border-bottom:2px solid var(--ink);background:#f4e6d3}
+.bar-l{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.bar-l>span{font:800 12px var(--body);letter-spacing:.14em;text-transform:uppercase;margin-right:4px}
+.fc{border:2px solid var(--ink);background:#fff;color:var(--ink);border-radius:999px;padding:7px 14px;font:700 13.5px var(--body);cursor:pointer;transition:background .2s,transform .2s}
+.fc:hover{transform:translateY(-2px)}
+.fc[aria-pressed="true"]{background:var(--acid);box-shadow:3px 3px 0 var(--ink)}
+.fc:focus-visible,.dl:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+.ct .dl{margin-top:6px;border:0;background:var(--pink);color:#fff;border-radius:999px;padding:11px 20px;font:800 14px var(--body);cursor:pointer;box-shadow:4px 4px 0 var(--ink)}
+.dl:disabled{opacity:.6;cursor:default}
+.dl-note{font-size:12.5px;color:var(--mut);margin:0;max-width:220px;text-align:right}
+.chips li.on{background:var(--acid);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.job-in{animation:jIn .35s ease}
+@keyframes jIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.job-in{animation:none}}
+@media (max-width:820px){.dl-note{text-align:left}}
+@media (max-width:820px){
+ .hd{grid-template-columns:auto minmax(0,1fr)}.ct{grid-column:1/-1;justify-items:start;text-align:left}
+ .bd{grid-template-columns:1fr}
+}
+@media (max-width:460px){.hd{grid-template-columns:1fr}.ph{width:140px}}
+</style>
+
+<div class="page">
+ <header class="hd wrap">
+  <div class="ph"><img src="assets/portrait_front.png" alt="Lindsay Morton"></div>
+  <div>
+   <h1>Lindsay Morton<span>.</span></h1>
+   <p class="role" id="roleLine">Marketing executive · Brand, growth &amp; go-to-market</p>
+   <p class="tag">Using my powers for <mark>good</mark>.</p>
+  </div>
+  <div class="ct">
+   <span>Birmingham, AL</span>
+   <b id="em">lindsayomorton@gmail.com</b>
+   <a href="https://www.linkedin.com/in/lindsayoneal" target="_blank" rel="noopener noreferrer">linkedin.com/in/lindsayoneal ↗</a>
+   <button type="button" id="cp">Copy email</button>
+   <button type="button" class="dl" id="dl">Download PDF ↓</button>
+   <p class="dl-note" id="dlNote" hidden></p>
+  </div>
+ </header>
+ <div class="bar wrap" role="group" aria-label="Résumé focus">
+  <div class="bar-l"><span>Focus</span>
+   <button type="button" class="fc" data-f="general" aria-pressed="true">General marketing</button>
+   <button type="button" class="fc" data-f="product" aria-pressed="false">Product marketing</button>
+   <button type="button" class="fc" data-f="brand" aria-pressed="false">Brand building</button>
+   <button type="button" class="fc" data-f="digital" aria-pressed="false">Digital</button>
+   <button type="button" class="fc" data-f="demand" aria-pressed="false">Demand gen</button>
+   <button type="button" class="fc" data-f="partner" aria-pressed="false">Partnerships</button>
+  </div>
+ </div>
+
+ <div class="bd wrap">
+  <aside>
+   <section class="prof"><h2>Profile</h2><p id="profile">Marketing executive with 15+ years building brands, launching products and accelerating growth across B2B technology, AI, SaaS, healthcare technology and consumer businesses. Combines C-level strategy with hands-on command of demand generation, positioning, digital acquisition, marketing operations and revenue analytics. Trusted partner to founders and executive teams.</p></section>
+   <section><h2>Results</h2><div class="nums" id="nums">
+    <div><b>$20M</b><span>first-year inbound pipeline</span></div>
+    <div><b>4×</b><span>top-of-funnel growth in under six months</span></div>
+    <div><b>10×</b><span>organic traffic</span></div>
+    <div><b>$55M</b><span>revenue at a business I helped scale</span></div>
+    <div><b>50%</b><span>of revenue from partner channels I built</span></div>
+    <div><b>5×</b><span>sales growth at Passport</span></div>
+   </div></section>
+   <section><h2>Expertise</h2><ul class="chips" id="skills"><li>Brand strategy &amp; positioning</li><li>Integrated marketing</li><li>Demand generation</li><li>Product marketing &amp; launches</li><li>Revenue &amp; pipeline growth</li><li>Digital, SEO/AEO &amp; paid media</li><li>Marketing ops &amp; attribution</li><li>AI-enabled marketing</li><li>Partnerships &amp; channels</li><li>Executive communications</li><li>Team &amp; agency leadership</li></ul></section>
+   <section class="tools"><h2>Platforms</h2><p>HubSpot (10+ years administration), Salesforce, GA4, paid search and social, CRM and lifecycle automation, SEO/AEO, dashboards, attribution, experimentation and AI-assisted marketing workflows.</p></section>
+  </aside>
+
+  <main>
+   <h2>Experience</h2>
+   <ol class="jobs" id="jobsMain"></ol>
+   <h2 class="early">Earlier career</h2>
+   <ol class="jobs" id="jobsEarly"></ol>
+   <div class="more"><h2>Also</h2><p>Fractional CMO and consulting (2019–2020) across growth, customer engagement and communications.</p></div>
+   <div class="more"><h2>Education</h2><p><b>Auburn University</b> · Bachelor of Arts, Journalism &amp; Psychology<br>Marketing Week Mini MBA in Marketing</p></div>
+
+  </main>
+ </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+var FOCUS={
+ general:{role:"Marketing executive · Brand, growth & go-to-market",profile:"Marketing executive with 15+ years building brands, launching products and accelerating growth across B2B technology, AI, SaaS, healthcare technology and consumer businesses. Combines C-level strategy with hands-on command of demand generation, positioning, digital acquisition, marketing operations and revenue analytics. Trusted partner to founders and executive teams.",nums:["pipe","tof","rev","part","org","sales"],skills:["Brand strategy & positioning","Integrated marketing","Demand generation","Revenue & pipeline growth","Team & agency leadership"]},
+ product:{role:"Product marketing leader · Positioning, launches & go-to-market",profile:"Product marketing leader with 15+ years turning complex products into clear market stories. Leads positioning, competitive differentiation, launches and sales enablement for AI, SaaS and healthcare technology, and partners closely with product and sales teams to drive adoption and revenue.",nums:["launch","tof","eng","pipe","rev","part"],skills:["Product marketing & launches","Brand strategy & positioning","Executive communications","AI-enabled marketing"]},
+ brand:{role:"Brand builder · Story, positioning & identity",profile:"Brand builder with 15+ years shaping how companies are seen and remembered. Rebrands, market narratives and websites that make emerging categories easy to understand, from a full rebrand and AI launch in one month to repositioning a private-equity portfolio. Background in journalism and editorial production.",nums:["launch","sales","traf","org","rev","pipe"],skills:["Brand strategy & positioning","Executive communications","Integrated marketing","Product marketing & launches"]},
+ digital:{role:"Digital growth leader · SEO/AEO, paid media & lifecycle",profile:"Digital growth leader with 15+ years building acquisition engines. Runs SEO and answer-engine optimization, paid media, lifecycle and conversion programs backed by attribution and testing, with 10× organic traffic, 7× website traffic and 5× sales growth on the record.",nums:["org","traf","sales","tof","paid","pipe"],skills:["Digital, SEO/AEO & paid media","Marketing ops & attribution","AI-enabled marketing","Demand generation"]},
+ demand:{role:"Demand generation leader · Pipeline & revenue growth",profile:"Demand generation leader with 15+ years building pipeline that sales can close. Integrated campaigns, events, content and lifecycle programs measured end to end, including $20M in first-year inbound pipeline and 4× top-of-funnel growth in under six months.",nums:["pipe","tof","rev","org","paid","roi"],skills:["Demand generation","Revenue & pipeline growth","Integrated marketing","Marketing ops & attribution"]},
+ partner:{role:"Partnerships & channel marketing leader",profile:"Marketing executive with 15+ years building growth through partners. Developed partner and referral channels that reached 50% of revenue while cutting acquisition cost in half, and leads co-marketing, agency and investor relationships alongside brand and demand programs.",nums:["part","cac","rev","pipe","roi","tof"],skills:["Partnerships & channels","Team & agency leadership","Revenue & pipeline growth","Executive communications"]}
+};
+var NUMS={pipe:["$20M","first-year inbound pipeline"],tof:["4×","top-of-funnel growth in under six months"],org:["10×","organic traffic"],rev:["$55M","revenue at a business I helped scale"],part:["50%","of revenue from partner channels I built"],sales:["5×","sales growth at Passport"],traf:["7×","website traffic at Passport"],launch:["1 month","to rebrand Klaar and launch its AI"],eng:["40%","lift in campaign engagement from buyer personas"],paid:["$3M","paid media managed with ROI discipline"],roi:["50%","improvement in marketing ROI"],cac:["50%","lower customer acquisition cost"]};
+var JOBS=[
+ {n:"Klaar",t:"Vice President of Marketing",d:"2026",x:"Predictive performance management software",b:[
+  ["Rebranded the company and launched its AI within <b>one month</b>.","general brand product"],
+  ["Led website, brand messaging and market narrative for an AI-enabled platform in an emerging category.","general brand digital"],
+  ["Owned product positioning and aligned product, commercial and event marketing around the launch.","product brand"],
+  ["Directed demand generation, digital growth and go-to-market planning.","general demand digital"]]},
+ {n:"Vivun",t:"Director of Demand Generation & GTM Engineering",d:"2024–2026",x:"AI software and sales technology",b:[
+  ["Led positioning and launch marketing for an AI sales agent: narrative, competitive differentiation, campaigns, content and sales enablement.","general product brand"],
+  ["Delivered <b>4× top-of-funnel growth</b> in under six months through integrated campaigns.","general demand"],
+  ["Grew organic traffic <b>10×</b> through website restructuring, SEO and conversion optimization.","general digital demand"],
+  ["Managed <b>$3M in paid media</b> with performance measurement and ROI discipline across channels.","digital demand"],
+  ["Ran $1.5M in events and executive-engagement programs.","demand brand partner"],
+  ["Built marketing operations, attribution and reporting; applied AI workflows to campaigns, content, targeting and analytics.","general digital demand"]]},
+ {n:"Trak Capital · HRLogics · OnCentive",t:"VP of Growth Marketing → Chief Growth Officer",d:"2021–2024",x:"Private-equity-backed portfolio of B2B technology and compliance businesses",b:[
+  ["Generated <b>$20M in inbound pipeline</b> in the first year through thought leadership, webinars, events, content and lifecycle marketing.","general demand"],
+  ["Developed partner and referral channels that reached <b>50% of revenue</b> while cutting customer acquisition cost 50%.","general partner demand"],
+  ["Helped build OnCentive's growth engine from $0 to $23M and then <b>$55M</b> in revenue; managed a $5M budget and improved marketing ROI 50%.","general demand digital"],
+  ["Led brand repositioning and acquired-company integrations across five B2B platforms.","brand general product"],
+  ["Partnered on pricing and packaging tied to 30% growth in existing-customer revenue.","product partner"],
+  ["Built and led a team of six plus agency partners; reported pipeline and strategy to executives and investors.","general partner brand"]]},
+ {n:"Passport",t:"Vice President of Marketing, Digital Growth",d:"2013–2019",x:"Consumer business with digital and physical customer channels",b:[
+  ["Built the digital acquisition engine, contributing to <b>5× sales growth</b>.","general digital demand"],
+  ["Led brand and website modernization, growing website traffic <b>7×</b>.","general brand digital"],
+  ["Established paid search, SEO, lifecycle marketing, testing and customer research programs.","digital demand product"]]},
+ {n:"SuccessEHS",t:"Product Marketing Specialist",d:"2011–2013",x:"Healthcare technology; later acquired by Greenway Health",b:[
+  ["Led positioning, competitive intelligence, sales enablement and buyer education for an EHR platform.","general product brand"],
+  ["Built buyer personas that lifted campaign engagement <b>40%</b>.","product demand digital"],
+  ["Developed national conference programs that doubled booth traffic and generated 300+ qualified leads.","demand partner brand general"]]}
+];
+var EARLY=[
+ {n:"Techli.com",t:"Co-founder & Editor",d:"2010–2011",x:"Startup and technology news site",b:[
+  ["Co-founded and led editorial operations for a popular startup blog, managing a global team of writers.","general brand partner product"],
+  ["Grew pageviews <b>200% month over month</b> through content strategy and distribution.","general digital demand brand"]]},
+ {n:"SocialKaty",t:"Social Media Manager",d:"2009–2011",x:"One of the first social-media-only agencies, serving Chicago tech startups",b:[
+  ["Ran social media strategy for 8 high-growth B2B and B2C clients, and brought in clients of my own.","general digital partner brand"],
+  ["Built content strategies aligned with each client's product messaging and goals.","product brand demand digital"]]}
+];
+var cur="general";
+function pick(job,f,max){ var m=job.b.filter(function(x){return x[1].split(" ").indexOf(f)>=0}); if(!m.length) m=job.b.slice(0,1); return m.slice(0,max); }
+function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML;}
+function jobHTML(j,f,max){ return '<li class="job job-in"><div class="jh"><h3>'+esc(j.n)+'</h3><time>'+j.d+'</time></div><p class="jt">'+esc(j.t)+'</p><p class="jd">'+esc(j.x)+'</p><ul>'+pick(j,f,max).map(function(x){return "<li>"+x[0]+"</li>"}).join("")+'</ul></li>'; }
+function render(f){ cur=f; var F=FOCUS[f];
+  document.getElementById("roleLine").textContent=F.role;
+  document.getElementById("profile").textContent=F.profile;
+  document.getElementById("nums").innerHTML=F.nums.map(function(k){return "<div><b>"+NUMS[k][0]+"</b><span>"+NUMS[k][1]+"</span></div>"}).join("");
+  [].forEach.call(document.querySelectorAll("#skills li"),function(li){ li.classList.toggle("on",F.skills.indexOf(li.textContent.replace("&","&"))>=0); });
+  document.getElementById("jobsMain").innerHTML=JOBS.map(function(j){return jobHTML(j,f,4)}).join("");
+  document.getElementById("jobsEarly").innerHTML=EARLY.map(function(j){return jobHTML(j,f,2)}).join("");
+  [].forEach.call(document.querySelectorAll(".fc"),function(b){ b.setAttribute("aria-pressed",b.dataset.f===f); });
+  try{ localStorage.setItem("lm-resume-focus",f); }catch(e){}
+}
+[].forEach.call(document.querySelectorAll(".fc"),function(b){ b.addEventListener("click",function(){ render(b.dataset.f); }); });
+var start="general"; try{ var v=localStorage.getItem("lm-resume-focus"); if(v&&FOCUS[v]) start=v; }catch(e){}
+render(start);
+
+/* PDF of the current version */
+function strip(h){ var d=document.createElement("div"); d.innerHTML=h; return d.textContent; }
+function buildPDF(){
+  var J=window.jspdf.jsPDF, doc=new J({unit:"pt",format:"letter"}), W=612, M=50, y=56, F=FOCUS[cur];
+  function need(h){ if(y+h>742){ doc.addPage(); y=56; } }
+  function text(t,size,style,color,gap,indent){ doc.setFont("helvetica",style||"normal"); doc.setFontSize(size); doc.setTextColor.apply(doc,color||[21,48,44]);
+    var lines=doc.splitTextToSize(t,W-2*M-(indent||0)); lines.forEach(function(l){ need(size+3); doc.text(l,M+(indent||0),y); y+=size+3; }); y+=(gap||0); }
+  function head(t){ y+=6; need(24); doc.setDrawColor(239,74,134); doc.setLineWidth(1.2); doc.line(M,y,W-M,y); y+=14; text(t.toUpperCase(),10,"bold",[239,74,134],4); }
+  text("LINDSAY MORTON",24,"bold",[21,48,44],2);
+  text(F.role.replace("·","|"),11,"bold",[21,48,44],2);
+  text("Birmingham, AL  |  lindsayomorton@gmail.com  |  linkedin.com/in/lindsayoneal",9.5,"normal",[80,90,88],4);
+  head("Profile"); text(F.profile,10,"normal",null,2);
+  head("Selected results"); text(F.nums.map(function(k){return NUMS[k][0]+" "+NUMS[k][1]}).join("   •   "),10,"normal",null,2);
+  head("Experience");
+  function job(j,max){ need(40); doc.setFont("helvetica","bold"); doc.setFontSize(11.5); doc.setTextColor(21,48,44); doc.text(j.n.toUpperCase()+"  |  "+j.t,M,y); doc.setFont("helvetica","normal"); doc.text(j.d,W-M,y,{align:"right"}); y+=14;
+    text(j.x,9,"italic",[90,100,98],2); pick(j,cur,max).forEach(function(x){ text("•  "+strip(x[0]),10,"normal",null,1,8); }); y+=6; }
+  JOBS.forEach(function(j){job(j,4)}); head("Earlier career"); EARLY.forEach(function(j){job(j,2)});
+  head("Education"); text("Auburn University — Bachelor of Arts, Journalism & Psychology",10,"normal",null,1); text("Marketing Week Mini MBA in Marketing",10,"normal",null,2);
+  head("Expertise"); text([].map.call(document.querySelectorAll("#skills li"),function(l){return l.textContent}).join("  •  "),9.5,"normal",null,2);
+  return doc;
+}
+var dl=document.getElementById("dl"), note=document.getElementById("dlNote"), downloads=null;
+if(window.claude&&window.claude.use) window.claude.use("downloads").then(function(d){downloads=d;}).catch(function(){});
+dl.addEventListener("click",function(){
+  if(!window.jspdf){ note.hidden=false; note.textContent="The PDF tool didn't load. Refresh the page and try again."; return; }
+  var name="Lindsay_Morton_Resume_"+document.querySelector('.fc[aria-pressed="true"]').textContent.replace(/[^A-Za-z]+/g,"_")+".pdf";
+  var doc=buildPDF(); note.hidden=true;
+  if(downloads){ dl.disabled=true; downloads.save({filename:name,data:doc.output("blob")}).then(function(){ note.hidden=false; note.textContent="Saved "+name+"."; },function(){ note.hidden=false; note.textContent="Download was cancelled."; }).finally(function(){ dl.disabled=false; }); }
+  else { try{ doc.save(name); }catch(e){} note.hidden=false; note.textContent="If nothing downloaded, open this résumé as its own page and try again."; }
+});
+})();
+</script>
+<script>
+(function(){var b=document.getElementById("cp");if(!b)return;b.addEventListener("click",function(){var t="lindsayomorton@gmail.com";function ok(){b.textContent="Copied";setTimeout(function(){b.textContent="Copy email"},1600)}
+try{navigator.clipboard.writeText(t).then(ok,function(){var r=document.createRange();r.selectNodeContents(document.getElementById("em"));var s=getSelection();s.removeAllRanges();s.addRange(r)})}catch(e){}})})();
+</script>

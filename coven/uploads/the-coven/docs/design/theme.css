@@ -1,0 +1,51 @@
+/* The Coven theme. Generated from docs/design/tokens.json. Dark only.
+   Step 1 imports this from src/app/globals.css and maps the shadcn variables to it (bottom of file). */
+:root {
+  color-scheme: dark;
+  --night: #110F31;
+  --dusk: #1A1744;
+  --twilight: #272360;
+  --outline: #423C73;
+  --outline-strong: #7C74C0;
+  --moonlight: #EDE9FF;
+  --mist: #A9A6D4;
+  --mint: #8DCFB5;
+  --on-mint: #110F31;
+  --lavender: #B9A3F5;
+  --violet: #876EB8;
+  --bloom: #FF6BC6;
+  --on-bloom: #110F31;
+  --peach: #FFB59E;
+  --sky: #7FA8FF;
+  --warning: #FFC978;
+  --danger: #FF7B7B;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+  --glow-mint: 0 0 0 1px rgba(141,207,181,0.5), 0 0 28px rgba(141,207,181,0.28);
+  --glow-bloom: 0 0 0 1px rgba(255,107,198,0.55), 0 0 32px rgba(255,107,198,0.3);
+  --lift: 0 12px 32px rgba(8,7,26,0.55);
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;   /* next/font variables */
+  --font-body: var(--font-figtree), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* shadcn/ui mapping: components keep their usual class names and pick up the theme. */
+  --background: var(--night);        --foreground: var(--moonlight);
+  --card: var(--dusk);               --card-foreground: var(--moonlight);
+  --popover: var(--dusk);            --popover-foreground: var(--moonlight);
+  --primary: var(--mint);            --primary-foreground: var(--on-mint);
+  --secondary: var(--twilight);      --secondary-foreground: var(--moonlight);
+  --muted: var(--twilight);          --muted-foreground: var(--mist);
+  --accent: var(--twilight);         --accent-foreground: var(--moonlight);
+  --destructive: var(--danger);      --destructive-foreground: var(--night);
+  --border: var(--outline);          --input: var(--outline-strong);
+  --ring: var(--mint);               --radius: var(--radius-md);
+}

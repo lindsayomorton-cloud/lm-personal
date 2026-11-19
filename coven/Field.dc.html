@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="uploads/the-coven/docs/design/theme.css">
+</helmet>
+<div style="display:flex;flex-direction:column;gap:var(--space-2);width:100%;font-family:var(--font-body)">
+<label for="{{ id }}" style="font-size:14px;line-height:1.5;font-weight:700;color:var(--moonlight)">{{ label }}</label>
+<sc-if value="{{ isInput }}" hint-placeholder-val="{{ true }}">
+<input id="{{ id }}" type="{{ type }}" value="{{ value }}" onChange="{{ onChange }}" placeholder="{{ placeholder }}" min="{{ min }}" autoComplete="{{ autoComplete }}" inputMode="{{ inputMode }}" aria-invalid="{{ invalid }}" aria-describedby="{{ msgId }}" style="width:100%;min-height:44px;padding:0 var(--space-3);background:var(--dusk);color:var(--moonlight);border:1px solid {{ border }};border-radius:var(--radius-sm);font-family:var(--font-body);font-size:16px;line-height:1.6;color-scheme:dark;transition:border-color 150ms ease">
+</sc-if>
+<sc-if value="{{ isTextarea }}" hint-placeholder-val="{{ false }}">
+<textarea id="{{ id }}" value="{{ value }}" onChange="{{ onChange }}" placeholder="{{ placeholder }}" rows="{{ rows }}" aria-invalid="{{ invalid }}" aria-describedby="{{ msgId }}" style="width:100%;min-height:96px;padding:var(--space-3);background:var(--dusk);color:var(--moonlight);border:1px solid {{ border }};border-radius:var(--radius-sm);font-family:var(--font-body);font-size:16px;line-height:1.6;resize:vertical"></textarea>
+</sc-if>
+<sc-if value="{{ isSelect }}" hint-placeholder-val="{{ false }}">
+<select id="{{ id }}" value="{{ value }}" onChange="{{ onChange }}" aria-invalid="{{ invalid }}" aria-describedby="{{ msgId }}" style="width:100%;min-height:44px;padding:0 var(--space-3);background:var(--dusk);color:var(--moonlight);border:1px solid {{ border }};border-radius:var(--radius-sm);font-family:var(--font-body);font-size:16px;line-height:1.6;color-scheme:dark">
+<sc-for list="{{ options }}" as="o" hint-placeholder-count="0"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+</select>
+</sc-if>
+<sc-if value="{{ showHelp }}" hint-placeholder-val="{{ false }}"><span id="{{ msgId }}" style="font-size:14px;line-height:1.5;color:var(--mist)">{{ help }}</span></sc-if>
+<sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}"><span id="{{ msgId }}" role="alert" style="font-size:14px;line-height:1.5;color:var(--danger)">{{ error }}</span></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;360px&quot;,&quot;height&quot;:&quot;120px&quot;},&quot;label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ZIP code&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;kind&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;input&quot;,&quot;textarea&quot;,&quot;select&quot;],&quot;default&quot;:&quot;input&quot;,&quot;tsType&quot;:&quot;'input'|'textarea'|'select'&quot;},&quot;help&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Where you'll pick it up or ship from.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;error&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;id&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;type&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;value&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;onChange&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(e) =&gt; void&quot;},&quot;options&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{value:string,label:string}[]&quot;},&quot;placeholder&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props, k = p.kind || 'input', id = p.id || 'field';
+    return {
+      id, msgId: id + '-msg', label: p.label ?? 'Label',
+      isInput: k === 'input', isTextarea: k === 'textarea', isSelect: k === 'select',
+      type: p.type || 'text', value: p.value ?? '', onChange: p.onChange,
+      placeholder: p.placeholder || '', options: p.options || [], rows: p.rows || 4,
+      min: p.min, autoComplete: p.autoComplete || 'off', inputMode: p.inputMode,
+      help: p.help, showHelp: !!p.help && !p.error,
+      error: p.error, hasError: !!p.error, invalid: p.error ? 'true' : 'false',
+      border: p.error ? 'var(--danger)' : 'var(--outline-strong)'
+    };
+  }
+}
+</script>
+</body>
+</html>

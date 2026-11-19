@@ -1,0 +1,338 @@
+/* ============ Jump-in link bar ============ */
+.jump{position:relative;z-index:50;background:var(--night);padding:18px clamp(16px,4vw,56px) 22px}
+.jump-in{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:clamp(4px,.5vw,8px);overflow-x:auto;scrollbar-width:none}
+.jump-in::-webkit-scrollbar{display:none}
+.jump-lab{flex:none;white-space:nowrap;margin-right:clamp(2px,.6vw,10px);font-size:clamp(10px,.85vw,12px);font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--acid)}
+.jump a{flex:none;white-space:nowrap;color:var(--cream);font-weight:700;font-size:clamp(12px,1.05vw,15px);padding:clamp(6px,.6vw,9px) clamp(9px,1.05vw,16px);border-radius:999px;border:1.5px solid rgba(251,242,230,.38);transition:background .2s,color .2s,border-color .2s}
+.jump a:hover,.jump a:focus-visible{background:var(--cream);color:var(--ink);border-color:var(--cream);outline:none}
+.jump a.hi{background:var(--pink);border-color:var(--pink);color:#fff}
+.jump a.hi:hover{background:var(--acid);border-color:var(--acid);color:var(--ink)}
+@media (max-width:1000px){.jump-in{justify-content:flex-start}}
+@media (max-width:700px){.jump{padding:10px 0}.jump-in{padding:0 16px}.jump a{font-size:14px;padding:8px 14px}}
+
+/* ============ Vortex: a portal you fall through on the way to the doors ============
+   The section itself is just scroll room. While you scroll through it, the portal fades in over
+   the whole screen, rushes toward you, and fades away as the doors arrive. */
+.vx{position:relative;z-index:50;height:170vh;height:170svh;background:linear-gradient(#120f12 0%,#2a1846 22%,var(--purple) 50%,#a43fa0 78%,var(--pink) 100%)}
+.vx-view{position:fixed;inset:0;z-index:90;pointer-events:none;overflow:hidden;display:grid;place-items:center;opacity:0;visibility:hidden;
+  background:radial-gradient(70% 60% at 50% 50%,#3a1a8a 0%,#1b0b45 55%,#0b0420 100%)}
+.vx-view.on{visibility:visible}
+.vx-hole{position:absolute;left:50%;top:50%;width:min(130vmax,1800px);aspect-ratio:351/265;
+  translate:-50% -50%;animation:vxSpin 60s linear infinite;will-change:transform}
+/* the soft edge and color boost are built into the image, so nothing is re-masked while it spins */
+.vx-hole img{display:block;width:100%;height:100%;object-fit:cover}
+.vx-ring{position:relative;z-index:2;width:min(62vmin,560px);height:auto;opacity:var(--ro,1);transform:scale(var(--rs,1)) rotate(var(--rr,0deg));
+  filter:drop-shadow(0 0 18px rgba(170,120,255,.9)) drop-shadow(0 0 50px rgba(120,80,255,.6)) brightness(1.5)}
+/* the cosmic tunnel at the center rushes toward you as you fall */
+.vx-tunnel{position:relative;z-index:2;width:min(70vmin,620px);height:auto;aspect-ratio:1;will-change:transform,opacity}
+@keyframes vxSpin{to{rotate:360deg}}
+
+/* Alice quotes fade in and out as you fall */
+.vq{position:absolute;z-index:4;margin:0;max-width:min(26ch,56vw);opacity:0;transform:rotate(var(--rt));
+  font:italic 400 clamp(30px,4vw,64px)/1.08 var(--serif);color:var(--cream);text-shadow:0 0 18px rgba(170,120,255,.9),0 2px 0 rgba(43,26,82,.6)}
+.vq small{display:block;margin-top:8px;font:700 11px var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--acid);text-shadow:none}
+
+/* gems drifting up through the portal */
+.vx-float{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;container-type:size}
+/* measured against the vortex window itself, so the pace is right in any viewer */
+
+/* the worm: 8 frames in one strip, stepped through while it inches across */
+.vx-worm{display:none!important;position:absolute;left:0;top:64%;width:clamp(120px,13vw,200px);aspect-ratio:240/100;background:url(assets/proj/vx-worm.webp) 0 0/800% 100% no-repeat;
+  filter:drop-shadow(0 0 10px rgba(255,220,240,.5));animation:wormFrames 1s steps(8) infinite,wormCross 24s linear infinite}
+@keyframes wormFrames{to{background-position:114.2857% 0}}
+@keyframes wormCross{0%{transform:translateX(-30vw) translateY(0)}50%{transform:translateX(50vw) translateY(-30px)}100%{transform:translateX(130vw) translateY(0)}}
+@media (prefers-reduced-motion:reduce){.vx-worm{display:none!important;animation:none;left:10%}}
+
+@media (max-width:700px){
+  .vq{max-width:86vw;font-size:clamp(24px,7vw,30px)}
+  .vq:nth-of-type(odd){left:6%!important}
+  .vq:nth-of-type(even){left:auto!important;right:6%;text-align:right}
+  .vb{width:calc(var(--w) * .7)}
+}
+
+/* When the whole page is shown at once (a very tall viewer with no scrolling),
+   the view is moved by script to follow whatever part of the section is on screen. */
+html.tall .vx{height:2000px}
+.vx-slice{position:absolute;left:0;width:1px;height:2.5%;pointer-events:none;visibility:hidden}
+html.tall .vx-view{position:absolute;inset:auto 0 auto 0;top:var(--vt,0px);height:var(--vh,100vh)}
+html.tall .vq{transform:rotate(var(--rt))!important}
+
+
+/* nothing in the vortex animates while it is out of sight */
+.vx-view:not(.on) *{animation-play-state:paused!important}
+
+/* the dive: a hole opens where the rabbit vanished and swallows the screen, then becomes the vortex */
+.dive{position:fixed;inset:0;z-index:95;pointer-events:none;background:#180a3e;clip-path:circle(0 at var(--dx) var(--dy));transition:clip-path 1.1s cubic-bezier(.7,0,.3,1),opacity .6s ease}
+.dive img{position:absolute;left:var(--dx);top:var(--dy);width:max(160vmax,1400px);translate:-50% -50%;scale:.4;animation:vxSpin 30s linear infinite;transition:scale 1.1s cubic-bezier(.7,0,.3,1)}
+.dive.open{clip-path:circle(150vmax at var(--dx) var(--dy))}
+.dive.open img{scale:1}
+.dive.gone{opacity:0}
+.page.diving{transition:transform 1.1s cubic-bezier(.7,0,.3,1);transform:scale(2.6)}
+
+/* until the rabbit has dived, the vortex section is just more cream page: no swirl, no colors */
+html:not(.vx-live) .vx{background:var(--cream)}
+html:not(.vx-live) .vx-view{visibility:hidden!important;opacity:0!important}
+
+/* things in the vortex have depth: some come flying OUT of the hole and rush past you,
+   others get pulled IN from the edges and shrink away down the hole. Each waits its turn. */
+.vb{position:absolute;left:50%;top:50%;width:var(--w);opacity:0;will-change:transform,opacity;animation:var(--anim) var(--dur) var(--del) infinite}
+.vb img{display:block;width:100%;height:auto;animation:vbSpin var(--dur) linear var(--del) infinite}
+@keyframes vbSpin{to{rotate:var(--rt,180deg)}}
+@keyframes vbOut{0%{transform:translate(-50%,-50%) scale(.05);opacity:0}4%{opacity:1}27%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(var(--s,3));opacity:.95}30%,100%{transform:translate(calc(-50% + var(--tx) * 1.2),calc(-50% + var(--ty) * 1.2)) scale(calc(var(--s,3) * 1.2));opacity:0}}
+@keyframes vbIn{0%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(1.6);opacity:0}4%{opacity:1}25%{opacity:.9}30%,100%{transform:translate(-50%,-50%) scale(.02) rotate(540deg);opacity:0}}
+
+/* each object passes through just once, one after another, then it's gone */
+.vb{animation:var(--anim) var(--dur) var(--del) 1 both!important}
+.vb img{animation:vbSpin var(--dur) linear var(--del) 1 both!important}
+@keyframes vbOut1{0%{transform:translate(-50%,-50%) scale(.05);opacity:0}12%{opacity:1}88%{opacity:.95}100%{transform:translate(calc(-50% + var(--tx) * 1.2),calc(-50% + var(--ty) * 1.2)) scale(calc(var(--s,3) * 1.2));opacity:0}}
+@keyframes vbIn1{0%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(1.6);opacity:0}12%{opacity:1}85%{opacity:.9}100%{transform:translate(-50%,-50%) scale(.02) rotate(540deg);opacity:0}}
+
+/* entering the vortex: gems rain down, balloons drift up, once */
+.vx-enter{position:absolute;left:var(--x);width:var(--w);opacity:0;pointer-events:none}
+.vx-enter img{display:block;width:100%;height:auto}
+.vx-enter.down{top:-15%;animation:enterFall var(--dur) cubic-bezier(.4,0,.7,1) var(--del) 1 both}
+.vx-enter.down img{animation:vbSpin var(--dur) linear var(--del) 1 both}
+.vx-enter.up{bottom:-20%;animation:enterRise var(--dur) cubic-bezier(.3,0,.6,1) var(--del) 1 both}
+@keyframes enterFall{0%{transform:translateY(0);opacity:0}8%{opacity:1}90%{opacity:1}100%{transform:translateY(130cqh);opacity:0}}
+@keyframes enterRise{0%{transform:translateY(0);opacity:0}10%{opacity:1}35%{transform:translate(12px,-45cqh)}70%{transform:translate(-12px,-95cqh)}90%{opacity:1}100%{transform:translateY(-140cqh);opacity:0}}
+
+/* one quote, centered, arriving word by word (the other animations carry on around it) */
+.vq.vq-center{left:0!important;right:0;top:38%;margin:0 auto;max-width:min(18ch,86vw)!important;text-align:center!important;font-size:clamp(34px,4.6vw,72px)}
+.vq .vw{display:inline-block;opacity:0;filter:blur(6px);translate:0 14px;animation:wordIn .7s ease calc(.35s + var(--i) * .32s) 1 both}
+@keyframes wordIn{to{opacity:1;filter:none;translate:0 0}}
+
+/* the vortex bursts OUT of the page: a portal opens in the middle of the screen and grows until it swallows everything */
+html:not(.tall) .vx-view{position:fixed;inset:0;opacity:1!important;visibility:hidden;will-change:clip-path}
+html:not(.tall).vx-live .vx-view.on{visibility:visible}
+.vx-view::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 0 rgba(200,140,255,0)}
+
+/* twinkling sparkles across the whole portal */
+.vx-spark{position:absolute;width:var(--z);height:var(--z);translate:-50% -50%;pointer-events:none;opacity:0;
+  background:radial-gradient(circle,#fff 0 12%,transparent 13%),conic-gradient(from 45deg,transparent 0 10%,#fff6c8 12% 13%,transparent 15% 35%,#fff6c8 37% 38%,transparent 40% 60%,#fff6c8 62% 63%,transparent 65% 85%,#fff6c8 87% 88%,transparent 90%);
+  clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);background:#fffbe0;
+  filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #d9b6ff);animation:vxTwinkle var(--dur) ease-in-out var(--del) infinite}
+@keyframes vxTwinkle{0%,100%{opacity:0;scale:.3;rotate:0deg}50%{opacity:1;scale:1;rotate:45deg}}
+.vx-float:not(.go) *{animation-play-state:paused!important}
+.vx-spark:nth-child(3n){background:#ffd36b}.vx-spark:nth-child(3n+1){background:#ffc2e6}
+
+/* the quote as a designed lockup: a question, a sigh, then the big answer */
+.vq.vq-lock{display:flex;flex-direction:column;align-items:center;gap:.12em;max-width:min(92vw,1100px)!important;top:50%!important;translate:0 -50%;
+  font-size:clamp(28px,3.4vw,56px);line-height:1;text-shadow:none;isolation:isolate}
+.vq-lock::before{content:"";position:absolute;inset:-18% -12%;z-index:-1;border-radius:50%;background:radial-gradient(closest-side,rgba(12,4,40,.62),rgba(12,4,40,.35) 55%,transparent);filter:blur(6px)}
+.vq-lock .vl{display:block}
+.vq-lock .vl1{font:italic 400 1em/1.05 var(--serif);color:var(--cream);text-shadow:0 0 22px rgba(170,120,255,.9)}
+.vq-lock .vl2{margin:.35em 0 .1em;font:800 .42em/1 var(--body);letter-spacing:.42em;text-transform:uppercase;color:var(--acid);text-shadow:0 0 14px rgba(206,255,50,.6)}
+.vq-lock .vl2::before,.vq-lock .vl2::after{content:"✦";margin:0 .9em;color:var(--pink)}
+.vq-lock .vl3{font:800 2.25em/.9 var(--display);letter-spacing:-.045em;color:#fff;
+  background:linear-gradient(100deg,#fff 0%,#ffd6ec 30%,#f5a2ff 55%,#ceff32 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 18px rgba(239,74,134,.65)) drop-shadow(0 4px 0 rgba(43,26,82,.8))}
+.vq-lock .vl3 .vw{-webkit-text-fill-color:transparent}
+@media (max-width:700px){.vq.vq-lock{font-size:clamp(22px,6.4vw,30px);left:0!important;right:0!important;text-align:center!important}.vq-lock .vl3{font-size:1.9em}.vq-lock .vl2{letter-spacing:.28em}}
+/* the gradient answer is painted on each word, so it shows while the words fade in */
+.vq-lock .vl3{background:none;-webkit-text-fill-color:initial}
+.vq-lock .vl3 .vw{background:linear-gradient(100deg,#fff 0%,#ffd6ec 35%,#f5a2ff 65%,#ceff32 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;padding:0 .04em .08em}
+/* phones: the flying things are scaled to the small screen so it doesn't get crowded */
+@media (max-width:700px){.vb{width:calc(var(--w) * .5)!important}.vx-enter{width:calc(var(--w) * .6)}.vb.hero-pair{width:calc(var(--w) * .6)!important}}
+/* the entry shower: every gem tumbles and every balloon wanders on its own line */
+@keyframes enterFall{0%{transform:translate(0,0);opacity:0}8%{opacity:1}35%{transform:translate(var(--wx1,0),45cqh)}70%{transform:translate(var(--wx2,0),90cqh)}90%{opacity:1}100%{transform:translate(var(--wx3,0),130cqh);opacity:0}}
+@keyframes enterRise{0%{transform:translate(0,0);opacity:0}10%{opacity:1}35%{transform:translate(var(--wx1,12px),-45cqh)}70%{transform:translate(var(--wx2,-12px),-95cqh)}90%{opacity:1}100%{transform:translate(var(--wx3,0),-140cqh);opacity:0}}
+.vx-enter.up img{animation:enterTilt var(--td,2s) ease-in-out infinite alternate}
+@keyframes enterTilt{from{rotate:calc(var(--tl,8deg) * -1)}to{rotate:var(--tl,8deg)}}
+/* past the hero, the vortex sits under the doors: the doors' own edge reveals them, with no lag */
+.doors{z-index:2}
+html.vx-past .vx{z-index:1}
+/* behind the portal the section is the portal's own deep purple, so no mismatched band can ever flash */
+html.vx-live .vx{background:radial-gradient(70% 60% at 50% 50%,#3a1a8a 0%,#1b0b45 55%,#0b0420 100%) fixed,#1b0b45}
+/* sparkles: a star with a soft painted halo, no filters, so 60 of them animate cheaply */
+.vx-spark{filter:none!important;clip-path:none!important;background:none!important;will-change:transform,opacity}
+.vx-spark::before,.vx-spark::after{content:"";position:absolute;inset:0}
+.vx-spark::after{inset:-60%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(217,182,255,.25) 45%,transparent)}
+.vx-spark::before{z-index:1;background:#fffbe0;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%)}
+.vx-spark:nth-child(3n)::before{background:#ffd36b}.vx-spark:nth-child(3n+1)::before{background:#ffc2e6}
+
+/* every word of the quote pops in on its own neon chip, one by one, as soon as you're in */
+.vq-lock::before{display:none}
+.vq-lock .vl{display:flex;flex-wrap:wrap;justify-content:center;gap:.18em .22em}
+.vq-lock .vw{opacity:0;filter:none;translate:0 .4em;scale:.6;rotate:var(--wr,0deg);
+  padding:.06em .32em .1em;border-radius:.28em;line-height:1.05;-webkit-text-fill-color:currentColor!important;background:var(--neon)!important;color:#140a3a;
+  box-shadow:0 0 .35em var(--neon),0 0 1.1em color-mix(in srgb,var(--neon) 60%,transparent),inset 0 -.08em 0 rgba(0,0,0,.15);
+  text-shadow:none;animation:chipIn .45s cubic-bezier(.2,1.7,.4,1) calc(.15s + var(--i) * .2s) 1 both}
+.vq-lock .vw:nth-child(4n+1){--neon:#ceff32;--wr:-2deg}
+.vq-lock .vw:nth-child(4n+2){--neon:#ff4fb0;--wr:1.5deg}
+.vq-lock .vw:nth-child(4n+3){--neon:#38f0ff;--wr:-1deg}
+.vq-lock .vw:nth-child(4n){--neon:#b98bff;--wr:2deg}
+.vq-lock .vl1{text-shadow:none}
+.vq-lock .vl2{letter-spacing:.12em;margin:.25em 0}
+.vq-lock .vl2::before,.vq-lock .vl2::after{content:none}
+.vq-lock .vl3{filter:none}
+.vq-lock .vl3 .vw{background:var(--neon)!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;padding:.02em .22em .08em}
+@keyframes chipIn{0%{opacity:0;translate:0 .4em;scale:.6}100%{opacity:1;translate:0 0;scale:1}}
+html:not(.vx-go) .vq-lock .vw{animation-play-state:paused!important}
+.vq-lock .vl2{font-size:.62em;letter-spacing:.06em}
+
+/* if you stay in the vortex, it keeps going: the shower keeps falling and rising, and the characters keep flying through,
+   each on its own rhythm (every piece still passes once per trip, it just comes round again) */
+.vx-enter.down,.vx-enter.up,.vx-enter.down img,.vb,.vb img{animation-iteration-count:infinite!important}
+/* the question: one white strip for the whole sentence, in italics; its words still arrive one by one */
+.vq-lock .vl1{background:#fff;border-radius:.3em;padding:.08em .45em .14em;gap:.08em .26em;box-shadow:0 0 .5em rgba(255,255,255,.7),0 0 1.4em rgba(217,182,255,.6);
+  opacity:0;animation:chipIn .45s cubic-bezier(.2,1.7,.4,1) .1s 1 both}
+html:not(.vx-go) .vq-lock .vl1{animation-play-state:paused}
+.vq-lock .vl1 .vw{background:none!important;box-shadow:none!important;padding:0;rotate:0deg;color:#1b0b45;font:italic 400 1em/1.1 var(--serif);-webkit-text-fill-color:#1b0b45!important}
+/* the question comes first, as soon as the portal opens, with a burst of sparkles */
+html:not(.vq-go) .vq-lock .vl1,html:not(.vq-go) .vq-lock .vl1 .vw{animation-play-state:paused!important}
+html.vq-go .vq-lock .vl1,html.vq-go .vq-lock .vl1 .vw{animation-play-state:running!important}
+.vq-lock .vl1{position:relative}
+.vq-spark{position:absolute;left:50%;top:50%;width:var(--z);height:var(--z);opacity:0;pointer-events:none;background:#fff;
+  clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);filter:drop-shadow(0 0 6px #fff)}
+.vq-spark:nth-child(3n){background:#ffd36b}.vq-spark:nth-child(3n+1){background:#ffc2e6}
+html.vq-go .vq-spark{animation:vqBurst 1.6s ease-out var(--del) 1 both,vqTw 1.8s ease-in-out calc(var(--del) + 1.6s) infinite}
+@keyframes vqBurst{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}30%{opacity:1}100%{opacity:1;transform:translate(calc(-50% + var(--sx) * 4),calc(-50% + var(--sy) * .5)) scale(1) rotate(90deg)}}
+@keyframes vqTw{0%,100%{opacity:1;transform:translate(calc(-50% + var(--sx) * 4),calc(-50% + var(--sy) * .5)) scale(1) rotate(90deg)}50%{opacity:.3;transform:translate(calc(-50% + var(--sx) * 4),calc(-50% + var(--sy) * .5)) scale(.5) rotate(135deg)}}
+.vq-spark{z-index:3;filter:drop-shadow(0 0 8px #fff) drop-shadow(0 0 16px #ffb8e6)}
+@keyframes vqBurst{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}30%{opacity:1}100%{opacity:1;transform:translate(calc(-50% + var(--sx)),calc(-50% + var(--sy))) scale(1) rotate(90deg)}}
+@keyframes vqTw{0%,100%{opacity:1;transform:translate(calc(-50% + var(--sx)),calc(-50% + var(--sy))) scale(1) rotate(90deg)}50%{opacity:.3;transform:translate(calc(-50% + var(--sx)),calc(-50% + var(--sy))) scale(.5) rotate(135deg)}}
+@media (max-width:700px){.vq-spark{--sx:calc(var(--sx) * .4)}}
+
+/* the question: one sentence on white paper, spinning up out of the wormhole from tiny to big, then sparkling */
+.vq-lock .vl1{background:#fffdf7 linear-gradient(115deg,rgba(0,0,0,.025) 25%,transparent 25% 50%,rgba(0,0,0,.025) 50% 75%,transparent 75%) 0 0/6px 6px;
+  border-radius:4px;padding:.18em .6em .24em;rotate:-2deg;box-shadow:0 6px 18px rgba(10,0,40,.45),0 0 1.4em rgba(217,182,255,.55);
+  clip-path:polygon(0 4%,3% 0,20% 3%,40% 0,62% 4%,80% 1%,97% 3%,100% 0,99% 40%,100% 96%,82% 100%,60% 96%,38% 100%,18% 97%,2% 100%,0 70%);
+  opacity:0;transform-origin:50% 50%;animation:paperSpin 1.4s cubic-bezier(.2,.9,.3,1.15) .05s 1 both!important}
+html:not(.vq-go) .vq-lock .vl1{animation-play-state:paused!important}
+@keyframes paperSpin{0%{opacity:0;transform:translateY(2.2em) scale(.04) rotate(-900deg)}25%{opacity:1}100%{opacity:1;transform:translateY(0) scale(1) rotate(0deg)}}
+.vq-lock .vl1 .vw{opacity:1!important;translate:none!important;scale:1!important;animation:none!important}
+html.vq-go .vq-spark{animation-delay:calc(1.3s + var(--del)),calc(2.9s + var(--del))!important}
+/* the answer follows right after; "puzzle." lands at about 2.3s, then the shower starts */
+.vq-lock .vl2 .vw,.vq-lock .vl3 .vw{animation-delay:calc(1.3s + (var(--i) - 6) * .25s)!important}
+html:not(.vq-go) .vq-lock .vw{animation-play-state:paused!important}
+html.vq-go .vq-lock .vw{animation-play-state:running!important}
+/* the question throws off glow and sparkles WHILE it spins up, then keeps twinkling */
+html.vq-go .vq-spark{animation-delay:calc(.1s + var(--del)),calc(1.7s + var(--del))!important}
+.vq-lock .vl1::after{content:"";position:absolute;inset:-30% -12%;z-index:-1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(255,255,255,.9),rgba(255,214,240,.55) 40%,rgba(185,139,255,.25) 65%,transparent);opacity:0}
+html.vq-go .vq-lock .vl1::after{animation:paperGlow 1.4s ease-out .05s both,paperPulse 2.6s ease-in-out 1.5s infinite}
+@keyframes paperGlow{0%{opacity:0;transform:scale(.2) rotate(0)}40%{opacity:1;transform:scale(1.4) rotate(180deg)}100%{opacity:.75;transform:scale(1) rotate(360deg)}}
+@keyframes paperPulse{0%,100%{opacity:.75}50%{opacity:.4}}
+.vq-lock .vl1{clip-path:none!important;overflow:visible}
+/* who said it: a small signature tag under the answer */
+.vq-cite{display:block;margin-top:.9em;font:600 .26em/1.3 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--cream);opacity:0;
+  background:rgba(18,8,40,.55);padding:.5em 1.1em;border-radius:999px;align-self:center}
+.vq-cite em{font:italic 400 1.15em var(--serif);letter-spacing:0;text-transform:none;color:var(--acid)}
+html.vq-go .vq-cite{animation:wordIn .6s ease 3.4s both}
+@media (max-width:700px){.vq-cite{font-size:.4em;letter-spacing:.06em}}
+
+/* a glitter dolphin leaps up from behind the "Who in the world am I?" strip and dives back behind it */
+.vq-lock .vl1{z-index:2}
+.vq-lock .vq-dol{position:absolute;z-index:1;left:calc(50% - 4.8em);top:-.3em;width:3em;height:auto;pointer-events:none;opacity:0;rotate:-40deg;
+  filter:drop-shadow(0 0 12px rgba(150,190,255,.6))}
+html.vq-go .vq-lock .vq-dol{animation:vqDol 6.5s cubic-bezier(.45,0,.55,1) 1.7s infinite}
+@keyframes vqDol{
+  0%{opacity:1;translate:0 30%;rotate:-40deg}
+  9%{translate:30% -60%;rotate:-26deg}
+  18%{translate:110% -95%;rotate:0deg}
+  27%{translate:190% -60%;rotate:30deg}
+  36%{opacity:1;translate:225% 35%;rotate:46deg}
+  37%,100%{opacity:0;translate:225% 35%;rotate:46deg}
+}
+@media (prefers-reduced-motion:reduce){html.vq-go .vq-lock .vq-dol{animation:none}}
+
+/* the first bursts: gems shoot OUT of the vortex center in every direction; balloons get pulled INTO it */
+.vx-enter{left:50%!important;top:50%!important;bottom:auto!important}
+.vx-enter.down{animation:vxScatterOut var(--dur) cubic-bezier(.5,0,.9,.6) var(--del) infinite both!important}
+.vx-enter.up{animation:vxPullIn var(--dur) cubic-bezier(.3,.2,.7,1) var(--del) infinite both!important}
+.vx-enter.down img{animation:vbSpin var(--dur) linear var(--del) infinite both!important}
+@keyframes vxScatterOut{
+  0%{transform:translate(-50%,-50%) scale(.05);opacity:0}
+  10%{opacity:1}
+  45%{transform:translate(calc(-50% + var(--ex) * .35),calc(-50% + var(--ey) * .35)) scale(calc(var(--es) * .45)) rotate(60deg)}
+  85%{opacity:1}
+  100%{transform:translate(calc(-50% + var(--ex)),calc(-50% + var(--ey))) scale(var(--es)) rotate(140deg);opacity:0}}
+@keyframes vxPullIn{
+  0%{transform:translate(calc(-50% + var(--ex)),calc(-50% + var(--ey))) scale(var(--es)) rotate(0deg);opacity:0}
+  12%{opacity:1}
+  60%{transform:translate(calc(-50% + var(--ex) * .35),calc(-50% + var(--ey) * .35)) scale(calc(var(--es) * .5)) rotate(-200deg);opacity:1}
+  100%{transform:translate(-50%,-50%) scale(.03) rotate(-540deg);opacity:0}}
+/* nothing fades away: everything flying out keeps going until it has left the screen */
+@keyframes vbOut1{0%{transform:translate(-50%,-50%) scale(.05);opacity:0}10%{opacity:1}100%{transform:translate(calc(-50% + var(--tx) * 2.2),calc(-50% + var(--ty) * 2.2)) scale(calc(var(--s,3) * 1.3));opacity:1}}
+@keyframes vxScatterOut{
+  0%{transform:translate(-50%,-50%) scale(.05);opacity:0}
+  10%{opacity:1}
+  45%{transform:translate(calc(-50% + var(--ex) * .45),calc(-50% + var(--ey) * .45)) scale(calc(var(--es) * .5)) rotate(60deg)}
+  100%{transform:translate(calc(-50% + var(--ex) * 1.9),calc(-50% + var(--ey) * 1.9)) scale(var(--es)) rotate(140deg);opacity:1}}
+img[src*="gem-plumbob"]{scale:.55}
+
+@keyframes vbFallIn{
+  0%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty) * 1.25)) scale(1.4) rotate(0deg);opacity:1}
+  40%{transform:translate(calc(-50% + var(--tx) * .9),calc(-50% + var(--ty) * .15)) scale(1.2) rotate(120deg)}
+  70%{transform:translate(calc(-50% + var(--tx) * -.25),calc(-50% + 6vh)) scale(.6) rotate(300deg)}
+  100%{transform:translate(-50%,-50%) scale(.02) rotate(620deg);opacity:1}}
+/* dolphin: 1.5x bigger, one leap right as "puzzle." lands */
+.vq-lock .vq-dol{width:4.5em!important;left:calc(50% - 6.6em)!important;top:-.6em!important}
+html.vq-go .vq-lock .vq-dol{animation:vqDolOnce 2.4s cubic-bezier(.45,0,.55,1) 2.7s 1 both!important}
+@keyframes vqDolOnce{
+  0%{opacity:1;translate:0 30%;rotate:-40deg}
+  25%{translate:30% -60%;rotate:-26deg}
+  50%{translate:110% -95%;rotate:0deg}
+  75%{translate:190% -60%;rotate:30deg}
+  97%{opacity:1;translate:225% 35%;rotate:46deg}
+  100%{opacity:0;translate:225% 35%;rotate:46deg}}
+/* nothing in the burst shows or moves until the answer has landed */
+#vxFloat:not(.go) .vx-enter,#vxFloat:not(.go) .vx-enter img,#vxFloat:not(.go) .vb,#vxFloat:not(.go) .vb img,#vxFloat:not(.go) .vx-spark{animation-play-state:paused!important;visibility:hidden!important}
+/* the dolphin stays hidden until its jump */
+@keyframes vqDolOnce{
+  0%{opacity:0;translate:0 30%;rotate:-40deg}
+  4%{opacity:1}
+  25%{translate:30% -60%;rotate:-26deg}
+  50%{translate:110% -95%;rotate:0deg}
+  75%{translate:190% -60%;rotate:30deg}
+  97%{opacity:1;translate:225% 35%;rotate:46deg}
+  100%{opacity:0;translate:225% 35%;rotate:46deg}}
+
+.vq-gem{position:absolute;left:50%;top:50%;width:var(--gz);height:auto;opacity:0;pointer-events:none;z-index:-1;filter:drop-shadow(0 0 10px rgba(255,200,255,.7))}
+html.vq-go .vq-gem{animation:vqGemPop .7s cubic-bezier(.2,1.6,.4,1) var(--gd) both,vqGemTw 2.4s ease-in-out calc(var(--gd) + .7s) infinite}
+@keyframes vqGemPop{0%{opacity:0;transform:translate(-50%,-50%) scale(.1) rotate(0)}100%{opacity:1;transform:translate(calc(-50% + var(--gx)),calc(-50% + var(--gy))) scale(1) rotate(var(--gr))}}
+@keyframes vqGemTw{0%,100%{opacity:1;transform:translate(calc(-50% + var(--gx)),calc(-50% + var(--gy))) scale(1) rotate(var(--gr))}50%{opacity:.75;transform:translate(calc(-50% + var(--gx)),calc(-50% + var(--gy) - 8px)) scale(1.12) rotate(calc(var(--gr) + 12deg))}}
+
+/* the question's gems twinkle for a beat, then join the vortex: half fly out past us, half get sucked into the middle, again and again */
+html.vq-go .vq-gem.g-out{animation:vqGemPop .7s cubic-bezier(.2,1.6,.4,1) var(--gd) both,vqGemOut 3.6s cubic-bezier(.5,0,.85,.5) calc(var(--gd) + 1.4s) infinite}
+html.vq-go .vq-gem.g-in{animation:vqGemPop .7s cubic-bezier(.2,1.6,.4,1) var(--gd) both,vqGemIn 3.6s cubic-bezier(.4,0,.7,1) calc(var(--gd) + 1.4s) infinite}
+@keyframes vqGemOut{
+  0%{opacity:1;transform:translate(calc(-50% + var(--gx)),calc(-50% + var(--gy))) scale(1) rotate(var(--gr))}
+  85%{opacity:1;transform:translate(calc(-50% + var(--gx) * 3.4),calc(-50% + var(--gy) * 3.4)) scale(3) rotate(calc(var(--gr) + 160deg))}
+  86%{opacity:0;transform:translate(-50%,-50%) scale(.05)}
+  100%{opacity:1;transform:translate(calc(-50% + var(--gx)),calc(-50% + var(--gy))) scale(1) rotate(var(--gr))}}
+@keyframes vqGemIn{
+  0%{opacity:1;transform:translate(calc(-50% + var(--gx)),calc(-50% + var(--gy))) scale(1) rotate(var(--gr))}
+  80%{opacity:1;transform:translate(-50%,-50%) scale(.04) rotate(calc(var(--gr) + 540deg))}
+  81%{opacity:0;transform:translate(calc(-50% + var(--gx) * 2.4),calc(-50% + var(--gy) * 2.4)) scale(1.6)}
+  100%{opacity:1;transform:translate(calc(-50% + var(--gx)),calc(-50% + var(--gy))) scale(1) rotate(var(--gr))}}
+
+/* idle hand-off: the camera dives into the center of the vortex */
+html.vx-zoom .vx-view{transition:transform .9s cubic-bezier(.6,0,.9,.4),filter .9s ease-in!important;transform:scale(7)!important;transform-origin:50% 50%;filter:brightness(2.2) saturate(1.4) blur(3px)}
+.vx-zoom-flash{position:fixed;inset:0;z-index:300;pointer-events:none;background:radial-gradient(circle at 50% 50%,#fff 0,#f4e6ff 35%,rgba(200,160,255,.85) 70%);opacity:0;animation:zoomFlash .9s ease-in forwards}
+.vx-zoom-flash.out{animation:none;opacity:1;transition:opacity .8s ease;opacity:0}
+@keyframes zoomFlash{0%,55%{opacity:0}100%{opacity:1}}
+/* the dolphin dives down behind the blue "puzzle." chip instead of fading out over it */
+.vq-lock .vl3{position:relative;z-index:3}
+.vq-lock .vl3 .vw{position:relative;z-index:3}
+@keyframes vqDolOnce{
+  0%{opacity:0;translate:0 30%;rotate:-40deg}
+  4%{opacity:1}
+  25%{translate:30% -60%;rotate:-26deg}
+  50%{translate:110% -95%;rotate:0deg}
+  75%{translate:185% -30%;rotate:30deg}
+  97%{opacity:1;translate:205% 45%;rotate:42deg}
+  100%{opacity:0;translate:205% 50%;rotate:42deg}}
+
+/* performance: the vortex follows the scroll closely and its moving pieces skip costly per-frame shadow filters */
+.vx-view{contain:layout paint;will-change:clip-path,opacity}
+.vx-hole,.vx-tunnel,.vx-float{will-change:transform}
+.vx-float .vb,.vx-float .vx-enter{will-change:transform,opacity;filter:none!important}
+.vx-float .vb img,.vx-float .vx-enter img{filter:none!important}
+.vq-spark,.vq-gem{filter:none!important}
+.vq-dol{filter:none!important}
+/* the space under the hero and the menu bar fade from navy into black, so the bunny's hole blends into the vortex */
+body{background:linear-gradient(180deg,var(--cream) 0,var(--cream) 85vh,#1b1a4a 100vh,#0d0b24 140vh,#120f12 170vh) 0 0/100% 200vh no-repeat,var(--cream)}
+.jump{background:linear-gradient(180deg,#1b1a4a 0%,#0d0b24 60%,#07050f 100%)!important}
+.jump-in a{border-color:rgba(206,220,255,.25)}
+body{background:linear-gradient(180deg,#1b1a4a 0,#0d0b24 60vh,#120f12 180vh) 0 0/100% 200vh no-repeat,var(--cream)!important}
