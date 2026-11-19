@@ -329,3 +329,7 @@ a.hi.note-landed{animation:noteLand 1.2s cubic-bezier(.2,1.6,.4,1)}
 .zoombox .zslot{position:relative;transform:scale(calc(var(--zk,1) * .85)) rotate(-2deg)!important}
 .zoombox.on .zslot{transform:scale(var(--zk,1))!important}
 .zoombox .zslot img{border:0!important;box-shadow:none!important;max-width:none!important;max-height:none!important;transform:none!important;border-radius:0!important}
+.snd-pill{position:fixed;left:50%;bottom:clamp(14px,3vh,28px);translate:-50% 0;z-index:4000;font:800 clamp(13px,1.1vw,15px)/1 var(--body);padding:.85em 1.3em;border-radius:999px;border:2px solid #15302c;background:#ceff32;color:#15302c;box-shadow:4px 4px 0 #ec2b7a;cursor:pointer;animation:sndPill .5s cubic-bezier(.2,1.5,.4,1) both,sndBob 2.4s ease-in-out .5s infinite;transition:opacity .4s,translate .4s}
+.snd-pill.bye{opacity:0;translate:-50% 20px}
+@keyframes sndPill{from{opacity:0;translate:-50% 30px}}
+@keyframes sndBob{50%{translate:-50% -5px}}

@@ -1,3 +1,9 @@
+/* a "real" hover means the visitor actually moved the mouse onto it (not a page scroll sliding it under a still mouse),
+   and not in the moment right after a pop-up closes */
+var __lastMove = 0, __quietUntil = 0;
+addEventListener("pointermove", function (e) { if (e.pointerType === "mouse") __lastMove = Date.now(); }, { passive: true });
+var __lastScroll = 0; addEventListener("scroll", function () { __lastScroll = Date.now(); }, { passive: true });
+function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - __lastScroll > 300) && n > __quietUntil; }
 /* ============ Behaviour ============ */
 (function () {
   var root = document.documentElement;
@@ -59,7 +65,7 @@
       addEventListener("pointerdown", retry, true); addEventListener("keydown", retry, true);
     });
   }
-  window.__playTheme = playTheme;
+  window.__playTheme = playTheme; window.__theme = theme;
   window.__stopTheme = function () { stopTheme(); };
   theme.loop = true;
   /* once you're through the vortex, the theme fades out and stops */
@@ -432,7 +438,7 @@
   paintSnd();
   var SFX = {};
   function playSfx(n) { try { var a = SFX[n] || (SFX[n] = new Audio("assets/sfx/" + n + ".mp3")); a.currentTime = 0; a.volume = .8; var pr = a.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {} }
-  window.__playSfx = playSfx;
+  window.__playSfx = playSfx; window.__SFX = SFX;
   ["dooropen", "doorslam", "welcome", "goodbye", "imrcv"].forEach(function (n) { var a = new Audio(); a.preload = "auto"; a.src = "assets/sfx/" + n + ".mp3"; SFX[n] = a; });
   /* AIM's "Welcome!" when sound goes on, "Goodbye!" when it goes off */
   sndBtn.addEventListener("click", function () { playSfx(soundOn ? "goodbye" : "welcome"); });
@@ -475,7 +481,7 @@
   function text(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
   function slotHtml(p, i) {
     var stage;
-    if (p.preview) stage = '<iframe data-src="' + p.preview + (/vans-cove/.test(p.preview) ? "?embed=room" : /wildkind\/showcase/.test(p.preview) ? "?embed=1" : "") + '" title="' + text(p.name) + ' preview" tabindex="-1" aria-hidden="true"></iframe><span class="slot-cue">Open preview ↗</span>';
+    if (p.preview) stage = '<iframe data-src="' + p.preview + (/vans-cove/.test(p.preview) ? "?embed=room" : /wildkind\/showcase/.test(p.preview) ? "?embed=1" : "") + '" title="' + text(p.name) + ' preview" tabindex="-1" aria-hidden="true"></iframe>' + (p.site ? "" : '<span class="slot-cue">Open preview ↗</span>');
     else {
       var bg = p.koi ? KOI_SVG : (p.pics && p.pics[0] ? '<img class="slot-bg" src="' + p.pics[0][0] + '" alt="" loading="lazy">' : "");
       if (!bg && !p.logo) bg = '<span class="slot-name">' + text(p.name) + '</span>';
@@ -537,8 +543,8 @@
     roomBody.scrollTop = 0;
   }
   /* hovering a door plays the AIM door-opening sound (once per hover) */
-  all(".door").forEach(function (d) { var last = 0; d.addEventListener("mouseenter", function () { var n = Date.now(); if (n - last > 1200) { last = n; window.__doorHoverAt = n; doorSound(true); } }); });
-  room.onclose = function () { all(".door").forEach(function (d) { d.setAttribute("aria-expanded", "false"); }); doorSound(false); roomBody.innerHTML = ""; };
+  all(".door").forEach(function (d) { var last = 0; d.addEventListener("mouseenter", function () { setTimeout(function () { if (!realHover() || !d.matches(":hover")) return; var n = Date.now(); if (n - last > 1200) { last = n; window.__doorHoverAt = n; doorSound(true); } }, 40); }); });
+  room.onclose = function () { __quietUntil = Date.now() + 1500; all(".door").forEach(function (d) { d.setAttribute("aria-expanded", "false"); }); doorSound(false); roomBody.innerHTML = ""; };
   /* live previews: load each one as it scrolls into the room, scaled from 1440 px wide */
   var slotRO = "ResizeObserver" in window ? new ResizeObserver(function (es) { es.forEach(function (e) { var f = e.target.querySelector("iframe"); if (f) fitFrame(e.target, f); }); }) : null;
   function fitSlots() {
@@ -764,10 +770,14 @@
     var tv = document.querySelector(".like-tv:not(.like-radio) .tv"); if (!tv) return;
     var vid = tv.querySelector(".tv-vid"), num = tv.querySelector(".tv-chnum"), ch = 0;
     var CH = [["sVvw0VjpBDU", "Pure Moods", 3], ["MXSUF_aGv5U", "Boy Meets World", 4], ["I2OHc4OvjVc", "FernGully", 5], ["wL6pCdpNPNI", "Sabrina the Teenage Witch", 6], [null, "My picks", 7]];
+    /* browsers only let a video start WITH sound after the visitor has clicked or tapped somewhere on the page;
+       before that it starts muted, with a little "tap for sound" chip */
+    function canSound() { return !!(navigator.userActivation ? navigator.userActivation.hasBeenActive : window.__tapped); }
+    addEventListener("pointerdown", function () { window.__tapped = true; }, { capture: true, once: true });
     function show(i, autoplay) {
       var c = CH[i]; tv.classList.toggle("on-list", !c[0]); num.textContent = "CH " + c[2];
       var now = $("tvNow"), yt = $("tvYT"); if (now) now.textContent = "CH " + c[2] + " · " + c[1]; if (yt) { yt.hidden = !c[0]; if (c[0]) yt.href = "https://www.youtube.com/watch?v=" + c[0]; }
-      vid.innerHTML = c[0] ? '<iframe src="https://www.youtube-nocookie.com/embed/' + c[0] + '?rel=0&modestbranding=1&playsinline=1&enablejsapi=1' + (autoplay ? "&autoplay=1" : "") + (location.origin && location.origin !== "null" ? "&origin=" + encodeURIComponent(location.origin) : "") + '" referrerpolicy="strict-origin-when-cross-origin" title="' + c[1] + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>' : "";
+      vid.innerHTML = c[0] ? '<iframe src="https://www.youtube-nocookie.com/embed/' + c[0] + '?rel=0&modestbranding=1&playsinline=1&enablejsapi=1' + (autoplay ? "&autoplay=1" + (canSound() ? "" : "&mute=1") : "") + (location.origin && location.origin !== "null" ? "&origin=" + encodeURIComponent(location.origin) : "") + '" referrerpolicy="strict-origin-when-cross-origin" title="' + c[1] + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>' : "";
     }
     /* talk to the YouTube player so it plays the instant you hover */
     function cmd(f, args) { var fr = vid.querySelector("iframe"); if (fr && fr.contentWindow) fr.contentWindow.postMessage(JSON.stringify({ event: "command", func: f, args: args || [] }), "*"); }
@@ -778,11 +788,22 @@
       new IntersectionObserver(function (es, ob) { if (es[0].isIntersecting) { ob.disconnect(); if (!vid.innerHTML) show(0, false); } }, { rootMargin: "1200px 0px" }).observe(bey); })();
     /* hovering the TV starts the commercial playing and stops Boy Meets World */
     var tvLive = false;
-    tv.closest(".like-tv").addEventListener("pointerenter", function () {
-      if (tvLive) return; tvLive = true;
-      if (vid.querySelector("iframe")) { cmd("playVideo"); fast(); setTimeout(function () { cmd("playVideo"); }, 600); } else { show(ch, true); fast(); }
-      if (window.__bmwStop) window.__bmwStop();
+    tv.closest(".like-tv").addEventListener("pointerenter", function (e) {
+      if (tvLive) return;
+      if (e.pointerType === "mouse") { var el = this; setTimeout(function () { if (!tvLive && realHover() && el.matches(":hover")) startTV(); }, 40); return; }
+      startTV();
     });
+    function startTV() {
+      if (tvLive) return; tvLive = true;
+      /* reload the channel with autoplay on, so it starts the instant you hover */
+      show(ch, true);
+      if (!canSound()) {
+        var chip = document.createElement("button"); chip.type = "button"; chip.className = "tv-sound"; chip.textContent = "🔊 Tap for sound";
+        tv.appendChild(chip);
+        chip.addEventListener("click", function (e) { e.stopPropagation(); chip.remove(); show(ch, true); });
+      }
+      if (window.__bmwStop) window.__bmwStop();
+    }
     function change() {
       ch = (ch + 1) % CH.length; tv.classList.add("flip");
       setTimeout(function () { show(ch, true); fast(); }, 220);
@@ -801,7 +822,7 @@
   /* the Boy Meets World theme plays as you step into the garden (My art), and fades out when you leave it */
   (function () {
     var artSec = $("art"); if (!artSec || !("IntersectionObserver" in window)) return;
-    var song = new Audio("assets/sfx/bmw.mp3"); song.preload = "none"; song.volume = .5;
+    var song = new Audio("assets/sfx/bmw.mp3"); song.preload = "none"; song.volume = .5; window.__bmwSong = song;
     var fade = null, inArt = false;
     function fadeTo(v, then) { clearInterval(fade); fade = setInterval(function () { var d = v - song.volume; if (Math.abs(d) < .04) { song.volume = v; clearInterval(fade); if (then) then(); } else song.volume += d > 0 ? .04 : -.04; }, 60); }
     function start() {
@@ -1326,11 +1347,23 @@
    and the Sound button pulses until then so people know to tap it. */
 (function () {
   var btn = document.getElementById("sndBtn"); if (btn) btn.classList.add("snd-hint");
+  /* a friendly "tap for sound" pill until the visitor's first tap (hovering and scrolling don't count for browsers) */
+  var pill = null, active = navigator.userActivation && navigator.userActivation.hasBeenActive;
+  var off = false; try { off = localStorage.getItem("doorSound") === "off"; } catch (e) {}
+  if (!active && !off) {
+    pill = document.createElement("button"); pill.type = "button"; pill.className = "snd-pill"; pill.innerHTML = "🔊 Tap anywhere for sound";
+    setTimeout(function () { if (pill) document.body.appendChild(pill); }, 1800);
+  }
   function unlock() {
     ["pointerdown", "keydown", "touchend"].forEach(function (ev) { removeEventListener(ev, unlock, true); });
     if (btn) btn.classList.remove("snd-hint");
-    ["dooropen", "doorslam", "welcome", "goodbye", "imrcv"].forEach(function (n) {
-      try { var a = new Audio("assets/sfx/" + n + ".mp3"); a.muted = true; var p = a.play(); if (p && p.then) p.then(function () { a.pause(); }).catch(function () {}); } catch (e) {} });
+    if (pill) { pill.classList.add("bye"); setTimeout(function () { pill.remove(); }, 500); }
+    /* Safari only lets a sound play later if that exact sound was started once during a tap, so warm up the real ones */
+    var all = []; var X = window.__SFX || {}; for (var k in X) all.push(X[k]); if (window.__theme) all.push(window.__theme); if (window.__bmwSong) all.push(window.__bmwSong);
+    all.forEach(function (a) {
+      if (!a || !a.paused) return;
+      try { a.muted = true; var p = a.play(); if (p && p.then) p.then(function () { if (a.muted) { a.pause(); a.currentTime = 0; } a.muted = false; }).catch(function () { a.muted = false; }); else a.muted = false; } catch (e) { a.muted = false; }
+    });
     if (window.__bmwRetry) window.__bmwRetry();
   }
   ["pointerdown", "keydown", "touchend"].forEach(function (ev) { addEventListener(ev, unlock, true); });
@@ -1388,11 +1421,9 @@
 })();
 
 window.__mail = function () {
+  /* the paper airplane lands in the button: the AIM message chime (a "You've got mail" clip can drop in as assets/sfx/gotmail.mp3 later) */
   var on = true; try { on = localStorage.getItem("doorSound") !== "off"; } catch (e) {}
-  if (!on) return;
-  var a = new Audio("assets/sfx/gotmail.mp3"); a.volume = .9;
-  a.addEventListener("error", function () { if (window.__playSfx) window.__playSfx("imrcv"); });
-  var p = a.play(); if (p && p.catch) p.catch(function () {});
+  if (on && window.__playSfx) window.__playSfx("imrcv");
 };
 
 /* clicking a photo (the Beyond work polaroids and the portraits) opens it big */
