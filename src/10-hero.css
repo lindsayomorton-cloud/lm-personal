@@ -539,3 +539,4 @@ html body .hero .hero-daisy{z-index:8!important}
 .rabbit{width:clamp(300px,26vw,420px)!important}
 @media (max-width:599px){.rabbit{width:clamp(200px,52vw,280px)!important}}
 .rabbit.go,.rabbit.go.fast{animation-duration:4.2s!important}.rabbit.go span,.rabbit.go.fast span{animation-duration:4.2s!important}
+@media (min-width:900px){html body .hero h1 .w3{padding-left:.95em!important}}
