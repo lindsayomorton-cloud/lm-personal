@@ -1306,6 +1306,8 @@ body{background:linear-gradient(180deg,#1b1a4a 0,#0d0b24 60vh,#120f12 180vh) 0 0
 .wall.shelf-in .shelf.shelf-neon img{animation:neonOn 1.4s steps(1,end) .3s both,neonHum 3.2s ease-in-out 1.8s infinite}
 @keyframes neonOn{0%{opacity:0}10%{opacity:1}16%{opacity:.2}24%{opacity:1}30%{opacity:.4}38%,100%{opacity:1}}
 @keyframes neonHum{0%,100%{filter:drop-shadow(0 0 6px rgba(255,255,255,.35)) brightness(1)}50%{filter:drop-shadow(0 0 14px rgba(254,123,191,.55)) brightness(1.12)}}
+/* the disco ball's chain starts right at the underside of the Study's shelf */
+.door-disco.study-disco img{margin-top:clamp(8px,1.2vw,20px)!important}
 
 /* ============ Let's connect ============ */
 .connect{position:relative;z-index:52;overflow-x:clip;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center;gap:clamp(36px,6vw,96px);
