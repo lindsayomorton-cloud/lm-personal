@@ -1168,3 +1168,8 @@ html.in-vx .drift{opacity:0!important;visibility:hidden!important}
 .art{background:radial-gradient(80% 70% at 50% 40%,#0000 60%,#0d1f0f66 100%),url(assets/proj/moss.webp) center top/100% auto repeat-y #2f4a1c!important}
 /* the daisy growing out of the fringe gem: bigger */
 .fringe-daisy{width:clamp(300px,26vw,470px)!important}
+
+/* "now watching" gets its own little blinking tag */
+.book li.bk-now span{display:inline-flex;align-items:center;gap:.35em;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.book li.bk-now span::before{content:"";width:.55em;height:.55em;border-radius:50%;background:#ec2b7a;box-shadow:0 0 6px #ec2b7a;animation:bkLive 1.2s ease-in-out infinite}
+@keyframes bkLive{50%{opacity:.25}}
