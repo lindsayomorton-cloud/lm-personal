@@ -871,6 +871,15 @@ body{background:linear-gradient(180deg,var(--cream) 0,var(--cream) 85vh,#1b1a4a 
 body{background:linear-gradient(180deg,#1b1a4a 0,#0d0b24 60vh,#120f12 180vh) 0 0/100% 200vh no-repeat,var(--cream)!important}
 /* the dolphin's leap is quicker; he still dives down behind the blue "puzzle." chip */
 html.vq-go .vq-lock .vq-dol{animation:vqDolOnce 1.6s cubic-bezier(.45,0,.55,1) 2.7s 1 both!important}
+/* smoke + sparkles when the rest of the vortex pours in */
+.vx-burst{position:fixed;left:50%;top:52%;width:0;height:0;z-index:95;pointer-events:none}
+.vx-burst s{position:absolute;left:0;top:0;width:var(--z);height:var(--z);translate:-50% -50%;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.85) 0,rgba(236,220,255,.55) 40%,rgba(200,170,255,0) 70%);opacity:0;animation:vxSmoke 2s ease-out var(--dl) forwards}
+@keyframes vxSmoke{0%{opacity:0;transform:translate(calc(var(--dx) * .45),calc(var(--dy) * .45)) scale(.4)}25%{opacity:.6}100%{opacity:0;transform:translate(calc(var(--dx) * 1.6),calc(var(--dy) * 1.6)) scale(1.7)}}
+.vx-burst b{position:absolute;left:0;top:0;width:var(--z);height:var(--z);translate:-50% -50%;background:#fff;
+  clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);filter:drop-shadow(0 0 6px #fff);opacity:0;animation:vxSpk 1.5s ease-out var(--dl) forwards}
+.vx-burst b:nth-child(3n){background:#ceff32}.vx-burst b:nth-child(3n+1){background:#fe7bbf}
+@keyframes vxSpk{0%{opacity:0;transform:translate(0,0) scale(.2) rotate(0)}25%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1) rotate(180deg)}}
 
 /* ============ Doors: three doors on the wallpaper, each with a shelf of flowers ============ */
 /* the wallpaper belongs to the doors alone, so it never peeks through anywhere else */
@@ -3817,7 +3826,18 @@ var FRAMES = { lime: "assets/proj/frame-lime-orig.webp", blush: "assets/proj/fra
   /* the question spins up out of the wormhole first; once "puzzle." lands, everything else pours in */
   function startQuote() {
     if (startQuote.done) return; startQuote.done = true; root.classList.add("vq-go");
-    setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); }, 4300);   /* the chair, teacup and the rest pour in the moment the dolphin splashes down */
+    setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); vxBurst(); }, 4900);   /* the chair, teacup and the rest pour in the moment the dolphin splashes down */
+  }
+  /* a puff of smoke and a spray of sparkles as everything else pours into the vortex */
+  function vxBurst() {
+    if (reduce) return;
+    var B = document.createElement("div"); B.className = "vx-burst"; B.setAttribute("aria-hidden", "true");
+    var h = "";
+    for (var k = 0; k < 9; k++) { var an = k / 9 * Math.PI * 2 + Math.random() * .5, d = 120 + Math.random() * 160;
+      h += '<s style="--dx:' + (Math.cos(an) * d).toFixed(0) + 'px;--dy:' + (Math.sin(an) * d * .7).toFixed(0) + 'px;--z:' + (140 + Math.random() * 120).toFixed(0) + 'px;--dl:' + (Math.random() * .25).toFixed(2) + 's"></s>'; }
+    for (k = 0; k < 26; k++) { an = k / 26 * Math.PI * 2 + Math.random() * .3; d = 160 + Math.random() * 320;
+      h += '<b style="--dx:' + (Math.cos(an) * d).toFixed(0) + 'px;--dy:' + (Math.sin(an) * d * .8).toFixed(0) + 'px;--z:' + (14 + Math.random() * 26).toFixed(0) + 'px;--dl:' + (.1 + Math.random() * .4).toFixed(2) + 's"></b>'; }
+    B.innerHTML = h; document.body.appendChild(B); setTimeout(function () { B.remove(); }, 2600);
   }
   function vortexTarget() {
     var r = vx.getBoundingClientRect(), H = innerHeight;

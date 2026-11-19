@@ -281,7 +281,18 @@
   /* the question spins up out of the wormhole first; once "puzzle." lands, everything else pours in */
   function startQuote() {
     if (startQuote.done) return; startQuote.done = true; root.classList.add("vq-go");
-    setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); }, 4300);   /* the chair, teacup and the rest pour in the moment the dolphin splashes down */
+    setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); vxBurst(); }, 4900);   /* the chair, teacup and the rest pour in the moment the dolphin splashes down */
+  }
+  /* a puff of smoke and a spray of sparkles as everything else pours into the vortex */
+  function vxBurst() {
+    if (reduce) return;
+    var B = document.createElement("div"); B.className = "vx-burst"; B.setAttribute("aria-hidden", "true");
+    var h = "";
+    for (var k = 0; k < 9; k++) { var an = k / 9 * Math.PI * 2 + Math.random() * .5, d = 120 + Math.random() * 160;
+      h += '<s style="--dx:' + (Math.cos(an) * d).toFixed(0) + 'px;--dy:' + (Math.sin(an) * d * .7).toFixed(0) + 'px;--z:' + (140 + Math.random() * 120).toFixed(0) + 'px;--dl:' + (Math.random() * .25).toFixed(2) + 's"></s>'; }
+    for (k = 0; k < 26; k++) { an = k / 26 * Math.PI * 2 + Math.random() * .3; d = 160 + Math.random() * 320;
+      h += '<b style="--dx:' + (Math.cos(an) * d).toFixed(0) + 'px;--dy:' + (Math.sin(an) * d * .8).toFixed(0) + 'px;--z:' + (14 + Math.random() * 26).toFixed(0) + 'px;--dl:' + (.1 + Math.random() * .4).toFixed(2) + 's"></b>'; }
+    B.innerHTML = h; document.body.appendChild(B); setTimeout(function () { B.remove(); }, 2600);
   }
   function vortexTarget() {
     var r = vx.getBoundingClientRect(), H = innerHeight;
