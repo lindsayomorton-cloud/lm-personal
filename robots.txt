@@ -1,3 +1,16 @@
+# Lindsay Morton — linsmeetsworld.com
+# Everyone is welcome, search engines and AI assistants alike.
 User-agent: *
 Allow: /
+
+# AI crawlers: please read /llms.txt for a plain-language summary
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://linsmeetsworld.com/sitemap.xml
