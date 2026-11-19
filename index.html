@@ -426,7 +426,7 @@ html.bunny-zoom .hero{transform:translate(var(--zx,0),var(--zy,0)) scale(1.3)!im
 .rb-sp{width:calc(var(--sz) * 1.8)!important;height:calc(var(--sz) * 1.8)!important;z-index:3}
 
 html.bunny-zoom .hero{transform:translate(var(--zx,0),var(--zy,0)) scale(1.12)!important}
-@media (min-width:900px){html body .hero h1 .w3{padding-left:2.15em!important}}
+@media (min-width:900px){html body .hero h1 .w3{padding-left:1.55em!important}}
 
 /* the logo and menu hold perfectly still while the camera pushes in on the bunny */
 html.bunny-zoom .top{transform:none!important;translate:none!important}
@@ -3261,8 +3261,10 @@ var ROOMS = {
   personal: {
     name: "Playroom",
     lede: "The games I make for my boys.",
+    /* same tile layout as the Workshop: Van's Cove as the big feature, then the other games */
+    layout: "career", moreLabel: "More games",
     projects: [
-      { name: "Van's Cove", kick: "Made for Van", color: "#0e4f6e", preview: "vans-cove/showcase.html",
+      { name: "Van's Cove", kick: "Made for Van", color: "#0e4f6e", preview: "vans-cove/showcase.html", learn: true,
         one: "My redesign of Treasure Cove, my favorite computer game growing up, made for my son Van.",
         logo: "assets/proj/vans-logo.webp",
         pics: [["assets/proj/vans-shells.webp", ""], ["assets/proj/vans-logo.webp", "Van's Cove"], ["assets/proj/vans-seahorse.webp", "A glowing golden seahorse"], ["assets/proj/vans-diver.gif", "Animated boy diver swimming"]],
@@ -3824,7 +3826,8 @@ var FRAMES = { lime: "assets/proj/frame-lime-orig.webp", blush: "assets/proj/fra
     var W = box.clientWidth, H = box.clientHeight; if (!W) return;
     var off = f.offsetTop || 0, src = f.dataset.src || f.src || "";
     /* these two pages only come in a wide layout: on a phone, zoom in on the logo and game instead of shrinking the whole page */
-    var fixed = /vans-cove|sanctuary/.test(src), focus = /vans-cove/.test(src) ? .32 : .5;
+    /* Van's Cove centers its own game when embedded, so only the Sanctuary needs the zoom */
+    var fixed = /sanctuary/.test(src), focus = .5;
     if (W < 520 && fixed) {
       var k = (H - off) / 900, x = Math.min(0, Math.max(W - 1440 * k, W / 2 - 1440 * k * focus));
       f.style.width = "1440px"; f.style.height = "900px"; f.style.transform = "translateX(" + x.toFixed(1) + "px) scale(" + k.toFixed(4) + ")"; return;
@@ -3842,7 +3845,7 @@ var FRAMES = { lime: "assets/proj/frame-lime-orig.webp", blush: "assets/proj/fra
       var body;
       if (R.layout === "career") {
         body = jumpHtml(R) + '<div class="slots feature">' + slotHtml(R.projects[0], 0) + '</div>'
-          + '<h3 class="room-sub">More projects<span class="dot">.</span></h3>'
+          + '<h3 class="room-sub">' + (R.moreLabel || "More projects") + '<span class="dot">.</span></h3>'
           + '<div class="slots small">' + R.projects.slice(1).map(function (p, i) { return slotHtml(p, i + 1); }).join("") + '</div>';
       } else body = jumpHtml(R) + '<div class="slots">' + R.projects.map(slotHtml).join("") + '</div>';
       roomBody.innerHTML = '<div class="room-pad">' + body
@@ -3897,7 +3900,7 @@ var FRAMES = { lime: "assets/proj/frame-lime-orig.webp", blush: "assets/proj/fra
   function openProject(p, from) {
     $("projTitle").textContent = p.name;
     $("projOne").textContent = p.one || "";
-    $("projKick").textContent = current && current.layout === "career" ? "Career" : "Personal project";
+    $("projKick").textContent = current && current.name === "Workshop" ? "Career" : "Personal project";
     var facts = $("projFacts"); facts.innerHTML = (p.facts || []).map(function (f) { return "<div><dt>" + text(f[0]) + "</dt><dd>" + text(f[1]) + "</dd></div>"; }).join(""); facts.hidden = !facts.innerHTML;
     var more = $("projMore"); more.innerHTML = p.more || ""; more.hidden = !p.more;
     var pics = p.pics || [], media = proj.querySelector(".proj-media");

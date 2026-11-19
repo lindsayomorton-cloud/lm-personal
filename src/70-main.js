@@ -490,7 +490,8 @@
     var W = box.clientWidth, H = box.clientHeight; if (!W) return;
     var off = f.offsetTop || 0, src = f.dataset.src || f.src || "";
     /* these two pages only come in a wide layout: on a phone, zoom in on the logo and game instead of shrinking the whole page */
-    var fixed = /vans-cove|sanctuary/.test(src), focus = /vans-cove/.test(src) ? .32 : .5;
+    /* Van's Cove centers its own game when embedded, so only the Sanctuary needs the zoom */
+    var fixed = /sanctuary/.test(src), focus = .5;
     if (W < 520 && fixed) {
       var k = (H - off) / 900, x = Math.min(0, Math.max(W - 1440 * k, W / 2 - 1440 * k * focus));
       f.style.width = "1440px"; f.style.height = "900px"; f.style.transform = "translateX(" + x.toFixed(1) + "px) scale(" + k.toFixed(4) + ")"; return;
@@ -508,7 +509,7 @@
       var body;
       if (R.layout === "career") {
         body = jumpHtml(R) + '<div class="slots feature">' + slotHtml(R.projects[0], 0) + '</div>'
-          + '<h3 class="room-sub">More projects<span class="dot">.</span></h3>'
+          + '<h3 class="room-sub">' + (R.moreLabel || "More projects") + '<span class="dot">.</span></h3>'
           + '<div class="slots small">' + R.projects.slice(1).map(function (p, i) { return slotHtml(p, i + 1); }).join("") + '</div>';
       } else body = jumpHtml(R) + '<div class="slots">' + R.projects.map(slotHtml).join("") + '</div>';
       roomBody.innerHTML = '<div class="room-pad">' + body
@@ -563,7 +564,7 @@
   function openProject(p, from) {
     $("projTitle").textContent = p.name;
     $("projOne").textContent = p.one || "";
-    $("projKick").textContent = current && current.layout === "career" ? "Career" : "Personal project";
+    $("projKick").textContent = current && current.name === "Workshop" ? "Career" : "Personal project";
     var facts = $("projFacts"); facts.innerHTML = (p.facts || []).map(function (f) { return "<div><dt>" + text(f[0]) + "</dt><dd>" + text(f[1]) + "</dd></div>"; }).join(""); facts.hidden = !facts.innerHTML;
     var more = $("projMore"); more.innerHTML = p.more || ""; more.hidden = !p.more;
     var pics = p.pics || [], media = proj.querySelector(".proj-media");

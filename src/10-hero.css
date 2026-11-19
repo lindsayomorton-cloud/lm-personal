@@ -352,7 +352,7 @@ html.bunny-zoom .hero{transform:translate(var(--zx,0),var(--zy,0)) scale(1.3)!im
 .rb-sp{width:calc(var(--sz) * 1.8)!important;height:calc(var(--sz) * 1.8)!important;z-index:3}
 
 html.bunny-zoom .hero{transform:translate(var(--zx,0),var(--zy,0)) scale(1.12)!important}
-@media (min-width:900px){html body .hero h1 .w3{padding-left:2.15em!important}}
+@media (min-width:900px){html body .hero h1 .w3{padding-left:1.55em!important}}
 
 /* the logo and menu hold perfectly still while the camera pushes in on the bunny */
 html.bunny-zoom .top{transform:none!important;translate:none!important}

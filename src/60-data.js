@@ -7,8 +7,10 @@ var ROOMS = {
   personal: {
     name: "Playroom",
     lede: "The games I make for my boys.",
+    /* same tile layout as the Workshop: Van's Cove as the big feature, then the other games */
+    layout: "career", moreLabel: "More games",
     projects: [
-      { name: "Van's Cove", kick: "Made for Van", color: "#0e4f6e", preview: "vans-cove/showcase.html",
+      { name: "Van's Cove", kick: "Made for Van", color: "#0e4f6e", preview: "vans-cove/showcase.html", learn: true,
         one: "My redesign of Treasure Cove, my favorite computer game growing up, made for my son Van.",
         logo: "assets/proj/vans-logo.webp",
         pics: [["assets/proj/vans-shells.webp", ""], ["assets/proj/vans-logo.webp", "Van's Cove"], ["assets/proj/vans-seahorse.webp", "A glowing golden seahorse"], ["assets/proj/vans-diver.gif", "Animated boy diver swimming"]],
