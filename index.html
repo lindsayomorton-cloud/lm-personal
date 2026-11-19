@@ -134,7 +134,8 @@ html.tall .loader{position:absolute;height:100vh;bottom:auto}
 .hero-figure{position:relative;z-index:2;margin:0;width:min(500px,84%)}
 .hero-photo{border-radius:28px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 30px 60px -30px rgba(21,48,44,.45);animation:rise .9s .1s cubic-bezier(.2,.8,.2,1) both}
 .hero-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
-.hero-tag{position:absolute;z-index:4;left:28px;bottom:28px;max-width:calc(100% - 40px);background:var(--acid);font-weight:700;font-size:15px;letter-spacing:.02em;padding:12px 22px;border-radius:999px;opacity:0;animation:rise .6s ease 2.5s forwards}
+.hero-tag .ht-name{display:block}.hero-tag .ht-sub{display:block;margin-top:3px;font:italic 400 .92em/1.15 var(--serif,Georgia),Georgia,serif;letter-spacing:0}
+.hero-tag{text-align:center;border-radius:22px!important;position:absolute;z-index:4;left:28px;bottom:28px;max-width:calc(100% - 40px);background:var(--acid);font-weight:700;font-size:15px;letter-spacing:.02em;padding:12px 22px;border-radius:999px;opacity:0;animation:rise .6s ease 2.5s forwards}
 
 /* tablet */
 @media (min-width:600px) and (max-width:900px){
@@ -160,7 +161,7 @@ html.tall .loader{position:absolute;height:100vh;bottom:auto}
   .hero{grid-template-columns:1fr}
   .hero-stage{order:-1;padding:76px 22px 20px}
   .hero-figure{width:min(270px,68%)}
-  .hero-tag{white-space:nowrap;font-size:12px;padding:8px 13px;left:50%;bottom:-14px;max-width:none;translate:-50% 0}
+  .hero-tag{white-space:nowrap;font-size:12px;padding:7px 14px;left:50%;bottom:10px;max-width:none;translate:-50% 0}
   .hero-photo{aspect-ratio:1}
   .hero-sun{width:300px;top:2%;left:-6%}
   .hero-copy{padding:30px 22px 48px}
@@ -3221,7 +3222,7 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
     <div class="hero-sun" aria-hidden="true"></div>
     <figure class="hero-figure">
       <div class="hero-photo"><img src="assets/proj/portrait-blue-clean.webp" alt="Lindsay Morton"></div>
-      <figcaption class="hero-tag">Lindsay Morton ✳</figcaption>
+      <figcaption class="hero-tag"><span class="ht-name">Lindsay Morton ✳</span><em class="ht-sub">Always curious. Always building.</em></figcaption>
     </figure>
   </div>
 </section>
