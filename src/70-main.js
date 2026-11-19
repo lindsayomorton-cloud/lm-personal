@@ -281,7 +281,7 @@
   /* the question spins up out of the wormhole first; once "puzzle." lands, everything else pours in */
   function startQuote() {
     if (startQuote.done) return; startQuote.done = true; root.classList.add("vq-go");
-    setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); }, 2900);
+    setTimeout(function () { var fl = $("vxFloat"); if (fl) fl.classList.add("go"); root.classList.add("vx-go"); }, 4300);   /* the chair, teacup and the rest pour in the moment the dolphin splashes down */
   }
   function vortexTarget() {
     var r = vx.getBoundingClientRect(), H = innerHeight;
