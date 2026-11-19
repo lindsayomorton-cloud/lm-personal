@@ -398,6 +398,8 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     var inView = r.top < H && r.bottom > 0, a = clamp((H * 1.15 - r.top) / (H * 1.15));
     /* once the hero is gone, the vortex drops beneath the doors, so the doors slide up over it exactly with your scroll */
     root.classList.toggle("vx-past", r.top < 0);
+    /* the vortex leftovers only hide once the doors have taken over the screen (not while you are still inside the vortex) */
+    root.classList.toggle("vx-gone", r.bottom < H * .3);
     if (r.top < 0) view.style.clipPath = "none";
     else { var hd = window.__holeDoc, at = hd ? hd.x.toFixed(0) + "px " + (hd.y - scrollY).toFixed(0) + "px" : "50% 55%"; view.style.clipPath = "circle(" + (!hd && a < .2 ? 0 : a * a * 160).toFixed(2) + "vmax at " + at + ")"; }
     return { p: clamp(-r.top / Math.max(1, r.height - H)), o: inView || (r.top > 0 && a > 0) ? 1 : 0 };
