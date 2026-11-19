@@ -31,8 +31,10 @@
     return '<g transform="translate(' + x + ' ' + y + ')' + (flip ? " rotate(180)" : "") + ' scale(' + k + ') translate(-10 -10)">' + PIP[s] + "</g>";
   }
   function faceSVG(c) {
-    var r = SOL.rank(c), s = SUITCH[SOL.suit(c)], isRed = SOL.red(c), bg = FACE[r][isRed ? 1 : 0];
-    var ink = (r === 1 || r >= 12) ? "#fff" : "#17121f", R = RANKS[r];
+    /* red suits (hearts, diamonds) sit on white with pink ink; black suits (clubs, spades) sit on lavender with dark ink,
+       so the two colors are obvious at a glance. A thin rainbow rank stripe keeps the whimsy. */
+    var r = SOL.rank(c), s = SUITCH[SOL.suit(c)], isRed = SOL.red(c), bg = isRed ? "#ffffff" : "#d9cdf7", R = RANKS[r];
+    var ink = isRed ? "#e0215f" : "#1d1633", stripe = FACE[r][0];
     var corner = '<text x="9" y="22" font-size="' + (R.length > 1 ? 17 : 20) + '" font-weight="800" letter-spacing="-1">' + R + "</text>" + pip(s, 15, 33, 11);
     var mid = "";
     if (r === 1) mid = pip(s, 50, 70, 46);
@@ -43,7 +45,7 @@
       mid = '<rect x="23" y="29" width="54" height="82" rx="8" fill="none" stroke="currentColor" stroke-width="2.4" opacity=".55"/>' + deco
         + '<text x="50" y="86" text-anchor="middle" font-size="36" font-weight="900" letter-spacing="-1">' + R + "</text>" + pip(s, 50, 99, 13);
     }
-    return '<svg viewBox="0 0 100 140" aria-hidden="true" style="color:' + ink + '"><rect width="100" height="140" rx="9" fill="' + bg + '"/><g fill="currentColor" font-family="\'Bricolage Grotesque\',\'DM Sans\',Arial,sans-serif">'
+    return '<svg viewBox="0 0 100 140" aria-hidden="true" style="color:' + ink + '"><rect width="100" height="140" rx="9" fill="' + bg + '"/><rect x="3.5" y="3.5" width="93" height="133" rx="6.5" fill="none" stroke="' + stripe + '" stroke-width="2.2" opacity=".85"/><g fill="currentColor" font-family="\'Bricolage Grotesque\',\'DM Sans\',Arial,sans-serif">'
       + corner + '<g transform="rotate(180 50 70)">' + corner + "</g>" + mid + "</g></svg>";
   }
   function label(c, up) { return up === false ? "Face-down card" : RANKNAME[SOL.rank(c)] + " of " + SUITS[SOL.suit(c)] + ", " + (SOL.red(c) ? "red" : "black"); }
