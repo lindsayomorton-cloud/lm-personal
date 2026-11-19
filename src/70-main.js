@@ -1139,7 +1139,8 @@
 
 /* hero daisy blooms once the photo has dropped in */
 (function () { var d = document.querySelector(".hero-daisy"); if (!d) return;
-  setTimeout(function () { d.src = d.dataset.src + "?t=" + Date.now(); d.classList.add("grow"); }, 2200); })();
+  /* it blooms together with the daisy patch, the moment the hero appears */
+  (function wait() { if (document.documentElement.classList.contains("hero-go")) { d.src = d.dataset.src + "?t=" + Date.now(); d.classList.add("grow"); } else setTimeout(wait, 60); })(); })();
 
 /* each Playroom sticker starts at the door's center, so it flies out of the door to its spot */
 (function () {

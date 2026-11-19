@@ -466,7 +466,7 @@ html.hero-go .hero-sky .cl.drop{animation:clDrop .9s cubic-bezier(.3,.1,.2,1) ca
 .logo:hover .lm-mark,.logo:focus-visible .lm-mark{fill:#ceff32!important;filter:drop-shadow(0 0 8px rgba(206,255,50,.8))}
 
 /* the blooming daisy stands big right on the far edge of the daisy field, covering where it ends */
-html body .hero .hero-daisy{left:clamp(240px,56vw,1000px)!important;top:auto!important;bottom:-7%!important;margin-left:0!important;translate:-50% 0!important;width:clamp(220px,24vw,460px)!important;z-index:3!important}
+html body .hero .hero-daisy{left:clamp(240px,56vw,1000px)!important;top:auto!important;bottom:-7%!important;margin-left:-10px!important;translate:-50% 0!important;width:clamp(220px,24vw,460px)!important;z-index:3!important}
 @media (max-width:899px){html body .hero .hero-daisy{left:auto!important;right:-6%!important;translate:0 0!important;width:46vw!important}}
 
 /* phone + tablet: the same lavender-to-pink gradient as desktop, and the headline always fits */
@@ -475,6 +475,26 @@ html body .hero .hero-daisy{left:clamp(240px,56vw,1000px)!important;top:auto!imp
   .hero-copy,.hero-stage{background:transparent!important}
   .hero h1{font-size:clamp(40px,13.6vw,110px)!important;margin-right:0!important}
   .hero h1 .w1{white-space:nowrap}
+}
+
+/* tablets (600-899px): photo first, then the words, like a phone, so nothing overlaps */
+@media (min-width:600px) and (max-width:899px){
+  .hero{grid-template-columns:1fr!important}
+  .hero-stage{order:-1;padding:96px 28px 24px!important}
+  .hero-figure{width:min(400px,62%)!important;margin:0 auto}
+  .hero-photo{aspect-ratio:1!important}
+  .hero-tag{left:50%!important;bottom:-14px!important;translate:-50% 0;white-space:nowrap}
+  .hero-sun{width:min(420px,60vw)!important;top:4%!important;left:4%!important}
+  .hero-copy{padding:34px 36px 64px!important}
+}
+/* MEMORABLE (in Monoton, a very wide face) always fits the screen */
+@media (max-width:899px){.hero h1 .w2{font-size:min(1em,8.6vw)!important}}
+
+/* small laptops (900-1199px): smaller words and a smaller photo so they never collide */
+@media (min-width:900px) and (max-width:1199px){
+  .hero h1{font-size:min(8.2vw,13svh)!important;margin-right:0!important}
+  .hero h1 .w2{font-size:.82em!important}
+  html body .hero-figure{height:min(74svh,84%)!important;right:-3%!important}
 }
 
 /* ============ Jump-in link bar ============ */
@@ -2447,7 +2467,7 @@ html.tv-raised .like-tv.tv-lift{z-index:620;position:relative}
 .art-bouquet{left:calc(50% + clamp(150px,13vw,240px))!important;width:clamp(200px,17vw,320px)!important;bottom:0!important}
 .art .pf .pfr{filter:none!important}
 /* the closing portrait: cut-out photo on a Neon Petal pink glow */
-.connect-photo{background:radial-gradient(110% 80% at 50% 30%,#ceff32 0,#e6f59a 35%,#fe7bbf 85%)!important}
+.connect-photo{background:radial-gradient(120% 90% at 50% 25%,#ffb35e 0,#f57c24 75%)!important}
 .connect-photo img{object-fit:cover;object-position:50% 10%}
 @media (min-width:901px){.connect-repeat h2{font-size:clamp(48px,6.4vw,140px)!important}}
 @media (min-width:901px){.connect-repeat h2{font-size:clamp(44px,5.2vw,120px)!important}}
@@ -2472,6 +2492,21 @@ html.in-vx .drift{opacity:0!important;visibility:hidden!important}
 .solo.in .solo-or,.solo.in .solo-line{opacity:1;translate:0 0}
 .solo-game:empty{display:none}
 @media (prefers-reduced-motion:reduce){.solo .solo-or,.solo .solo-line{opacity:1;translate:none}}
+
+/* narrow screens: the river runs behind the Now brewing boxes, never over them */
+@media (max-width:900px){.brew-list{z-index:70!important}.brew-box,.brew-box.brew-locked{position:relative;z-index:70!important}}
+/* the closing headline sits in front of the hanging clouds and wraps instead of running off the edge */
+.connect .connect-copy{position:relative;z-index:9!important}
+@media (max-width:1200px){.connect h2,.connect-repeat h2{white-space:normal!important}}
+/* narrow screens: the two yellow oval frames never stack on top of each other */
+@media (max-width:900px){
+  .art-wall button:nth-child(1){order:1}.art-wall button:nth-child(2){order:2}.art-wall button:nth-child(3){order:3}.art-wall button:nth-child(4){order:4}.art-wall button:nth-child(5){order:5}
+  .art-wall button:nth-child(6){order:7}.art-wall button:nth-child(7){order:6}.art-wall button:nth-child(8){order:8}.art-wall button:nth-child(9){order:9}
+}
+/* the art garden on the darker moss */
+.art{background:radial-gradient(80% 70% at 50% 40%,#0000 60%,#0d1f0f66 100%),url(assets/proj/moss.webp) center top/100% auto repeat-y #2f4a1c!important}
+/* the daisy growing out of the fringe gem: bigger */
+.fringe-daisy{width:clamp(300px,26vw,470px)!important}
 
 /* ============ Pop-up windows ============ */
 .modal{position:fixed;inset:0;display:grid;place-items:center;padding:16px;background:rgba(18,8,36,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:fadeIn .3s ease}
@@ -2805,6 +2840,85 @@ a.hi.note-landed{animation:noteLand 1.2s cubic-bezier(.2,1.6,.4,1)}
 .zoombox.on .zslot{transform:scale(var(--zk,1))!important}
 .zoombox .zslot img{border:0!important;box-shadow:none!important;max-width:none!important;max-height:none!important;transform:none!important;border-radius:0!important}
 
+/* ===== Rainbow Solitaire ===== */
+.solo-game:empty{display:none}
+.solo-game{margin:clamp(22px,3vw,40px) auto 0;max-width:1180px;text-align:left}
+/* the invitation: a fan of bunny cards and a Play me button */
+.sol-teaser{display:grid;justify-items:center;gap:clamp(16px,2vw,26px);padding:clamp(18px,3vw,36px) 0 6px}
+.sol-fan{position:relative;width:clamp(150px,18vw,230px);aspect-ratio:1.25}
+.sol-fan i{position:absolute;left:50%;bottom:0;width:58%;aspect-ratio:.68;border-radius:9px;background:url(assets/sol/card-back.webp) center/cover;box-shadow:0 10px 22px -8px rgba(40,10,60,.5);transform-origin:50% 120%;translate:-50% 0;transition:rotate .5s cubic-bezier(.2,1.4,.4,1)}
+.sol-fan i:nth-child(1){rotate:-24deg}.sol-fan i:nth-child(2){rotate:-12deg}.sol-fan i:nth-child(3){rotate:0deg}.sol-fan i:nth-child(4){rotate:12deg}.sol-fan i:nth-child(5){rotate:24deg}
+.sol-teaser:hover .sol-fan i:nth-child(1){rotate:-34deg}.sol-teaser:hover .sol-fan i:nth-child(2){rotate:-17deg}.sol-teaser:hover .sol-fan i:nth-child(4){rotate:17deg}.sol-teaser:hover .sol-fan i:nth-child(5){rotate:34deg}
+.sol-fan i:nth-child(3){animation:solPeek 3.2s ease-in-out infinite}
+@keyframes solPeek{0%,100%{translate:-50% 0}50%{translate:-50% -10px}}
+.sol-play{font-size:clamp(17px,1.6vw,22px)!important}
+/* the table */
+.sol-table{position:relative;border-radius:clamp(14px,2vw,26px);padding:clamp(10px,1.6vw,22px);background:url(assets/sol/table-bg.webp) center 30%/cover;box-shadow:0 30px 60px -30px rgba(30,10,60,.55),inset 0 0 0 3px rgba(255,255,255,.5);overflow:hidden;animation:solOpen .6s cubic-bezier(.2,1.2,.4,1)}
+@keyframes solOpen{from{opacity:0;scale:.96}to{opacity:1;scale:1}}
+.sol-bar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;margin-bottom:clamp(8px,1.2vw,14px);padding:8px 10px;border-radius:16px;background:rgba(255,255,255,.88);box-shadow:0 6px 18px -10px rgba(20,10,60,.4)}
+.sol-bar button{font:700 clamp(12px,1vw,14px)/1 var(--body);border:2px solid var(--ink);background:#fff;color:var(--ink);border-radius:999px;padding:.55em .9em;cursor:pointer;transition:transform .15s,background .15s}
+.sol-bar button:hover:not(:disabled){transform:translateY(-2px);background:#ceff32}
+.sol-bar button:disabled{opacity:.4;cursor:default}
+.sol-bar button.thinking{animation:solThink .8s ease-in-out infinite}
+@keyframes solThink{50%{background:#fe7bbf}}
+.sol-modes{display:flex;gap:4px;padding:3px;border-radius:999px;background:#f1e9f7}
+.sol-modes button{border-color:transparent;background:transparent}
+.sol-modes button[aria-checked="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.sol-acts{display:flex;flex-wrap:wrap;gap:6px}
+.sol-finish{background:#ceff32!important}
+.sol-left{font-weight:700}
+.sol-stats{display:flex;gap:14px;font:600 clamp(12px,1vw,14px)/1 var(--body);color:var(--ink)}
+.sol-stats b{font-variant-numeric:tabular-nums}
+.sol-live{min-height:1.4em;margin:8px 4px 0;font:600 clamp(13px,1.1vw,15px)/1.35 var(--body);color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.sol-board{position:relative;touch-action:none;user-select:none;-webkit-user-select:none;min-height:300px}
+/* empty piles */
+.sol-slot{position:absolute;left:0;top:0;border-radius:calc(var(--cw) * .09);border:2px dashed rgba(255,255,255,.75);background:rgba(255,255,255,.18);display:grid;place-items:center}
+.sol-slot svg{width:42%;fill:rgba(255,255,255,.85)}
+.sol-slot.stock{cursor:pointer;border-style:solid}
+.sol-slot.stock .sol-recycle{font:700 calc(var(--cw) * .45)/1 var(--body);color:#fff;opacity:0}
+.sol-slot.stock.can-recycle .sol-recycle{opacity:1}
+.sol-slot.col{border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.1)}
+/* the cards */
+.sol-card{position:absolute;left:0;top:0;width:var(--cw);aspect-ratio:100/140;perspective:800px;transition:transform .24s cubic-bezier(.25,.9,.3,1);cursor:pointer;will-change:transform}
+.sol-card.dragging{transition:none;cursor:grabbing}
+.sol-card.dragging .sol-in{box-shadow:0 18px 30px -8px rgba(0,0,0,.45)}
+.sol-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .32s ease;border-radius:calc(var(--cw) * .09);box-shadow:0 2px 5px rgba(0,0,0,.28)}
+.sol-card:not(.up) .sol-in{transform:rotateY(180deg)}
+.sol-face,.sol-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:inherit;overflow:hidden}
+.sol-face svg{display:block;width:100%;height:100%}
+.sol-back{transform:rotateY(180deg);background:url(assets/sol/card-back.webp) center/cover #ff4f00}
+.sol-card.buried .sol-in{box-shadow:none}
+.sol-card:focus-visible{outline:none}
+.sol-card:focus-visible .sol-in{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 6px #ec2b7a}
+.sol-card.shake{animation:solShake .32s}
+@keyframes solShake{25%{translate:-5px 0}75%{translate:5px 0}}
+/* hints: a bold outline and a pulse, never a change of card color */
+.hint-src .sol-in,.sol-slot.hint-src{outline:4px solid #fff;outline-offset:1px;box-shadow:0 0 0 8px #ec2b7a,0 0 26px 8px rgba(236,43,122,.6);animation:solPulse 1s ease-in-out infinite}
+.hint-dst .sol-in,.sol-slot.hint-dst{outline:4px dashed #ceff32;outline-offset:3px;box-shadow:0 0 0 7px #15302c}
+@keyframes solPulse{50%{box-shadow:0 0 0 4px #ec2b7a,0 0 12px 2px rgba(236,43,122,.4)}}
+.sol-board.reshuffle .sol-card:not(.up){animation:solMix .6s ease}
+@keyframes solMix{40%{translate:0 -10px;rotate:-6deg}70%{rotate:5deg}}
+/* winning */
+.sol-cascade{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1000}
+.sol-win{position:absolute;inset:0;display:grid;place-items:center;z-index:1001;pointer-events:none}
+.sol-win-card{pointer-events:auto;text-align:center;background:#fff;border:3px solid var(--ink);border-radius:22px;padding:22px 28px;box-shadow:8px 8px 0 #ec2b7a;animation:solOpen .5s cubic-bezier(.2,1.4,.4,1)}
+.sol-win-h{font:800 clamp(28px,3.4vw,44px)/1 var(--display);margin:0 0 6px;color:var(--pink)}
+.sol-win-card p{margin:0 0 14px;font:600 15px/1.3 var(--body)}
+@media (max-width:640px){
+  .sol-bar{justify-content:center}
+  .sol-acts button{padding:.5em .7em}
+  .sol-stats{width:100%;justify-content:center}
+  .sol-slot{border-width:1.5px}
+}
+@media (prefers-reduced-motion:reduce){.sol-card,.sol-in{transition:none}.sol-fan i{animation:none!important}}
+/* stronger hint rings that sit outside the card, plus a little lift */
+.sol-card.hint-src,.sol-card.hint-dst{z-index:850!important}
+.sol-card.hint-src .sol-in::after,.sol-card.hint-dst .sol-in::after{content:"";position:absolute;inset:-7px;border-radius:calc(var(--cw) * .13);pointer-events:none}
+.sol-card.hint-src .sol-in::after{border:5px solid #ec2b7a;box-shadow:0 0 0 3px #fff,0 0 22px 6px rgba(236,43,122,.7);animation:solRing 1s ease-in-out infinite}
+.sol-card.hint-dst .sol-in::after{border:5px dashed #15302c;box-shadow:0 0 0 3px #ceff32}
+@keyframes solRing{50%{inset:-3px}}
+.sol-live:not(:empty){display:inline-block;background:rgba(21,48,44,.86);color:#fff;text-shadow:none;padding:.5em .9em;border-radius:999px;position:relative;z-index:5}
+
 
 </style>
 
@@ -2829,7 +2943,7 @@ a.hi.note-landed{animation:noteLand 1.2s cubic-bezier(.2,1.6,.4,1)}
   <img class="fl" src="assets/proj/gem-star3-yellow.webp" alt="" aria-hidden="true" style="left:3%;top:58%;width:44px;--r:14deg;--d:7.5s">
   <img class="fl" src="assets/proj/cr-star-rpink.webp" alt="" aria-hidden="true" style="left:42%;top:10%;width:clamp(60px,6vw,96px);--r:-12deg;--d:7s">
   <img class="fl" src="assets/proj/gem-pink.webp" alt="" aria-hidden="true" style="right:3%;top:12%;width:clamp(70px,7vw,120px);--r:10deg;--d:9s;--dl:-2s">
-  <img class="fl" src="assets/proj/cr-heart.webp" alt="" aria-hidden="true" style="left:44%;bottom:7%;width:clamp(80px,7vw,130px);--r:-8deg;--d:8s;--dl:-4s">
+  <img class="fl" src="assets/proj/cr-heart.webp" alt="" aria-hidden="true" style="left:21%;bottom:27%;width:clamp(48px,4.4vw,80px);--r:-8deg;--d:8s;--dl:-4s">
   <div class="hero-copy">
     <h1 id="heroTitle"><span class="w1">Powerful.</span> <span class="w2">Memorable.</span> <span class="w3">Skilled.</span></h1>
     <div class="hero-qa aim">
@@ -3145,8 +3259,12 @@ a.hi.note-landed{animation:noteLand 1.2s cubic-bezier(.2,1.6,.4,1)}
 <!-- ============ Solitaire: the very end ============ -->
 <section class="solo" id="solo" aria-labelledby="soloTitle">
   <p class="solo-or" id="soloTitle">Or you can go it alone.</p>
-  <p class="solo-line"><em>No one sees when you lose when you&rsquo;re playing solitaire</em></p>
-  <div class="solo-game" id="solitaire"></div>
+  <div class="solo-game" id="solitaire">
+    <div class="sol-teaser">
+      <div class="sol-fan" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <button type="button" class="btn sol-play">Play me <span aria-hidden="true">&#9824;</span></button>
+    </div>
+  </div>
 </section>
 
 
@@ -4492,7 +4610,8 @@ var FRAMES = { lime: "assets/proj/frame-lime-orig.webp", blush: "assets/proj/fra
 
 /* hero daisy blooms once the photo has dropped in */
 (function () { var d = document.querySelector(".hero-daisy"); if (!d) return;
-  setTimeout(function () { d.src = d.dataset.src + "?t=" + Date.now(); d.classList.add("grow"); }, 2200); })();
+  /* it blooms together with the daisy patch, the moment the hero appears */
+  (function wait() { if (document.documentElement.classList.contains("hero-go")) { d.src = d.dataset.src + "?t=" + Date.now(); d.classList.add("grow"); } else setTimeout(wait, 60); })(); })();
 
 /* each Playroom sticker starts at the door's center, so it flies out of the door to its spot */
 (function () {
@@ -4868,6 +4987,595 @@ window.__mail = function () {
     };
     $("docSave").onclick = function () { if (window.__downloads && docMd) window.__downloads.save({ filename: "Lindsay_Morton_Tailored_Resume.md", data: docMd }).catch(function () {}); };
   };
+})();
+
+/* ===== Rainbow Solitaire: the game engine (pure rules, no screen code) =====
+   Shared by the page, the hint/rescue worker and the offline deal generator.
+   Cards are numbers 0-51: suit * 13 + (rank - 1). Suits: 0 hearts, 1 diamonds, 2 clubs, 3 spades.
+   Pile convention everywhere: the top of a pile is the LAST element of its array.
+   Deal (rules v1): round-robin triangular deal from deck[0]; row r puts one card on columns r..6,
+   the first card of each row face up; deck[28..51] becomes the stock in that order (stock top = deck[51]). */
+function SOL_FACTORY() {
+  var RULES = 1;
+  function suit(c) { return (c / 13) | 0; }
+  function rank(c) { return (c % 13) + 1; }
+  function red(c) { return c < 26; }
+  function clone(st) {
+    return { t: st.t.map(function (col) { return { c: col.c.slice(), d: col.d }; }), f: st.f.slice(), s: st.s.slice(), w: st.w.slice(), draw: st.draw };
+  }
+  function deal(deck, draw) {
+    var t = [], k = 0, i, j;
+    for (i = 0; i < 7; i++) t.push({ c: [], d: 0 });
+    for (i = 0; i < 7; i++) for (j = i; j < 7; j++) t[j].c.push(deck[k++]);
+    for (i = 0; i < 7; i++) t[i].d = i;
+    return { t: t, f: [0, 0, 0, 0], s: deck.slice(28), w: [], draw: draw === 3 ? 3 : 1 };
+  }
+  /* can card c sit on card under (or on an empty column when under is undefined) */
+  function fitsTab(c, under) { return under === undefined ? rank(c) === 13 : (red(c) !== red(under) && rank(c) === rank(under) - 1); }
+  function fitsFound(c, f) { return rank(c) === f[suit(c)] + 1; }
+  function flip(col) { if (col.d > 0 && col.c.length === col.d) col.d--; }
+  /* apply an action; returns a NEW state, or null if the action is illegal (the old state is never touched) */
+  function apply(st, a) {
+    var n = clone(st), col, card, k;
+    if (a.k === "draw") {
+      if (!n.s.length) return null;
+      for (k = 0; k < n.draw && n.s.length; k++) n.w.push(n.s.pop());
+      return n;
+    }
+    if (a.k === "recycle") {
+      if (n.s.length || !n.w.length) return null;
+      n.s = n.w.reverse(); n.w = []; return n;
+    }
+    if (a.k !== "mv") return null;
+    var cnt = a.n || 1, moving;
+    /* lift the cards off the source */
+    if (a.from.p === "w") { if (!n.w.length || cnt !== 1) return null; moving = [n.w[n.w.length - 1]]; }
+    else if (a.from.p === "f") { if (cnt !== 1 || !n.f[a.from.i]) return null; moving = [a.from.i * 13 + n.f[a.from.i] - 1]; }
+    else if (a.from.p === "t") { col = n.t[a.from.i]; if (!col || cnt < 1 || col.c.length - cnt < col.d) return null; moving = col.c.slice(col.c.length - cnt); }
+    else return null;
+    /* check the destination */
+    if (a.to.p === "f") {
+      if (moving.length !== 1 || a.from.p === "f" || suit(moving[0]) !== a.to.i || !fitsFound(moving[0], n.f)) return null;
+    } else if (a.to.p === "t") {
+      if (a.from.p === "t" && a.from.i === a.to.i) return null;
+      var dest = n.t[a.to.i]; if (!dest) return null;
+      if (!fitsTab(moving[0], dest.c.length ? dest.c[dest.c.length - 1] : undefined)) return null;
+      if (dest.c.length && dest.c.length === dest.d) return null;
+    } else return null;
+    /* commit */
+    if (a.from.p === "w") n.w.pop();
+    else if (a.from.p === "f") n.f[a.from.i]--;
+    else { col.c.length -= cnt; flip(col); }
+    if (a.to.p === "f") n.f[a.to.i]++;
+    else Array.prototype.push.apply(n.t[a.to.i].c, moving);
+    return n;
+  }
+  function won(st) { return st.f[0] + st.f[1] + st.f[2] + st.f[3] === 52; }
+  /* every legal action in this position */
+  function legal(st) {
+    var out = [], i, j, col, top;
+    if (st.w.length) {
+      top = st.w[st.w.length - 1];
+      if (fitsFound(top, st.f)) out.push({ k: "mv", from: { p: "w" }, to: { p: "f", i: suit(top) }, n: 1 });
+      for (j = 0; j < 7; j++) if (fitsTab(top, last(st.t[j]))) out.push({ k: "mv", from: { p: "w" }, to: { p: "t", i: j }, n: 1 });
+    }
+    for (i = 0; i < 7; i++) {
+      col = st.t[i]; if (!col.c.length) continue;
+      top = col.c[col.c.length - 1];
+      if (fitsFound(top, st.f)) out.push({ k: "mv", from: { p: "t", i: i }, to: { p: "f", i: suit(top) }, n: 1 });
+      for (var s = col.d; s < col.c.length; s++) for (j = 0; j < 7; j++) if (j !== i && fitsTab(col.c[s], last(st.t[j]))) out.push({ k: "mv", from: { p: "t", i: i }, to: { p: "t", i: j }, n: col.c.length - s });
+    }
+    for (i = 0; i < 4; i++) if (st.f[i]) { var fc = i * 13 + st.f[i] - 1; for (j = 0; j < 7; j++) if (st.t[j].c.length && fitsTab(fc, last(st.t[j]))) out.push({ k: "mv", from: { p: "f", i: i }, to: { p: "t", i: j }, n: 1 }); }
+    if (st.s.length) out.push({ k: "draw" }); else if (st.w.length) out.push({ k: "recycle" });
+    return out;
+  }
+  function last(col) { return col.c.length && col.c.length > col.d ? col.c[col.c.length - 1] : (col.c.length ? -1 : undefined); }
+  /* a position key; columns are sorted because swapping whole columns never changes who can win */
+  function key(st) {
+    return st.f.join(",") + "|" + st.t.map(function (c) { return c.d + ":" + c.c.join("."); }).sort().join("/") + "|" + st.w.join(".") + "~" + st.s.join(".");
+  }
+  function safeFound(st, c) {
+    var r = rank(c); if (r <= 2) return true;
+    var o1 = red(c) ? st.f[2] : st.f[0], o2 = red(c) ? st.f[3] : st.f[1];
+    return o1 >= r - 1 && o2 >= r - 1;
+  }
+  /* the solver's move list: legal moves, pruned to the ones that can matter, best first */
+  function solverMoves(st) {
+    var all = legal(st), good = [], i;
+    for (i = 0; i < all.length; i++) {
+      var a = all[i];
+      if (a.k === "mv" && a.to.p === "f" && a.from.p !== "f") {
+        var c = a.from.p === "w" ? st.w[st.w.length - 1] : st.t[a.from.i].c[st.t[a.from.i].c.length - 1];
+        if (safeFound(st, c)) return [a];
+        good.push([90, a]); continue;
+      }
+      if (a.k === "mv" && a.from.p === "t" && a.to.p === "t") {
+        var col = st.t[a.from.i], start = col.c.length - a.n, dest = st.t[a.to.i];
+        if (start === col.d) {
+          if (col.d === 0 && !dest.c.length) continue;          /* a king already at the bottom of a column: pointless */
+          good.push([col.d > 0 ? 100 : 70, a]); continue;        /* reveals a card, or empties a column */
+        }
+        var under = col.c[start - 1];                              /* splitting a run only to free the card under it for a foundation */
+        if (fitsFound(under, st.f)) good.push([60, a]);
+        continue;
+      }
+      if (a.k === "mv" && a.from.p === "w") { good.push([a.to.p === "t" && !st.t[a.to.i].c.length ? 40 : 55, a]); continue; }
+      if (a.k === "mv" && a.from.p === "f") { good.push([5, a]); continue; }
+      good.push([20, a]);
+    }
+    good.sort(function (x, y) { return y[0] - x[0]; });
+    return good.map(function (g) { return g[1]; });
+  }
+  /* depth-first search with a visited table. "solved" paths are real, replayable action lists.
+     Running out of budget is "unknown", never "unsolvable". */
+  function solve(st0, opt) {
+    opt = opt || {};
+    var maxNodes = opt.nodes || 150000, deadline = opt.ms ? Date.now() + opt.ms : 0, seen = new Set(), path = [], expanded = 0, stop = null;
+    function dfs(st) {
+      if (won(st)) return true;
+      if (expanded >= maxNodes) { stop = "node-limit"; return false; }
+      if (deadline && (expanded & 1023) === 0 && Date.now() > deadline) { stop = "timeout"; return false; }
+      var k = key(st); if (seen.has(k)) return false; seen.add(k); expanded++;
+      var ms = solverMoves(st);
+      for (var i = 0; i < ms.length; i++) {
+        var nx = apply(st, ms[i]); if (!nx) continue;
+        path.push(ms[i]);
+        if (dfs(nx)) return true;
+        path.pop();
+        if (stop) return false;
+      }
+      return false;
+    }
+    var ok = dfs(st0);
+    if (ok) return { status: "solved", actions: path.slice(), expanded: expanded };
+    if (stop) return { status: "unknown", reason: stop, expanded: expanded };
+    return { status: "exhausted", expanded: expanded };   /* pruned search found nothing; still not a proof */
+  }
+  function replay(st, actions) { for (var i = 0; i < actions.length; i++) { st = apply(st, actions[i]); if (!st) return false; } return won(st); }
+  /* seeded random numbers (mulberry32, PRNG v1) and Fisher-Yates */
+  function rng(seed) { var a = seed >>> 0; return function () { a = (a + 0x6D2B79F5) >>> 0; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function shuffle(arr, r) { var x = arr.slice(); for (var i = x.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)); var tmp = x[i]; x[i] = x[j]; x[j] = tmp; } return x; }
+  function deckFromSeed(seed) { var d = []; for (var i = 0; i < 52; i++) d.push(i); return shuffle(d, rng(seed)); }
+  function encode(deck) { return deck.map(function (c) { return String.fromCharCode(48 + c); }).join(""); }
+  function decode(s) { var d = []; for (var i = 0; i < s.length; i++) d.push(s.charCodeAt(i) - 48); return d; }
+  function count(st) { var n = st.s.length + st.w.length + st.f[0] + st.f[1] + st.f[2] + st.f[3]; st.t.forEach(function (c) { n += c.c.length; }); return n; }
+  return { RULES: RULES, suit: suit, rank: rank, red: red, clone: clone, deal: deal, apply: apply, legal: legal, won: won, key: key, solve: solve, replay: replay,
+    fitsTab: fitsTab, fitsFound: fitsFound, rng: rng, shuffle: shuffle, deckFromSeed: deckFromSeed, encode: encode, decode: decode, count: count, safeFound: safeFound };
+}
+var SOL = SOL_FACTORY();
+if (typeof module !== "undefined" && module.exports) module.exports = { SOL: SOL, SOL_FACTORY: SOL_FACTORY };
+
+/* verified-winnable starting deals (rules v1, mulberry32 + Fisher-Yates); each was solved and its winning path replayed through the engine. Full records with solutions: solitaire-deals.json */
+var SOL_DEALS = {"easy":["c_2?H@CI6AMB8=5>OS9RZLWaF14J^VG;`<N\\UK3TE]QXYDP07:b[","[_1bTZL@PK76M>2<Q3=E\\?JXa^GW;c`O58AISDRNHCYF9V]04U:B","WB@\\INOY`[RVFPAXG^1>6K;D:abJC70ZHQ3]_95TS<?2MU8cEL=4","ZX`T[];I8SB6351HbFAN>CK:^Mc?@_7\\W24DGPa9Q=YRJ<VE0OUL","[E96ac8_\\BASFI:XO5U`ZL2QVW0<^;]bRDMN?7GT=3CH>K4Y1J@P","=YTDO_H:IR?VK]1P\\>`^[ZU6J7EG3aCS5AM;LQNc@9X08b<B4FW2","@]MNbU6BXO[9a`L?G8CS;Y=E3J71R2:HA^ZQ0>5DP4cK<\\VIFW_T","5RK:F1@MW;C4QH][aY?B78L>_cEbZ`XSGTPOVDU36=\\<^NJ20AI9","FD]`7TOb[M314^?aH9:AC8=cZ;\\WJ>PN@VL2U<56K_BRXEGY0SQI","ZDA83BH=@CLVMS<6E2R;]71W>:Y509NQO4G?bJ_UX^Ic`[K\\PaFT","OH;6U?:9cLG<XB]RFa`>C5E2_4Q[Pb7J31ISN\\^D=W@KAZT0MV8Y","J56\\Yb:BTH[>SE9<;@`c8VCMa430GZ=PU^AF]XORLWI?K2QN_71D","WJ1@8D^BU9Y<KXT543]a[Z0Ob`MQ_RVC\\:2H=7;P>I6NAGS?FLEc","F5\\]4[?Q_@BX7aK69LcOZI38AJb>RWU<1EM0HD`2G^SVTY=NC;:P","T`Z\\F<DOQ1X>_09V43aRW6H2@I5;A]S?Y^[G=bB8:JM7KcNULCPE","WY`Z2B@VKC7N<cXL6A4b>a[]5\\3MTHI=EFPQ_8JRSO;1^U0:D?G9","DL[T8\\1QFGY<6U2Sac;4IR0>:XCP9]@N53M=_7`EVBK?^bAHOJZW","O?4aFHSV:D\\LREGXYc^M@KP5C];B9b17<ZQUATI[N863J_0=>W`2","Sb\\4:D1X`HRWVMTEGUa[8B?L3@905ZAP>cK7^]<=;FO2YJNQ_CI6","?=[HEC6Z<^K\\UJbX;2VPM@8OaSB4LFWc_>R39IN0T5]Q`D:7AY1G","THNS63EZY5[]I49^1RP>XBFc:aKC?MD@_L<;\\7AQ8bJ=U2WG`O0V","206O]Z[4@T7DAWXEIQKRJH;SMV>=b1Y5CUa3FNB<8P:^L?G\\c_9`","01XARCE6:NP<4=cY;5SH@TD[7^`8QO92\\JbZVK]I3ULM_WFG>Ba?","KRUP1[ZaC:>T3F_LN;4BHSDA<I2J\\WX8?5V6@Y]^E97=cObG0`MQ","I9D6:[4_Y^MZ;K=VCO`GXRFS\\U>Tb?W<a5LEQAP82]1BcNH37@0J","R<?KPc7045B\\TCN;FZ[E16M3XA9=Wb]_V@IJOH2U8Y>aQ^:`DGSL","cA6M?a4JTYGR7DZb<_KBHIE=N1S^]\\;9UX2P>L5WV[@38F`0:COQ","GE;:X]<=PU[D168^7>_Zab4YOH305WC`KR@NVc?MIQFABJ92S\\TL","7YAEPB92SVL\\GHR_TOJb;@Q1:C[NDZc8U5X?F3]4K>6<^0aM`W=I","RS>[PU1Z9=IM2DWO]5\\HC_bGX4`0aYNQK8<?J:^T@c6BEF;L73AV","5F;ELV>3XYUIMJ9DB^Pa\\@R2SK]6Q4<A=ZNO1bT?GH0c`_87W[:C","T25;aR:=61PcA8>\\<LO`@4[DbKS0M7EH9IXG?Y_Q^BWNVC]3FUJZ","09>S@IbJWcK:G^HY<EL38?=ZF[X_NA547OB2VR;1\\TCUQ6`a]MPD","P2RN`:\\Lc4A6_JH]OTM[8BK9CbI5;7a^>DS13@?VZYE<F=GQUX0W","IVO6:b8Ka9AZDULSQ?BPM[W]<G0_JCYF@Xc;412\\N=RH3>`T5^7E","YE6`b@cV_^N9CDGOIMAB3\\=]Q?K>J4<781:F;LRT[ZH52SWaP0UX","4HY5?Rb=UDBKO7C:\\T1]McZE@60_8L23PFI;`J^VA>W9a<XS[GNQ","H0?2`L6SW8KbNRPFT;7OD@^M>_]GYCQ:ZcVB9A3IaU=XEJ5\\14<[","\\23QH5@`OS6>K0a7cP1J[_4IZ9]R^;TW?<CEFXA=NbG8UDV:YMLB","1RL[S7EU0_I9Y]M\\CVT5QNO?XG2D^>3Wc;PZBbJ`K84<@F=AH:a6","64^GEB<K]MaNZT\\IH;U5R[F2VQ8>:JP1W3X0bSOC9D_=cYL?7@`A","4^`358XbNAV7TUMQ2Z=O9Gac;6BK>1P<H@YDRLI_CW:J\\S]?FE0[","EK;aNU1^A7X>L2QBSG[FP_93\\W8:RIYT5`O=<?CbHJ4cD@]6MV0Z","7F2K]4>0T;IYC[P_b\\@ZUBHO?^RGS98JEQX<D61aWV=M3NA5cL:`","7^bScT:WJ3M_I4VNL`aGF280QOZ6<;9UY@=H>E[\\RP1B?C]5AXDK","=W[`8;XK]c3IEQCMRbSPa1@<LV?>:9G5TN0F6YU_D7OB^HAZ4J\\2","=T5?1D\\67ZcSA2<;WPQ4_V:N3RLK0]H8bGM`JYB9EX[@UOFCaI^>","^[E6M1?b73QFNJaD]IH;KX9`4OCZ>BYc5LR\\V_S<W@8U0GPTA=:2","]R;\\8GFI5?1aD>SZAQBMYU:EX6H3b0VLN9TOc[PC@_WJ<=K`^742",";F]UO7_:B\\ZRM0>cL8CGI`K2WTX4@bPY96<J[?DH5QNSEV1a^=3A","9Y]GU7`_C>34Ab<^@?J5Da\\K0cI=[61BFH;R8MT2ZVSPOL:XWENQ","QK>Y_P?J=@[76N2BTOMW8LEDURI0FbHGcZ\\3`SV514a<AX;9:^]C","\\4GVN9[aO;2<8]SRU`E5ACQTbMFX^3LJDK0:@_I71Z?6Yc>HPB=W","R9K8?;BHJ3`^:TEYO\\40P2=A5cV_N6F17@>aM<SIGW]LQCU[DZbX","TV9^aYbJDAI180OL:@W5>=ZNc\\4H_XQB]7SM`?EG2;PRC6UF3<K[","`@=bBE3S0>F2M:^[R4LCa<8?VOTXG\\NIHYAD6Q;UP_J719]cWZ5K","QR>A31CWE05?cLM4NP`;[BJa<=Y2b8@HXI6OKSFUD]7:TZ_G^V9\\","M;8P^R4BA]USVN03E1J=>KO?`W7XD5<LTQ92_G:ba@I6ZC\\F[YcH","QLH>Y;`^[<I7=M_cVRA96]BOGJa2\\53CD84ZXT@NSWPU1:?0KEbF","`HL?KCF<]8VUbWM2;IQ>OZTD4^BN3YR\\6XA1S=957_EcG0Pa[J@:","JL36IO<28X5?c:\\[a4DA;NQ@KTHZ_M=UWYRSGV0B>1^E]9`PC7bF",">?DLc<@JSV8ZX;B41MR^K_3PFO9G7UHCEW[50b\\`a6IQ=:N2]TAY","^0G:_FQ7POc`1TJ98\\ZEUH[LW;SCaB<MKAYN64]VXb?3R5=2@>ID","H98B_6>O:JU<`0G3P5W]c;2CARXa=bYM@K\\7N1F4SILVDT^Z?QE[","@N<E96C3T;RG7QS_Z?b2AH0=FX5>YDI4aP`:U\\J[]O1BMWLV^8Kc","OI\\YH<a>7JUMGNLQVb4T5KC2;1@A3`D_^6ZRW[=?0cEB9:F]8XSP","8TRIYX76@Z1P`K=?QS5\\Ha32:U]0[cG>;BMEONW^9Fb_JVCD4<LA","G0[N`VCEIXD:@K\\OH24=]_?acBWM1>ZSYb7^<FJ9T3QLUR5A8;6P","=UF]3`RPOcBGLH1ZK[YT92QDI8J:_0>XSC4\\67N?<^VbWE5aM;@A","<X;U`cFRS6>b3Ha[ATC4\\]_V10MDNPWEB5?LK@=8IZY729^GJQO:","LIU1;Z4OJQa^bXDA>M=C?NRSTG8c@E6Y_B23:F[`P0]\\9V5W<K7H","Z;Jb17O`YP[I5EXLT:a3UFQ2KBAV_]>=G6M\\^SCcD@<?4NRW98H0","WQ07@EFVK5R`>8cAN]3OBXZ9U6\\2LYbPCa;SGMJ:T1H^4<_?[=ID","[Z3J7P@5QI_H?ET:LBR;9aFVG]1O^6UNXbKDcASY0`8\\M=WC2>4<",">NG^@FMQ1DV;KU_aRBITJH8E`OY?]45b\\ZWCSX9Lc<2=:P67[0A3","?>NI95EM01Y`OHA4D:C<[V^PZ;T\\LWGcK=8BFb@]RQ7_62J3XaSU","L`XTa8b@VYC_<P?=EOI]U:7Jc1GF;2QZ[MH^0A\\B5K4W>963SDRN","=P:IUZBLD>G?Ha1F<cR5;0EX\\@]N7JK2V3Q^8AM6CO_WSY4bT[9`","`_]Qa195bWYMUCB:S3ONE4@I8X?[TcPD\\<^FJK7>=VZ2;60HGRAL","aX1FDAI[Y8`O;H9c0^S\\2Z>RG]CW4J:?T5=BLN3E<MK76@UbP_VQ","TSEa>AL<:_?Ic=H;7QP4[@XDV1`BURM8N]52Z69bFCK3GYW^\\0JO","Jc9CQ2TE<Bb]VLH56Y1S_^0W8=U7F:>ONIAX\\DRZ?PMK[3Ga4;@`","P1@<\\H2FRSaX9cL^UMK;WbQDN]O0B6C`ZEI[A4J_8G>TYV?35=7:","J5H=`GMX2LcT;^:9_[]EUID@WZSOP1N<0FQK?R73YAab86VB4>C\\","0RW\\=MLaZF^CcYI7G5>P1SD[KHV_E3`9?8B;AO<X2b:J64TQ]@NU","O][`GQ73IZS@UMaPERC_V9WJ;B0:1LA>TD<6F\\X^?8=24Y5NKcbH","C>04:973<IARUF;\\ZVL^86cY_XaWE[@P]D1MG=BHOQ?`25JTNKbS","^Ab>ZY_KL4TDEN[RI<9QF@85H123:OWM=Ua\\;P?`SV0JC]GcB76X","W@3cQX[PH=`_U]<?ZK^VLBY8T2>\\6MF79:4ISOJ;CN5EDaR1Ab0G","bFNTQLRBW]@Dc1J9IP=O5837;4MH[XSY62V:A?Z<^UC0_K\\a`GE>","XK6@:FVGH2b<\\]NPZ?=EUWS_3Lc>`4;M[70BA1I9RJQa5^ODCYT8","N3Y9[L?a]@GAZC2^8J=bKH5R\\QU:;F_6MTIW4><D70POSBcEXV`1","aH[V26<N\\:bEL8OC31DA]0S>K4@RGPQ_J^95;I=TBc`U7MFZXW?Y","H[5:R?BU\\80NDZ74;bGP9a@2FS`_T>]<Y^CQVLK31AcJXM6IWE=O","\\AD`68UWaSC7?451QNP0X<HETI]K@:BOZ[2bc;MG^L_J3=RF>Y9V","P>10DMKLY2IO7GH_cFJ:ENB63RQ^=TUVX]9aZ`\\;W8CS?4[@<5Ab","cY4`73@b>:VA;BGR_CLJ9a=8O\\M[F<QZN?ED0SH52ITXU1PKW6^]","9CY\\<A]V8T7N21abQBW30L[=`?GEO45:PZ_>X;6MKc@HFRDJSU^I","6>\\UNFTSMCAIKP7HBD24G0;[Qc]8=Yb<XOL:a@`?5VZ139_EWR^J","DB1GS?V408A>2Q73c_:5Y=b@JWILRUKN6TZ^F]<P`OHC[a9X;E\\M","_:I3;EDSGO?UPHZ5cb=L4<\\J8N[VKQ7]X@F`Y^6WR0>1BaMAT29C","J`X:;8VWM1PB<=I0Ob5Z9DQ]aL7RY26>KHATcE^[C4S\\GN?_UF@3","L^N9Z?a5[T_YIOK:>2A6SV3PJ`\\GUQRCMH]X07=BE@Fc4<;W8b1D","Y]<M8EZIO35Bb7RS\\4TKV>;_1^X@c09QH2JNLG6D=:aFCPWA`?U[","EP<4N?F2cT6_KC]Y9a:;G8A[^10B\\@`MLQRJ=bH7US3O>ZWVIXD5","H]=EN:8\\^0LbC>TGAI4Y51M@DF_[ZcBX7K3`PR62;U9WOQaSJV<?","2EK[CcNbO\\;@R8aIQD1WHB5LY<40?G_ZF3VAX=P7JS^:>MU6]9T`","4^USca<K5@EZWMPN;CB9?T21bAD7H_`IVFO6L=:X8\\3>R]QYJG[0","NG97VTOP=W2c_DY?LBAQM];6`ZUIC@Jb<84\\Ha5KX^1E[S0FR:>3","07;b:8_VJ3]ZK<O^F1Sc`G@XC4N[UHQ6>\\DIM2BYREW5?9APaL=T","\\0OR^[?D2M47IK`HZ_GW8a]3EBY6JPc>Vb@F<CNS;1TXQ9U=5LA:","[QUa`\\^=REMV3@c0;HLb6W?XKAZ:I9]O5GP1_4F8S<>DTNCJ2YB7","J?06CDT7`1Ma8<G^SLARWPZ3NH;U:OV4\\IYE=FcBX@5QbK>9][_2","7]P<cCM821_?:a^@TA4ZF9>6BGWY[QRNV5DULb\\OI`KS=3HJXE0;","FK>2C:9=4`P]bD5A<HO_NVa8W7[X6Q?UR^L0G\\IMSJY;cETBZ13@","7A:PRbQ04[C\\=6LDa_W1FB?ISN;>JU@58M`ZGY<2TXH]EV^3K9cO",";<1@0NOD[4`X\\Q98CUF7TV3:I>5R6YJ]AZM?BW_HKGbSE2PLc^a=","4M@UF32O1TXBN8:Dc<R_WaIVCY`Q670HG;=L5Z?P^>\\bEA[S]JK9","U31@QWP0bX\\O]`D>G24N5;JVRIa69_BZSc8=H[Y<F?C7^:MKLTAE","SCbNPX7BHI4?YFZRE>;[JAMLD8T65aQ\\^:03V=1c9_]UK@WO<`G2","WL8ZOU;JDV_P0]\\X26=1ab>HBM5<EFTK^ScRC:@93[QA4IG?7NY`","7SFH:X5`UR<2Ta_cEAbWP0I?;C38>YQOBMVNG]^\\D=@6JK9[LZ14","9ab315_HT6COM[P?;A4Z@WEUI<7c^B2>=]FS`0:VGY\\8DQRXLNKJ","1T]EX_@IW2ZBQ[<J4;3A`\\P68RG?bSMDY:>UO=^FKL70ac9H5VNC","_GKTcLM^47@F8P6D=XB<VRJWO0C[S>Z1E9\\3UH?NI]QaA`Y;25b:","_BU:T[C>Y9;GHZJ04bQ?<\\]6^ESMaWDIA13P5F`XL2N@=8cKV7OR","YK:3VF1^6=D4\\9UbNCIST5W2R_O`8A>ZHEcJL@[P0X<;?QMGa7]B","@J]OH3DEVGC6X0U4B`W[?L5^bA=QT:<_\\Z;c91>NYRF7KS2MIa8P","3VBTc:KG?bQW\\`]Ua;9RZ^>72YCF6=<X_OA1[HJ5EI04NPML@SD8","J=LKN`0bMQ581UDV>6^YSPC[IFc4E_9H?7XATR:3a<O;2]@\\BZWG","9\\U8aAX[1K2Bb;LYQ@?05<IS>O6FR=^3_]PTJZDNH:74CWMG`VEc","CB:W8Lc^_045VF=NHA291G@ZX7RI><bY?3D;MJ]Pa[6ETOQ\\`UKS","c<?_[S2R\\BYP>0O^KEDN97L=FUMZa8V3CbH@G`A6XI41]TJ;W5Q:",">ZK=^9aNO6Mc;JB:<`VAHU7Y]IW?DR3[F_L52Cb8\\1EPX40@QTGS","^>0QWG[C4O32XE`?K78\\@FD:YTMcUa_IJ<AR6;9]BNVPL1bSZ=H5","H9bJF2`4Q<\\UMS0;I^?:N]aPB@6XZOWL37A[V5c_=1DRCYKE>TG8","b>M=3HC_`JAE@L^8XPNG<QD6O;a]U4S2RYZ5WITF71c:V\\90KB?[","O3Q:cCI_BbN;T42PJU=?WK\\HX`7LY<A0R>Fa^6SD8@E9GM1VZ[]5","RJ7OAGD=\\S;VX^?LIM@8P5[`aF:H_3TBKZ4N<6YQU0Ec29]W>1bC","7UI1B^GW8V3`bH>6TSRYO=LPQ;2_a@[<F\\A4DJX]ZEcK0MNC?95:","<:P5M7AFc>G;NQY42^`T0KIHE]X3WS1DUZJC=OLR\\?_[b@9aB68V","<?_57bQ04RHG^CTKDV@P\\AEU]BZI9X2:Y6L=`W[c8OS1J;FM>3Na","]GE:JOV[?8;ZbXIHFKPDMT@>YC075cU=4`R132N\\La96BQ^W<AS_","QP^K1\\G<M29FEOR3BaS:YL@b?V=6AIN5;CZcTJ04[`H]7_UX8DW>","G2TKO]U[4?1a6_ECF<R;S>Z9c0@PNHXA\\M573LbVDWQI=`^:YJB8","SC3U6H9\\0]`F^P7aGYZ8[5R@=c21MJ4KTAQL<Ob:W_XBDE>;N?IV","B_3KE<2YbR^LGX4AT:[=1Z]IJWPC08`6aON9HM7FUS;\\5?c>VD@Q","VAGW>_O=503EB7Q1^NLT@PRS4D]JIF;c:aUY`C6?ZbK2XM[9<8H\\","ZYHTSA6:Qb>@81OR`9JP7]B^?0<\\LVM43;N=C2FEaD5K[U_cXWIG","a2ASc5?0T1RGX9]MDK@O;6PNJUW_7^3[<FQ:E8YZI`b\\C>4BHLV=","a5GDC0YTb>K`QI_\\V@N]BZ;7J9<PMW=A14XHS6c[3^2F:UELR?O8",">VN375S6\\MH]:@YPXRT;?JUOc4B1a^AEKDW9C`LI[_Q<b=F8GZ02","29:W45?\\cYS^_ML36EBbP;G1OQU[K=F<]TV0R8ZJDHC7@>NaIAX`","81cT;_7DU?<:RFb6B2X4GH=CZQJ9WY35^ON[M@VP>I\\AEKa0]SL`",";S_Q]BECO0W`A6cY^[\\ZM7GU:b>X@L1235RTHD?K4Pa<N8VFJI=9","E>=W_31PR@AQB54[cZ92I8NO:Lb<?6\\UTaXD]S;7HK0FCGJ`YV^M","7J`DV6T:cG[U5C90=1<ZMIbN^S@AHEBL\\>Q;F43a2?XRKP_YW]8O","2=HIW@4X5GL?N3aEO7M_89J6KCAD;^Rb:Q>BV[PZ`0U\\Y1]cFST<","EY3MA`BDbIFCW\\8<LR0X=VN]a1GJ^@:72[;4U?ZP9ScQ6>5TOH_K","?>@63N]QJ87EDMT2LZO1=`BA4[9RH\\V^WXYI<Kc:SbUG_F;05CaP","14AP;cE^\\HSFTXDUYLR>WZ?=B23[JG9:]5K<Ob7@8`_QaMNV60CI","5RKAJG?aB[32S:QcM_]ZT1X89C=`Y6DEI<bPW\\FHNL7^O0;V4U>@","9CLNAVb<QKD]7EZOXI[8W`0PM6B;URJa45_^@Y1=?H3F>c:2TS\\G",";_Y6Ac^9D:S0C8VZT[XLQ7MUI<24b]a`PW?E53KF\\H1@BRGO>J=N","?9HY=EKLAU[\\G_T2bMQ^PVNc0@ZJD8O4]>B37XIC5R6`:;S<WFa1","29OBHVPc>@FNY]_Ka^=610`XEQLZ5U8RIDCJ:AW7ST\\M3bG4<[?;","]IbVMP36KDS@\\[XH8<R=YCTa?QN1UOJ:Z40_75cLEWG9;`FA2^B>","HBF`T:^WI_M=E3<Z;aYUR1Q9458O27[ALJ>cbS\\NC?G]X6DP@0KV","8L`cZ6_S9Ob3FV[:E=7CPI^15MRU<W\\2K@Y4JQ?BH]0DXATa;>GN","`U@OH_Y<87:?[FaN\\Q5B24Mb]V0JRIEWLK6>^;319DZ=APCScTGX","QbPRT@F_Ca>YU5X;01MH7`[A\\J9]BNIZ8K?6VW<:G2^4=SO3DELc","PAaEGT0JM:<U98WIR;5N64LO_D`2V@S\\1K[^Z3]H=7QC?XYbB>cF","[13>:PbY\\7McN]^=V@QW2BAGOL6H_5?T`FS9;CK84aURI0EJZ<XD","RcYESL68>K2N`M4@0CaV\\75<]FAU1I;[:WbQDOP3B_=?ZJH^9XTG","b5?VO:T\\NL`ZGC28SaQ<M[PJK6U>314E@]D_=F07cIARY^WB;H9X","CZ]V5QaIHO^\\MB6Nc=T98DS`1PJ<2@W:[Y3KX7>F40REGUA?Lb;_","EH2IaNcQ6\\]SLAT^J9KGCO[UZ34:R5M?8W7>=Vb`F0@B;YP1DX<_","\\=SL?F9`WO>BQIGT[MKU2_6Ya@1^bR3HEJV8]XC7540cNDZA:;<P","LMN?[_2KX4P^bC\\1AHS9YEV<=>6`UIDZ@R5OQ7;J:cWTB3G]8F0a","2YIAU6@GFZBP<:L5MNEX=0^1_bSRc7\\48Q[3T9`aOV?>W;JCKDH]","1GaHZ@KW;63MEABPF\\7:V4U2ILSYJ]_`Oc?X=RQ9^8[D5N<Tb>C0","=4BV9G2S?:XL@Ka<_PROI0W3J;5U7AH[MEC]QD\\TZ>6`NYF^81cb","7A:08NXC9^P@cYELbIFaBJV;5D2]G`K3[R=>\\Z6SW1O<_?4MTHQU","COMJS7P?T>H9LBE^YD08_[IG2@ZXN\\1<caRU4K]WVA6:F5;3Q=b`","[3>;2\\FEZ=<Y`O5UXWG@C?47VMc]P0_TNLKARS18Qb:^H9J6DIaB"],"medium":["F8`]GBKZbN:69aOHLc[\\4MW@DY7CXUR_PTVJ>S^3IE;025Q?A<=1","_SE]N\\=JF[XMD;49CQ5`G3P6aRVb2U8WYOZIATLH0K1c>^@B<?7:","Dc^AO>bFN=ZXPGL@?9[CH3]WQ:;07V\\Y_Ka68J25RM1<4`BSIUET",":AMB^]5S<4WCU6KEODH@93;YP[I1R`QV?c8GL2bT07>Xa\\FZ=NJ_","@QB<ScaWIUX6LK5ZRb34>NP;8^2FACOT1H0V_[7J\\E?M]`:YG=9D","?_6I[`P5^BZ>G;QVC\\L@3WcU41MAK70NEY8a9]2F:=ORD<HXJbST","NXR6:PDH0]VZ1B5?G[9=WSQ3F\\AcOT_K<^8@IE2M;Ya4JL7>bUC`","P3c^R4YHZM>ALVF`SKaE_b2BQ?8:]C<XW09I[;=GNJU67TOD1@\\5","aE?H=4@P<NVG25^O61UbAMTC0R\\I];BD7XJ:`>9Y3FcQ_LWK8SZ[","?GP\\35c906O=1HZ^XBMCLKU8VI4<N`EQRF_S>2@]JWT7[Y:b;AaD","MG:2I0>c9FR@KC?Xb\\[48^356BVUA<EJ_PDYT`WLZ=S;7HQ]O1Na","X43F>a@R8PWKUAB5G79[`\\Z?0MNCOEbS;2YTJ6HQ1c]^D_<LI=:V","`H_?4S0aP8U:Q\\Mb2EOV1T>7ZYF;WA]B<=965^[@RDCcG3IXLNKJ","9:cO;N3a7X5G]<I>CKJ`=1YBZMRT?WS6[UHAEFL4_b\\@D8PV2Q0^","8D[H`]AZTP=2Xc9J7b30@KQ4?RBS1WYUM\\5<^Oa>I_CEG;LFN6:V","N17>ACDO?3@4]`82:WQSbMG6VULJc_=^KE0B;5XZTYI9aRF<\\H[P","?S_b<254EA6DZcQ=JVW>\\XM:CKYR0OI@]9H[PNBL`8G;7^aT3F1U","ECaLV4]FNUA`M;YBTG9O\\Q[^R3JW>H@1S56b:?c8X27<=_IZKDP0","MUT2Z6AQJF?bP9a5K3G]N8c0=D@IYXB_[WH714CLR`EV;:<S^>O\\","Z:37B`FaH=QCG>VPRKSJ\\1_MU8^NOI?20b@5A4;WL9XD<E[cTY]6","<56:A0VB`GFY\\OaN?2_cUZ=;@^QWC4>3HD7RXSM]PIEL[8K9T1bJ","_@KCEQ:IG<J8\\SX;ND^15B2FYRWa03?b[96O`7VZMT>4AU=LPHc]","\\SIAR2KbaG[T73V1?@=LCW6_Y]E9P4BDZF>O;cN`JMU8<X5H:^Q0","WEPXKQ:14YM_JIT8SL@ab`ROF0\\H]3V=6?BZA9NU7C<2Dc>5G;^[","7EXRHT9c`>;N<:=@JQLWUB_a?5b\\FK30IV4YC1[8G2]A^SZOP6DM","9BaAI@VOCJD7_N1?`32E6XTHZ][P5:=<48K0^\\>LFRQ;cWYSMUGb","4YS\\5A<73]^RDVK0J?ICE1Z_O26[M=8ca`>GBb:FP;H9LQXWTU@N","NGU[TW4@Q<KZ?^O2L\\b5F=SA_87HJE>P9D]aX;C0VIc`1B6:M3RY","37;4b?WAT52:cV19LZM[@]YIQSJRNG<FU8X=`KED0O^P\\CHa_6>B","C<F0ba58Q2NKXP=@]HM[OD`RVB7W;U?39Z6_YS\\LE^>c14GJI:AT","B9I027KYR5?c8:TND;6XQa[\\C>POGbSW@^L1FJMH`V_E<34]ZAU=","@YKMSD9LU0A\\5B:N^T]`6bC>[W832X=GaRc1QIHVFZP_O;E74J?<","`\\QCIJ56HZbM8;[cAPFLW7O>2@^VND]TR:<1?a3UY4XSGK9B=_E0","0?8WOF2NCL`6A^SaD3=@IU_4E19QbJ>V\\B]GZcT;HMK5Y<PRX7[:","]GK`E8[OSYXBcVFaTN@6DM^0bU_ZHJA=;9>\\:75?2LQ14<RIPWC3","GT7ML\\>:[Q?;Z`@<_WOX0^Y6=V9CFIcH2EBb8RS1KNUPaAD]5J34","<SI>=F^G5]XKA7`J:bPY2EcZ@6U9RHQB[Ca?1LVD;4\\O_T803MNW","_H]Ja?2P956:cFVEG<XY4UM=B>CQZA7@1TLb3[S`N^\\0D;IWRK8O","6>KHEI@ZJC4[P;_N2<8^G30Y5\\LcUMOW19AR7T`Da]VX?SbF=Q:B","4<>@?6;_FVLDb:RNa2OPE3XW\\]5H^MZc`Y7K8C1GSJ9UQA=B[TI0","EBJ]80NcTR6A\\VL;:aGO>_[F`M=HZ31IY?2DW<CU59SQ4@P^KbX7","XCO[2_6aD@8`=;bIE]KB7ZMG\\RJP:VFU4L0THS3?1AcQ<9Y5^NW>","4]1@GW?3_cVb0KCER9H56;T<\\=AMD8US[BO7XJI2N^:aLY>Z`QFP","T<7V_YDI[G48@\\9C?c:B5KXZWR3aSQO]=F^NJU;`L2M0E16Ab>HP","8Y>LIbU[`TN@:Wa0B;<5G9OcXF\\7MQZA6D_R=41CPJV^]SE?H23K","0H=N1UL`]ZKPY9A2FW7b4[OVBXICGc5Q;@><\\3:?8_RTMDE6a^SJ","1D3A:WV_7XSZH@BM^`b0EC>O?4[\\TN5LcUGFP];6=Ya<9K2RQ8JI","H2O:GX8<VTKQFEY@\\4JNLU9]aI0b[^DAPS>=BRC_Z67351`WcM;?","2Sa7K^H]OWAJE43LXP9=DRNMC;5T8_`[0B?6\\>1<YGZ:IF@VUQbc","J_T`9IVH52WUDbLK:Z0]RX;FaO[A=CEBGP<>N6\\8?3^47MS@c1YQ","8^[_cDABW@IM<?>9C]JK3R:6Z1PTFQ45NEU`O=GVY\\aHb2XLS;07","7V2>0[CW?H^\\4X5I1KN3cZ<B8`AOa]MJ;bY=9D:L_RPSQF6E@GTU","CL:bG>@FXBROU^09WZK<S]H2cAI`NPT\\EM_7=583Ja14DY?Q6V;[","UZ>_^RW71KM?DG3HO]AY8N:2E\\PFa;9@QJBSIVC6<XbT=c4L`5[0",">=0YRSFZV^432DMJ?5[aI98A7QTGH`<K]XOB:C_bNU\\@E61P;cWL","T]V_?Y;O\\RAF71XMHEKZW5aUB4ND39`I@[=<PG>bc^J2SC80:6LQ","<K52XV9[;?:>H6S]T`4UIJD\\M^01ZP3_AF@RCOYELcB=ab7GQN8W","P\\[DT4W^H`Mb5KY2E?J1ROLX9F@C:VBQI7>_Z<8c]UNA6=3SG0;a","_XKE[R@52P<OI^0J>QY=19MG47DVWC8;F?Bb36HT:\\c`N]USaZAL","N4P8C^;IXT@Y5OFG=Wc3D:abQ?VMHBR9_]6`J[SAU<L012E7ZK\\>","<_]ASL2>GE\\PWa`^O[JKV8MFHUYNIb6=7T0:D@3XR;9c1B5ZQ?C4","Ua<2:6ZJO0KHF;A^BW`1>S9CD@YEL[_Q8Rb7\\M]P5G?cNITVX=43","SM[aW\\981_YGJ?X`Z>cbECNH4K<Q^IU32@5BP]L7R:6DT;A0OFV=","J[3B7N:V\\6=ZLK^aGSb@H9]?4YMA5P0UC<Q>RE_OIX28FW1D;T`c","@1b\\>J<AKW7SR2H9TM[VE;Z4YLNDF:0I?cCXU356_G^]8a=BQP`O","YFOQ?7c<[SNP182bM:TA;_\\KE59RDUZ3BW^Ga0@=>HJ64`]LICXV","NY1GD=VETZK_[>PI7^H0345C;Jc`b?9Q\\LU6B8@XSO:AF<WRa]2M",":?LKE[]4a<WMU`P;=bFZQ7Gc12_3R0TSD^XYH698>\\NOA@VJBIC5","<7S[UE3\\IKNGT?4OFcDB>R`]Lb=^W;1aQ_0PVJ@5XH69Z:8CMAY2","PWU\\=9O?YZT3:]ECc^S8AXaD1[Jb2G4IRMHVF0K><N7;5Q6_@B`L","5;RPH71=K>:4aXZB6W\\cLOTSUC]ME3DAI8V[GF_Q^?0Yb9J`N<2@","VOUQTRHXJ=5F_`><c2^7MZGCL:Da[]3NK\\A9I@;P06E?S148bYBW","\\IQ^7?>TB<:_HR58]294YPO`SXWLJ3aD;AE60CF[VN@b=c1UKZMG","[a2V9QFXHI3M6;bP_0R?T\\U<:4GNSL]J5@cK^W=O>AZYE871DCB`","M8^AaRBZLK=J2VF`EC_0P>?4NGW<5]YI7@;:6[ScHX3\\UD9TOQ1b","2bS0ATQ1J5W>c3[?M]8\\@<LF;VK^E`XH9OB7UG4a6DI=:RNP_CZY","R^Q[aLBH96Z?8]c`;WDV2M@U4XA75\\IEPJNCb:S>G_O1T<KY=F03","XL3WE\\NI6DVC2YO5Za?_0=>^`PT1[RBAFU@:KG7b]QM;H<c48J9S","J>HcbYM;Z:D1=O6aEKPTUW`5\\IQ]^2N370SXFL_?V4<9@G8ABCR[","A=PTL89]KWB52\\6QVY;X:@CGE4Ubca7[1<^?M0_O3>FDIRSHZN`J","6b5LNWYAUZ>;MOJ[2VS89X4a<K1Q_\\?FTc:D=P@I`ERG7CH]B03^","\\0F;9Q`MS@VAG<53BWI]K[P2R7^XJHcUN?_8Ya6E1b:>DC4=TLZO","N[LI]A1M2@4XRVFHG:^cCEJS;P?bUK37_8>\\`Wa0<Y=9QDT6B5ZO","Z>X2bc@aN5<C=19OQT^384I:0]_K;DG`PUMLJHS\\FVBAR6[7YW?E",":BOFWC<5M0DXTQ7ILcEY?_3HZV\\U]6K[JbaP1@89;`A=R4G2N^>S","75E?2FGQZ4C^=3WR;M_H1KOSD>[aLT\\]YBUAX6PJVb8N@I`9c<0:","@c^P?EBGRMFZbKH50YI]3=aXCWAVU_:8QN7;[`462D9\\<S>JOLT1","^c38097NU2Z[TXQ?;]:1ODP<`aA@Y45GHIL6K\\MFJSR_bW=>BCEV","E1R=K@7;U<539c[TWQYDaPMOS86_>02NFZb4:H\\ACI`?BX]LVJG^","62XOD_`BAUE=aW[SKC9N7:LG?;I0T3c^1Y<H5]P\\8Q4RbFMZJ>@V","6U1]>R4[MYIS;H07<=TQNVJWc:^@PAL\\`K5bZ89?EFG2OX3D_CaB","^SaGV0E7@bLYP6O?AM_I<[QNJ]c;2=3`KCBUZH:DT\\FR458>91WX","D3OWT:]BK0Z7G\\P`=RE?XYCL9AcS@JI_;48UNa1V6bH2F[<5M>^Q","UAN_?[0@K`\\<baX=1O2FG5P]TLHIJc^3S4ZR78E;6:YBVQ9D>MCW",";H>A@X\\NPJD4E9KL?0]IMY^[`c6GU8:5W71OQ<2SRVBZ3C_=abTF","9^8<4TJ07:DOZ=CNXLS@2H>1Q;B6F[\\?A]W5EUPMVKbGR`Ia_cY3","NW8H<VO9c>I=[J]SDB0314Z7@:XE`TL?;YCQ\\^aUPF5_6b2AKRGM","2BX;[L75F?1AJ]@C>c=9`Q8M:Z6SOPGDb<Wa4^HE3\\IYVR0T_UNK","G30`Q9bN>AB<U]VO@48CP;^:McWXY2S?aR=5HI[\\D16LTF7ZKEJ_","V5Y4D<P7GSLO@3BEAM?KWR]ca0=ITZH6_Q>FJNX`9:[^82;\\CUb1","MR=5BZO^@T7LW;0QHVSI]:NYGX4<A_bKCJFU2cD83\\aP1E9?[6`>","7U5DK;X1Y]S0@LNQ94[OPA23BEW:_`a^8HGM?Z6>\\CF<=JcbTIVR",":Y;_51]>2NEVWK9[?0F`CSAcGOUJBRHQ3M8DI4=TZP\\^aL@X76b<","\\1]TUa2X6AIGO^<5W4?@_EZMV9FJb;0SR`D=Q[73C>NPKYcL8HB:","Q7TaW4SF`=L^O:C_@VRM3J>15ZHBK;c8bXP[<6\\]2?UY0ND9AIEG","GY7Q12AEN=bHVa[TI0Z:]6@cKRP\\X8C5DUS`L93>JW?4FO_M<B;^","Ba]>E1FPV5A`[bML3^cSWYQD0T<4;6@8:KH97?U_=RN2CZGXJOI\\","0@aD;CJ_5\\YXH<MG6>Z7WN=[bB:RE9`cAV]QFI4S^UO21LKP8T3?","YH8VA7DEPOS@5[KJ;0]4?1_\\Z>`6aQLNcW^9M2<:TGR3Cb=IXUBF","[?Z5:M^8=7T0N13RO4XBbHPJI\\@<DCFGEa9>K`]_VcLS2QA;UYW6","^=37F`5[94H;E<cGP261abNVSAZL_J@O?\\8>MYBQWTK0X:R]DIUC","JH>8S=<4aR\\L@IKbXV]WcB1EZTPFU6YD;257O?G3:_`NAQ9M0[C^",";c4=3?9BAQYPXS@I>1]GaJCVHE62MU^KLZFR5O:78_<0W`[DT\\Nb","^Z=MUa@bRK;JX<C8F60IOVH2541_N3?ST]G9WY`[P>QBEDA:\\Lc7","Z>W<\\AJURHCL8IK@QPO3S_D?42G5:B;ca^b=1M]N`9E[V7Y0FXT6","H?Z:=75IJ\\GP<`9CS;6cRV8>N[@W_a4FXA3bEDQ2UYK0]TB^OML1","Q2C403\\5GNP8_]KJcFUB7a^1Z@9LAM;D6`>ISY:XRT=W<[EVbHO?","I^X2L<3\\V4b_=`10>BTPGa:ZCMcWSKF]O;DH[NR89UJ7A6YQ5@?E","O9E3X75<:?4@WGIUM0SaH\\AcJFB1=^Y6V2ZbCD[QL>8P`TN];KR_","aB[TUMWcJFL_PE3bZ24C\\]KG:?D>A6O1^XR097@<5`QNSH;VI=8Y","IDB9aEZUbc2J1M7=5LVAX[S^W@O<T3P>_C]R:F8`Q?;6HYG40N\\K","PYG0N_[7L6\\b1E85=RS4?W>@C<]^FMcX3`HA;:J2T9aDQBKIZVOU","TXcF=;5GZ9VELJQNASI<CY`D\\]bMU18H60>24_R?^@3:[aPBOKW7","UYKa:OMV1Q?LX>62[\\IGEZ3@9RPHSFAT7B^`5=Jc840D;N_CbW]<",">:GKSL0[1ENH3@UaJD^?V4cZ62QWFPb`T5M=R7\\B]Y<_9;C8OAXI","QVN5Db6@]W4I<^30a_:CKXZ;=BE?>JH8L279G`YSPUAcT[R1M\\OF","C0A^[=YPa5I@`ZGLF6H_WTMUN834\\V]2BK?R7b>;9:EOcX1DQJS<","FWB[;CHLPS?UXKcQ0I1T5<24=>\\M:G8@79]3OJN_bDaZRV6^`AYE","<A>9W5Y8F\\Ib@GJQPaX[CV_^7LcN`:STR]ZD=E6;OKUH?40123BM","7S\\`9R<2K]Q^LYWB=FCH@D;X[cP5NI6UE_1JAaVb8M0TZG:?>O34","Lac0:GU[14^XAV73RO=6MWQIPZ8D5BSbHY9F;J`@2>T\\E<]_NC?K","b9ca@X4[GZ=HL]NE3:0K78WJ\\5D2A1F^SOTPRQ<CB`;IYV>MU_?6","O><RVW^4IFED01;_`G]baQMCK62?Sc58HY7:J[ZXNP9LU3@BA\\=T","M648;53EG\\1=cUTVS0b`NCaW29>_@7KQDZ^?OX:BHIJ]A<[RYLPF","R3B_S76PLK:NJ`1O@G8c2W<FAHQE\\?VD>Z5=UC;^[I90]MYa4bTX","STKBYWcHF4DOLG0?^[a3=2PNA81UJ>9b_`@IRVX;C6Q:M5]<7E\\Z","_M2>4K01TXI=L7;3[O]Wa8?UZ9:EQ^65JSAC@cGRDNY`BPFVH\\b<","a@A4K<^IW32CQM10=9H8_`V6LXRbY5TDNE[BGJP\\>?]cU:7O;FZS","1^RXQ@;\\5O=]ZNGI4LSWM>_37HYU[CP<?:8a6TEcA`K0F2BDVJ9b","HU4]JE^3<aW[2IZ:POY95BDQ6c_`T\\L>;RFNKASX7C1V?0GMb=8@","N0W8\\3[6^ZFIRa9QKUTOAVcS`Y2?1<PG7CJbXL]>MD=B_5@;:4EH","1UAYS3?TM5J9PVcRNWI^G2@0`]8L\\FO[Ka6QCbZ;:B_4=EHXD<7>","=V^Y0XO>B6A\\`ZKS9J]INPc74_3?RCM<H;FUTbQaDW81[25:EL@G","`G2?7FaW4C0VJOQbZLTS=5<cN9KD8U6;PH^R1I[>_XE\\B]3MAY:@","_L7BKRaX>8TcSV6:W`ZJ9NMA150D\\?YO<UFC42^EH;bPGIQ]=[@3","U5O`a=]S<W^0N_DMT9H\\P7Z8X[B>JALGVF4IcE62?Y1K@R;C3Qb:","b`:c_K]23^I7J>Y01=6GU5[TLPMRZ;HWQCE9?8aVB<A@X4\\NFSDO","GaFSC2AQP3\\;JI:`YVB7^R4<0>5M6KWU9EbHTL81=NZOD?[X]@_c","W=>LQ2\\MFP:c]X3@T5Ka;A1RCB6DN^VZIb?`47<EOH8[S9JYUG_0","7:_WCDbTN3O<SZPJ8[L=FQAM?c`64GVBaUYX0^H\\I;>9R@12]E5K","GW4<>0YT?B61;DUN`5^KO\\37[ERZCFJQV_:a=9LI]b@HXASMP2c8",":W>_L]?^A6J0H`KMNPC3QO[8aU;XSI5G=E\\1<49TRZVb@D72YBcF","Y0b@\\:C8N3Ka6APH1D[IV;cWJX5_E]LZMO>U24<RG7Q=T?9SF`B^","C[F^\\W>M:;?46SLREBX8NZ]9VH`JOb3PGTUAY27IcQD<0=51_aK@","@L:C>YNS[cJ0G]O?DAFUR`345W82M<16E^T_=B9;b7ZVKa\\PIQXH","HIZOW[U2A;L8SC\\M`35?TKBE>N1Q67Y=@_G4JPaXV0]9F:R^<bcD","XBa0H=AVLP`2CQDb4Tc<5;O71J8>^[RUIF_]YSN9?Z3:WM\\G@KE6","PCD@KR[F`LXN_BAM8=4Tb?1W>3aOS^\\]09:U6JVc72I<ZGY;HQ5E","2HW`6@<8KJRVb4G;=\\7X:0>_ISTPFO]5[cBY9LA?ZaM3U^ECND1Q","9=aA?DQHIKNPLM]cBE\\6<:;W0Y_3Z8TOU>[41@JC`^7bSXV5GR2F","aT7U>V[N9J06H1?PD:_CWSIE=2Q5c<@BXbAZ4\\38YKOGF^];LM`R","8C]J=@aU5E_HO>M;D`F1Tb^cA706ZK\\Y4?RIG9XV3B2[Q:N<LSPW","GTJaWN]@\\5UI0P2;1HX`[c:BDL3E_FVb=S^6>89C<4YMZAQ7?KRO","U0b9R6W^aKIO;MN?Y=EC2Z@>[V41X]SG:THAc8L_FQ`P<5B\\7DJ3","1AW4MBJ:@bR?G<E2[5_cO9Q`0VXT]SU3L\\;NaHF=6^>YZCPK8D7I","T]IS=J7Q6?<KMCLO`ZBaWG@3>1H\\RN9;E8bY0^Dc_U:4X2P5[FVA","RS209GJT6@\\]^ON187?bEUYFC`WMBL;H:[PZX_c3=KQVD<5I4>aA","YZO35DUVX1T0]42AF=;[RQS@c?C:GIMP78J`_ELH<K9^bBaN6W>\\","93]Q<=FY^Z51>8@4J0PcSIMUHAD;`bWLN67[OG2CRV_\\KET?B:Xa","LSWDENa<X;^UJcTOMQH3ZIVb57?A89BF@`]=RP\\24Y0CK_G6:>1[","CRV9FW3>TKPA^bLOBa2:X61Z;0<cUD_NG`4@[5YJHS?QM8E]7=\\I","L3F<@MJE4Y=K0Cb]T_P2I`GBRaUS7[Z\\59^HN1XQ:?cV6ADOW8>;","S6UKP>J9RE4;HbFO=1Z@7XCDcWNM?L<:\\Q]30TV2_[YGB58I^aA`",">cJW8aM3`\\IBK:S0QEA_U4;LV=Z7<]T[H6Y92bXGRC^P1O@?5FDN","X@1WS]Z?4C2E0Q3K`U_HO=\\<T>aVYcMP:b^[;N9FB7568GLRAJID","7E?BXLWO5YSA0<CQJH3]a9ZG1N_[4KRPcbMF`@6;>I^T\\U=2D8:V","L<BbW:KH2>YGQO0SN87aCAZ1;VEM]R4[=?UD9`@56^F_c\\TXJ3IP","8D1FMb]aB:<T?A@L5JKPWRY^O;_9[UN=E>\\IGc`62XZ43QSH0CV7","IZJSFcHB;`_EPL>W:Q41N[XR5=D^]U3bKG79aM<60O8CY2@?V\\AT","Y0PQL?=X3;6SW\\1<M4U:V_5CG[@>IK]OD`BJNAa7Z2F9c^RTEbH8","^QEOY_HDBMNW2Z;J@UXa<S\\GT57]=6F4`CAR3Ib89L?c10V[K:P>","\\58=J_c^aH3Y0IbT;[1P6:KSALG]ZM`9@VRW?UEB7DQNFO>2C4<X","?_USF\\37aNBGVI;KRJ0^XQEC[AYHT2c]O8>5=1<LMW9PD:`@4Zb6","[cY65V0CQW<:O;TaD728X?Z1\\F>ENS9]@3^b=PU4GJABRK_HMIL`","`c4CV9WN>IKD6AbZ^FL@83U;\\?O2=<JP:TQSMGY5BR_1E[]aH0X7","@ZJ>P=05DMG[cabW2:IX1S?47LC^U_<`K3QNHF;OB]9YAR\\6EV8T"],"expert":["JT>RS3;\\KAH`XcIMZ:WbYL21_58Ea9U?C4^[7<6DBF=P]0VG@OQN","=W[D`?\\@Ic4STEFU]:HBKNO<X^QY6GLJA>b7C9;1M5RP8V30aZ_2","^X>\\TV`]=c5M[J_<QPU4HZEb9B2RaG86LSIFOYW:NC;701D@3?KA","DLR2[G6bQOS?HV15XT<PFa>=YB;]_\\UI^J`CWc308EMNAK4:@Z79","0MCTc46JX>PN=B]ULSDGA`ZHF[\\2:1Ya_E7;^?83Wb9O5IK<Q@VR","`KJN_2YC1I>38a4H@G]ULTbDA?<:\\Q970ROS[WcV=P65;MZBEX^F","H^6@`5MYSRE\\>U3_7Bb04LFPX:c=2GC9TIZ81ODQW;[JNAa<V]K?",";U@1RDM:cL?5K2a8Z>XQY4BJOP6Sb0]`EN\\<V=H[I^FT7W9_C3AG","<?c\\4SIM75AEHW_3N=0>69UD1^O]VBbX@YZFQKa:`2;L8PTRCJ[G","S7>`T=[\\9^V8J1ZW340:?CaGMXREBH2OFc<bPA5DKLUN6I_]Q@;Y","G9L_UA=VI5XP4bB02F7?a6;^18E3:R>KW]MT`HD<OcY\\CZS[@JQN","KQ61^U`J>\\M0?Vc7O9X2CBaTEP4@_D<]SbAN[W;GLFYR5=8Z3I:H","NSRZ\\2MAEaYL_>61TD9H3W;4X`U<58PCOI:[Kb=?cQB0^V@7F]JG","TWR>M261QHLV5Kb7BEa_3X@?[:`IGZ8DUcO;F=APY94]J0S<^CN\\","O>P^S?a[3]J2FCXZ0RBU`D<5cb_G4LVQWK=T\\:7Y9E6H@;I81AMN","U29ZXA?NLOYG=6DBR<:VE@F1;aHJT`3cSMbI]8K^>547W0_Q[PC\\",">@GQVS0UP5[a]b_\\=R`:MXL4IJAH9OD2KC^Y83;FTEc61BZN7<W?","=bHK8CEV[QI\\9P:SL6M1];R3X72W_5>4FcT?JU<ZYN^G`D@aOBA0","9FKN36BC5W>YbHODEL\\201@RZJ^[a4<MQ]VS7=U;?X8_cT`GAP:I","@3cS9B[OK=0_:NI]A4JX?W8`MZb>RCVYD<PG2Q5UF1^E;7H6\\aTL","[]5S3F2XLMNH6>^cIb;\\D4RGW?AC`J7<E=ZT0P9aVY1KB_@QUO:8","WaUJ=T?MX57@;<9CRI2_A1NL^YP`6Vc][FGEZ4\\0>:b3OS8HKBDQ","4S5DBYZ@N8>_CF0H7aQJPMb\\]^OTW9c;:1KIUAX3`6?<=GE[RL2V","VLZ\\A_F1][cHa=T;4BDQ<79O6J?:8@Sb2W>0NI^X35YGMPKCU`ER","cWYR:HX49\\I1ZK>`MNFD2A_Jb3<V8@5O;GCT[?B=6aL07PEQ^]SU","WEX[TB9Y1VGP^4<8D2@:`5c?=OSF_CL360\\;AKIaQJbZR>]MNU7H","<137H5VRP8F6JW`M\\OaG@;4K:]EZDBQXS=C^YNTL0IUbc[2>A?_9","F<CNUO=@`2684[AcR1SVJW>^L0QG5TP_7EKHM3D:?Y9X]BIbZ\\;a","@Q^\\HBP7C12`M:a?N<F>J3ALK[_]YU=ZDcV06ET9WGSIX8bO54;R","N6>Y=93MFVU\\`^8JT5K0B?OSI[2;DaZ4W@XHC]c1GEQ:PA7_<RbL",";J80?TXHYQNS_<^L75F@GIU]3cA6ERb\\94Z[aKCBV`1OW=M:>D2P",">2IY8HMa:C?7E35bWT=[P`SK@0J\\U<RBFGNO]9cDX_LQ6V1^4Z;A","6;L>P7MERO8GB5@DSb]FCA_c?=UI\\21VJNY0:aQ3<HW[`Z9TK4X^","Sa\\K7cH@bF;]ANJ2?`X3<_Q=1BMG5^0PZ[6OV9U:L>D8RWIYT4EC","9Z2J7K1a:>QDTB4]U@<YFNbI_=cRH?63;EL^\\85S`WGA[XVMC0PO","1Z;O6R3^EaITbYCDA]GcM4BQ?S><5FJNX8K2\\[7H@U`9=WP0_V:L","G2];PZMEJ7^UHb38cO\\V4K:aBYQ<F?96XLC`R=SN5_T@10DA[IW>","UE0C=9BF6@_AP8\\V<1YcS`47I?3WMGNKb^TOQZa;2L:J][XDH5R>","9:Y]T>VF<8?@HSRW10cAZJBKL=`[4QPC73IaU2b^MXNO\\;6D_E5G","0\\[TK9<4UABHbXLDJ?:=I]Y`^M8W53R;@GOPaZ7>E_CQ2SNVFc16","ONC]7`D@9[XEU0?Y:AFVK8c_b65B=L^\\IT2WM1<PZJaQ;34H>SRG","@C32N=074T;5BJLO\\_IAGbP1[EX`>YW9]:Z8V6RD<H^cQFUK?aSM","8<E[2MbVcRNPGH=46^K;BZUC@9J\\FaT_3>WL57D]SOI`1XAQY:?0","@\\ER0XBTbAN5LM=^caKO6?>UVD`Q12P9SGW;_CI7]8F<YZJH[:34","]=b@ONW4a?GSEA^\\U6<2P;TY3C51VF8RcBI7JL9`K[HX>D0QM_:Z","L7;`<^\\BEbYH3[M]JP_>SN4WR@C:K0UIDQ2a=5GFX9O8VA?ZT61c","L:>5OGB4]YQ?[cMC@=VF09TNE_;D`J\\1AWR<3UIXK6bH72ZSP^8a","NM35U\\9=P`2K4[VJ?G_cXY16;8@WBDTFQ7<ZS]LAEOH^0bC>Ra:I","\\QANE=D9`:WG@;LF?P32SXa]4Ic[87TV1K<O>JHb0U5M_RC^ZY6B","J3Z2O;IAa]FYbXQ`:MBHK=GW76EV?L>TS0R9^C[U4Dc<51N@8P_\\","VQRP1G4K67_BS=0CM;X8TF?ND`OU3\\ZYLIc2E5JA>^[]aH9W@:<b","]a;Ic9BYPR_@LW>Q8F\\`KENC=MHZb27^XU:640AO53?VG<S1TD[J","IJAT[690L@=X>RG;]BNb_1O\\V7P:3`UYFcQ4Z8SC?KD<H2^5aWME","LY8Z6[C3NW<@V^Ob`M>JX2EcUTP0GDRI54HBKA\\;S1Q?Fa9=:_7]",">:UM\\?R6=Za[T7X8<50`IHCQ^]_JFG3LKD9OE4cAS;21NVYWBP@b","37XbO^4YE_JKPFGSLW@U\\MRT<aQ6VN1:[5>2`ZB;=A]IHC8?0c9D","?8c<HT9U>XbJ6DI54Y3RW7O`FKaAM[^_S1G0ZB:E@V\\;]CPLN=Q2","^Z61J9Y>3;M_]725AV?bOQTaRc:D\\U8W@N0PB4CIE<=GLHFS`K[X","H\\E4P7QW][Va5?JMR^XU=N63BbA`@>1ZFG0L;<DcCI_T28:OYK9S","2IaV_SF74M3A]W`PUOJ^98QL1[NB?0X:<TK@\\cZYRG56C>HbD=E;","5>730X9J[:I_Z\\6SBcCF4MHYLUP8<RDN^b;TK2E=a1@OQ]A?GWV`","BSY@D8[>JM4<CbU9KFP`A^ZN1H=T:6?]05;LaQ\\_EOR7W3GIc2XV","LcFISaBWQT<A>04bK_8=]?Z\\VU[O5E@9;:G26JHXNDC3`7^PYMR1",";9UKO3Y>a]@:=HMR4BGPNSCI1\\D`JT<EV6AFWb_7Q[c08X?2Z^L5","_<bLZ6C]c>aYBMJQ\\49WE12^R;SF`NXI3@V0UHD:5[AP8KO=G7T?","[bN6SO280U]4QaLGKc`\\^A1RMJV>D_WHBIPC:EX357<?Y=T9;@FZ","A:1bON4`?I<Y62ZHWa53R9>SK8B7]0U[X^MV_c@DPQGTCF=\\J;EL","D6J=2WOCB:\\9MPa5T;]cG`I<LZV3@8U0?FHS^1NAK>R4Q7E_YXb[","7_UP<F=S\\NaK:DA1EO@69;?0IX`J]THL5RVWYB2C^[M>b8ZQ43Gc","O2^UKcEFQ137HMI`NL4@DSJa\\Xb;]_?C[=T>RWY0PG68AZV9B:5<","BFV3E;]SYTQINUA2Lc0^R[@PZXb<a9_C=?GJ6H`:\\57DK1O>WM48","G:2]M=V5YI4CD8S@^FaL\\;0?QcHEB>[X<U`OAWNJbTRP16Z97K_3","WZE6=I`cUNT2XS9DHG7JY]KO^<CaM:[3bR8?VF_B4P0;L1A@5Q>\\","9ETL6:?VW2A>=ZRC_45G0QbXNMFHOBS3;<a`@\\IK^7JY1U8P][cD","0SQb?TX5I4B\\JCF7:Za3G1WV[_=H6;>K`YNMRO8D@<PEUA^9cL2]","89`YZ:VED2O0=ABS;?4F_<W^UcC\\RJ1P[G5b3T>XaK@IN6HQ7ML]","<KMGZW^8DE]0F3\\QUS=NHAR?VPO24@`:Y[5_LIbCTa79;B>61XJc","57>_<G3?FED6UYOXVca1Q9@JH2[W\\C`b]S4ZP:80=BMRLAT^IKN;","D@`?X9]aHV7Z<J:=G1PcS_8bWN5TCL602OQB43A[Y>ERF\\U^;KIM","RIABW5Ha6UZPLMO[S=^2K7E@;1_Q3]9JbY84DG0C?`:<XV>NF\\Tc","FC4N@_0cH[29>K5`Tb3;^YO?QS86GUD=PBL:XZ<V\\]JMWIAR17Ea","UJBD0_E<9R4ZX[=^>3]62WGOPa7\\AKNHM8TI:LVY@`5?bcS1;QFC","c[86=^M0>Q9UKO:\\aBZ3<1SAGVTWJX`CYN@RI_b5PL]?4F72EDH;","2TZ>GBAFc8]K6_7XRQH=N<01\\b^LW5;@JIYE:34VP9`aD?O[CSMU","6AFILC4=UR\\?3T:H]9SQ@ZK0`;5bV8_OPaM>ED1WGXN^Bc7[YJ2<","BWVIE3\\c9QFP<GaSA5YM408T`C_L[bDH;U1K6J2X]NR=7:@?O^Z>",":R]@2c\\M9X0^QFb7a>VOLHAY1BKWC=E3<GP[N5?`US84J;_6ZDIT","b8B5;4SOI]<:`2EaHZU=?MCW[1FLQGDJ_6A^T>9\\@K07YPXNVRc3","LGBbARU_X]JY>5E1c8:IC3<TO60`KQ\\S?a^N[H4DW@Z97VPFM;=2","TZ]>QO@_MDR1CPIcV:;076<9U[JS2YGH^b5L=\\FXWB48`K3A?NaE","1MQ9cCSBUA<KN0FZ46;=HD\\@_E^O7XbPYaW2]>?JGI:38VL[`T5R","b89265VBa][HKML3^SYNAI`XW70P@;<F=G:_QCRE?ZJ>TDOc\\U41","L:]R56^?SF<2KUA\\P@49H38=T[JGaEbNB0YXMC1D7;`WIQc_Z>VO","a>SO\\QVZPB6M?bUT^K_1]CA79YH@RE50:JIG3X[c;L8<=42W`DNF","Y4AIO^G\\VXaDQ0U:BbN<LZK]28PTFC`MW;9_S3R>EH[=?J751@6c","02?@WA8NQ1TDFGSXc^ZK7EY:69M;PVIL53J]\\[UHRBb<_C`4a>=O","\\bBZ<LEJP?K_CRaS^O0:7`4AN3GFM58@]2Uc19=W;QDYVIT6>HX[","cZRU;>4QbB[L_W8V\\I?G01T^E]SH63F@<9aM:Y`57CAK=PX2NJDO","<UHPZ\\1F9WIL;2>@`48Sc=7N:RQ0M^O?VCYAB]G3EJ5b_KX6DaT[","KV^AbBFE1[Rc;\\W85aD?I24@OSJ>`T=9X]_M:CZH3GN7PL6U<0YQ","b?3@1=KPO[Y49TD;C\\GBc6H_WV^:7a8J>LZRMXAI]FE5`2N0SQ<U","<;`51?X@=\\KQ0[TW>2OS_J8LN]B6R4C9FZbY7ac3GUIAMP^ED:VH","CIc4aVbN_OZ38[=?L;]:QRHA\\2<@M16YFXWB`0DJP^E9GKU75>ST","H?ATXbP[2U9DBFMYW4<6_QC;V=:R>I5`703E@cS\\LG1O]KN^aJZ8","?;=LM5O9NX^K7]4A[ZIQ\\c3TYV<aG`@8DU_PH1W62R:JFESBCb>0","U>2Ra0J?XM\\8BQL<F74C_N:I[DZ`HPA=KE;c63GTO9@bV1^SY5W]",";C7ERXG3MZc<W6=5VQ2SN@0D\\IT1[_YFbU?8aH>B^4OL]A:KP9J`","[A5YaIS>O`Fc:P^]M=K<XD\\G4T0_?J9;L7Z1BNVRUHEQ8CW26@b3","Y6@F[8=]NEPKaABQcH_J1R29L;UDO^<V435CGSW0`I:ZX7\\?bT>M","2[SHT:cI_58Z^Y;?3<4MDE]=JGB6QLOF9`N7@>APW\\bKXa0V1RCU","J7GXQZ^18cA6:CKSN2\\=LM35IFD]<W[?E_P`YO>@BVaTR4UH0b9;",":S`6W]1b<4>HRPAB9LE0CGZ7J=\\3QDI_5XK2OaV^8@;?McFTUN[Y","[4ZO?<P\\cC3aA8YB6>MUSI=V;^TWX@KN7]`F05:2LD9bR1GJ_HEQ","8^BC5:41T`DE7GY2NKARO>HaQIX09[U@LJP<3];Z\\_S?V6bFcMW=","LKEQA]4S98F`=I\\[CG;B1UT?cYOPM7<_Z5R^JaVW0b>D6X@2NH:3","8_5S72bCT`0IE]6^1J9WH@MZVN:[c<Ra\\?LOGA3=BYQD4UP>KX;F","RXAMDYK;:29B[QJaNS^73O4P>I8cG`?Z6FEU<CHT0@WVb=5]_L1\\","HL;@42PbVIS`0U6cAJ9a>G^Y=:[]NWDTRQB3E1X57<OKZ_?CM\\F8",":`]G?[2DBKYaAO4UWIHV9S\\;J0Z1R^Q83F_5>TXb6P@=MNc7CLE<","1_\\DT2<5;JY^MGK4?3UBQIV]FWA`c:S7XbN8C>L[=OZ6aPR9EH0@","C?IJB8]M=OYT<c7:X@E9[bG5F`Z>DS^WU_R\\A04KQ6a2NHPL;1V3","?^6[I=4Q8P5UK1:bEWcVH@N\\`];7><CA_2F0L9GJ3XMOZaRYBSDT","A?FV:_O>DT7E`QS3cNYUI1@[;=5]GZJRX086\\<H^PCbBaWKL9M24","?D\\LIB=A]NS;@_:YR`<0b[^CGE6QFJcT>a1W459PU8MK72V3ZXOH","[P87DX]N^O61?9KF:=A0UcTJY\\RMbZC5_<Q4B@GWSH>V3a2IL`;E","F:85ENH>a39<\\SD61P4;GC0Y2^L[`c_=WVTKZbAJXMIUB7OQR?@]","?5YJTP1a=WZ@GN_<2[Hb4LMc^8]KFS>EO7QCA3:`X90I6UV;\\DRB","?L8\\ZAXY3BUb4960QNDaF:WCERHP`c<^JI>]1KSV2=;O@M[G7_5T","G5`1>P09^RB3c?QY4EA8VJOa2T76=]IHM@D[U;NL_<\\WZSFbCXK:",":b`;D28@?S\\K^5aT3EHC1VOAZWU[NG7Y0I<c9P>_RF]BJ=4LXQ6M","YK<36?`_c]EZA8DFbW05QGR>IHLTXJ2:a[;BN9M7^O@=C\\P14VUS","LB53;<?G8QScPb\\O]U[0RW@DX9H7NCT1E`AK_M=2Z:4F>VI^JaY6",":WVQRXO[3LDTSC^?1]NIUaGE>0AH5_94;2@F7b<\\6BZcJMK`=YP8","E:XU]R8AG>JSW7H[^C;cYF\\26PT1Z=53OB0?N`bK94@VLDQ<IM_a","17CZDB=A][Y4PIF`:?LR9^OSKT_abcG<2J;8NVU@X0\\3QH>5E6WM","\\203_8QRD?WLMJ4I1YEAX;@`]N[PO5:VKFC^=aB9>S67ZUTHGb<c","HbU9YP6G?[2V`FWS34J0Z5@XA;>ca\\KE=1<IQO8^]NC7LRB:_TDM","3Y]0?AHLB6=8J5X[b7SRKN;EI9Z:PWFM@^_aU>42DGcC\\O`TQ1<V","=EFN`;[^I78>U9_X6c:bLS3C5TMHW<BJZR4\\AQV02?@1ODYaK]GP","1;HNc78QCOY<^Jb`2SVP>K=LXa0TEZ5]UB[IA?W94_@M\\3RGF:D6","KRT:b5AIM;Xc>[21QCa?<J0@HF]Z9U8=V4^\\EL7`_OGPBWN36YDS","W\\I>QXAaY@1J6Mc?K9^S:3_02`UCHENOLR[BF8DV57<TbZ=G4;]P",";8:6`M@<I>_T7H?]2U15DacCJQ\\K9PGRYNBZXSL3OW[^EVbFA4=0","<54A1U]08X;29Q@6?`RcWKaI[^TNVZHF_>JLOM37EYbP:BS=GCD\\","YRN?\\CVFc6a50J`M@>_P4SO7G;IXUWQEHK2^Zb[8=ALT<:39BD1]","?C<EX][G:H4K1JSARNOW\\P8F7L=>Yb`QD29MIVB;U5_c0@T^Z36a","`[9TR0K3;@G_DLS^cbX81Y24\\EUWN>COM?H=BAJ]:VIP7F5Z6aQ<","FaC@NEMGJIL1;Q8H4WR<D2Y>?03^9b\\T7S]ZXB_:P=5cO`6[AUVK","[P>;UYGTb0:V1^JREA?=BIOL45aMKDC]cWZ23FH\\`SQ_8<N976X@","]8Z5G3J?AEFcbUPOH^0R[_XL<S2@IaM79\\WBQD;>T4C=Y`K1N:6V","F5<@Yab`E]?U;V67^4cSQ30AT:MXD18OGW\\BR9>PHLKZNI_2[JC=",">=6DO]A\\YN2<b`FPZEIS5G4a_BU;89RK3J[0^V@?H7cQWTLCM:1X","\\K`OQHIWVZC>cT4^D8S:0bG;B7A5UYL31J6]29?EP@[a<NXFMR_=","Y7>@PUM[F6VXa1Kc\\b^IB]:Z=4?ERJO82`H<_;L5SQTWD0CA3N9G","b<:[^XRFN19S3J=8GKQc_;A@aM064\\]BWT5C7UI`ZLVY2P?ED>OH","HWR[Z71TB6DCU2L;bVAS>\\M^4Ic@Ya=?8KG:O]EJX`<PF90Q5_N3","I:^bU@WVZSKN[8`cOD56GM39B]74;QHJATFLCaX=0_1>R\\2YP?<E","FN2RC?P]E=H3071@6Q89MUK;DG>`TI<c\\4_:SbLY[^BaZJA5OWVX","Ia\\cG6>_RUNSbFYAV2@L?EHCO:`;8B19<X^0M[W3=7PT5JQ]4KDZ","KQaV=IA>bUL4@68H5WTYC^R;NF`GJc?_SDBM[\\:21Z]<9EPX73O0","_aS?cPD@V=689]T4^K3OXIFWH;AJ>GU2YL0NCQZ\\R75[:EMBb1<`","4FOW[bVQNI>^567aR39_]T8:`;1HCDEAG0\\cKXS?LJ<U@P2Z=BMY","F80I9ZJ1@cVa3BD6MY]?=7_;`<2K5HRX[OLAPEQCUG4>^TN:bS\\W",";KR_2PZ?38<\\F9D:Ub6>@1aI`5VAWNJQ[LS^Ec]TC0H=BXOM7GY4","A;EC\\Q=FZ?W1<cHSJaYB340:G[TPL6IbM`X_@8ONR7VK]U5D^9>2","61;_B3>F^\\QUW0JNGVDEc2APY97I8HL=X:C@5<T?Kb`aMO]4ZR[S","^<]N2UD`O?X=RS4IVZ;0L_M3P1\\KHT7a@B6cAQ:>9[EF58GCYbWJ","4^SQ:[3VRG?>H8PNB51ZLW0O\\2ME6Ca<=TUIc_`K@7Ab]J;9DXFY","P06RB<M>OG8c?N^Ya[_I9C\\K2X14:E35@JD`;VQ=U7HSWZFA]TLb","T]M?R@^:U902<HQLNOXc\\_b>8B6JG3ZEVD=75C1AYP;KI`FS[aW4","B4MH1U6>@=]NZb<OI3C9V\\2:^AD0aP?QcFEK8;R[TYG7L_WS`X5J","8IVaGUCYR0T=Q`SPFX2@M]WN_c[BD6<71OLJ:ZA;^9?E543H>\\bK","?K;B5RWA2J=a6OV1b^:DMX_4P9`@SI\\8Y0UHE37TLN[]cGCF<>ZQ","75U2]6[;Q0@ARC_?=3aFOESZBTc^1\\V<L4DXYK98IJW>bNMG:`HP","a[SFWQM^\\9=PL3U?76<ZYGKIX0c5J`28>VTD:C1HbB;]RAO4_EN@","E=BTLQ1J?9[GKU:_c>3RAaIP65bND78]4Y^;V@M\\2OWS<FCZH`0X","85c=_X9RS;a`U10KLHJNQCE?\\2<^4Y[3TPO]AFb7V6DGBZ>MI:W@","S]P72O;3D0MFEV5HGW:KaJ4@bZ6A>XYTB1LN89R_\\C=c[?I<Q`U^","TW]SF@JEI\\4D:2M3O>A[Q1B97?=cKXYb0G8Z<PV^6HCU_LR5N;a`","QaW_?]61;LIFJAEPC@DY`8\\X2R:VO[B<4S3TKUN9b5GcH^0>Z7=M","7a<[8>?TC1]RMIS_`P@65WUYZb=4:Qc9NA^O0GJ\\B2KLXEH;DV3F","@<4G9aK[A>Y]bQ8^Fc3WT1R?EN\\;SB=UPZI_J2XVC7MH6L`0:DO5","INQ5b`2TR^:Z9;D8BGW@[aVUK0A?c\\LJC761X3>=FYEPO_M<4SH]","a1@V`SH=B650C:Yc;R92I[UZO_]JD7KL8FA<b^TGXW?Q\\NEP4M>3","P13NcYV<2O_KTDa:>WCI[Z=4@MULH]G?RXJ0^F;B5S9`AE8\\Q76b","?0D]B3O@b4IZQ27TH9E[AFVN5LU6=;<Y8aC`cJPM>:_S1GWR\\^KX","QDW>U<8576HP1A04FRIB@J:E2]39\\Ma?KVY^ZC=GL;N[`b_OcTXS","K4aHPOWM^Fc:>9LbESXBJ@NUAD2Y?=5_7]CQ6V;RG8[\\1<0ZI3`T","Ub[DT0KX1I4_3EL\\N=P6<RYJ?BCaO^G>@`cS5;8VMAH9QZ:7]2FW","92WXS8<1:Kc;FVUBYa]DGIRCQTHJ3>N_[?5b@7O^M4AP06EZ`L\\=","]aOUIGMPYB0>Eb;=S@RKLT^DN<\\AJQ`Z:7HW9548Xc163_2V?CF[","9Ia6GZP^>=`R@][2c<S:\\MF8J1YW5;?7T3DCXVKH_NQbU4OLABE0","PX:RIJQ;B_2<1A7HG\\T3N?cY@568MF=>9CK0`aVU4ZS^EbL[OWD]","QJP<L7^c_KH@U=a]4TBF>[M1?O2YR983C6ISN\\Wb`X5;0DEZ:AGV","\\]b=<;CE4PLcFH`1?UM0S:DIOBQ7_@G6A3ZTXN9aR^WY52J8K[V>","D:7T`4C5L21EZFGKI?OUYbc8@M0X[VAJ\\HN^3=B;<R]96aWQP>_S","@<6c`49DB7C\\b=2EQOYJMTHRNWL5V:KZG3Xa[F?P_A^10I8S;]U>","D@JWYZ\\]U98KN6A;3FH<B^[c0VObR42SIa5P>=?`M_:G7LXT1QCE","@2E\\9Y?D4SA7KVTL:>^8P1IZHbW<BQNJ6GMa03[`c_C=F5]O;RUX","aL^E9<W0J2C_NT]@7;FBZ4A3>K5cVD=P6\\I:RG1[SXYOQ8H`bMU?","H1I0V<[JTQ2S:DYO`R4K3_5M>XZC^cG98LW6Fb;E?@P\\a]7UAN=B","O=WS]UCQJ>Hb_2IE[N0aTX6MKPcVB`AF3^<148;\\LG@YD5RZ7?9:","6aJZG4WHURAES\\3=@1`CIOb0T9YNcD28X^VQL:P_?]BMF>K<;75[","Z7<;Y:1PH\\XbT@OJNW9UV6`>MAC_]GKaRc[8^D0BQ=4IF2S3LE?5"]};
+
+/* ===== Rainbow Solitaire: cards, table, play, hints, rescue shuffle, saving ===== */
+(function () {
+  var host = document.getElementById("solitaire"); if (!host || typeof SOL === "undefined") return;
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var SUITS = ["hearts", "diamonds", "clubs", "spades"], SUITCH = ["h", "d", "c", "s"], RANKS = ["", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+  var RANKNAME = ["", "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"];
+  /* rank color families: black suits take the deeper shade, red suits the lighter one */
+  var FACE = [null, ["#D81783", "#EC3295"], ["#ED477C", "#F06C9A"], ["#F25B55", "#FF7773"], ["#F57C24", "#FF963E"], ["#F9AC24", "#FFC24D"], ["#F6D53D", "#FFE46B"],
+    ["#C5D72A", "#D7E650"], ["#84BE38", "#A2D65A"], ["#32A86D", "#54C68A"], ["#17A8AC", "#51C8C2"], ["#268FCB", "#6ABAE6"], ["#7654BA", "#A17BD7"], ["#A1259E", "#C94BBC"]];
+  var MODES = { easy: { label: "Easy", draw: 1, rescues: Infinity, mult: 1 }, medium: { label: "Medium", draw: 1, rescues: 3, mult: 1.5 }, expert: { label: "Expert", draw: 3, rescues: 1, mult: 2 } };
+  var KEY = "lm-solitaire-v1";
+
+  /* ---------- the card artwork, built from data as SVG ---------- */
+  var PIP = {
+    h: '<path d="M10 18.2C10 18.2 1 12.3 1 6.6 1 3.6 3.4 1.6 6 1.6 7.9 1.6 9.3 2.8 10 4.2 10.7 2.8 12.1 1.6 14 1.6 16.6 1.6 19 3.6 19 6.6 19 12.3 10 18.2 10 18.2Z"/>',
+    d: '<path d="M10 .8 18.2 10 10 19.2 1.8 10Z"/>',
+    s: '<path d="M10 1C10 1 2 7.4 2 11.9 2 14.5 4 16.2 6.3 16.2 7.6 16.2 8.7 15.6 9.3 14.7 9 16.5 8.2 17.9 7 19H13C11.8 17.9 11 16.5 10.7 14.7 11.3 15.6 12.4 16.2 13.7 16.2 16 16.2 18 14.5 18 11.9 18 7.4 10 1 10 1Z"/>',
+    c: '<circle cx="10" cy="5.4" r="4.1"/><circle cx="5.1" cy="11.4" r="4.1"/><circle cx="14.9" cy="11.4" r="4.1"/><path d="M9 11.5C9 15.4 8.1 17.6 6.5 19H13.5C11.9 17.6 11 15.4 11 11.5Z"/>'
+  };
+  var LAYOUT = {
+    2: [[50, 32], [50, 108, 1]], 3: [[50, 32], [50, 70], [50, 108, 1]],
+    4: [[32, 32], [68, 32], [32, 108, 1], [68, 108, 1]], 5: [[32, 32], [68, 32], [50, 70], [32, 108, 1], [68, 108, 1]],
+    6: [[32, 32], [68, 32], [32, 70], [68, 70], [32, 108, 1], [68, 108, 1]],
+    7: [[32, 32], [68, 32], [50, 51], [32, 70], [68, 70], [32, 108, 1], [68, 108, 1]],
+    8: [[32, 32], [68, 32], [50, 51], [32, 70], [68, 70], [50, 89, 1], [32, 108, 1], [68, 108, 1]],
+    9: [[32, 32], [68, 32], [32, 57], [68, 57], [50, 70], [32, 83, 1], [68, 83, 1], [32, 108, 1], [68, 108, 1]],
+    10: [[32, 32], [68, 32], [50, 44.5], [32, 57], [68, 57], [32, 83, 1], [68, 83, 1], [50, 95.5, 1], [32, 108, 1], [68, 108, 1]]
+  };
+  function pip(s, x, y, size, flip) {
+    var k = size / 20;
+    return '<g transform="translate(' + x + ' ' + y + ')' + (flip ? " rotate(180)" : "") + ' scale(' + k + ') translate(-10 -10)">' + PIP[s] + "</g>";
+  }
+  function faceSVG(c) {
+    var r = SOL.rank(c), s = SUITCH[SOL.suit(c)], isRed = SOL.red(c), bg = FACE[r][isRed ? 1 : 0];
+    var ink = (r === 1 || r >= 12) ? "#fff" : "#17121f", R = RANKS[r];
+    var corner = '<text x="9" y="22" font-size="' + (R.length > 1 ? 17 : 20) + '" font-weight="800" letter-spacing="-1">' + R + "</text>" + pip(s, 15, 33, 11);
+    var mid = "";
+    if (r === 1) mid = pip(s, 50, 70, 46);
+    else if (r <= 10) mid = LAYOUT[r].map(function (p) { return pip(s, p[0], p[1], 17, p[2]); }).join("");
+    else {
+      /* J, Q, K: a bold geometric emblem built from the suit, not a portrait */
+      var deco = r === 13 ? '<path d="M33 52 39 40 45 50 50 36 55 50 61 40 67 52Z" opacity=".9"/>' : r === 12 ? '<circle cx="38" cy="45" r="3.4"/><circle cx="50" cy="40" r="3.4"/><circle cx="62" cy="45" r="3.4"/>' : '<path d="M50 36 56 44 50 52 44 44Z"/>';
+      mid = '<rect x="23" y="29" width="54" height="82" rx="8" fill="none" stroke="currentColor" stroke-width="2.4" opacity=".55"/>' + deco
+        + '<text x="50" y="86" text-anchor="middle" font-size="36" font-weight="900" letter-spacing="-1">' + R + "</text>" + pip(s, 50, 99, 13);
+    }
+    return '<svg viewBox="0 0 100 140" aria-hidden="true" style="color:' + ink + '"><rect width="100" height="140" rx="9" fill="' + bg + '"/><g fill="currentColor" font-family="\'Bricolage Grotesque\',\'DM Sans\',Arial,sans-serif">'
+      + corner + '<g transform="rotate(180 50 70)">' + corner + "</g>" + mid + "</g></svg>";
+  }
+  function label(c, up) { return up === false ? "Face-down card" : RANKNAME[SOL.rank(c)] + " of " + SUITS[SOL.suit(c)] + ", " + (SOL.red(c) ? "red" : "black"); }
+
+  /* ---------- game state ---------- */
+  var G = null, hist = [], fut = [], els = {}, timerT = null, worker = null, reqId = 0, hintStage = 0, hintFor = -1, hintAct = null, busy = false, finishing = false;
+  function blank(mode, idx) {
+    var deck = SOL.decode(SOL_DEALS[mode][idx]);
+    var st = SOL.deal(deck, MODES[mode].draw);
+    return { mode: mode, idx: idx, deck: SOL_DEALS[mode][idx], st: st, moves: 0, secs: 0, hints: 0, rescues: 0, assisted: false, revealed: [], known: initialKnown(st), rev: 0, status: "playing", started: false };
+  }
+  function initialKnown(st) { var k = []; st.t.forEach(function (col) { k.push(col.c[col.c.length - 1]); }); return k; }
+  function pickIdx(mode) {
+    var played = load("played") || {}, list = played[mode] || [], n = SOL_DEALS[mode].length, free = [];
+    for (var i = 0; i < n; i++) if (list.indexOf(i) < 0) free.push(i);
+    if (!free.length) { list = []; free = Array.from({ length: n }, function (_, i) { return i; }); }
+    var pick = free[Math.floor(Math.random() * free.length)];
+    list.push(pick); played[mode] = list; save("played", played); return pick;
+  }
+  /* storage that never breaks the game (private mode, full quota, blocked) */
+  function load(k) { try { var v = localStorage.getItem(KEY + ":" + k); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
+  function save(k, v) { try { localStorage.setItem(KEY + ":" + k, JSON.stringify(v)); } catch (e) {} }
+  function persist() { save("game", { G: G, hist: hist.slice(-200), fut: fut.slice(-200) }); }
+  function restore() {
+    var s = load("game"); if (!s || !s.G || !s.G.st || !SOL_DEALS[s.G.mode]) return false;
+    try { if (SOL.count(s.G.st) !== 52) return false; var seen = {}; s.G.st.t.forEach(function (c) { c.c.forEach(function (x) { seen[x] = 1; }); }); s.G.st.s.concat(s.G.st.w).forEach(function (x) { seen[x] = 1; });
+      for (var i = 0; i < 4; i++) for (var r = 0; r < s.G.st.f[i]; r++) seen[i * 13 + r] = 1; if (Object.keys(seen).length !== 52) return false; } catch (e) { return false; }
+    G = s.G; hist = s.hist || []; fut = s.fut || []; return true;
+  }
+
+  /* ---------- build the table ---------- */
+  var root, board, bar, live, statMoves, statTime, statScore, btn = {}, pileEls = {};
+  function build() {
+    host.classList.add("open");
+    host.innerHTML = '<div class="sol-table"><div class="sol-bar" role="toolbar" aria-label="Solitaire controls">'
+      + '<div class="sol-modes" role="radiogroup" aria-label="Difficulty">' + Object.keys(MODES).map(function (m) { return '<button type="button" role="radio" data-mode="' + m + '">' + MODES[m].label + "</button>"; }).join("") + "</div>"
+      + '<div class="sol-acts"><button type="button" data-a="new">New game</button><button type="button" data-a="restart">Restart</button><button type="button" data-a="undo" aria-label="Undo">↶ Undo</button><button type="button" data-a="redo" aria-label="Redo">Redo ↷</button>'
+      + '<button type="button" data-a="hint">💡 Hint</button><button type="button" data-a="shuffle">🔀 Shuffle <b class="sol-left"></b></button><button type="button" data-a="finish" class="sol-finish" hidden>Finish ✨</button></div>'
+      + '<div class="sol-stats"><span>Moves <b data-s="moves">0</b></span><span>Time <b data-s="time">0:00</b></span><span>Score <b data-s="score">0</b></span></div></div>'
+      + '<div class="sol-board" aria-label="Solitaire table"></div><p class="sol-live" aria-live="polite"></p></div>';
+    root = host.querySelector(".sol-table"); board = host.querySelector(".sol-board"); live = host.querySelector(".sol-live");
+    statMoves = host.querySelector('[data-s="moves"]'); statTime = host.querySelector('[data-s="time"]'); statScore = host.querySelector('[data-s="score"]');
+    host.querySelectorAll("[data-a]").forEach(function (b) { btn[b.dataset.a] = b; b.addEventListener("click", function () { act(b.dataset.a); }); });
+    host.querySelectorAll("[data-mode]").forEach(function (b) { b.addEventListener("click", function () { if (G.mode !== b.dataset.mode) newGame(b.dataset.mode); }); });
+    /* empty-pile outlines: stock, waste, four foundations (ghosted suit), seven columns */
+    function slot(cls, html) { var d = document.createElement("div"); d.className = "sol-slot " + cls; d.innerHTML = html || ""; board.appendChild(d); return d; }
+    pileEls.stock = slot("stock", '<span class="sol-recycle" aria-hidden="true">↻</span>'); pileEls.stock.setAttribute("role", "button"); pileEls.stock.tabIndex = 0;
+    pileEls.stock.setAttribute("aria-label", "Stock: draw cards");
+    pileEls.stock.addEventListener("click", function () { act("stock"); });
+    pileEls.stock.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); act("stock"); } });
+    pileEls.waste = slot("waste");
+    pileEls.f = [0, 1, 2, 3].map(function (i) { return slot("found", '<svg viewBox="0 0 20 20" aria-hidden="true">' + PIP[SUITCH[i]] + "</svg>"); });
+    pileEls.t = [0, 1, 2, 3, 4, 5, 6].map(function () { return slot("col"); });
+    for (var c = 0; c < 52; c++) {
+      var el = document.createElement("div"); el.className = "sol-card"; el.dataset.c = c;
+      el.innerHTML = '<div class="sol-in"><div class="sol-face">' + faceSVG(c) + '</div><div class="sol-back"></div></div>';
+      board.appendChild(el); els[c] = el; wireCard(el, c);
+    }
+    addEventListener("resize", function () { layout(); });
+    if ("ResizeObserver" in window) new ResizeObserver(function () { layout(); }).observe(board);
+    document.addEventListener("visibilitychange", tick);
+  }
+
+  /* ---------- where every card sits ---------- */
+  var M = {};   /* measurements */
+  function locate(st) {
+    var loc = {};
+    st.s.forEach(function (c, i) { loc[c] = { p: "s", i: i, up: false }; });
+    st.w.forEach(function (c, i) { loc[c] = { p: "w", i: i, up: true }; });
+    for (var f = 0; f < 4; f++) for (var r = 0; r < st.f[f]; r++) loc[f * 13 + r] = { p: "f", f: f, i: r, up: true };
+    st.t.forEach(function (col, ci) { col.c.forEach(function (c, i) { loc[c] = { p: "t", col: ci, i: i, up: i >= col.d }; }); });
+    return loc;
+  }
+  function layout(dragging) {
+    if (!G) return;
+    var W = board.clientWidth, gap = Math.max(4, Math.min(16, W * .014)), cw = (W - gap * 8) / 7, ch = cw * 1.4;
+    M = { W: W, gap: gap, cw: cw, ch: ch, x: function (i) { return gap + i * (cw + gap); }, top: gap, tab: gap * 2 + ch + Math.max(8, ch * .12) };
+    root.style.setProperty("--cw", cw + "px");
+    var st = G.st, loc = locate(st);
+    /* each column squeezes its overlap if it would get very long */
+    var maxTab = Math.max(ch * 3.6, (innerHeight || 800) * .62), fd = ch * .13, fuBase = ch * .27, colFu = [];
+    st.t.forEach(function (col, i) { var n = col.c.length, up = n - col.d, need = col.d * fd + Math.max(0, up - 1) * fuBase + ch; colFu[i] = need > maxTab && up > 1 ? Math.max(ch * .17, (maxTab - ch - col.d * fd) / (up - 1)) : fuBase; });
+    var bottom = M.tab + ch;
+    pileEls.stock.style.cssText = pos(M.x(0), M.top); pileEls.waste.style.cssText = pos(M.x(1), M.top);
+    pileEls.stock.classList.toggle("empty", !st.s.length); pileEls.stock.classList.toggle("can-recycle", !st.s.length && st.w.length > 0);
+    pileEls.f.forEach(function (e, i) { e.style.cssText = pos(M.x(3 + i), M.top); });
+    pileEls.t.forEach(function (e, i) { e.style.cssText = pos(M.x(i), M.tab); });
+    var wn = st.w.length, fan = G.st.draw === 3 ? Math.min(3, wn) : 1;
+    for (var c = 0; c < 52; c++) {
+      var L = loc[c], el = els[c], x, y, z;
+      if (L.p === "s") { x = M.x(0); y = M.top; z = 10 + L.i; }
+      else if (L.p === "w") { var fromTop = wn - 1 - L.i; x = M.x(1) + (fromTop < fan ? (fan - 1 - fromTop) * cw * .24 : 0); y = M.top; z = 100 + L.i; }
+      else if (L.p === "f") { x = M.x(3 + L.f); y = M.top; z = 200 + L.i; }
+      else {
+        var col = st.t[L.col], yy = M.tab; for (var k = 0; k < L.i; k++) yy += k < col.d ? fd : colFu[L.col];
+        x = M.x(L.col); y = yy; z = 300 + L.i; if (y + ch > bottom) bottom = y + ch;
+      }
+      if (dragging && dragging.indexOf(c) >= 0) continue;
+      el.style.transform = "translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px,0)"; el.style.zIndex = z;
+      el.classList.toggle("up", L.up);
+      var movable = L.up && (L.p === "t" || (L.p === "w" && L.i === wn - 1) || (L.p === "f" && L.i === st.f[L.f] - 1));
+      el.tabIndex = movable ? 0 : -1; el.setAttribute("role", movable ? "button" : "img"); el.setAttribute("aria-label", label(c, L.up));
+      el.classList.toggle("buried", L.p === "s" && L.i < st.s.length - 2);
+    }
+    board.style.height = (bottom + gap * 2) + "px";
+    paint();
+  }
+  function pos(x, y) { return "transform:translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px,0);width:" + M.cw.toFixed(1) + "px;height:" + M.ch.toFixed(1) + "px"; }
+
+  /* ---------- toolbar, stats, score ---------- */
+  function score() {
+    var f = G.st.f[0] + G.st.f[1] + G.st.f[2] + G.st.f[3];
+    var s = f * 10 + Math.min(21, G.revealed.length) * 5 - G.hints * 5 - G.rescues * 25 + (G.status === "won" ? 500 : 0);
+    return Math.max(0, Math.round(s * MODES[G.mode].mult));
+  }
+  function fmt(t) { return Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0"); }
+  function paint() {
+    statMoves.textContent = G.moves; statTime.textContent = fmt(G.secs); statScore.textContent = score();
+    host.querySelectorAll("[data-mode]").forEach(function (b) { b.setAttribute("aria-checked", b.dataset.mode === G.mode); });
+    btn.undo.disabled = !hist.length; btn.redo.disabled = !fut.length;
+    var left = MODES[G.mode].rescues - G.rescues;
+    btn.shuffle.querySelector(".sol-left").textContent = left === Infinity ? "" : "(" + Math.max(0, left) + ")";
+    btn.shuffle.disabled = left <= 0 || G.status === "won";
+    btn.finish.hidden = !(G.status === "playing" && canFinish());
+  }
+  function say(t) { live.textContent = ""; setTimeout(function () { live.textContent = t; }, 30); }
+  function tick() {
+    clearInterval(timerT);
+    if (!G || G.status !== "playing" || !G.started || document.hidden) return;
+    timerT = setInterval(function () { G.secs++; statTime.textContent = fmt(G.secs); if (G.secs % 10 === 0) persist(); }, 1000);
+  }
+
+  /* ---------- every change goes through here ---------- */
+  function commit(a, opts) {
+    opts = opts || {};
+    var nx = SOL.apply(G.st, a); if (!nx) return false;
+    hist.push(snap()); fut = [];
+    var before = G.st; G.st = nx; G.moves++; G.rev++; hintStage = 0; clearHint();
+    learn(before, nx);
+    if (!G.started) { G.started = true; tick(); }
+    if (SOL.won(nx)) win();
+    layout(); persist(); return true;
+  }
+  /* remember every card ever seen face up (kept across undo, so peeking can't be erased) */
+  function learn(a, b) {
+    var loc = locate(b);
+    for (var c = 0; c < 52; c++) if (loc[c].up && G.known.indexOf(c) < 0) {
+      G.known.push(c);
+      if (loc[c].p === "t") { var wasTab = locate(a)[c]; if (wasTab.p === "t" && !wasTab.up && G.revealed.indexOf(c) < 0) G.revealed.push(c); }
+    }
+  }
+  function snap() { return { st: G.st, moves: G.moves, status: G.status }; }
+  function act(a) {
+    if (busy || finishing) return;
+    if (a === "new") return newGame(G.mode);
+    if (a === "restart") { var keep = { known: G.known, revealed: G.revealed, hints: G.hints, rescues: G.rescues, assisted: G.assisted }; G = blank(G.mode, G.idx); Object.assign(G, keep); hist = []; fut = []; clearHint(); layout(); persist(); tick(); say("Restarted the same deal."); return; }
+    if (a === "undo") { if (!hist.length) return; fut.push(snap()); var h = hist.pop(); G.st = h.st; G.moves = h.moves; G.status = h.status; G.rev++; clearHint(); layout(); persist(); say("Undone."); return; }
+    if (a === "redo") { if (!fut.length) return; hist.push(snap()); var r = fut.pop(); G.st = r.st; G.moves = r.moves; G.status = r.status; G.rev++; clearHint(); learn(G.st, G.st); layout(); persist(); say("Redone."); return; }
+    if (a === "stock") { if (G.status !== "playing") return; if (G.st.s.length) commit({ k: "draw" }); else if (G.st.w.length) { commit({ k: "recycle" }); say("Turned the waste back over."); } return; }
+    if (a === "hint") return hint();
+    if (a === "shuffle") return rescue();
+    if (a === "finish") return finish();
+  }
+  function newGame(mode) {
+    clearHint(); G = blank(mode, pickIdx(mode)); hist = []; fut = []; clearInterval(timerT);
+    layout(); persist(); dealIn(); say("New " + MODES[mode].label + " game. Every deal here has a verified win.");
+  }
+  /* cards fly out from the stock when a deal starts */
+  function dealIn() {
+    if (reduce) return;
+    var order = [], st = G.st; st.t.forEach(function (col) { col.c.forEach(function (c) { order.push(c); }); });
+    order.forEach(function (c, i) {
+      var el = els[c], to = el.style.transform; el.style.transition = "none"; el.style.transform = "translate3d(" + M.x(0) + "px," + M.top + "px,0)";
+      requestAnimationFrame(function () { setTimeout(function () { el.style.transition = ""; el.style.transform = to; }, 20 + i * 28); });
+    });
+  }
+
+  /* ---------- picking cards up: drag, tap and keyboard all use the same moves ---------- */
+  function sourceOf(c) {
+    var L = locate(G.st)[c]; if (!L.up) return null;
+    if (L.p === "t") return { from: { p: "t", i: L.col }, n: G.st.t[L.col].c.length - L.i, cards: G.st.t[L.col].c.slice(L.i) };
+    if (L.p === "w" && L.i === G.st.w.length - 1) return { from: { p: "w" }, n: 1, cards: [c] };
+    if (L.p === "f" && L.i === G.st.f[L.f] - 1) return { from: { p: "f", i: L.f }, n: 1, cards: [c] };
+    return null;
+  }
+  function smart(c) {
+    var src = sourceOf(c); if (!src || G.status !== "playing") return false;
+    if (src.n === 1 && src.from.p !== "f" && commit({ k: "mv", from: src.from, to: { p: "f", i: SOL.suit(c) }, n: 1 })) return true;
+    var order = [], i;
+    for (i = 0; i < 7; i++) if (G.st.t[i].c.length) order.push(i);
+    for (i = 0; i < 7; i++) if (!G.st.t[i].c.length && !(src.from.p === "t" && G.st.t[src.from.i].c.length === src.n && G.st.t[src.from.i].d === 0)) order.push(i);
+    for (i = 0; i < order.length; i++) if (commit({ k: "mv", from: src.from, to: { p: "t", i: order[i] }, n: src.n })) return true;
+    nope(src.cards); return false;
+  }
+  function nope(cards) { if (reduce) return; cards.forEach(function (c) { els[c].classList.remove("shake"); void els[c].offsetWidth; els[c].classList.add("shake"); }); }
+  function wireCard(el, c) {
+    var down = null;
+    el.addEventListener("pointerdown", function (e) {
+      if (busy || finishing || !G || G.status !== "playing" || e.button > 0) return;
+      var L = locate(G.st)[c];
+      if (L.p === "s") { act("stock"); return; }
+      var src = sourceOf(c); if (!src) return;
+      down = { x: e.clientX, y: e.clientY, src: src, drag: false, base: src.cards.map(function (k) { return parse(els[k].style.transform); }) };
+      try { el.setPointerCapture(e.pointerId); } catch (er) {}
+    });
+    el.addEventListener("pointermove", function (e) {
+      if (!down) return;
+      var dx = e.clientX - down.x, dy = e.clientY - down.y;
+      if (!down.drag && Math.abs(dx) + Math.abs(dy) < 7) return;
+      if (!down.drag) { down.drag = true; down.src.cards.forEach(function (k, i) { els[k].classList.add("dragging"); els[k].style.zIndex = 900 + i; }); clearHint(); }
+      down.src.cards.forEach(function (k, i) { els[k].style.transform = "translate3d(" + (down.base[i][0] + dx) + "px," + (down.base[i][1] + dy) + "px,0)"; });
+    });
+    function up(e) {
+      if (!down) return; var d = down; down = null;
+      d.src.cards.forEach(function (k) { els[k].classList.remove("dragging"); });
+      if (!d.drag) { smart(c); return; }
+      var to = dropTarget(d.base[0][0] + e.clientX - d.x + M.cw / 2, d.base[0][1] + e.clientY - d.y + M.ch / 2);
+      if (!to || !commit({ k: "mv", from: d.src.from, to: to, n: d.src.n })) layout();
+    }
+    el.addEventListener("pointerup", up); el.addEventListener("pointercancel", function () { if (down) { down = null; layout(); } });
+    el.addEventListener("keydown", function (e) { if ((e.key === "Enter" || e.key === " ") && el.tabIndex === 0) { e.preventDefault(); smart(c); } });
+  }
+  function parse(t) { var m = /translate3d\(([-\d.]+)px,\s*([-\d.]+)px/.exec(t || ""); return m ? [+m[1], +m[2]] : [0, 0]; }
+  /* which pile is under the dragged card's center */
+  function dropTarget(x, y) {
+    if (y < M.tab - M.gap) { for (var f = 0; f < 4; f++) if (x >= M.x(3 + f) - M.gap / 2 && x <= M.x(3 + f) + M.cw + M.gap / 2) return { p: "f", i: f }; return null; }
+    for (var i = 0; i < 7; i++) if (x >= M.x(i) - M.gap / 2 && x <= M.x(i) + M.cw + M.gap / 2) return { p: "t", i: i };
+    return null;
+  }
+
+  /* ---------- hints: the solver first (in the background), then plain good sense ---------- */
+  function getWorker() {
+    if (worker !== null) return worker;
+    try {
+      var src = "var SOL=(" + SOL_FACTORY.toString() + ")();onmessage=function(e){var d=e.data,r;"
+        + "if(d.kind==='solve'){r=SOL.solve(d.st,{nodes:d.nodes,ms:d.ms});}"
+        + "else{r=null;var rnd=SOL.rng(d.seed);for(var t=0;t<d.tries&&!r;t++){var cand=perm(d.st,d.known,rnd);if(!cand)break;var s=SOL.solve(cand,{nodes:d.nodes,ms:d.ms});if(s.status==='solved'&&SOL.replay(SOL.clone(cand),s.actions))r={st:cand,actions:s.actions};}}"
+        + "postMessage({id:d.id,r:r});};"
+        + "function perm(st,known,rnd){var c=SOL.clone(st),slots=[],cards=[];c.s.forEach(function(x,i){if(known.indexOf(x)<0){slots.push(['s',i]);cards.push(x);}});"
+        + "c.t.forEach(function(col,ci){for(var i=0;i<col.d;i++)if(known.indexOf(col.c[i])<0){slots.push(['t',ci,i]);cards.push(col.c[i]);}});"
+        + "if(cards.length<2)return null;var sh=SOL.shuffle(cards,rnd);if(sh.join()===cards.join())sh=SOL.shuffle(cards,rnd);"
+        + "slots.forEach(function(p,k){if(p[0]==='s')c.s[p[1]]=sh[k];else c.t[p[1]].c[p[2]]=sh[k];});return c;}";
+      worker = new Worker(URL.createObjectURL(new Blob([src], { type: "text/javascript" })));
+    } catch (e) { worker = false; }
+    return worker;
+  }
+  function ask(msg, cb, fallback) {
+    var w = getWorker(), id = ++reqId, rev = G.rev, done = false;
+    msg.id = id;
+    function finish(r) { if (done) return; done = true; if (id !== reqId || rev !== G.rev) return; cb(r); }
+    if (w) {
+      var on = function (e) { if (e.data.id === id) { w.removeEventListener("message", on); finish(e.data.r); } };
+      w.addEventListener("message", on); w.onerror = function () { worker = false; finish(fallback()); };
+      w.postMessage(msg); setTimeout(function () { if (!done) { w.removeEventListener("message", on); finish(null); } }, (msg.ms || 2000) * (msg.tries || 1) + 1500);
+    } else setTimeout(function () { finish(fallback()); }, 10);
+  }
+  function hint() {
+    if (G.status !== "playing") return;
+    if (hintAct && hintFor === G.rev) {
+      hintStage++;
+      if (hintStage === 2) { showHint(hintAct, true); return; }
+      var a = hintAct; clearHint(); if (a.k === "mv") commit(a); else act("stock"); return;
+    }
+    if (hintFor !== G.rev) { G.hints++; hintFor = G.rev; }
+    busy = true; btn.hint.classList.add("thinking"); say("Thinking…");
+    ask({ kind: "solve", st: G.st, nodes: 60000, ms: 1800 }, function (r) {
+      busy = false; btn.hint.classList.remove("thinking");
+      var a = r && r.status === "solved" && r.actions.length ? r.actions[0] : null, why = a ? reason(a, true) : "";
+      if (!a) { a = heuristic(); why = a ? reason(a, false) : ""; }
+      if (!a) { say("No helpful move found yet. Try Undo, Shuffle, or Restart."); paint(); return; }
+      hintAct = a; hintStage = 1; showHint(a, false); say(why + " (Tap Hint again for more.)"); paint();
+    }, function () { var s = SOL.solve(G.st, { nodes: 12000, ms: 400 }); return s; });
+  }
+  function heuristic() {
+    var st = G.st, best = null, bs = -1;
+    SOL.legal(st).forEach(function (a) {
+      var s = 0;
+      if (a.k === "draw" || a.k === "recycle") s = 20;
+      else if (a.to.p === "f") { var c = a.from.p === "w" ? st.w[st.w.length - 1] : st.t[a.from.i].c[st.t[a.from.i].c.length - 1]; s = SOL.rank(c) === 1 ? 95 : SOL.safeFound(st, c) ? 80 : 50; }
+      else if (a.from.p === "t") { var col = st.t[a.from.i], start = col.c.length - a.n; if (start === col.d && col.d > 0) s = 100; else if (start === col.d && !st.t[a.to.i].c.length) s = 0; else if (start === col.d) s = 75; else s = SOL.fitsFound(col.c[start - 1], st.f) ? 45 : 0; }
+      else if (a.from.p === "w") s = 60;
+      else s = 0;
+      if (s > bs) { bs = s; best = a; }
+    });
+    return bs > 0 ? best : null;
+  }
+  function reason(a, solver) {
+    var tail = solver ? " This keeps a winning path open." : "";
+    if (a.k === "draw") return "Draw from the stock." + tail;
+    if (a.k === "recycle") return "Turn the waste back over and go again." + tail;
+    if (a.to.p === "f") return "Send it up to the foundation." + tail;
+    if (a.from.p === "t" && G.st.t[a.from.i].c.length - a.n === G.st.t[a.from.i].d && G.st.t[a.from.i].d > 0) return "Move these to uncover a face-down card." + tail;
+    if (a.from.p === "w") return "Play the waste card onto the table." + tail;
+    return "Rearrange to open things up." + tail;
+  }
+  function cardOfSource(a) {
+    if (a.k !== "mv") return null; var st = G.st;
+    if (a.from.p === "w") return [st.w[st.w.length - 1]];
+    if (a.from.p === "f") return [a.from.i * 13 + st.f[a.from.i] - 1];
+    var col = st.t[a.from.i]; return col.c.slice(col.c.length - a.n);
+  }
+  function showHint(a, dest) {
+    clearHint(true);
+    if (a.k !== "mv") { pileEls.stock.classList.add("hint-src"); return; }
+    cardOfSource(a).forEach(function (c) { els[c].classList.add("hint-src"); });
+    if (dest) {
+      var tgt = a.to.p === "f" ? (G.st.f[a.to.i] ? els[a.to.i * 13 + G.st.f[a.to.i] - 1] : pileEls.f[a.to.i]) : (G.st.t[a.to.i].c.length ? els[G.st.t[a.to.i].c[G.st.t[a.to.i].c.length - 1]] : pileEls.t[a.to.i]);
+      tgt.classList.add("hint-dst");
+    }
+  }
+  function clearHint(keep) { board && board.querySelectorAll(".hint-src,.hint-dst").forEach(function (e) { e.classList.remove("hint-src", "hint-dst"); }); if (!keep) { hintAct = null; } }
+
+  /* ---------- rescue shuffle: reshuffle only cards you've never seen, and only into a position with a verified win ---------- */
+  function rescue() {
+    if (G.status !== "playing") return;
+    var left = MODES[G.mode].rescues - G.rescues; if (left <= 0) { say("No shuffles left in this mode."); return; }
+    busy = true; btn.shuffle.classList.add("thinking"); say("Shuffling the cards you haven't seen yet, without losing your progress…");
+    ask({ kind: "rescue", st: G.st, known: G.known, seed: (Date.now() & 0xffffff), tries: 10, nodes: 40000, ms: 900 }, function (r) {
+      busy = false; btn.shuffle.classList.remove("thinking");
+      if (!r) { say("Couldn't find a winning shuffle this time. Your game is unchanged. Try Undo or Restart."); paint(); return; }
+      hist.push(snap()); fut = []; G.st = r.st; G.rescues++; G.assisted = true; G.rev++; clearHint();
+      board.classList.add("reshuffle"); setTimeout(function () { board.classList.remove("reshuffle"); }, 700);
+      layout(); persist(); say("Shuffled. There's a winning path from here.");
+    }, function () { return null; });
+  }
+
+  /* ---------- finishing: when everything is face up, play it all home, one card at a time ---------- */
+  function canFinish() { var st = G.st; if (st.s.length || st.w.length) return false; for (var i = 0; i < 7; i++) if (st.t[i].d > 0) return false; return !SOL.won(st); }
+  function finish() {
+    if (!canFinish()) return; finishing = true; say("Finishing…");
+    (function step() {
+      if (G.status !== "playing") { finishing = false; return; }
+      var st = G.st, best = null, low = 99;
+      for (var i = 0; i < 7; i++) { var col = st.t[i]; if (!col.c.length) continue; var c = col.c[col.c.length - 1]; if (SOL.fitsFound(c, st.f) && SOL.rank(c) < low) { low = SOL.rank(c); best = { k: "mv", from: { p: "t", i: i }, to: { p: "f", i: SOL.suit(c) }, n: 1 }; } }
+      if (!best) { finishing = false; paint(); return; }
+      commit(best); setTimeout(step, reduce ? 0 : 90);
+    })();
+  }
+
+  /* ---------- winning: the classic bouncing-card cascade ---------- */
+  function win() {
+    G.status = "won"; clearInterval(timerT);
+    var rec = load("records") || {}, m = rec[G.mode] || { wins: 0, assistedWins: 0, best: null };
+    if (!G.counted) { if (G.assisted || G.hints) m.assistedWins++; else m.wins++; if (!G.assisted && !G.hints && (m.best === null || G.secs < m.best)) m.best = G.secs; rec[G.mode] = m; save("records", rec); G.counted = true; }
+    say("You won! " + G.moves + " moves in " + fmt(G.secs) + ". Score " + score() + ".");
+    setTimeout(cascade, 400);
+  }
+  function cascade() {
+    var wrap = document.createElement("div"); wrap.className = "sol-win";
+    wrap.innerHTML = '<div class="sol-win-card"><p class="sol-win-h">You did it!</p><p>' + G.moves + " moves · " + fmt(G.secs) + " · score " + score() + '</p><button type="button" class="btn">Deal again</button></div>';
+    root.appendChild(wrap); wrap.querySelector("button").addEventListener("click", function () { wrap.remove(); newGame(G.mode); });
+    if (reduce) return;
+    var cv = document.createElement("canvas"), W = board.clientWidth, H = board.clientHeight, dpr = Math.min(2, devicePixelRatio || 1);
+    cv.width = W * dpr; cv.height = H * dpr; cv.className = "sol-cascade"; board.appendChild(cv);
+    var ctx = cv.getContext("2d"); ctx.scale(dpr, dpr);
+    var imgs = {}, queue = [];
+    for (var r = 13; r >= 1; r--) for (var s = 0; s < 4; s++) queue.push(s * 13 + r - 1);
+    queue.forEach(function (c) { var im = new Image(); im.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(faceSVG(c).replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ')); imgs[c] = im; });
+    var cur = null, n = 0, frames = 0;
+    (function fly() {
+      if (!cv.isConnected) return;
+      if (!cur) { if (n >= queue.length) { setTimeout(function () { cv.remove(); }, 1500); return; }
+        var c = queue[n++]; cur = { c: c, x: M.x(3 + SOL.suit(c)), y: M.top, vx: (Math.random() < .5 ? -1 : 1) * (2 + Math.random() * 4), vy: -Math.random() * 6 }; }
+      cur.vy += .45; cur.x += cur.vx; cur.y += cur.vy;
+      if (cur.y + M.ch > H) { cur.y = H - M.ch; cur.vy *= -.72; }
+      if (imgs[cur.c].complete) ctx.drawImage(imgs[cur.c], cur.x, cur.y, M.cw, M.ch);
+      if (cur.x < -M.cw || cur.x > W) cur = null;
+      if (++frames < 6000) requestAnimationFrame(fly);
+    })();
+  }
+
+  /* ---------- the "Play me" invitation ---------- */
+  var play = host.querySelector(".sol-play");
+  function start() {
+    build();
+    if (!restore()) G = blank("easy", pickIdx("easy"));
+    layout(); if (!hist.length && G.moves === 0) dealIn(); tick();
+    if (G.status === "won") say("Last game: won. Tap New game to play again.");
+    host.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }
+  if (play) play.addEventListener("click", start);
+  window.__sol = { faceSVG: faceSVG, get G() { return G; }, play: function (a) { return commit(a); } };
 })();
 
 

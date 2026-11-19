@@ -392,7 +392,7 @@ html.hero-go .hero-sky .cl.drop{animation:clDrop .9s cubic-bezier(.3,.1,.2,1) ca
 .logo:hover .lm-mark,.logo:focus-visible .lm-mark{fill:#ceff32!important;filter:drop-shadow(0 0 8px rgba(206,255,50,.8))}
 
 /* the blooming daisy stands big right on the far edge of the daisy field, covering where it ends */
-html body .hero .hero-daisy{left:clamp(240px,56vw,1000px)!important;top:auto!important;bottom:-7%!important;margin-left:0!important;translate:-50% 0!important;width:clamp(220px,24vw,460px)!important;z-index:3!important}
+html body .hero .hero-daisy{left:clamp(240px,56vw,1000px)!important;top:auto!important;bottom:-7%!important;margin-left:-10px!important;translate:-50% 0!important;width:clamp(220px,24vw,460px)!important;z-index:3!important}
 @media (max-width:899px){html body .hero .hero-daisy{left:auto!important;right:-6%!important;translate:0 0!important;width:46vw!important}}
 
 /* phone + tablet: the same lavender-to-pink gradient as desktop, and the headline always fits */
@@ -401,4 +401,24 @@ html body .hero .hero-daisy{left:clamp(240px,56vw,1000px)!important;top:auto!imp
   .hero-copy,.hero-stage{background:transparent!important}
   .hero h1{font-size:clamp(40px,13.6vw,110px)!important;margin-right:0!important}
   .hero h1 .w1{white-space:nowrap}
+}
+
+/* tablets (600-899px): photo first, then the words, like a phone, so nothing overlaps */
+@media (min-width:600px) and (max-width:899px){
+  .hero{grid-template-columns:1fr!important}
+  .hero-stage{order:-1;padding:96px 28px 24px!important}
+  .hero-figure{width:min(400px,62%)!important;margin:0 auto}
+  .hero-photo{aspect-ratio:1!important}
+  .hero-tag{left:50%!important;bottom:-14px!important;translate:-50% 0;white-space:nowrap}
+  .hero-sun{width:min(420px,60vw)!important;top:4%!important;left:4%!important}
+  .hero-copy{padding:34px 36px 64px!important}
+}
+/* MEMORABLE (in Monoton, a very wide face) always fits the screen */
+@media (max-width:899px){.hero h1 .w2{font-size:min(1em,8.6vw)!important}}
+
+/* small laptops (900-1199px): smaller words and a smaller photo so they never collide */
+@media (min-width:900px) and (max-width:1199px){
+  .hero h1{font-size:min(8.2vw,13svh)!important;margin-right:0!important}
+  .hero h1 .w2{font-size:.82em!important}
+  html body .hero-figure{height:min(74svh,84%)!important;right:-3%!important}
 }
