@@ -3043,6 +3043,21 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
 .sol-win-card{margin-top:clamp(140px,22vw,260px)}
 @media (prefers-reduced-motion:reduce){.sol-yay{animation:none}}
 .sol-fan{cursor:pointer}.sol-fan:hover i:nth-child(3){translate:-50% -16px}
+/* the game opens softly: the room dims and blurs, the table floats up and settles, stars and sparkles fly out */
+.sol-overlay{transition:opacity .45s ease,backdrop-filter .6s ease;backdrop-filter:blur(0)}
+.sol-overlay.show{backdrop-filter:blur(6px)}
+.sol-overlay .sol-table{opacity:0;transform:translateY(40px) scale(.9);transition:opacity .5s ease .05s,transform .8s cubic-bezier(.16,1.15,.3,1) .05s;animation:none}
+.sol-overlay.show .sol-table{opacity:1;transform:none}
+.sol-overlay .sol-bar{opacity:0;transform:translateY(16px);transition:opacity .4s ease .45s,transform .5s cubic-bezier(.2,1.3,.4,1) .45s}
+.sol-overlay.show .sol-bar{opacity:1;transform:none}
+.sol-burst{position:fixed;left:50%;top:50%;width:0;height:0;z-index:6000;pointer-events:none}
+.sol-burst img{position:absolute;left:0;top:0;max-width:none;translate:-50% -50%;opacity:0;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25));animation:solStar 2.1s cubic-bezier(.15,.8,.3,1) var(--dl) forwards}
+@keyframes solStar{0%{opacity:0;transform:translate(0,0) scale(.2) rotate(0)}15%{opacity:1}75%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1) rotate(var(--r))}}
+.sol-burst b{position:absolute;left:0;top:0;width:var(--z);height:var(--z);translate:-50% -50%;background:#fff;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);filter:drop-shadow(0 0 6px #fff);opacity:0;animation:solSpk 1.9s ease-out var(--dl) forwards}
+.sol-burst b:nth-child(3n){background:#ceff32}.sol-burst b:nth-child(3n+1){background:#fe7bbf}.sol-burst b:nth-child(5n){background:#ffb35e}
+@keyframes solSpk{0%{opacity:0;transform:translate(0,0) scale(.3)}30%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(160deg)}}
+@media (prefers-reduced-motion:reduce){.sol-overlay .sol-table,.sol-overlay .sol-bar{transition:opacity .2s;transform:none}}
+.sol-burst{z-index:6500}
 
 
 </style>
@@ -5116,7 +5131,7 @@ window.__mail = function () {
   b.setAttribute("aria-label", "Click me to let the bunny out");
   function place() {
     var h = hero.getBoundingClientRect(), d = dz.getBoundingClientRect();
-    b.style.left = (d.left - h.left + d.width * .5) + "px"; b.style.top = (d.top - h.top + d.height * .3) + "px";   /* sits right on the flower head */
+    b.style.left = (d.left - h.left + d.width * .5) + "px"; b.style.top = (d.top - h.top + d.height * .46) + "px";   /* sits right on the flower head */
   }
   function go() {
     if (window.__daisyGo) return; window.__daisyGo = true;
@@ -5124,6 +5139,12 @@ window.__mail = function () {
     if (window.__poof) window.__poof(dz);
   }
   b.addEventListener("click", go); dz.addEventListener("click", go);
+  /* a click anywhere near the flower counts too */
+  hero.addEventListener("click", function (e) {
+    if (window.__daisyGo || !root.classList.contains("daisy-calling")) return;
+    var d = dz.getBoundingClientRect(), pad = Math.max(80, d.width * .35);
+    if (e.clientX > d.left - pad && e.clientX < d.right + pad && e.clientY > d.top - pad && e.clientY < d.bottom + pad) go();
+  });
   /* if the bunny comes out any other way (they scrolled first), the button and glow go away too */
   function bunnyOut() { return root.classList.contains("bunny-on") || root.classList.contains("vx-past") || !!document.querySelector(".rabbit.go") || !document.querySelector(".rabbit"); }
   function hide() { root.classList.remove("daisy-calling"); if (b.isConnected) { b.classList.add("bye"); setTimeout(function () { b.remove(); }, 500); } }
@@ -5845,12 +5866,24 @@ var SOL_DEALS = {"easy":["c_2?H@CI6AMB8=5>OS9RZLWaF14J^VG;`<N\\UK3TE]QXYDP07:b["
     var first = !overlay;
     if (first) build();
     overlay.hidden = false; document.documentElement.classList.add("sol-on");
-    requestAnimationFrame(function () { overlay.classList.add("show"); });
+    overlay.classList.remove("show"); void overlay.offsetWidth;
+    requestAnimationFrame(function () { overlay.classList.add("show"); sparkle(); });
     if (first) { if (!restore()) G = blank("easy", pickIdx("easy")); }
     layout(); if (first && !hist.length && G.moves === 0) dealIn(); tick();
     if (G.status === "won") say("Last game: won. Tap New game to play again.");
     setTimeout(function () { var x = overlay.querySelector(".sol-x"); if (x) x.focus({ preventScroll: true }); }, 50);
     if (play) play.innerHTML = 'Back to my game <span aria-hidden="true">&#9824;</span>';
+  }
+  /* stars and sparkles burst out as the table opens */
+  function sparkle() {
+    if (reduce) return;
+    var B = document.createElement("div"); B.className = "sol-burst"; B.setAttribute("aria-hidden", "true");
+    var stars = ["gem-star3-pink", "cr-star-yellow", "gem-star-glitter", "gem-star3-blue", "cr-star-rpink", "holo-star-teal"], h = "";
+    for (var k = 0; k < 14; k++) { var an = k / 14 * Math.PI * 2 + Math.random() * .4, d = 34 + Math.random() * 26;
+      h += '<img src="assets/proj/' + stars[k % stars.length] + '.webp" alt="" style="--dx:' + (Math.cos(an) * d).toFixed(1) + 'vw;--dy:' + (Math.sin(an) * d * .7).toFixed(1) + 'vh;width:' + (56 + Math.random() * 60).toFixed(0) + 'px;--dl:' + (Math.random() * .25).toFixed(2) + 's;--r:' + Math.round(Math.random() * 540 - 270) + 'deg">'; }
+    for (k = 0; k < 40; k++) { an = Math.random() * Math.PI * 2; d = 18 + Math.random() * 40;
+      h += '<b style="--dx:' + (Math.cos(an) * d).toFixed(1) + 'vw;--dy:' + (Math.sin(an) * d * .7).toFixed(1) + 'vh;--z:' + (10 + Math.random() * 22).toFixed(0) + 'px;--dl:' + (Math.random() * .6).toFixed(2) + 's"></b>'; }
+    B.innerHTML = h; document.body.appendChild(B); setTimeout(function () { B.remove(); }, 2600);
   }
   function close() {
     if (!overlay) return;

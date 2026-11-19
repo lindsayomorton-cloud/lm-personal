@@ -97,3 +97,18 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
 .sol-win-card{margin-top:clamp(140px,22vw,260px)}
 @media (prefers-reduced-motion:reduce){.sol-yay{animation:none}}
 .sol-fan{cursor:pointer}.sol-fan:hover i:nth-child(3){translate:-50% -16px}
+/* the game opens softly: the room dims and blurs, the table floats up and settles, stars and sparkles fly out */
+.sol-overlay{transition:opacity .45s ease,backdrop-filter .6s ease;backdrop-filter:blur(0)}
+.sol-overlay.show{backdrop-filter:blur(6px)}
+.sol-overlay .sol-table{opacity:0;transform:translateY(40px) scale(.9);transition:opacity .5s ease .05s,transform .8s cubic-bezier(.16,1.15,.3,1) .05s;animation:none}
+.sol-overlay.show .sol-table{opacity:1;transform:none}
+.sol-overlay .sol-bar{opacity:0;transform:translateY(16px);transition:opacity .4s ease .45s,transform .5s cubic-bezier(.2,1.3,.4,1) .45s}
+.sol-overlay.show .sol-bar{opacity:1;transform:none}
+.sol-burst{position:fixed;left:50%;top:50%;width:0;height:0;z-index:6000;pointer-events:none}
+.sol-burst img{position:absolute;left:0;top:0;max-width:none;translate:-50% -50%;opacity:0;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25));animation:solStar 2.1s cubic-bezier(.15,.8,.3,1) var(--dl) forwards}
+@keyframes solStar{0%{opacity:0;transform:translate(0,0) scale(.2) rotate(0)}15%{opacity:1}75%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1) rotate(var(--r))}}
+.sol-burst b{position:absolute;left:0;top:0;width:var(--z);height:var(--z);translate:-50% -50%;background:#fff;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);filter:drop-shadow(0 0 6px #fff);opacity:0;animation:solSpk 1.9s ease-out var(--dl) forwards}
+.sol-burst b:nth-child(3n){background:#ceff32}.sol-burst b:nth-child(3n+1){background:#fe7bbf}.sol-burst b:nth-child(5n){background:#ffb35e}
+@keyframes solSpk{0%{opacity:0;transform:translate(0,0) scale(.3)}30%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(160deg)}}
+@media (prefers-reduced-motion:reduce){.sol-overlay .sol-table,.sol-overlay .sol-bar{transition:opacity .2s;transform:none}}
+.sol-burst{z-index:6500}

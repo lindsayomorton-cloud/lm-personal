@@ -1522,7 +1522,7 @@ window.__mail = function () {
   b.setAttribute("aria-label", "Click me to let the bunny out");
   function place() {
     var h = hero.getBoundingClientRect(), d = dz.getBoundingClientRect();
-    b.style.left = (d.left - h.left + d.width * .5) + "px"; b.style.top = (d.top - h.top + d.height * .3) + "px";   /* sits right on the flower head */
+    b.style.left = (d.left - h.left + d.width * .5) + "px"; b.style.top = (d.top - h.top + d.height * .46) + "px";   /* sits right on the flower head */
   }
   function go() {
     if (window.__daisyGo) return; window.__daisyGo = true;
@@ -1530,6 +1530,12 @@ window.__mail = function () {
     if (window.__poof) window.__poof(dz);
   }
   b.addEventListener("click", go); dz.addEventListener("click", go);
+  /* a click anywhere near the flower counts too */
+  hero.addEventListener("click", function (e) {
+    if (window.__daisyGo || !root.classList.contains("daisy-calling")) return;
+    var d = dz.getBoundingClientRect(), pad = Math.max(80, d.width * .35);
+    if (e.clientX > d.left - pad && e.clientX < d.right + pad && e.clientY > d.top - pad && e.clientY < d.bottom + pad) go();
+  });
   /* if the bunny comes out any other way (they scrolled first), the button and glow go away too */
   function bunnyOut() { return root.classList.contains("bunny-on") || root.classList.contains("vx-past") || !!document.querySelector(".rabbit.go") || !document.querySelector(".rabbit"); }
   function hide() { root.classList.remove("daisy-calling"); if (b.isConnected) { b.classList.add("bye"); setTimeout(function () { b.remove(); }, 500); } }

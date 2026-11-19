@@ -443,12 +443,24 @@
     var first = !overlay;
     if (first) build();
     overlay.hidden = false; document.documentElement.classList.add("sol-on");
-    requestAnimationFrame(function () { overlay.classList.add("show"); });
+    overlay.classList.remove("show"); void overlay.offsetWidth;
+    requestAnimationFrame(function () { overlay.classList.add("show"); sparkle(); });
     if (first) { if (!restore()) G = blank("easy", pickIdx("easy")); }
     layout(); if (first && !hist.length && G.moves === 0) dealIn(); tick();
     if (G.status === "won") say("Last game: won. Tap New game to play again.");
     setTimeout(function () { var x = overlay.querySelector(".sol-x"); if (x) x.focus({ preventScroll: true }); }, 50);
     if (play) play.innerHTML = 'Back to my game <span aria-hidden="true">&#9824;</span>';
+  }
+  /* stars and sparkles burst out as the table opens */
+  function sparkle() {
+    if (reduce) return;
+    var B = document.createElement("div"); B.className = "sol-burst"; B.setAttribute("aria-hidden", "true");
+    var stars = ["gem-star3-pink", "cr-star-yellow", "gem-star-glitter", "gem-star3-blue", "cr-star-rpink", "holo-star-teal"], h = "";
+    for (var k = 0; k < 14; k++) { var an = k / 14 * Math.PI * 2 + Math.random() * .4, d = 34 + Math.random() * 26;
+      h += '<img src="assets/proj/' + stars[k % stars.length] + '.webp" alt="" style="--dx:' + (Math.cos(an) * d).toFixed(1) + 'vw;--dy:' + (Math.sin(an) * d * .7).toFixed(1) + 'vh;width:' + (56 + Math.random() * 60).toFixed(0) + 'px;--dl:' + (Math.random() * .25).toFixed(2) + 's;--r:' + Math.round(Math.random() * 540 - 270) + 'deg">'; }
+    for (k = 0; k < 40; k++) { an = Math.random() * Math.PI * 2; d = 18 + Math.random() * 40;
+      h += '<b style="--dx:' + (Math.cos(an) * d).toFixed(1) + 'vw;--dy:' + (Math.sin(an) * d * .7).toFixed(1) + 'vh;--z:' + (10 + Math.random() * 22).toFixed(0) + 'px;--dl:' + (Math.random() * .6).toFixed(2) + 's"></b>'; }
+    B.innerHTML = h; document.body.appendChild(B); setTimeout(function () { B.remove(); }, 2600);
   }
   function close() {
     if (!overlay) return;
