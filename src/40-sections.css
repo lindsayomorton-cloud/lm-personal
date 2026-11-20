@@ -1202,3 +1202,6 @@ html.in-vx .drift{opacity:0!important;visibility:hidden!important}
 .mgr-rev mark{background:#ffe97a;color:inherit;font-weight:700;padding:0 2px;border-radius:3px}
 .mgr-rev figcaption{margin-top:10px;font-size:12px;color:#4b5a57}
 @media (max-width:760px){.mgr-rev .mr-cards{grid-template-columns:1fr}.mgr-rev blockquote{rotate:none!important}}
+
+/* Pollinate film as a video loop on phones */
+.slot-stage .slot-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#0b110d;pointer-events:none}

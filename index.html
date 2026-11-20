@@ -2734,6 +2734,9 @@ html.in-vx .drift{opacity:0!important;visibility:hidden!important}
 .mgr-rev figcaption{margin-top:10px;font-size:12px;color:#4b5a57}
 @media (max-width:760px){.mgr-rev .mr-cards{grid-template-columns:1fr}.mgr-rev blockquote{rotate:none!important}}
 
+/* Pollinate film as a video loop on phones */
+.slot-stage .slot-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#0b110d;pointer-events:none}
+
 /* ============ Pop-up windows ============ */
 .modal{position:fixed;inset:0;display:grid;place-items:center;padding:16px;background:rgba(18,8,36,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:fadeIn .3s ease}
 .modal[hidden]{display:none}
@@ -4314,7 +4317,9 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   function text(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
   function slotHtml(p, i) {
     var stage;
-    if (p.preview) stage = '<iframe data-src="' + p.preview + (/vans-cove/.test(p.preview) ? "?embed=room" : /wildkind\/showcase/.test(p.preview) ? "?embed=1" : "") + '" title="' + text(p.name) + ' preview" tabindex="-1" aria-hidden="true"></iframe>' + (p.site ? "" : '<span class="slot-cue">Open preview ↗</span>');
+    /* on phones, the Pollinate film is a light video loop instead of the full 3 MB animation */
+    if (p.preview && /pollinate\/film/.test(p.preview) && matchMedia("(max-width:700px)").matches) stage = '<video class="slot-video" src="assets/proj/pollinate-loop.mp4" poster="assets/proj/pollinate-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>';
+    else if (p.preview) stage = '<iframe data-src="' + p.preview + (/vans-cove/.test(p.preview) ? "?embed=room" : /wildkind\/showcase/.test(p.preview) ? "?embed=1" : "") + '" title="' + text(p.name) + ' preview" tabindex="-1" aria-hidden="true"></iframe>' + (p.site ? "" : '<span class="slot-cue">Open preview ↗</span>');
     else {
       var bg = p.koi ? KOI_SVG : (p.pics && p.pics[0] ? '<img class="slot-bg" src="' + p.pics[0][0] + '" alt="" loading="lazy">' : "");
       if (!bg && !p.logo) bg = '<span class="slot-name">' + text(p.name) + '</span>';

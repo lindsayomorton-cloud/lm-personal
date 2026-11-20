@@ -550,7 +550,9 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   function text(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
   function slotHtml(p, i) {
     var stage;
-    if (p.preview) stage = '<iframe data-src="' + p.preview + (/vans-cove/.test(p.preview) ? "?embed=room" : /wildkind\/showcase/.test(p.preview) ? "?embed=1" : "") + '" title="' + text(p.name) + ' preview" tabindex="-1" aria-hidden="true"></iframe>' + (p.site ? "" : '<span class="slot-cue">Open preview ↗</span>');
+    /* on phones, the Pollinate film is a light video loop instead of the full 3 MB animation */
+    if (p.preview && /pollinate\/film/.test(p.preview) && matchMedia("(max-width:700px)").matches) stage = '<video class="slot-video" src="assets/proj/pollinate-loop.mp4" poster="assets/proj/pollinate-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>';
+    else if (p.preview) stage = '<iframe data-src="' + p.preview + (/vans-cove/.test(p.preview) ? "?embed=room" : /wildkind\/showcase/.test(p.preview) ? "?embed=1" : "") + '" title="' + text(p.name) + ' preview" tabindex="-1" aria-hidden="true"></iframe>' + (p.site ? "" : '<span class="slot-cue">Open preview ↗</span>');
     else {
       var bg = p.koi ? KOI_SVG : (p.pics && p.pics[0] ? '<img class="slot-bg" src="' + p.pics[0][0] + '" alt="" loading="lazy">' : "");
       if (!bg && !p.logo) bg = '<span class="slot-name">' + text(p.name) + '</span>';
