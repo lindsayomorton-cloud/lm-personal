@@ -3763,26 +3763,19 @@ var ART = [
 var FRAMES = { lime: "assets/proj/frame-lime-orig.webp", blush: "assets/proj/frame-blush-orig.webp", oval: "assets/proj/frame-oval-orig.webp", pink: "assets/proj/pink-frame-orig.webp" };
 
 /* ===== master volume: every sound on the site is scaled by one volume knob the visitor controls =====
-   iPhones and iPads ignore audio.volume, so there each sound is routed through a Web Audio gain instead,
-   and "Sound off" mutes every sound outright (that part works everywhere) */
+   "Sound off" mutes every sound outright (that part works everywhere) */
 (function () {
   var master = .8; try { var v = parseFloat(localStorage.getItem("lmVolume")); if (!isNaN(v)) master = Math.min(1, Math.max(0, v)); } catch (e) {}
   var d = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, "volume"), all = new Set(), muted = false;
   try { muted = localStorage.getItem("doorSound") === "off"; } catch (e) {}
   if (!d || !d.set) return;
-  var locked = false; try { var pr = new Audio(); d.set.call(pr, .5); locked = Math.abs(d.get.call(pr) - .5) > .01 || /[?&]ioslock/.test(location.search); } catch (e) {}
-  var AC = window.AudioContext || window.webkitAudioContext, ctx = null;
-  function unlock() { if (!ctx && locked && AC) try { ctx = new AC(); } catch (e) {} if (ctx && ctx.state !== "running") { var r = ctx.resume(); if (r && r.catch) r.catch(function () {}); } }
-  if (locked && AC) ["touchend", "pointerdown", "click", "keydown"].forEach(function (ev) { addEventListener(ev, unlock, true); });
-  function route(a) {
-    if (!locked || !AC || a.__gain || a.__noRoute) return;
-    try { if (!ctx) ctx = new AC(); var src = ctx.createMediaElementSource(a), g = ctx.createGain(); src.connect(g); g.connect(ctx.destination); a.__gain = g; }
-    catch (e) { a.__noRoute = true; }
-  }
+  var locked = false; try { var pr = new Audio(); d.set.call(pr, .5); locked = Math.abs(d.get.call(pr) - .5) > .01; } catch (e) {}
+  /* iPhones and iPads: audio.volume can't be changed there, and routing sounds through Web Audio made them echo,
+     so on those devices the volume steps simply turn sound off at the bottom and back on above it */
   function apply(a) {
     var lv = Math.min(1, Math.max(0, (a.__baseVol === undefined ? 1 : a.__baseVol) * master));
-    if (a.__gain) { a.__gain.gain.value = lv; d.set.call(a, 1); } else d.set.call(a, lv);
-    a.muted = muted;
+    d.set.call(a, lv);
+    a.muted = a.__warm ? true : (muted || (locked && master < .05));   /* a silent Safari warm-up stays silent */
   }
   Object.defineProperty(HTMLMediaElement.prototype, "volume", { configurable: true,
     get: function () { return this.__baseVol === undefined ? d.get.call(this) : this.__baseVol; },
@@ -3790,10 +3783,12 @@ var FRAMES = { lime: "assets/proj/frame-lime-orig.webp", blush: "assets/proj/fra
   var play = HTMLMediaElement.prototype.play;
   HTMLMediaElement.prototype.play = function () {
     if (this.__baseVol === undefined) this.__baseVol = d.get.call(this);
-    all.add(this); route(this); unlock(); apply(this);
+    if (this.__warmCall) this.__warmCall = false; else this.__warm = false;   /* a real play during a warm-up takes over */
+    all.add(this); apply(this);
     return play.apply(this, arguments);
   };
   window.__getVolume = function () { return master; };
+  window.__reapply = function (a) { apply(a); };
   window.__setVolume = function (v) {
     master = Math.min(1, Math.max(0, v)); try { localStorage.setItem("lmVolume", master); } catch (e) {}
     all.forEach(apply);
@@ -5223,7 +5218,8 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
     var all = []; var X = window.__SFX || {}; for (var k in X) all.push(X[k]); if (window.__theme) all.push(window.__theme); if (window.__bmwSong) all.push(window.__bmwSong);
     all.forEach(function (a) {
       if (!a || !a.paused) return;
-      try { a.muted = true; var p = a.play(); if (p && p.then) p.then(function () { if (a.muted) { a.pause(); a.currentTime = 0; } a.muted = false; }).catch(function () { a.muted = false; }); else a.muted = false; } catch (e) { a.muted = false; }
+      function done() { a.__warm = false; if (window.__reapply) window.__reapply(a); else a.muted = false; }
+      try { a.__warm = true; a.__warmCall = true; a.muted = true; var p = a.play(); if (p && p.then) p.then(function () { if (a.__warm) { a.pause(); a.currentTime = 0; } done(); }).catch(done); else { a.pause(); a.currentTime = 0; done(); } } catch (e) { done(); }
     });
     if (window.__bmwRetry) window.__bmwRetry();
   }
