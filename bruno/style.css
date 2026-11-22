@@ -1504,3 +1504,9 @@ nav.ft2-col>a:hover::after{opacity:1;transform:none}
   .mp-hl{animation:mpHl linear both;animation-timeline:view();animation-range:entry 20% cover 45%}
 }
 @keyframes mpHl{from{background-size:0% .42em}to{background-size:100% .42em}}
+/* Parents page: resource cards are links */
+a.pg-link{text-decoration:none;color:inherit;transition:transform .25s,box-shadow .25s}
+a.pg-link:hover{transform:translateY(-3px);box-shadow:0 24px 50px rgba(15,77,146,.14)}
+.pg-cards:has(.pg-link){grid-template-columns:repeat(3,1fr)}
+@media (max-width:900px){.pg-cards:has(.pg-link){grid-template-columns:1fr}}
+.phero .ph-copy .btn{margin-top:22px}
