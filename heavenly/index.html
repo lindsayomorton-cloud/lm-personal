@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Heavenly Donut Co. | Handmade Daily in Birmingham, AL</title>
+<meta name="description" content="Fresh, handmade doughnuts, kolaches and coffee in Birmingham, AL. Two locations: Cahaba River Road and Homewood.">
+<meta property="og:title" content="The Heavenly Donut Co. | Handmade Daily in Birmingham, AL">
+<meta property="og:description" content="Fresh, handmade doughnuts, kolaches and coffee in Birmingham, AL. Two locations: Cahaba River Road and Homewood.">
+<meta property="og:image" content="assets/images/products/donut-box-open.webp">
+<link rel="icon" href="assets/images/brand/logo.avif">
+<script src="js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="js/image-slot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Bitter:wght@700;800&family=Pacifico&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+html{background:#6cc3ee}
+body{margin:0;background:transparent}
+a{color:#3d240c;text-decoration:none}
+a:hover{color:#0f5f6c}
+@keyframes hvDrift{from{transform:translateX(0)}to{transform:translateX(var(--dx,60px))}}
+@keyframes hvBob{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-16px) rotate(calc(var(--r,0deg) + 4deg))}}
+@keyframes hvRise{0%{transform:translate(0,105vh) rotate(-20deg) scale(.8)}35%{transform:translate(3vw,60vh) rotate(40deg) scale(.95)}70%{transform:translate(-2vw,22vh) rotate(110deg) scale(1)}100%{transform:translate(2vw,-30vh) rotate(180deg) scale(1)}}
+@keyframes hvHalo{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-10px) rotate(-5deg)}}
+@keyframes hvRays{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important}}
+body{overflow-x:clip}
+</style>
+</helmet>
+<section data-screen-label="Hero" ref="{{ rootRef }}" style="position:relative;z-index:6;-webkit-mask-image:linear-gradient(180deg,#000 90%,transparent 100%);mask-image:linear-gradient(180deg,#000 90%,transparent 100%);height:max(100svh,640px);overflow:hidden;font-family:'Bricolage Grotesque',sans-serif;color:#3d240c;background:linear-gradient(180deg,rgba(108,195,238,0) 62%,#6cc3ee 100%),radial-gradient(40% 45% at 8% 4%,rgba(255,226,150,.85) 0%,rgba(255,226,150,0) 100%),radial-gradient(70% 80% at 30% 55%,#e4f5fd 0%,#a8dcf5 34%,#7cc8ef 70%,#6cc0ec 100%);display:flex;flex-direction:column">
+  {{ rays }}
+  {{ backLayer }}
+  <div style="position:relative;z-index:9;background:#4a2a0c;color:#fff6e6;font-family:'Bitter',serif;font-size:clamp(14px,1.2vw,19px)">
+    <div style="max-width:1440px;margin:0 auto;padding:10px clamp(20px,4vw,56px);display:flex;justify-content:center;align-items:center;gap:8px 36px;flex-wrap:wrap">
+      <sc-for list="{{ locs }}" as="loc" hint-placeholder-count="2">
+        <a href="{{ loc.href }}" style="display:flex;align-items:center;gap:10px;color:#fff6e6;white-space:nowrap" style-hover="color:#ffd84d">
+          <span style="width:9px;height:9px;border-radius:50%;background:{{ loc.dot }};flex:none"></span>
+          <strong style="font-weight:700">{{ loc.name }}</strong>
+          <span style="font-weight:500;color:#ffd27a">{{ loc.status }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+  <header style="position:relative;z-index:8;padding:clamp(24px,3.4vw,40px) clamp(20px,2.4vw,44px) 0">
+    <div style="max-width:1760px;margin:0 auto 0 calc(clamp(180px,18vw,340px) * .5);display:flex;align-items:center;gap:12px 20px;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:clamp(18px,1.8vw,28px);padding:clamp(10px,1vw,16px) clamp(10px,1vw,16px) clamp(10px,1vw,16px) 20px;box-shadow:0 12px 30px rgba(15,60,90,.12)">
+      <a href="#" aria-label="The Heavenly Donut Co. home" style="display:flex;align-items:center;height:clamp(48px,4.4vw,72px);margin:clamp(-70px,-5vw,-40px) 0 clamp(-110px,-7.6vw,-60px) calc(-20px - clamp(180px,18vw,340px) * .5)"><img src="assets/images/brand/logo.avif" alt="The Heavenly Donut Co." style="width:clamp(180px,18vw,340px);height:auto;filter:drop-shadow(0 6px 10px rgba(15,60,90,.25))"></a>
+      <nav aria-label="Main" style="display:flex;align-items:center;gap:clamp(2px,1vw,18px);flex-wrap:nowrap;margin-left:auto;min-width:0">
+        <a href="menu.html" style="font-family:'Bitter',serif;font-weight:700;font-size:clamp(16px,1.35vw,21px);color:#3d240c;padding:10px clamp(8px,1vw,16px);white-space:nowrap;border-radius:10px" style-hover="color:#0f5f6c;background:rgba(15,95,108,.08)">Menu</a>
+        <a href="#locations" style="font-family:'Bitter',serif;font-weight:700;font-size:clamp(16px,1.35vw,21px);color:#3d240c;padding:10px clamp(8px,1vw,16px);white-space:nowrap;border-radius:10px" style-hover="color:#0f5f6c;background:rgba(15,95,108,.08)">Locations</a>
+        <a href="food-truck.html" style="font-family:'Bitter',serif;font-weight:700;font-size:clamp(16px,1.35vw,21px);color:#3d240c;padding:10px clamp(8px,1vw,16px);white-space:nowrap;border-radius:10px" style-hover="color:#0f5f6c;background:rgba(15,95,108,.08)">Food Truck</a>
+        <a href="our-story.html" style="font-family:'Bitter',serif;font-weight:700;font-size:clamp(16px,1.35vw,21px);color:#3d240c;padding:10px clamp(8px,1vw,16px);white-space:nowrap;border-radius:10px" style-hover="color:#0f5f6c;background:rgba(15,95,108,.08)">Our Story</a>
+        <a href="join-our-team.html" style="font-family:'Bitter',serif;font-weight:700;font-size:clamp(16px,1.35vw,21px);color:#3d240c;padding:10px clamp(8px,1vw,16px);white-space:nowrap;border-radius:10px" style-hover="color:#0f5f6c;background:rgba(15,95,108,.08)">Join Our Team</a>
+      </nav>
+      <a href="https://order.toasttab.com/online/the-heavenly-donut-company-4911-cahaba-river-rd-105" target="_blank" rel="noopener" style="flex:none;font-family:'Bitter',serif;font-weight:700;font-size:clamp(16px,1.35vw,22px);color:#fff;background:#4a2a0c;padding:clamp(12px,1vw,16px) clamp(22px,2vw,40px);border-radius:999px;white-space:nowrap" style-hover="background:#0f5f6c;color:#fff">Order Online</a>
+    </div>
+  </header>
+  <div style="position:relative;z-index:7;flex:1;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(24px,3vw,48px);max-width:1760px;width:100%;margin:0 auto;padding:clamp(10px,2.4vh,40px) clamp(20px,4vw,56px) clamp(20px,4vh,60px);min-height:0;box-sizing:border-box">
+    <div style="flex:1 1 min(100%,300px);min-width:0;position:relative;display:grid;place-items:end center;align-self:stretch">
+      <div ref="{{ donutRef }}" style="position:relative;width:clamp(280px,min(84vh,50vw),960px);aspect-ratio:1;margin-left:clamp(-120px,-6vw,-20px);margin-bottom:clamp(-90px,-7vh,-20px);transition:translate .5s ease-out">
+        {{ donut }}
+      </div>
+    </div>
+    <div style="flex:1 1 min(100%,420px);min-width:0;position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(8px,1.5vh,22px)">
+      <p style="margin:0;display:flex;align-items:center;gap:clamp(14px,1.6vw,28px);font-weight:800;font-size:clamp(13px,min(1.2vw,2vh),19px);letter-spacing:.16em;text-transform:uppercase;color:#0b4a56">Birmingham, AL <span style="width:6px;height:6px;border-radius:50%;background:#ffd84d"></span> Since 2013</p>
+      <h1 style="margin:0;display:flex;flex-direction:column;align-items:center;font-family:'Shrikhand',serif;font-weight:400;font-size:clamp(48px,min(7.2vw,11vh),140px);line-height:.95;color:#4a2a0c;-webkit-text-stroke:clamp(6px,.7vw,12px) #fff;paint-order:stroke fill;filter:drop-shadow(0 8px 12px rgba(15,60,90,.2))">Heavenly<span style="position:relative;display:inline-block;font-family:'Pacifico',cursive;font-size:.8em;line-height:1.2;color:#fff;-webkit-text-stroke:clamp(6px,.6vw,11px) #1fa8ec;paint-order:stroke fill;filter:drop-shadow(0 0 0 #fff) drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 8px 12px rgba(15,60,90,.22));transform:rotate(-3deg);margin-top:-.08em">handmade daily.</span><span style="display:block;width:72%;height:clamp(6px,.6vw,10px);margin-top:.06em;border-radius:50% 50% 50% 50% / 100% 100% 30% 30%;background:#ffd84d;transform:rotate(-1.5deg);box-shadow:0 2px 0 rgba(61,36,12,.08)"></span></h1>
+      <div style="position:relative;margin:clamp(4px,1vh,12px) clamp(30px,3vw,56px) 0"><svg viewBox="0 0 40 40" aria-hidden="true" style="position:absolute;width:clamp(30px,2.8vw,52px);height:auto;top:50%;translate:0 -50%;left:calc(-1 * clamp(28px,2.8vw,50px));transform:rotate(-8deg)"><path d="M20 2 L23 17 L38 20 L23 23 L20 38 L17 23 L2 20 L17 17 Z" fill="#ffde2e" stroke="#e8b400" stroke-width="1"></path></svg><svg viewBox="0 0 40 40" aria-hidden="true" style="position:absolute;width:clamp(30px,2.8vw,52px);height:auto;top:50%;translate:0 -50%;right:calc(-1 * clamp(28px,2.8vw,50px));transform:rotate(10deg)"><path d="M20 2 L23 17 L38 20 L23 23 L20 38 L17 23 L2 20 L17 17 Z" fill="#ffde2e" stroke="#e8b400" stroke-width="1"></path></svg><figure style="position:relative;margin:0;padding:clamp(10px,min(1.4vw,1.8vh),22px) clamp(24px,2.6vw,44px);background:linear-gradient(90deg,#fde6d6,#fff3e8 50%,#fde4dc);clip-path:polygon(0 6%,3% 0,12% 4%,24% 1%,38% 5%,52% 0,66% 4%,80% 1%,94% 5%,100% 2%,99% 30%,100% 62%,98% 96%,86% 100%,72% 96%,58% 100%,44% 97%,30% 100%,16% 96%,4% 100%,1% 70%,0 38%);filter:drop-shadow(0 8px 14px rgba(15,60,90,.15));display:flex;flex-direction:column;align-items:center;gap:6px">
+        <blockquote style="margin:0;white-space:nowrap;font-family:'Bitter',serif;font-style:italic;font-weight:700;font-size:clamp(17px,min(2.2vw,3.6vh),42px);line-height:1.15;color:#3d240c">“These doughnuts are out of this world.”</blockquote>
+        <figcaption style="font-weight:800;font-size:clamp(11px,min(1.1vw,1.8vh),19px);letter-spacing:.16em;text-transform:uppercase;color:#3d240c">— Alton Brown, Food Network</figcaption>
+      </figure></div>
+      
+      <div style="display:flex;flex-direction:column;align-items:center;gap:clamp(4px,.8vh,14px);width:min(100%,600px)">
+        <p style="margin:0;width:100%;display:flex;align-items:center;gap:20px;font-weight:800;font-size:clamp(12px,min(1.15vw,1.9vh),20px);letter-spacing:.18em;text-transform:uppercase;color:#0b4a56"><span style="flex:1;height:2px;background:#3d240c;opacity:.6"></span>Seen in<span style="flex:1;height:2px;background:#3d240c;opacity:.6"></span></p>
+        <div style="display:flex;align-items:center;gap:clamp(18px,2.4vw,40px)">
+          <img src="assets/images/press/food-network-logo.webp" alt="Food Network" style="display:block;height:clamp(48px,min(6vw,9vh),110px);width:auto">
+          <span style="width:2px;height:clamp(32px,min(4vw,6vh),70px);background:#1a4f73"></span>
+          <img src="assets/images/press/travel-channel-logo.webp" alt="Travel Channel" style="display:block;height:clamp(40px,min(5vw,7.5vh),92px);width:auto">
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  {{ frontLayer }}
+  <div style="position:absolute;z-index:10;left:clamp(20px,4vw,56px);bottom:clamp(24px,6vh,72px);width:min(46%,760px);display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(14px,2vw,32px)">
+        <a href="https://order.toasttab.com/online/the-heavenly-donut-company-4911-cahaba-river-rd-105" style="display:flex;align-items:center;gap:10px;background:#ffde2e;color:#3d240c;font-family:'Bitter',serif;font-weight:700;font-size:clamp(17px,min(1.9vw,3vh),32px);padding:clamp(12px,min(1.6vw,2.2vh),26px) clamp(28px,3.4vw,64px);border-radius:999px;box-shadow:0 0 0 clamp(4px,.4vw,7px) #fff,0 14px 26px rgba(15,60,90,.25)" style-hover="background:#ff6fa8;color:#fff">Order Online →</a>
+        <a href="#menu" style="display:flex;align-items:center;gap:14px;background:#fff;color:#3d240c;font-family:'Bitter',serif;font-weight:700;font-size:clamp(17px,min(1.9vw,3vh),32px);padding:clamp(12px,min(1.6vw,2.2vh),26px) clamp(28px,3.4vw,64px);border-radius:999px;box-shadow:0 14px 26px rgba(15,60,90,.2)" style-hover="background:#4a2a0c;color:#fff"><span>See the Menu</span> <svg width="1.5em" height="1.5em" viewBox="0 0 24 24" aria-hidden="true" style="flex:none"><circle cx="12" cy="12" r="8" fill="none" stroke="#e8a35c" stroke-width="7"></circle><circle cx="12" cy="12" r="8" fill="none" stroke="#ff8fbd" stroke-width="5.4"></circle><circle cx="12" cy="12" r="8" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="1.6 3"></circle></svg></a>
+      </div>
+</section>
+<section id="locations" data-bg="#d8f0fd" data-screen-label="Locations" style="position:relative;margin-top:-18vh;overflow:visible;font-family:'Bricolage Grotesque',sans-serif;color:#3d240c;z-index:5;padding:calc(18vh + clamp(24px,3vw,48px)) clamp(16px,4vw,56px) clamp(40px,5vw,72px)">
+  <img loading="lazy" decoding="async" data-par="-0.25" src="assets/images/clouds/cloud-02.webp" alt="" style="position:absolute;left:-10%;top:30%;width:34vw;opacity:.9;pointer-events:none">
+  <img loading="lazy" decoding="async" data-par="0.2" src="assets/images/clouds/cloud-04.webp" alt="" style="position:absolute;right:-12%;top:12%;width:32vw;opacity:.9;pointer-events:none">
+  <div data-rise="1" style="position:relative;z-index:2;max-width:1120px;will-change:transform,opacity;margin:0 auto;display:flex;flex-direction:column;gap:clamp(24px,3vw,36px)">
+    <img loading="lazy" decoding="async" data-par="-0.15" src="assets/images/clouds/cloud-01.webp" alt="" style="position:absolute;left:50%;top:-14%;width:min(110%,1100px);transform:translateX(-50%);opacity:.95;pointer-events:none;z-index:-1">
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px">
+      <div style="display:flex;align-items:center;gap:clamp(10px,1.6vw,22px)"><svg width="clamp(34px,4vw,52px)" height="clamp(34px,4vw,52px)" viewBox="0 0 40 40" aria-hidden="true" style="flex:none;"><g stroke="#ffd23f" stroke-width="4.5" stroke-linecap="round"><path d="M8 6 L20 14"></path><path d="M4 20 H18"></path><path d="M8 34 L20 26"></path></g></svg><h2 style="margin:0;font-family:'Shrikhand',serif;font-weight:400;font-size:clamp(38px,4.6vw,68px);line-height:1.05;color:#3d240c;-webkit-text-stroke:6px #fff;paint-order:stroke fill;filter:drop-shadow(0 6px 10px rgba(15,60,90,.18));text-wrap:balance">Visit Us in Birmingham</h2><svg width="clamp(34px,4vw,52px)" height="clamp(34px,4vw,52px)" viewBox="0 0 40 40" aria-hidden="true" style="flex:none;transform:scaleX(-1)"><g stroke="#ffd23f" stroke-width="4.5" stroke-linecap="round"><path d="M8 6 L20 14"></path><path d="M4 20 H18"></path><path d="M8 34 L20 26"></path></g></svg></div>
+      <p style="margin:0;font-weight:800;font-size:clamp(13px,1.1vw,16px);letter-spacing:.2em;text-transform:uppercase;color:#3d240c">Two locations <span style="color:#ff5c9a">•</span> Same heavenly doughnuts</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(20px,3vw,36px);align-items:stretch;background:rgba(255,255,255,.9);border-radius:44px;padding:clamp(18px,2.4vw,28px);box-shadow:0 24px 50px rgba(15,60,90,.16)">
+      <div style="display:flex;flex-direction:column;gap:22px;padding:clamp(4px,1vw,10px)">
+        <div role="tablist" style="display:grid;grid-template-columns:1fr 1fr;background:#fff8e6;border:2px solid #f4e2b8;border-radius:999px;padding:4px">
+          <sc-for list="{{ locTabs }}" as="t" hint-placeholder-count="2">
+            <button role="tab" onClick="{{ t.pick }}" style="border:0;cursor:pointer;font-family:'Bitter',serif;font-weight:700;font-size:clamp(16px,1.4vw,19px);color:#3d240c;padding:12px 10px;border-radius:999px;background:{{ t.bg }};box-shadow:{{ t.sh }}">{{ t.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;padding:0 clamp(8px,1.6vw,22px)">
+          <div style="display:flex;gap:14px;align-items:flex-start"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="flex:none;margin-top:2px"><path d="M12 22s7-7.2 7-12.5A7 7 0 0 0 5 9.5C5 14.8 12 22 12 22z" fill="#ff5c9a"></path><circle cx="12" cy="9.5" r="2.6" fill="#fff"></circle></svg><p style="margin:0;font-family:'Bitter',serif;font-weight:700;font-size:clamp(16px,1.4vw,19px);line-height:1.35">{{ loc.addr1 }}<br>{{ loc.addr2 }}</p></div>
+          <div style="display:flex;gap:14px;align-items:center"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="flex:none"><circle cx="12" cy="12" r="9" fill="none" stroke="#ff5c9a" stroke-width="2.4"></circle><path d="M12 7v5l3 2" fill="none" stroke="#ff5c9a" stroke-width="2.4" stroke-linecap="round"></path></svg><p style="margin:0;font-family:'Bitter',serif;font-weight:700;font-size:clamp(16px,1.4vw,19px)">{{ loc.status }}</p></div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:6px">
+            <a href="{{ loc.dir }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;border:2px solid #3d240c;color:#3d240c;font-family:'Bitter',serif;font-weight:700;font-size:17px;padding:10px 22px;border-radius:999px" style-hover="background:#3d240c;color:#fff">Get Directions ↗</a>
+            <a href="tel:+12055367200" style="display:inline-flex;align-items:center;color:#3d240c;font-family:'Bitter',serif;font-weight:700;font-size:17px;padding:10px 8px" style-hover="color:#ff5c9a">(205) 536-7200</a>
+          </div>
+        </div>
+      </div>
+      <div style="position:relative;min-height:260px;border-radius:30px;overflow:hidden;background:#e9f6fd;box-shadow:inset 0 0 0 3px #fff">
+        <iframe title="Map of {{ loc.name }}" src="{{ loc.map }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+      </div>
+      <div style="grid-column:1/-1;position:relative;overflow:hidden;margin:calc(clamp(20px,3vw,36px) * -0.4) calc(clamp(18px,2.4vw,28px) * -1) calc(clamp(18px,2.4vw,28px) * -1);border-radius:0 0 44px 44px;background:linear-gradient(90deg,#ff8fb3,#ffa9c6 50%,#ff8fb3);color:#3d240c;padding:clamp(18px,2vw,24px) clamp(24px,3vw,44px);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px clamp(14px,1.8vw,24px);text-align:center">
+        <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none"><span style="position:absolute;left:4%;top:64%;width:16px;height:6px;border-radius:6px;background:#ffd23f;transform:rotate(-90deg);opacity:.9"></span><span style="position:absolute;left:14.2%;top:18%;width:16px;height:6px;border-radius:6px;background:#6cc0ea;transform:rotate(-43deg);opacity:.9"></span><span style="position:absolute;left:24.4%;top:64%;width:16px;height:6px;border-radius:6px;background:#fff;transform:rotate(4deg);opacity:.9"></span><span style="position:absolute;left:34.599999999999994%;top:18%;width:16px;height:6px;border-radius:6px;background:#7fd6a8;transform:rotate(51deg);opacity:.9"></span><span style="position:absolute;left:44.8%;top:64%;width:16px;height:6px;border-radius:6px;background:#b99cf0;transform:rotate(-82deg);opacity:.9"></span><span style="position:absolute;left:55%;top:18%;width:16px;height:6px;border-radius:6px;background:#fff;transform:rotate(-35deg);opacity:.9"></span><span style="position:absolute;left:65.19999999999999%;top:64%;width:16px;height:6px;border-radius:6px;background:#ffd23f;transform:rotate(12deg);opacity:.9"></span><span style="position:absolute;left:75.39999999999999%;top:18%;width:16px;height:6px;border-radius:6px;background:#6cc0ea;transform:rotate(59deg);opacity:.9"></span><span style="position:absolute;left:85.6%;top:64%;width:16px;height:6px;border-radius:6px;background:#fff;transform:rotate(-74deg);opacity:.9"></span><span style="position:absolute;left:95.8%;top:18%;width:16px;height:6px;border-radius:6px;background:#7fd6a8;transform:rotate(-27deg);opacity:.9"></span></div>
+        <div style="position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px clamp(18px,2.4vw,32px)">
+          <img loading="lazy" decoding="async" src="assets/images/press/travel-magazine-logo.webp" alt="Travel Magazine" style="display:block;height:clamp(44px,4vw,60px);width:auto;filter:drop-shadow(0 2px 3px rgba(61,36,12,.3))">
+          <span aria-hidden="true" style="width:3px;height:clamp(44px,4vw,60px);border-radius:3px;background:rgba(255,255,255,.7)"></span>
+          <p style="margin:0;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:0 .35em;font-family:'Bitter',serif;font-weight:800;font-size:clamp(18px,1.7vw,24px);line-height:1.2;color:#3d240c">Named one of the <span style="font-family:'Shrikhand',serif;font-weight:400;font-size:1.6em;line-height:1;color:#3d240c;-webkit-text-stroke:5px #fff;paint-order:stroke fill">Top 10</span> doughnut shops in America</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="menu" data-bg="#c4e8fb" data-screen-label="Our Flavors" style="position:relative;z-index:4;overflow:visible;font-family:'Bricolage Grotesque',sans-serif;color:#3d240c;padding:clamp(40px,5vw,72px) clamp(16px,4vw,56px) clamp(56px,6vw,88px)">
+  <img loading="lazy" decoding="async" data-par="-0.25" src="assets/images/clouds/cloud-03.webp" alt="" style="position:absolute;left:-14%;bottom:-6%;width:36vw;opacity:.85;pointer-events:none">
+  <img loading="lazy" decoding="async" data-par="0.2" src="assets/images/clouds/cloud-05.webp" alt="" style="position:absolute;right:-12%;top:10%;width:30vw;opacity:.85;pointer-events:none">
+  <div data-rise="1" style="position:relative;z-index:2;max-width:1120px;will-change:transform,opacity;margin:0 auto;display:flex;flex-direction:column;gap:clamp(24px,3vw,40px)">
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px">
+      <div style="display:flex;align-items:center;gap:clamp(10px,1.6vw,22px)"><svg width="clamp(34px,4vw,52px)" height="clamp(34px,4vw,52px)" viewBox="0 0 40 40" aria-hidden="true" style="flex:none;"><g stroke="#ffd23f" stroke-width="4.5" stroke-linecap="round"><path d="M8 6 L20 14"></path><path d="M4 20 H18"></path><path d="M8 34 L20 26"></path></g></svg><h2 style="margin:0;font-family:'Shrikhand',serif;font-weight:400;font-size:clamp(38px,4.6vw,68px);line-height:1.05;color:#3d240c;-webkit-text-stroke:6px #fff;paint-order:stroke fill;filter:drop-shadow(0 6px 10px rgba(15,60,90,.18));text-wrap:balance">Our Flavors</h2><svg width="clamp(34px,4vw,52px)" height="clamp(34px,4vw,52px)" viewBox="0 0 40 40" aria-hidden="true" style="flex:none;transform:scaleX(-1)"><g stroke="#ffd23f" stroke-width="4.5" stroke-linecap="round"><path d="M8 6 L20 14"></path><path d="M4 20 H18"></path><path d="M8 34 L20 26"></path></g></svg></div>
+      <p style="margin:0;font-weight:800;font-size:clamp(13px,1.1vw,16px);letter-spacing:.2em;text-transform:uppercase;color:#3d240c">Fan favorites, seasonal specials, and more</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,44px) clamp(14px,3vw,40px);max-width:880px;width:100%;margin:0 auto">
+      <sc-for list="{{ flavors }}" as="f" hint-placeholder-count="6">
+        <a href="menu.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;color:#3d240c;transition:transform .2s" style-hover="transform:translateY(-6px)">
+          <div style="width:100%;aspect-ratio:1;display:grid;place-items:center;min-height:0;position:relative">
+            <sc-if value="{{ f.img }}" hint-placeholder-val="{{ true }}"><img loading="lazy" decoding="async" src="{{ f.img }}" alt="{{ f.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 14px 14px rgba(15,60,90,.25))"></sc-if>
+            <sc-if value="{{ f.slot }}" hint-placeholder-val="{{ false }}"><image-slot id="{{ f.slot }}" shape="circle" placeholder="{{ f.name }} photo" style="display:block;width:88%;aspect-ratio:1;height:auto"></image-slot></sc-if>
+          </div>
+          <span style="margin-top:-18px;position:relative;background:#fff8e6;padding:8px 18px;border-radius:12px;transform:rotate(-2deg);font-family:'Shrikhand',serif;font-size:clamp(15px,1.6vw,22px);line-height:1.05;text-align:center;box-shadow:0 6px 14px rgba(61,36,12,.12)">{{ f.name }}</span>
+        </a>
+      </sc-for>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:clamp(8px,2vw,24px)">
+      <a href="https://order.toasttab.com/online/the-heavenly-donut-company-4911-cahaba-river-rd-105" style="display:flex;align-items:center;gap:14px;background:#ffde2e;color:#3d240c;font-family:'Bitter',serif;font-weight:700;font-size:clamp(22px,2.4vw,34px);padding:clamp(18px,2vw,26px) clamp(40px,5vw,72px);border-radius:999px;border:5px solid #fff;box-shadow:0 14px 30px rgba(15,60,90,.22);white-space:nowrap" style-hover="background:#ff8fbf">Order Online →</a>
+    </div>
+  </div>
+</section>
+<section id="truck" data-bg="#cfe6f6" data-screen-label="Food Truck" style="position:relative;z-index:5;overflow:visible;font-family:'Bricolage Grotesque',sans-serif;color:#3d240c;padding:clamp(40px,5vw,72px) clamp(16px,4vw,56px) clamp(64px,7vw,100px)">
+  <img loading="lazy" decoding="async" data-par="-0.25" src="assets/images/clouds/cloud-01.webp" alt="" style="position:absolute;left:-8%;bottom:10%;width:30vw;opacity:.95;pointer-events:none;z-index:0">
+  <img loading="lazy" decoding="async" data-par="0.2" src="assets/images/clouds/cloud-04.webp" alt="" style="position:absolute;right:-10%;top:4%;width:30vw;opacity:.85;pointer-events:none">
+  <div data-rise="1" style="position:relative;z-index:2;max-width:1120px;will-change:transform,opacity;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(28px,4vw,64px);align-items:center">
+    <div style="position:relative">
+      <svg viewBox="0 0 60 60" aria-hidden="true" style="position:absolute;left:-2%;top:-14%;width:clamp(60px,8vw,110px);z-index:1"><g stroke="#ffd23f" stroke-width="5" stroke-linecap="round"><path d="M30 6 V20"></path><path d="M10 14 L20 24"></path><path d="M4 34 H18"></path></g></svg>
+      <div style="position:relative;z-index:6;transform:rotate(-2deg)"><img loading="lazy" decoding="async" src="assets/images/truck/truck-wedding-sticker.webp" alt="A wedding couple in front of the Vincent Van Dough doughnut truck" style="display:block;width:116%;max-width:none;margin-left:-8%;height:auto;filter:drop-shadow(0 22px 30px rgba(15,60,90,.25))"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px">
+      <h2 style="margin:0;font-family:'Shrikhand',serif;font-weight:400;font-size:clamp(40px,4.8vw,72px);line-height:1;color:#3d240c;-webkit-text-stroke:6px #fff;paint-order:stroke fill;filter:drop-shadow(0 6px 10px rgba(15,60,90,.18));text-wrap:balance">The Heavenly Donut Truck</h2>
+      <span style="width:min(70%,320px);height:6px;border-radius:6px;background:#ffd23f;margin-top:-6px"></span>
+      <p style="margin:0;max-width:40ch;font-family:'Bitter',serif;font-size:clamp(17px,1.5vw,21px);line-height:1.5;text-wrap:pretty">Bring a little piece of Heaven to your next event. Perfect for weddings, parties, festivals and more.</p>
+      <a href="https://www.theheavenlydonutco.com/food-truck" style="display:inline-flex;align-items:center;gap:10px;background:#ffd23f;color:#3d240c;font-family:'Bitter',serif;font-weight:700;font-size:clamp(17px,1.6vw,22px);padding:16px 44px;border-radius:999px;box-shadow:0 0 0 4px #fff,0 12px 24px rgba(15,60,90,.2)" style-hover="background:#ff8fbd">Rent the Truck →</a>
+    </div>
+  </div>
+  <div data-rise="1" style="position:relative;z-index:2;max-width:1240px;margin:clamp(40px,5vw,72px) auto 0;display:flex;flex-direction:column;align-items:center;gap:18px">
+    <p style="margin:0;font-family:'Bitter',serif;font-weight:800;font-size:clamp(15px,1.2vw,17px);letter-spacing:.12em;text-transform:uppercase;color:#1f7fb0">Weddings · Parties · Festivals</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:16px;width:100%"><div role="button" tabindex="0" aria-label="Open photo 1" onClick="{{ ev0 }}" style="cursor:zoom-in;min-width:0;aspect-ratio:4/3;border-radius:22px;overflow:hidden;border:5px solid #fff;box-shadow:0 14px 30px rgba(15,60,90,.18);transform:rotate(-1.5deg)"><img loading="lazy" decoding="async" src="assets/images/events/event-truck-wide.webp" alt="Wedding couple at the Heavenly Donut truck" style="display:block;width:100%;height:100%;object-fit:cover"></div><div role="button" tabindex="0" aria-label="Open photo 2" onClick="{{ ev1 }}" style="cursor:zoom-in;min-width:0;aspect-ratio:4/3;border-radius:22px;overflow:hidden;border:5px solid #fff;box-shadow:0 14px 30px rgba(15,60,90,.18);transform:rotate(1deg)"><img loading="lazy" decoding="async" src="assets/images/events/event-sharing.webp" alt="Couple sharing a doughnut" style="display:block;width:100%;height:100%;object-fit:cover"></div><div role="button" tabindex="0" aria-label="Open photo 3" onClick="{{ ev2 }}" style="cursor:zoom-in;min-width:0;aspect-ratio:4/3;border-radius:22px;overflow:hidden;border:5px solid #fff;box-shadow:0 14px 30px rgba(15,60,90,.18);transform:rotate(-1deg)"><img loading="lazy" decoding="async" src="assets/images/events/event-tray.webp" alt="Tray of pastries at a wedding" style="display:block;width:100%;height:100%;object-fit:cover"></div><div role="button" tabindex="0" aria-label="Open photo 4" onClick="{{ ev3 }}" style="cursor:zoom-in;min-width:0;aspect-ratio:4/3;border-radius:22px;overflow:hidden;border:5px solid #fff;box-shadow:0 14px 30px rgba(15,60,90,.18);transform:rotate(1.5deg)"><img loading="lazy" decoding="async" src="assets/images/events/event-hands.webp" alt="Doughnut held at a wedding" style="display:block;width:100%;height:100%;object-fit:cover"></div></div>
+  </div>
+<sc-if value="{{ evOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ evClose }}" style="position:fixed;inset:0;z-index:100;background:rgba(14,52,78,.84);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;gap:clamp(10px,2vw,28px);padding:clamp(16px,4vw,48px);box-sizing:border-box">
+      <button onClick="{{ evPrev }}" aria-label="Previous photo" style="flex:none;width:56px;height:56px;border-radius:50%;border:none;background:#fff;color:#3d240c;font-size:28px;line-height:1;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.25)" style-hover="background:#ffd23f">‹</button>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;min-width:0;max-width:1100px;flex:1">
+        <img loading="lazy" decoding="async" src="{{ evSrc }}" alt="{{ evAlt }}" onClick="{{ evStop }}" style="display:block;max-width:100%;max-height:78vh;object-fit:contain;border-radius:22px;border:6px solid #fff;box-shadow:0 24px 60px rgba(0,0,0,.35)">
+        <p style="margin:0;color:#fff;font-weight:700;font-size:16px;letter-spacing:.08em">{{ evCount }}</p>
+      </div>
+      <button onClick="{{ evNext }}" aria-label="Next photo" style="flex:none;width:56px;height:56px;border-radius:50%;border:none;background:#fff;color:#3d240c;font-size:28px;line-height:1;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.25)" style-hover="background:#ffd23f">›</button>
+      <button onClick="{{ evClose }}" aria-label="Close" style="position:absolute;top:20px;right:20px;flex:none;width:56px;height:56px;border-radius:50%;border:none;background:#fff;color:#3d240c;font-size:28px;line-height:1;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.25)" style-hover="background:#ffd23f">×</button>
+    </div>
+  </sc-if>
+</section>
+<section id="press" data-bg="#dfe3f1" data-screen-label="Press" style="position:relative;z-index:5;overflow-x:clip;overflow-y:visible;font-family:'Bricolage Grotesque',sans-serif;color:#3d240c;padding:clamp(28px,3vw,48px) clamp(20px,4vw,56px) clamp(56px,5vw,72px)">
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;-webkit-mask-image:linear-gradient(#000 45%,transparent 92%);mask-image:linear-gradient(#000 45%,transparent 92%)">
+    <img loading="lazy" decoding="async" data-plx="0.3" src="assets/images/clouds/cloud-04.webp" alt="" style="position:absolute;left:-12%;bottom:-4%;width:52vw;opacity:.85">
+    <img loading="lazy" decoding="async" data-plx="0.15" src="assets/images/clouds/cloud-02.webp" alt="" style="position:absolute;right:-10%;top:4%;width:40vw;opacity:.7">
+  </div>
+  <div data-rise="1" style="position:relative;z-index:2;max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(36px,5vw,80px)">
+    <div style="position:relative;z-index:1;flex:1 1 280px;max-width:380px;min-width:0;margin:0 auto">
+      <img loading="lazy" decoding="async" src="assets/images/press/alton-brown.webp" alt="Alton Brown" style="display:block;width:100%;height:auto;transform:rotate(-3deg);filter:drop-shadow(0 22px 30px rgba(22,70,100,.25))">
+      
+      
+    </div>
+    <figure style="position:relative;z-index:3;isolation:isolate;flex:1.3 1 420px;min-width:0;margin:0 0 0 max(-200px,min(0px,calc((820px - 100vw) * .5)));display:flex;flex-direction:column;align-items:flex-start;gap:clamp(16px,2vw,24px);background:#fff;border:2px solid #fff;border-radius:36px;padding:clamp(28px,3.4vw,52px);box-shadow:0 24px 48px rgba(22,70,100,.14)">
+      <div style="position:absolute;right:clamp(-40px,-2.4vw,-20px);top:clamp(-56px,-3.6vw,-36px);z-index:4;width:clamp(110px,11vw,150px);aspect-ratio:1;border-radius:50%;background:#fff;box-shadow:0 14px 26px rgba(61,36,12,.25);transform:rotate(8deg);display:grid;place-items:center"><img loading="lazy" decoding="async" src="assets/images/press/food-network-logo.webp" alt="Food Network" style="display:block;width:88%;height:auto"></div>
+      <p style="margin:0;font-weight:800;font-size:clamp(13px,1vw,15px);letter-spacing:.2em;text-transform:uppercase;color:#1b6f8a">As seen on Food Network</p>
+      <div style="position:relative">
+        <span aria-hidden="true" style="position:absolute;left:-.06em;top:-.02em;font-family:'Shrikhand',serif;font-size:clamp(120px,13vw,200px);line-height:1;color:#bfe6fb;opacity:1;z-index:-1">“</span>
+        <blockquote style="position:relative;margin:0;padding-top:clamp(64px,6vw,96px);font-family:'Bitter',serif;font-style:italic;font-weight:700;font-size:clamp(22px,2vw,30px);line-height:1.4;color:#3d240c;text-wrap:pretty"><span style="display:block;font-size:1.45em;line-height:1.15;margin-bottom:.4em">“The doughnuts were out&#8209;of&#8209;this&#8209;world.</span>I’m always going to be partial to the old&#8209;fashioned kind, and well, it lived up to my expectations.”</blockquote>
+      </div>
+      
+      <figcaption style="display:flex;align-items:center;gap:14px;margin-top:4px"><span style="width:44px;height:3px;border-radius:3px;background:#6cc0ea"></span><span style="font-weight:800;font-size:clamp(17px,1.4vw,21px);letter-spacing:.12em;text-transform:uppercase">Alton Brown</span></figcaption>
+    </figure>
+  </div>
+</section>
+<section id="reviews" data-bg="#f6e1e8" data-screen-label="Reviews" style="position:relative;z-index:6;font-family:'Bricolage Grotesque',sans-serif;color:#3d240c;padding:clamp(16px,2vw,32px) clamp(20px,4vw,56px) clamp(64px,7vw,100px)">
+  <div aria-hidden="true" style="position:absolute;inset:0;overflow-x:clip;pointer-events:none;z-index:0;-webkit-mask-image:linear-gradient(transparent 0,#000 14%);mask-image:linear-gradient(transparent 0,#000 14%)">
+    <img loading="lazy" decoding="async" data-plx="0.35" src="assets/images/clouds/cloud-02.webp" alt="" style="position:absolute;left:-8%;top:8%;width:38vw;opacity:.75">
+    <img loading="lazy" decoding="async" data-plx="0.15" src="assets/images/clouds/cloud-04.webp" alt="" style="position:absolute;right:-10%;top:30%;width:44vw;opacity:.6">
+    <img loading="lazy" decoding="async" data-plx="0.5" src="assets/images/clouds/cloud-05.webp" alt="" style="position:absolute;left:20%;bottom:-6%;width:50vw;opacity:.55">
+    
+  </div>
+  <img loading="lazy" decoding="async" data-plx="-0.25" src="assets/images/stickers/sprinkle-donut-b.webp" alt="" aria-hidden="true" style="position:absolute;right:4%;top:-70px;z-index:3;pointer-events:none;width:clamp(70px,7vw,110px);transform:rotate(18deg);filter:drop-shadow(0 10px 12px rgba(61,36,12,.2))">
+  <div data-rise="1" style="position:relative;z-index:2;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px">
+    <p style="margin:0;font-weight:800;font-size:clamp(13px,1vw,15px);letter-spacing:.2em;text-transform:uppercase;color:#1b6f8a">A Birmingham favorite</p>
+    <h2 style="margin:0;font-family:'Shrikhand',serif;font-weight:400;font-size:clamp(44px,5.6vw,84px);line-height:1;max-width:20ch;color:#3d240c;-webkit-text-stroke:7px #fff;paint-order:stroke fill;filter:drop-shadow(0 8px 12px rgba(61,36,12,.2));text-wrap:balance">Sweet Words From Our Fans</h2>
+    <p style="margin:0;max-width:52ch;font-family:'Bitter',serif;font-size:clamp(17px,1.4vw,20px);line-height:1.5;text-wrap:pretty">Real love from our neighbors, regulars, and morning coffee crew.</p>
+    <div style="position:relative;width:100%;margin-top:clamp(24px,3vw,40px)">
+      <img loading="lazy" decoding="async" data-plx="-0.18" src="assets/images/products/donut-chocolate-sprinkle.webp" alt="" style="position:absolute;left:-3%;top:-80px;width:clamp(130px,15vw,210px);transform:rotate(-14deg);filter:drop-shadow(0 12px 14px rgba(61,36,12,.25));pointer-events:none;z-index:0">
+      <div data-plx="0.22" style="position:absolute;right:-3%;bottom:-70px;width:clamp(130px,15vw,200px);transform:rotate(10deg);z-index:3"><img loading="lazy" decoding="async" src="assets/images/products/donut-glazed.webp" alt="" style="display:block;width:100%;filter:drop-shadow(0 12px 14px rgba(61,36,12,.25))"></div>
+      <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:clamp(14px,1.8vw,22px);padding:0 clamp(0px,3vw,48px)">
+        <figure style="margin:0;background:#fff;border-radius:24px;padding:clamp(28px,2.8vw,40px) clamp(22px,2.4vw,36px);box-shadow:0 14px 34px rgba(61,36,12,.10);display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;"><div aria-label="5 stars" style="display:flex;gap:4px;color:#f0a21a;font-size:22px;line-height:1">★★★★★</div><blockquote style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-style:normal;font-weight:600;font-size:clamp(19px,1.6vw,23px);line-height:1.5;color:#2a1806;text-wrap:pretty">“The best doughnuts in Birmingham! Always fresh, always friendly, and worth the early wake-up.”</blockquote><figcaption style="font-weight:800;font-size:15px;letter-spacing:.14em;text-transform:uppercase">— Sarah M.</figcaption></figure>
+        <figure style="margin:0;background:#fff;border-radius:24px;padding:clamp(28px,2.8vw,40px) clamp(22px,2.4vw,36px);box-shadow:0 14px 34px rgba(61,36,12,.10);display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;"><div aria-label="5 stars" style="display:flex;gap:4px;color:#f0a21a;font-size:22px;line-height:1">★★★★★</div><blockquote style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-style:normal;font-weight:600;font-size:clamp(19px,1.6vw,23px);line-height:1.5;color:#2a1806;text-wrap:pretty">“A Saturday morning tradition for our family. The kolaches are incredible, and the doughnuts never miss!”</blockquote><figcaption style="font-weight:800;font-size:15px;letter-spacing:.14em;text-transform:uppercase">— James R.</figcaption></figure>
+        <figure style="margin:0;background:#fff;border-radius:24px;padding:clamp(28px,2.8vw,40px) clamp(22px,2.4vw,36px);box-shadow:0 14px 34px rgba(61,36,12,.10);display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;"><div aria-label="5 stars" style="display:flex;gap:4px;color:#f0a21a;font-size:22px;line-height:1">★★★★★</div><blockquote style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-style:normal;font-weight:600;font-size:clamp(19px,1.6vw,23px);line-height:1.5;color:#2a1806;text-wrap:pretty">“Heavenly Donut Co. has that old-fashioned charm and the best variety in town. We’re hooked!”</blockquote><figcaption style="font-weight:800;font-size:15px;letter-spacing:.14em;text-transform:uppercase">— Erin L.</figcaption></figure>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;margin-top:clamp(28px,3vw,44px)"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" style="flex:none;"><g stroke="#3d240c" stroke-width="3" stroke-linecap="round"><path d="M10 8 L20 15"></path><path d="M6 20 H18"></path><path d="M10 32 L20 25"></path></g></svg><span style="display:inline-flex;align-items:center;gap:10px;background:#dff1fb;border:3px solid #fff;border-radius:999px;padding:12px 26px;font-weight:700;font-size:clamp(15px,1.2vw,18px);box-shadow:0 8px 18px rgba(61,36,12,.10)"><span aria-hidden="true" style="color:#5a3510;font-size:20px">♥</span>A Birmingham Local Favorite for Over a Decade</span><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" style="flex:none;transform:scaleX(-1)"><g stroke="#3d240c" stroke-width="3" stroke-linecap="round"><path d="M10 8 L20 15"></path><path d="M6 20 H18"></path><path d="M10 32 L20 25"></path></g></svg></div>
+  </div>
+</section>
+<section id="catering" data-bg="#fff0de" data-screen-label="Catering" style="position:relative;z-index:3;font-family:'Bricolage Grotesque',sans-serif;color:#3d240c;padding:clamp(44px,5vw,80px) clamp(20px,4vw,56px)">
+  <div data-rise="1" style="position:relative;z-index:2;max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(28px,3.4vw,48px)">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,64px);align-items:center">
+      <div style="border-radius:32px;overflow:hidden;box-shadow:0 18px 40px rgba(61,36,12,.16);flex:0 1 380px;min-width:240px"><img loading="lazy" decoding="async" src="assets/images/products/catering-boxes.webp" alt="Boxes of Heavenly doughnuts" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 50%"></div>
+    
+      <div style="display:flex;flex-direction:column;gap:16px;flex:1 1 420px;min-width:0;align-items:flex-start">
+        <p style="margin:0;font-weight:800;font-size:clamp(13px,1vw,15px);letter-spacing:.2em;text-transform:uppercase;color:#1b6f8a">Catering &amp; big orders</p>
+      <h2 style="margin:0;font-family:'Shrikhand',serif;font-weight:400;font-size:clamp(40px,4.6vw,70px);line-height:1.05;max-width:20ch;padding-top:.35em;color:#3d240c;-webkit-text-stroke:7px #fff;paint-order:stroke fill;filter:drop-shadow(0 8px 12px rgba(61,36,12,.2));text-wrap:balance">Bring <span style="position:relative;display:inline-block">Heavenly<span aria-hidden="true" style="position:absolute;left:.34em;top:-.28em;width:.62em;height:.26em;transform:translateX(-50%) rotate(-4deg);border-radius:50%;border:.075em solid #ffd23f;box-shadow:0 0 .18em #ffe680,0 0 .4em rgba(255,210,63,.7),inset 0 0 .14em #ffe680;pointer-events:none"></span></span> to the Table</h2>
+        <p style="margin:0;max-width:52ch;font-family:'Bitter',serif;font-size:clamp(17px,1.4vw,20px);line-height:1.5;text-wrap:pretty">Doughnuts, kolaches, coffee, and more for your next meeting, celebration, or community event.<br>We’ll make it easy (and delicious) for your group.</p>
+      <div style="display:flex;justify-content:flex-start;margin-top:6px"><a href="mailto:info@theheavenlydonutco.com?subject=Catering%20inquiry" style="display:inline-flex;align-items:center;gap:10px;background:#3d240c;color:#fff;font-family:'Bitter',serif;font-weight:700;font-size:clamp(17px,1.5vw,21px);padding:16px 40px;border-radius:999px;box-shadow:0 0 0 4px #fff,0 12px 24px rgba(61,36,12,.2)" style-hover="background:#5a3510">Ask About Catering →</a></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(14px,1.6vw,22px);align-items:stretch">
+        <div style="position:relative;background:#ffe3ec;border:3px solid #fff;border-radius:26px;padding:16px 20px;margin-top:0;box-shadow:0 0 0 2px #ff8fb333,0 14px 28px rgba(61,36,12,.12);transform:rotate(-1.5deg);transition:transform .25s ease;display:flex;flex-direction:row;align-items:center;text-align:left;gap:16px" style-hover="transform:rotate(0deg) translateY(-6px)"><div style="display:grid;place-items:center;flex:none"><svg width="46" height="46" viewBox="0 0 40 40" fill="none" stroke="#f4a7bf" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="13" width="28" height="19" rx="3" ></rect><path d="M15 13 V9 a2 2 0 0 1 2-2 h6 a2 2 0 0 1 2 2 V13"></path><path d="M6 21 H34"></path></svg></div><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><h3 style="margin:0;font-family:'Bitter',serif;font-weight:800;font-size:clamp(16px,1.3vw,19px);line-height:1.15;color:#3d240c;text-wrap:pretty">Office Meetings</h3><p style="margin:0;font-size:14.5px;line-height:1.4;color:#3d240c;text-wrap:pretty">Fuel the whole team.</p></div></div>
+        <div style="position:relative;background:#fff1c2;border:3px solid #fff;border-radius:26px;padding:16px 20px;margin-top:0;box-shadow:0 0 0 2px #f5c33033,0 14px 28px rgba(61,36,12,.12);transform:rotate(1deg);transition:transform .25s ease;display:flex;flex-direction:row;align-items:center;text-align:left;gap:16px" style-hover="transform:rotate(0deg) translateY(-6px)"><div style="display:grid;place-items:center;flex:none"><svg width="46" height="46" viewBox="0 0 40 40" fill="none" stroke="#e8c766" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="20" width="26" height="12" rx="2" ></rect><path d="M7 26 q4 3 8 0 t8 0 t10 0"></path><path d="M13 20 V15 M20 20 V15 M27 20 V15"></path><path d="M13 11 v1 M20 11 v1 M27 11 v1"></path></svg></div><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><h3 style="margin:0;font-family:'Bitter',serif;font-weight:800;font-size:clamp(16px,1.3vw,19px);line-height:1.15;color:#3d240c;text-wrap:pretty">Birthdays &amp; Celebrations</h3><p style="margin:0;font-size:14.5px;line-height:1.4;color:#3d240c;text-wrap:pretty">Make it sweeter.</p></div></div>
+        <div style="position:relative;background:#dcf1fc;border:3px solid #fff;border-radius:26px;padding:16px 20px;margin-top:0;box-shadow:0 0 0 2px #6cc0ea33,0 14px 28px rgba(61,36,12,.12);transform:rotate(-1deg);transition:transform .25s ease;display:flex;flex-direction:row;align-items:center;text-align:left;gap:16px" style-hover="transform:rotate(0deg) translateY(-6px)"><div style="display:grid;place-items:center;flex:none"><svg width="46" height="46" viewBox="0 0 40 40" fill="none" stroke="#8fcbe8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4 V11 M17 7 H23"></path><path d="M10 34 V20 L20 12 L30 20 V34 Z"></path><path d="M17 34 V27 a3 3 0 0 1 6 0 V34"></path><path d="M6 34 H34"></path></svg></div><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><h3 style="margin:0;font-family:'Bitter',serif;font-weight:800;font-size:clamp(16px,1.3vw,19px);line-height:1.15;color:#3d240c;text-wrap:pretty">Church &amp; Community Events</h3><p style="margin:0;font-size:14.5px;line-height:1.4;color:#3d240c;text-wrap:pretty">Gatherings big and small.</p></div></div>
+      </div>
+  </div>
+</section>
+<section id="social" data-bg="#ece6f4" data-screen-label="Stay Connected" style="position:relative;z-index:2;overflow-x:clip;overflow-y:visible;font-family:'Bricolage Grotesque',sans-serif;color:#3d240c;padding:clamp(64px,8vw,120px) clamp(20px,4vw,56px)">
+  <img loading="lazy" decoding="async" data-par="-0.2" src="assets/images/clouds/cloud-03.webp" alt="" style="position:absolute;left:-8%;top:18%;width:22vw;opacity:.85;pointer-events:none">
+  <img loading="lazy" decoding="async" data-par="0.2" src="assets/images/clouds/cloud-05.webp" alt="" style="position:absolute;right:-8%;top:14%;width:22vw;opacity:.85;pointer-events:none">
+  <img loading="lazy" decoding="async" src="assets/images/clouds/cloud-02.webp" alt="" style="position:absolute;left:-6%;bottom:2%;width:22vw;opacity:.9;pointer-events:none">
+  <img loading="lazy" decoding="async" src="assets/images/clouds/cloud-04.webp" alt="" style="position:absolute;right:-6%;bottom:2%;width:22vw;opacity:.9;pointer-events:none">
+  <div data-rise="1" style="position:relative;z-index:2;max-width:1120px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px">
+    <p style="margin:0;font-weight:800;font-size:clamp(13px,1vw,15px);letter-spacing:.2em;text-transform:uppercase;color:#1b6f8a">Stay connected</p>
+    <h2 style="margin:0;font-family:'Shrikhand',serif;font-weight:400;font-size:clamp(44px,5.6vw,84px);line-height:1;max-width:11ch;color:#3d240c;-webkit-text-stroke:7px #fff;paint-order:stroke fill;filter:drop-shadow(0 8px 12px rgba(61,36,12,.2));text-wrap:balance">Stay in the Sprinkle Loop</h2>
+    <p style="margin:0;max-width:56ch;font-family:'Bitter',serif;font-size:clamp(17px,1.4vw,20px);line-height:1.5;text-wrap:pretty">Fresh doughnuts, daily specials, and behind-the-scenes bakery fun — follow along for a little more Heavenly in your feed.</p>
+    <div style="position:relative;width:100%;margin-top:clamp(20px,3vw,36px)"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true" style="position:absolute;left:-36px;top:-34px;transform:rotate(30deg)"><g stroke="#3d240c" stroke-width="3" stroke-linecap="round"><path d="M10 8 L20 15"></path><path d="M6 20 H18"></path><path d="M10 32 L20 25"></path></g></svg><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true" style="position:absolute;right:-36px;top:-34px;transform:scaleX(-1) rotate(30deg)"><g stroke="#3d240c" stroke-width="3" stroke-linecap="round"><path d="M10 8 L20 15"></path><path d="M6 20 H18"></path><path d="M10 32 L20 25"></path></g></svg><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:clamp(12px,1.6vw,20px)"><div style="background:#fff;padding:8px;border-radius:22px;box-shadow:0 12px 26px rgba(61,36,12,.12)"><div style="aspect-ratio:1;border-radius:16px;overflow:hidden"><img loading="lazy" decoding="async" src="assets/images/social/instagram-01.webp" alt="" style="display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.16);transform-origin:0% 100%"></div></div><div style="background:#fff;padding:8px;border-radius:22px;box-shadow:0 12px 26px rgba(61,36,12,.12)"><div style="aspect-ratio:1;border-radius:16px;overflow:hidden"><img loading="lazy" decoding="async" src="assets/images/social/instagram-02.webp" alt="" style="display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.16);transform-origin:0% 100%"></div></div><div style="background:#fff;padding:8px;border-radius:22px;box-shadow:0 12px 26px rgba(61,36,12,.12)"><div style="aspect-ratio:1;border-radius:16px;overflow:hidden"><img loading="lazy" decoding="async" src="assets/images/social/instagram-03.webp" alt="" style="display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.16);transform-origin:0% 100%"></div></div><div style="background:#fff;padding:8px;border-radius:22px;box-shadow:0 12px 26px rgba(61,36,12,.12)"><div style="aspect-ratio:1;border-radius:16px;overflow:hidden"><img loading="lazy" decoding="async" src="assets/images/social/instagram-04.webp" alt="" style="display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.16);transform-origin:0% 100%"></div></div></div></div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:clamp(20px,3vw,32px)">
+      <a href="https://www.instagram.com/theheavenlydonutco/" style="display:inline-flex;align-items:center;gap:10px;background:#3d240c;color:#fff;font-family:'Bitter',serif;font-weight:700;font-size:clamp(16px,1.4vw,19px);padding:15px 32px;border-radius:999px;box-shadow:0 0 0 4px #fff,0 12px 24px rgba(61,36,12,.2)" style-hover="background:#5a3510"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor"></circle></svg>Follow on Instagram →</a>
+      <a href="https://order.toasttab.com/online/the-heavenly-donut-company-4911-cahaba-river-rd-105" style="display:inline-flex;align-items:center;background:#fff8ec;color:#3d240c;font-family:'Bitter',serif;font-weight:700;font-size:clamp(16px,1.4vw,19px);padding:15px 32px;border-radius:999px;border:2.5px solid #3d240c" style-hover="background:#ffde2e">Order Online →</a>
+    </div>
+  </div>
+</section>
+<section id="more" data-bg="#e2f2ea" data-screen-label="More Morning Joy" style="position:relative;overflow-x:clip;overflow-y:visible;font-family:'Bricolage Grotesque',sans-serif;color:#3d240c;padding:clamp(80px,10vw,140px) clamp(20px,4vw,56px)">
+  <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto">
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;margin-bottom:clamp(40px,5vw,64px)">
+      <p style="margin:0;font-weight:800;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:#0f5f6c">Not just doughnuts</p>
+      <h2 style="margin:0;font-family:'Shrikhand',serif;font-weight:400;font-size:clamp(44px,6vw,92px);line-height:.95;color:#3d240c;-webkit-text-stroke:clamp(7px,.8vw,12px) #fff;paint-order:stroke fill;filter:drop-shadow(0 10px 14px rgba(15,60,90,.2));transform:rotate(-2deg);text-wrap:balance">More Morning Joy</h2>
+      <p style="margin:8px 0 0;max-width:46ch;font-size:clamp(18px,1.4vw,21px);line-height:1.55;font-weight:500;text-wrap:pretty">It's more than doughnuts around here.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(calc(25% - 18px),(1000px - 100%) * 999,clamp(calc(50% - 12px),(560px - 100%) * 999,100%)),1fr));gap:24px">
+      <article style="display:flex;flex-direction:column;gap:16px;background:#fff;border-radius:32px;padding:14px 14px 24px;box-shadow:0 14px 30px rgba(61,36,12,.1);transition:transform .25s ease" style-hover="transform:translateY(-6px) rotate(-1deg)">
+        <div style="aspect-ratio:1;border-radius:24px;overflow:hidden;background:#e9f6fd"><img loading="lazy" decoding="async" src="assets/images/products/custom-seasonal-box.webp" alt="A dozen seasonal pumpkin and turkey doughnuts" style="display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%"></div>
+        <div style="padding:0 10px"><h3 style="margin:0 0 4px;font-size:22px;font-weight:800">Custom Orders</h3><p style="margin:0;font-size:16px;color:#5b4128">Seasonal designs and boxes made for your occasion</p></div>
+      </article>
+      <article style="display:flex;flex-direction:column;gap:16px;background:#fff;border-radius:32px;padding:14px 14px 24px;box-shadow:0 14px 30px rgba(61,36,12,.1);transition:transform .25s ease" style-hover="transform:translateY(-6px) rotate(-1deg)">
+        <div style="aspect-ratio:1;border-radius:24px;overflow:hidden;background:#e9f6fd"><img loading="lazy" decoding="async" src="assets/images/products/donut-flavors-rack.webp" alt="Chocolate-topped doughnut on a cooling rack" style="display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%"></div>
+        <div style="padding:0 10px"><h3 style="margin:0 0 4px;font-size:22px;font-weight:800">More Flavors</h3><p style="margin:0;font-size:16px;color:#5b4128">Toppings, fillings and new favorites every week</p></div>
+      </article>
+      <article style="display:flex;flex-direction:column;gap:16px;background:#fff;border-radius:32px;padding:14px 14px 24px;box-shadow:0 14px 30px rgba(61,36,12,.1);transition:transform .25s ease" style-hover="transform:translateY(-6px) rotate(-1deg)">
+        <div style="aspect-ratio:1;border-radius:24px;overflow:hidden;background:radial-gradient(circle at 50% 60%,#fff 0%,#ffe3ec 70%);position:relative"><img loading="lazy" decoding="async" src="assets/images/products/coffee-cup.webp" alt="Coffee cup with a pink sleeve" style="position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 14px 16px rgba(61,36,12,.2))"></div>
+        <div style="padding:0 10px"><h3 style="margin:0 0 4px;font-size:22px;font-weight:800">Coffee</h3><p style="margin:0;font-size:16px;color:#5b4128">Drip, cold brew and espresso drinks</p></div>
+      </article>
+      <article style="display:flex;flex-direction:column;gap:16px;background:#fff;border-radius:32px;padding:14px 14px 24px;box-shadow:0 14px 30px rgba(61,36,12,.1);transition:transform .25s ease" style-hover="transform:translateY(-6px) rotate(-1deg)">
+        <div style="aspect-ratio:1;border-radius:24px;overflow:hidden;background:#e9f6fd"><img loading="lazy" decoding="async" src="assets/images/products/kolaches.webp" alt="Andouille kolaches" style="display:block;width:100%;height:100%;object-fit:cover;object-position:50% 45%"></div>
+        <div style="padding:0 10px"><h3 style="margin:0 0 4px;font-size:22px;font-weight:800">Kolaches</h3><p style="margin:0;font-size:16px;color:#5b4128">Savory favorites including Andouille and jalapeño cheddar</p></div>
+      </article>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:clamp(40px,5vw,60px)"><a href="menu.html" style="display:inline-flex;align-items:center;gap:10px;background:#3d240c;color:#fff;font-weight:800;font-size:17px;padding:16px 28px;border-radius:999px;box-shadow:0 0 0 4px #fff,0 10px 22px rgba(15,60,90,.22)" style-hover="background:#ff6fa8;color:#fff">Browse everything →</a></div>
+  </div>
+</section>
+<section id="story" data-bg="#fff6e6" data-screen-label="Our Story" style="position:relative;overflow-x:clip;overflow-y:visible;font-family:'Bricolage Grotesque',sans-serif;color:#3d240c;padding:clamp(80px,10vw,140px) clamp(20px,4vw,56px)">
+  <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(36px,5vw,80px);align-items:center">
+      <div style="position:relative;">
+        <div style="aspect-ratio:1;border-radius:40px;overflow:hidden;background:#fff;box-shadow:0 0 0 8px #fff,0 24px 44px rgba(61,36,12,.18);transform:rotate(-2deg)"><img loading="lazy" decoding="async" src="assets/images/about/owners-family.avif" alt="Brock and Kimberly Beiersdoerfer with their two sons" style="display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%"></div>
+        <img loading="lazy" decoding="async" src="assets/images/stickers/sprinkle-donut-b.webp" alt="" style="position:absolute;right:-6%;bottom:-10%;width:30%;transform:rotate(14deg);filter:drop-shadow(0 14px 16px rgba(61,36,12,.25));pointer-events:none">
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:22px">
+        <p style="margin:0;font-weight:800;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:#0f5f6c">Established January 2013</p>
+        <h2 style="margin:0;font-family:'Shrikhand',serif;font-weight:400;font-size:clamp(44px,6vw,92px);line-height:.95;color:#3d240c;-webkit-text-stroke:clamp(7px,.8vw,12px) #fff;paint-order:stroke fill;filter:drop-shadow(0 10px 14px rgba(15,60,90,.2));transform:rotate(-2deg);text-wrap:balance">Our Story Is Pretty Sweet.</h2>
+        <p style="margin:0;max-width:48ch;font-size:clamp(18px,1.4vw,21px);line-height:1.6;font-weight:500;text-wrap:pretty">Kimberly and Brock Beiersdoerfer opened Heavenly Donut Company in 2013. Inspired by the doughnut makers at Gibson's Donuts in Memphis, they built a family-owned Birmingham shop centered on fresh doughnuts and old-fashioned customer service.</p>
+        <a href="our-story.html" style="display:inline-flex;align-items:center;gap:10px;background:#3d240c;color:#fff;font-weight:800;font-size:17px;padding:16px 28px;border-radius:999px;box-shadow:0 0 0 4px #fff,0 10px 22px rgba(15,60,90,.22)" style-hover="background:#ff6fa8;color:#fff">Meet the family →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="rewards" data-bg="#cceaf9" data-screen-label="Rewards" style="position:relative;overflow-x:clip;overflow-y:visible;font-family:'Bricolage Grotesque',sans-serif;color:#3d240c;padding:clamp(80px,10vw,140px) clamp(20px,4vw,56px)">
+  <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(24px,3vw,40px)">
+      <article style="position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:18px;background:#ffe3ec;border:4px solid #fff;border-radius:40px;padding:clamp(32px,4vw,52px);box-shadow:0 0 0 2px #ff8fb333,0 24px 44px rgba(61,36,12,.14);transition:transform .25s ease" style-hover="transform:translateY(-6px)">
+        <img loading="lazy" decoding="async" src="assets/images/products/donut-plate.webp" alt="" style="position:absolute;right:-5%;top:-12%;width:clamp(110px,11vw,150px);transform:rotate(10deg);filter:drop-shadow(0 12px 16px rgba(61,36,12,.22));pointer-events:none">
+        <h2 style="margin:0;font-family:'Shrikhand',serif;font-weight:400;font-size:clamp(30px,2.8vw,42px);line-height:1.08;color:#3d240c;-webkit-text-stroke:6px #fff;paint-order:stroke fill;filter:drop-shadow(0 6px 10px rgba(61,36,12,.18));position:relative;text-wrap:balance;max-width:16ch">Join the Heavenly Rewards Club</h2>
+        <p style="margin:0;max-width:36ch;font-family:'Bitter',serif;font-size:clamp(17px,1.4vw,20px);line-height:1.5;position:relative;text-wrap:pretty">Sign up for Heavenly Rewards and get 25 points just for joining PLUS $5 off in your birthday month!</p>
+        <div aria-hidden="true" style="display:flex;flex-wrap:wrap;gap:10px;margin:2px 0 6px"><div style="display:flex;align-items:center;gap:12px;background:#fff;border-radius:999px;padding:6px 16px 6px 6px;box-shadow:0 8px 18px rgba(61,36,12,.1);"><span style="display:grid;place-items:center;width:44px;height:44px;flex:none;border-radius:50%;background:#ffd84d;font-family:'Shrikhand',serif;font-size:19px;color:#3d240c">25</span><span style="font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;line-height:1.25;white-space:nowrap">Points for<br>joining</span></div><div style="display:flex;align-items:center;gap:12px;background:#fff;border-radius:999px;padding:6px 16px 6px 6px;box-shadow:0 8px 18px rgba(61,36,12,.1);"><span style="display:grid;place-items:center;width:44px;height:44px;flex:none;border-radius:50%;background:#ffb3cb;font-family:'Shrikhand',serif;font-size:19px;color:#3d240c">$5</span><span style="font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;line-height:1.25;white-space:nowrap">Off your<br>birthday month</span></div></div>
+        <a href="https://www.toasttab.com/the-heavenly-donut-company-4911-cahaba-river-rd-105/rewardsSignup" style="margin-top:auto;display:inline-flex;align-items:center;gap:10px;background:#3d240c;color:#fff;font-family:'Bitter',serif;font-weight:700;font-size:18px;padding:16px 32px;border-radius:999px;box-shadow:0 0 0 4px #fff,0 12px 24px rgba(61,36,12,.2);position:relative" style-hover="background:#5a3510;color:#fff">Join the club →</a>
+      </article>
+      <article style="position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:18px;background:#dcf1fc;border:4px solid #fff;border-radius:40px;padding:clamp(32px,4vw,52px);box-shadow:0 0 0 2px #6cc0ea33,0 24px 44px rgba(61,36,12,.14);transition:transform .25s ease" style-hover="transform:translateY(-6px)">
+        <img loading="lazy" decoding="async" src="assets/images/products/donut-glazed.webp" alt="" style="position:absolute;right:-6%;bottom:-12%;width:clamp(110px,12vw,160px);transform:rotate(-14deg);filter:drop-shadow(0 12px 16px rgba(61,36,12,.22));pointer-events:none">
+        <h2 style="margin:0;font-family:'Shrikhand',serif;font-weight:400;font-size:clamp(30px,2.8vw,42px);line-height:1.08;color:#3d240c;-webkit-text-stroke:6px #fff;paint-order:stroke fill;filter:drop-shadow(0 6px 10px rgba(61,36,12,.18));position:relative;text-wrap:balance">Join our Mailing List</h2>
+        <p style="margin:0;max-width:40ch;font-family:'Bitter',serif;font-size:clamp(17px,1.4vw,20px);line-height:1.5;text-wrap:pretty"><strong>Don’t miss out on anything!</strong> Join our mailing list and keep up to date with all things donuts!</p>
+        <div aria-hidden="true" style="display:flex;flex-wrap:wrap;gap:10px;margin:2px 0 6px"><div style="display:flex;align-items:center;gap:12px;background:#fff;border-radius:999px;padding:6px 16px 6px 6px;box-shadow:0 8px 18px rgba(61,36,12,.1)"><span style="display:grid;place-items:center;width:44px;height:44px;flex:none;border-radius:50%;background:#ffd84d;font-family:'Shrikhand',serif;font-size:17px;color:#3d240c">★</span><span style="font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;line-height:1.25;white-space:nowrap">New flavors<br>first</span></div><div style="display:flex;align-items:center;gap:12px;background:#fff;border-radius:999px;padding:6px 16px 6px 6px;box-shadow:0 8px 18px rgba(61,36,12,.1)"><span style="display:grid;place-items:center;width:44px;height:44px;flex:none;border-radius:50%;background:#bfe6fb;font-family:'Shrikhand',serif;font-size:17px;color:#3d240c">♥</span><span style="font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;line-height:1.25;white-space:nowrap">Specials &amp;<br>events</span></div></div>
+        <form onSubmit="{{ subscribe }}" style="display:flex;align-items:center;gap:6px;width:100%;margin-top:auto;position:relative;z-index:1;background:#fff;border-radius:999px;padding:6px;box-shadow:0 0 0 2px #6cc0ea55,0 10px 22px rgba(15,60,90,.1);box-sizing:border-box">
+          <label style="flex:1 1 0;display:flex;min-width:0"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</span><input type="email" required="" placeholder="you@example.com" style="flex:1;min-width:0;font:inherit;font-size:17px;padding:12px 14px;border-radius:999px;border:0;background:transparent;color:#3d240c;outline:none" style-focus="border-color:#0f5f6c"></label>
+          <button type="submit" style="font:inherit;font-weight:800;font-size:17px;padding:14px 20px;border-radius:999px;border:0;flex:none;background:#3d240c;color:#fff;cursor:pointer" style-hover="background:#5a3510">{{ subLabel }}</button>
+        </form>
+      </article>
+    </div>
+  </div>
+</section>
+<footer data-screen-label="Footer" style="position:relative;overflow-x:clip;overflow-y:visible;font-family:'Bricolage Grotesque',sans-serif;background:linear-gradient(180deg,rgba(204,234,249,0) 0%,#c6e8fa 22%,#8fd0f0 60%,#6cc0ea 100%);color:#3d240c;padding:clamp(40px,5vw,72px) clamp(20px,4vw,56px) 24px">
+  <img loading="lazy" decoding="async" src="assets/images/clouds/cloud-05.webp" alt="" style="position:absolute;left:-10%;top:-6%;width:40vw;opacity:.85;pointer-events:none">
+  <img loading="lazy" decoding="async" src="assets/images/clouds/cloud-01.webp" alt="" style="position:absolute;right:-12%;top:10%;width:38vw;opacity:.85;pointer-events:none">
+  <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px">
+    <img loading="lazy" decoding="async" src="assets/images/products/donut-box-open.webp" alt="A box of six Heavenly doughnuts" style="width:clamp(220px,24vw,340px);filter:drop-shadow(0 18px 22px rgba(15,60,90,.3))">
+    <h2 style="margin:0;font-family:'Shrikhand',serif;font-weight:400;font-size:clamp(38px,4.6vw,68px);line-height:1;color:#3d240c;-webkit-text-stroke:clamp(6px,.7vw,10px) #fff;paint-order:stroke fill;transform:rotate(-2deg);text-wrap:balance">Let's Make It a Doughnut Day!</h2>
+    <p style="margin:0;max-width:44ch;font-size:clamp(18px,1.4vw,21px);line-height:1.55;font-weight:600;color:#fff;text-shadow:0 1px 10px rgba(15,60,90,.35)">Join the rewards club, pick your favorites, or bring a box to someone who needs a little sunshine.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
+      <a href="https://order.toasttab.com/online/the-heavenly-donut-company-4911-cahaba-river-rd-105" style="display:inline-flex;align-items:center;gap:10px;background:#ffd84d;color:#3d240c;font-weight:800;font-size:17px;padding:16px 28px;border-radius:999px;box-shadow:0 0 0 4px #fff,0 10px 22px rgba(15,60,90,.25)" style-hover="background:#ff6fa8;color:#fff">Order online →</a>
+      <a href="#rewards" style="display:inline-flex;align-items:center;background:#fff;color:#3d240c;font-weight:800;font-size:17px;padding:16px 28px;border-radius:999px;box-shadow:0 10px 22px rgba(15,60,90,.2)" style-hover="background:#3d240c;color:#fff">Join rewards</a>
+    </div>
+    <div style="width:100%;margin-top:clamp(40px,5vw,64px);background:rgba(255,255,255,.92);border-radius:28px;box-shadow:0 14px 30px rgba(15,60,90,.14);padding:clamp(18px,2vw,24px) clamp(20px,2.6vw,32px);box-sizing:border-box;color:#3d240c;display:flex;flex-wrap:wrap;align-items:center;gap:14px 32px;text-align:left">
+      <a href="./" aria-label="The Heavenly Donut Co. home" style="flex:none"><img src="assets/images/brand/logo.avif" alt="The Heavenly Donut Co." style="display:block;width:84px;height:auto"></a>
+      <nav aria-label="Footer" style="flex:1 1 300px;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 24px"><a href="menu.html" style="font-weight:700;font-size:15px;color:#3d240c" style-hover="color:#0f5f6c">Menu</a><a href="./#locations" style="font-weight:700;font-size:15px;color:#3d240c" style-hover="color:#0f5f6c">Locations</a><a href="our-story.html" style="font-weight:700;font-size:15px;color:#3d240c" style-hover="color:#0f5f6c">Our Story</a><a href="food-truck.html" style="font-weight:700;font-size:15px;color:#3d240c" style-hover="color:#0f5f6c">Food Truck</a><a href="join-our-team.html" style="font-weight:700;font-size:15px;color:#3d240c" style-hover="color:#0f5f6c">Join Our Team</a></nav>
+      <div style="flex-basis:100%;display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(calc(33.34% - 22px),(760px - 100%) * 999,100%),1fr));gap:14px 32px">
+        <div><p style="margin:0 0 4px;font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#0f5f6c">Cahaba River Rd</p><p style="margin:0;font-family:'Bitter',serif;font-size:16px;line-height:1.5;color:#3d240c">4911 Cahaba River Road, Suite 105<br>Birmingham, AL 35243</p></div>
+        <div><p style="margin:0 0 4px;font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#0f5f6c">Homewood</p><p style="margin:0;font-family:'Bitter',serif;font-size:16px;line-height:1.5;color:#3d240c">817 Green Springs Hwy, Suite 109<br>Homewood, AL 35209</p></div>
+        <div><p style="margin:0 0 4px;font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#0f5f6c">Email</p><a href="mailto:info@theheavenlydonutco.com" style="font-family:'Bitter',serif;font-weight:700;font-size:16px;color:#3d240c" style-hover="color:#0f5f6c">info@theheavenlydonutco.com</a></div>
+      </div>
+      <div style="flex-basis:100%;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding-top:14px;border-top:2px dashed #cfe7f5"><span style="font-size:13px;font-weight:600;color:#5b4128">© 2026 The Heavenly Donut Company</span><div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-left:auto"><a href="tel:+12055367200" style="font-family:'Bitter',serif;font-weight:800;font-size:clamp(19px,1.6vw,22px);color:#3d240c;white-space:nowrap" style-hover="color:#0f5f6c">(205) 536-7200</a><div style="display:flex;gap:10px"><a href="https://www.facebook.com/theheavenlydonutco" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook" style="display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#3d240c;color:#fff" style-hover="background:#0f5f6c;color:#fff"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3z" fill="currentColor" stroke="none"></path></svg></a><a href="https://www.instagram.com/theheavenlydonutco/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram" style="display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#3d240c;color:#fff" style-hover="background:#0f5f6c;color:#fff"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"></circle></svg></a><a href="https://twitter.com/heavenlydonutco" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)" style="display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#3d240c;color:#fff" style-hover="background:#0f5f6c;color:#fff"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path transform="translate(3.4 3.4) scale(.72)" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" fill="currentColor" stroke="none"></path></svg></a></div></div></div>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  raysRef = React.createRef();
+  placeRays = () => { const r = this.raysRef.current, d = this.donutRef && this.donutRef.current, root = r && r.offsetParent; if (!r || !d || !root) return; const a = root.getBoundingClientRect(), b = d.getBoundingClientRect(); r.style.left = (b.left + b.width / 2 - a.left) + 'px'; r.style.top = (b.top + b.height / 2 - a.top) + 'px'; };
+  rootRef = React.createRef();
+  donutRef = React.createRef();
+  componentDidMount() {
+    this.onScrollFx = () => this.scrollFx();
+    window.addEventListener('scroll', this.onScrollFx, { passive: true }); window.addEventListener('resize', this.onScrollFx); this.scrollFx();
+    
+    this.onMove = e => {
+      const el = this.rootRef.current; if (!el) return;
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      el.querySelectorAll('[data-depth]').forEach(n => { const d = +n.dataset.depth; n.style.translate = `${x * d * 50}px ${y * d * 28}px`; });
+      if (this.donutRef.current) this.donutRef.current.style.translate = `${x * -18}px ${y * -12}px`;
+    };
+    window.addEventListener('pointermove', this.onMove);
+    this.initSprinkles();
+    this.initPlx();
+    this.paintBg = () => {
+      const secs = [...document.querySelectorAll('section[data-bg]')]; if (!secs.length) return;
+      const top = el => el.getBoundingClientRect().top + scrollY;
+      const H = document.documentElement.scrollHeight;
+      if (!H || top(secs[0]) <= 0) { this.bgTries = (this.bgTries || 0) + 1; if (this.bgTries < 60) this.bgRetry = setTimeout(this.paintBg, 250); return; }
+      if (!this.bgDone) { this.bgDone = true; this.bgLate = setTimeout(this.paintBg, 1500); }
+      const hero = document.querySelector('section[data-screen-label="Hero"]'); const hb = hero ? top(hero) + hero.offsetHeight : top(secs[0]);
+      const stops = ['#6cc3ee 0px', `#6cc3ee ${Math.round(hb)}px`];
+      secs.forEach(s => { const mid = top(s) + s.offsetHeight / 2; stops.push(`${s.dataset.bg} ${Math.round(mid)}px`); });
+      stops.push(`${secs[secs.length - 1].dataset.bg} ${H}px`);
+      const de = document.documentElement.style; de.backgroundColor = secs[secs.length - 1].dataset.bg; de.backgroundImage = `linear-gradient(180deg, ${stops.join(', ')})`; de.backgroundSize = `100% ${H}px`; de.backgroundRepeat = 'no-repeat';
+    };
+    let bgT = 0; this.queueBg = () => { clearTimeout(bgT); bgT = setTimeout(this.paintBg, 50); };
+    this.bgRO = new ResizeObserver(this.queueBg); this.bgRO.observe(document.body);
+    document.querySelectorAll('section[data-bg]').forEach(s => this.bgRO.observe(s));
+    this.paintBg(); this.queueBg();
+    window.addEventListener('resize', this.queueBg); window.addEventListener('load', this.queueBg);
+    document.addEventListener('visibilitychange', this.queueBg);
+  }
+  initSprinkles() {
+    const sec = document.getElementById('social'); if (!sec || sec.querySelector('[data-sprk]')) return;
+    const cols = ['#ff8fb3','#ffd23f','#6cc0ea','#7fd6a8','#b99cf0','#ff9f5a','#ffffff'];
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const layer = document.createElement('div'); layer.setAttribute('data-sprk','1');
+    layer.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1';
+    const els = [];
+    for (let i = 0; i < 38; i++) {
+      const side = i % 2 ? 1 : -1;
+      const x = side < 0 ? 2 + Math.random() * 22 : 76 + Math.random() * 22;
+      const y = 6 + Math.random() * 86;
+      const r = Math.random() * 360, w = 6 + Math.random() * 4, l = 20 + Math.random() * 14;
+      const s = document.createElement('span');
+      s.style.cssText = `position:absolute;left:${x}%;top:${y}%;width:${l}px;height:${w}px;border-radius:${w}px;background:${cols[i % cols.length]};box-shadow:0 2px 4px rgba(61,36,12,.12)${cols[i % cols.length]==='#ffffff'?',0 0 0 1px rgba(61,36,12,.08)':''};opacity:${reduce?1:0};transform:rotate(${r}deg)`;
+      s._r = r; s._dx = side * (120 + Math.random() * 160); s._dy = -80 - Math.random() * 160;
+      layer.appendChild(s); els.push(s);
+    }
+    sec.insertBefore(layer, sec.firstChild);
+    if (reduce) return;
+    let done = false;
+    const play = () => { if (done) return; const r = sec.getBoundingClientRect(); if (r.top > innerHeight * 0.85 || r.bottom < 0) return; done = true; window.removeEventListener('scroll', play);
+      els.forEach((s, i) => s.animate([
+        { opacity: 0, transform: `translate(${s._dx}px,${s._dy}px) rotate(${s._r - 220}deg) scale(.6)` },
+        { opacity: 1, offset: .6 },
+        { opacity: 1, transform: `translate(0,0) rotate(${s._r}deg) scale(1)` }
+      ], { duration: 1100 + Math.random() * 700, delay: i * 35, easing: 'cubic-bezier(.2,.9,.3,1.15)', fill: 'forwards' }));
+    };
+    window.addEventListener('scroll', play, { passive: true }); play();
+  }
+  componentWillUnmount() { clearTimeout(this.bgRetry); clearTimeout(this.bgLate); if (this.bgRO) this.bgRO.disconnect(); window.removeEventListener('resize', this.queueBg); window.removeEventListener('load', this.queueBg); document.removeEventListener('visibilitychange', this.queueBg); window.removeEventListener('pointermove', this.onMove); window.removeEventListener('scroll', this.onScrollFx); window.removeEventListener('resize', this.onScrollFx); }
+  scrollFx() {
+    const root = this.rootRef.current && this.rootRef.current.parentNode; if (!root) return;
+    const vh = window.innerHeight, still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ease = t => 1 - Math.pow(1 - Math.min(1, Math.max(0, t)), 3);
+    root.querySelectorAll('section[id]').forEach(sec => {
+      const r = sec.getBoundingClientRect();
+      const enter = ease((vh * (sec.id === 'locations' ? .45 : 1) - r.top) / (vh * 0.85));
+      sec.querySelectorAll('[data-part]').forEach(el => {
+        const dir = el.dataset.part === 'l' ? -1 : 1;
+        el.style.transform = still ? '' : 'translate3d(' + (dir * enter * 70) + 'vw,' + (-enter * 12) + 'vh,0) scale(' + (1 + enter * .25) + ')';
+        el.style.opacity = still ? 0 : String(1 - enter * 1.1);
+      });
+      sec.querySelectorAll('[data-par]').forEach(el => {
+        const mid = (r.top + r.height / 2 - vh / 2);
+        el.style.transform = still ? '' : 'translate3d(0,' + (mid * +el.dataset.par) + 'px,0)';
+      });
+      const c = sec.querySelector('[data-rise]');
+      if (c && !still) { const p = ease((vh - r.top) / (vh * 0.7)); c.style.opacity = String(.15 + p * .85); c.style.transform = 'translate3d(0,' + ((1 - p) * 90) + 'px,0) scale(' + (.94 + p * .06) + ')';  }
+    });
+    const hero = this.rootRef.current, hr = hero.getBoundingClientRect(), hp = Math.min(1, Math.max(0, -hr.top / hr.height));
+    root.querySelectorAll('[data-fog]').forEach(el => { const f = still ? 1 : ease((hp - .4) * 2.4); el.style.opacity = String(f); el.style.transform = 'translate3d(0,' + ((1 - f) * 14) + 'vh,0) scale(' + (.9 + f * .1) + ')'; });
+    if (!still) hero.querySelectorAll('[data-depth]').forEach(el => { el.style.marginTop = (hp * -260 * (+el.dataset.depth || .3)) + 'px'; });
+  }
+  fliers() {
+    const h = React.createElement;
+    const F = [
+      ['b', '3%', 'clamp(60px,5vw,96px)', 0],
+      ['c', '36%', 'clamp(60px,6vw,104px)', -6],
+      ['d', '94%', 'clamp(44px,3.6vw,70px)', -12],
+    ];
+    return F.map(([l, left, w, d], i) => h('div', { key: 'f' + i, style: { position: 'absolute', left, top: 0, width: w, zIndex: 4, pointerEvents: 'none', animation: `hvRise 18s linear ${d}s infinite` } },
+      h('img', { src: `assets/images/stickers/sprinkle-donut-${l}.webp`, alt: '', style: { width: '100%', display: 'block', filter: 'drop-shadow(0 12px 14px rgba(15,60,90,.28))' } })));
+  }
+  locCards() {
+    const day = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' })).getDay();
+    const L = [
+      { id: 'loc-cahaba', name: 'Cahaba River Road', addr1: '4911 Cahaba River Road, Suite 105', addr2: 'Birmingham, AL 35243', dir: 'https://www.google.com/maps/dir/?api=1&destination=The%20Heavenly%20Donut%20Company%2C%204911%20Cahaba%20River%20Rd%20Suite%20105%2C%20Birmingham%2C%20AL%2035243', s: [[7, 14], null, [6, 21], [6, 21], [6, 21], [6, 21], [7, 21]],
+        hours: [['Mon', 'Closed', [1]], ['Tue–Fri', '6 AM – 9 PM', [2, 3, 4, 5]], ['Sat', '7 AM – 9 PM', [6]], ['Sun', '7 AM – 2 PM', [0]]] },
+      { id: 'loc-homewood', name: 'Homewood @ The Edge', addr1: '817 Green Springs Hwy, Suite 109', addr2: 'Homewood, AL 35209', dir: 'https://www.google.com/maps/dir/?api=1&destination=The%20Heavenly%20Donut%20Company%2C%20817%20Green%20Springs%20Hwy%20Suite%20109%2C%20Homewood%2C%20AL%2035209', s: [[7, 18], [6.5, 18], [6.5, 18], [6.5, 18], [6.5, 18], [6.5, 18], [7, 18]],
+        hours: [['Mon', '6:30 AM – 6 PM · pastries only', [1]], ['Tue–Fri', '6:30 AM – 6 PM', [2, 3, 4, 5]], ['Sat–Sun', '7 AM – 6 PM', [6, 0]]] },
+    ];
+    return L.map(l => { const st = this.status(l.s); return { ...l, status: st.text, dot: st.open ? '#2fbf71' : '#e2574c', ring: st.open ? '#dcf5e7' : '#fde3e0', hours: l.hours.map(([d, t, ds]) => ({ d, t, bg: ds.includes(day) ? '#fff3c4' : 'transparent' })) }; });
+  }
+  status(sched) {
+    const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+    const fmt = x => { const hr = Math.floor(x), m = Math.round((x - hr) * 60), p = hr >= 12 ? 'PM' : 'AM', h12 = ((hr + 11) % 12) + 1; return h12 + (m ? ':' + String(m).padStart(2, '0') : '') + ' ' + p; };
+    const day = now.getDay(), t = now.getHours() + now.getMinutes() / 60, today = sched[day];
+    if (today && t >= today[0] && t < today[1]) return { open: true, text: 'Open till ' + fmt(today[1]) };
+    const names = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    if (today && t < today[0]) return { open: false, text: 'Opens ' + fmt(today[0]) };
+    for (let k = 1; k <= 7; k++) { const d = (day + k) % 7; if (sched[d]) return { open: false, text: 'Opens ' + (k === 1 ? 'tomorrow ' : names[d] + ' ') + fmt(sched[d][0]) }; }
+    return { open: false, text: 'Closed' };
+  }
+  state = { subscribed: false, loc: 0, flavPage: 0 };
+  flavRef = React.createRef();
+  flavGo = p => { const el = this.flavRef.current; if (!el) return; const n = Math.max(1, Math.ceil(el.scrollWidth / el.clientWidth)); const q = (p + n) % n; el.scrollTo({ left: q * el.clientWidth, behavior: 'smooth' }); };
+  flavPages() { const el = this.flavRef.current; return el ? Math.max(1, Math.ceil((el.scrollWidth - 4) / el.clientWidth)) : 3; }
+  evPhotos = [['assets/images/events/event-truck-wide.webp','Wedding couple at the Heavenly Donut truck'],['assets/images/events/event-sharing.webp','Couple sharing a doughnut'],['assets/images/events/event-tray.webp','Tray of pastries at a wedding'],['assets/images/events/event-hands.webp','Doughnut held at a wedding']];
+  evGo(d) { this.setState(s => ({ ev: ((s.ev ?? 0) + d + 4) % 4 })); }
+  initPlx() {
+    const sec = document.getElementById('reviews'); if (!sec || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const els = [...sec.querySelectorAll('[data-plx]')];
+    let raf = 0;
+    const run = () => { raf = 0; const r = sec.getBoundingClientRect(); if (r.bottom < -200 || r.top > innerHeight + 200) return;
+      const p = (r.top + r.height / 2 - innerHeight / 2);
+      els.forEach(n => { const s = +n.dataset.plx; n.style.translate = '0 ' + (p * s).toFixed(1) + 'px'; }); };
+    this._plx = () => { if (!raf) raf = requestAnimationFrame(run); };
+    window.addEventListener('scroll', this._plx, { passive: true }); run();
+  }
+  renderVals() {
+    const ev = this.state.ev ?? null, P = this.evPhotos;
+    if (!this._evKey) { this._evKey = e => { if (this.state.ev == null) return; if (e.key === 'Escape') this.setState({ ev: null }); if (e.key === 'ArrowRight') this.evGo(1); if (e.key === 'ArrowLeft') this.evGo(-1); }; window.addEventListener('keydown', this._evKey); }
+    return { ...this._rv(), evOpen: ev != null, evSrc: ev != null ? P[ev][0] : '', evAlt: ev != null ? P[ev][1] : '', evCount: ev != null ? (ev + 1) + ' / 4' : '',
+      ev0: () => this.setState({ ev: 0 }), ev1: () => this.setState({ ev: 1 }), ev2: () => this.setState({ ev: 2 }), ev3: () => this.setState({ ev: 3 }),
+      evClose: () => this.setState({ ev: null }), evStop: e => e.stopPropagation(),
+      evPrev: e => { e.stopPropagation(); this.evGo(-1); }, evNext: e => { e.stopPropagation(); this.evGo(1); } };
+  }
+  _rv() {
+    const h = React.createElement;
+    const cloud = (n, pos, w, z, depth, dx, t, i, o = 1) => h('div', { key: 'c' + i, 'data-depth': depth, style: { position: 'absolute', ...pos, width: w, zIndex: z, transition: 'translate .6s ease-out', pointerEvents: 'none' } },
+      h('img', { src: `assets/images/clouds/cloud-0${n}.webp`, alt: '', style: { width: '100%', display: 'block', opacity: o, '--dx': dx + 'px', animation: `hvDrift ${t}s ease-in-out ${-i * 4}s infinite alternate` } }));
+    const sticker = (l, pos, w, rot, depth, i, z) => h('div', { key: 's' + i, 'data-depth': depth, style: { position: 'absolute', ...pos, width: w, zIndex: z, transition: 'translate .6s ease-out', pointerEvents: 'none' } },
+      h('img', { src: `assets/images/stickers/sprinkle-donut-${l}.webp`, alt: '', style: { width: '100%', display: 'block', '--r': rot + 'deg', filter: 'drop-shadow(0 12px 14px rgba(15,60,90,.28))', animation: `hvBob ${6 + i}s ease-in-out ${-i}s infinite` } }));
+    return {
+      rootRef: this.rootRef, donutRef: this.donutRef,
+      subscribe: e => { e.preventDefault(); this.setState({ subscribed: true }); },
+      subLabel: this.state.subscribed ? 'Subscribed!' : 'Subscribe',
+      locCards: this.locCards(),
+      loc: (() => { const c = this.locCards()[this.state.loc]; const q = encodeURIComponent('The Heavenly Donut Company, ' + c.addr1 + ', ' + c.addr2); return { ...c, status: c.status, map: 'https://maps.google.com/maps?q=' + q + '&z=14&output=embed' }; })(),
+      locTabs: ['Cahaba River Rd', 'Homewood'].map((label, i) => ({ label, bg: this.state.loc === i ? '#ffd23f' : 'transparent', sh: this.state.loc === i ? '0 4px 10px rgba(61,36,12,.15)' : 'none', pick: () => this.setState({ loc: i }) })),
+      flavRef: this.flavRef,
+      flavors: [
+        { name: 'Classic Sprinkle', img: 'assets/images/stickers/sprinkle-donut-d.webp' },
+        { name: 'Strawberry Frosted', img: 'assets/images/products/donut-pink-sprinkle.webp' },
+        { name: 'Chocolate Sprinkle', img: 'assets/images/products/donut-chocolate-sprinkle.webp' },
+        { name: 'Classic Glazed', img: 'assets/images/products/donut-glazed.webp' },
+        { name: 'Sprinkle Stack', img: 'assets/images/products/donut-stack.webp' },
+        { name: 'The Half Dozen', img: 'assets/images/products/donut-box-open.webp' },
+      ],
+      flavPrev: () => this.flavGo(this.state.flavPage - 1),
+      flavNext: () => this.flavGo(this.state.flavPage + 1),
+      flavScroll: e => { const el = e.currentTarget; const p = Math.round(el.scrollLeft / el.clientWidth); if (p !== this.state.flavPage) this.setState({ flavPage: p }); },
+      flavDots: Array.from({ length: this.flavPages() }, (_, i) => ({ bg: i === this.state.flavPage ? '#ff5c9a' : 'rgba(61,36,12,.2)', go: () => this.flavGo(i) })),
+      locs: [
+        ['Cahaba River Rd', '#loc-cahaba', [[7, 14], null, [6, 21], [6, 21], [6, 21], [6, 21], [7, 21]]],
+        ['Homewood', '#loc-homewood', [[7, 18], [6.5, 18], [6.5, 18], [6.5, 18], [6.5, 18], [6.5, 18], [7, 18]]],
+      ].map(([name, href, s]) => { const st = this.status(s); return { name, href, status: st.text, dot: st.open ? '#2fbf71' : '#e2574c', ring: st.open ? 'rgba(47,191,113,.22)' : 'rgba(226,87,76,.2)' }; }),
+            backLayer: [
+        cloud(3, { right: '-10%', top: '24%' }, '30vw', 1, .4, -40, 30, 1, .95),
+        cloud(5, { left: '-8%', top: '38%' }, '24vw', 1, .5, 30, 28, 5, .9),
+        cloud(1, { right: '-6%', bottom: '8%' }, '26vw', 1, .6, -30, 26, 0, .95),
+      ],
+      frontLayer: [
+        h('div', { key: 'haze', style: { position: 'absolute', left: 0, right: 0, bottom: 0, height: '32%', zIndex: 5, pointerEvents: 'none', background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(240,248,255,.75) 60%, rgba(255,255,255,.95) 100%)' } }),
+        cloud(2, { left: '-14%', bottom: '-12%' }, '58vw', 8, 1.2, 30, 24, 2),
+        cloud(5, { left: '-12%', bottom: '2%' }, '36vw', 8, 1, 20, 30, 6, .95),
+        cloud(6, { left: '30%', bottom: '-26%' }, '50vw', 6, 1.6, 30, 20, 4),
+        cloud(4, { right: '-18%', bottom: '-20%' }, '52vw', 6, 1.4, -40, 28, 3),
+        cloud(3, { right: '-14%', bottom: '10%' }, '26vw', 6, 1.1, -30, 26, 7, .95),
+      ],
+      rays: h('div', { ref: this.raysRef, style: { position: 'absolute', left: '28%', top: '52%', width: '180vmax', height: '180vmax', marginLeft: '-90vmax', marginTop: '-90vmax', zIndex: 0, background: 'repeating-conic-gradient(from 0deg, rgba(255,255,255,.18) 0deg 6deg, rgba(255,255,255,0) 6deg 15deg)', WebkitMaskImage: 'radial-gradient(circle, #000 0%, transparent 50%)', maskImage: 'radial-gradient(circle, #000 0%, transparent 50%)', animation: 'hvRays 120s linear infinite', pointerEvents: 'none' } }),
+      donut: h('div', { style: { position: 'absolute', inset: 0, '--r': '0deg', animation: 'hvBob 7s ease-in-out infinite' } },
+        h('div', { style: { position: 'absolute', inset: '-14%', borderRadius: '50%', background: 'radial-gradient(circle at 50% 42%, rgba(255,248,225,.9) 0%, rgba(255,240,200,.35) 34%, rgba(255,255,255,0) 60%)' } }),
+        h('img', { src: 'assets/images/products/donut-box-open.webp', alt: 'A box of six Heavenly doughnuts', style: { position: 'relative', width: '100%', height: '100%', objectFit: 'contain', transform: 'translate(8%, -4%) scale(1.05) rotate(-5deg)', transformOrigin: '50% 60%', filter: 'drop-shadow(0 0 1px #fff) drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(0 18px 18px rgba(15,60,90,.22)) drop-shadow(0 40px 50px rgba(15,60,90,.25))' } })),
+    };
+  }
+}
+</script>
+</body>
+</html>
