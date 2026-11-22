@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+<script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+<style>body{--font-heading:'Cormorant Garamond',Georgia,serif;--color-bg:#ffffff;--color-surface:#f5dcd5;--color-accent:#201e1d;--sage:#d3dac3;--sky:#c1d6e8;--lav:#ecdff5;--blush:#f5dcd5;--peach:#fdcba1;margin:0;background:var(--color-bg);font-family:var(--font-body);color:var(--color-text)}a{color:var(--color-text)}a:hover{color:var(--color-neutral-700)}</style>
+<script src="./hw-polish.js"></script>
+<style>html{scroll-behavior:smooth}</style>
+</helmet>
+<div style="overflow:hidden">
+  <dc-import name="HWHeader" active="Memberships" hint-size="100%,130px"></dc-import>
+
+  <section data-screen-label="Memberships hero" style="background:radial-gradient(55% 70% at 90% 10%, var(--sky) 0%, rgba(193,214,232,0) 70%), radial-gradient(45% 60% at 0% 100%, var(--peach) 0%, rgba(253,203,161,0) 70%)">
+    <div style="max-width:1440px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(20px,5vw,64px);box-sizing:border-box;display:flex;flex-direction:column;gap:24px">
+      <span style="display:flex;align-items:center;gap:14px;font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-600)"><span style="width:36px;height:1px;background:currentColor"></span>IV Memberships</span>
+      <h1 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(42px,7vw,104px);line-height:.95">Make it a <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.15em">ritual.</span></h1>
+      <p style="margin:0;font-size:16px;line-height:1.85;color:var(--color-neutral-700);max-width:620px;text-wrap:pretty">Four membership levels for clients who want IV therapy as part of their regular routine. We'll walk through what each includes at your consultation and help you choose the right fit.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Tiers" style="max-width:1440px;margin:0 auto;padding:clamp(48px,6vw,88px) clamp(20px,5vw,64px);box-sizing:border-box">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px">
+      <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="4">
+        <div style="position:relative;background-image:{{ t.g }};padding:clamp(28px,3vw,40px);display:flex;flex-direction:column;gap:20px;min-height:340px">
+          <span style="font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase">{{ t.name }}</span>
+          <span style="font-family:var(--font-heading);font-weight:500;font-size:clamp(56px,5vw,76px);line-height:.9">{{ t.price }}</span>
+          <span style="font-size:15px;line-height:1.6;color:var(--color-neutral-800)">{{ t.d }}</span>
+          <a href="Book.dc.html?service=iv" style="margin-top:auto;align-self:flex-start;text-decoration:none;color:var(--color-bg);background:var(--color-text);padding:14px 22px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Ask about {{ t.name }}</a>
+        </div>
+      </sc-for>
+    </div>
+    <p style="margin:24px 0 0;font-size:13px;line-height:1.7;color:var(--color-neutral-700);max-width:720px">Pricing is subject to change. Membership terms, inclusions and eligibility are confirmed with you before enrollment.</p>
+  </section>
+
+  <section data-screen-label="How it works" style="border-top:1px solid rgba(32,30,29,.08);max-width:1440px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,64px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(40px,5vw,80px)">
+    <h2 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(32px,4vw,56px);line-height:1">How membership <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.2em">works</span></h2>
+    <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+      <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+        <li style="display:flex;gap:24px;align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(32,30,29,.1)"><span style="font-family:var(--font-heading);font-size:44px;line-height:.8;opacity:.15;width:56px;flex:none">{{ st.n }}</span><span style="font-size:17px;line-height:1.5">{{ st.t }}</span></li>
+      </sc-for>
+    </ol>
+  </section>
+
+  <dc-import name="HWFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const g = ['linear-gradient(135deg,var(--sage),var(--sky))', 'linear-gradient(135deg,var(--peach),var(--blush))', 'linear-gradient(135deg,var(--sky),var(--lav))', 'linear-gradient(135deg,var(--blush),var(--lav))'];
+    return {
+      tiers: [['Silver', '$99', 'A simple way to start a monthly routine.'], ['Gold', '$140', 'For clients who visit regularly.'], ['Platinum', '$240', 'More flexibility for an active schedule.'], ['Diamond', '$340', 'Our most complete membership.']].map(([name, price, d], k) => ({ name, price, d, g: g[k] })),
+      steps: ['Book a consultation and complete a short health screening', 'Choose the membership level that fits your routine', 'Schedule your visits and settle into the lounge'].map((t, k) => ({ t, n: '0' + (k + 1) })),
+    };
+  }
+}
+</script>
+</body>
+</html>

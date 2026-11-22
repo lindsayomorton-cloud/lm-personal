@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+<script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+<script src="./hw-services.js"></script>
+<style>body{--font-heading:'Cormorant Garamond',Georgia,serif;--color-bg:#ffffff;--color-surface:#f5dcd5;--color-accent:#201e1d;--sage:#d3dac3;--sky:#c1d6e8;--lav:#ecdff5;--blush:#f5dcd5;--peach:#fdcba1;margin:0;background:var(--color-bg);font-family:var(--font-body);color:var(--color-text)}a{color:var(--color-text)}a:hover{color:var(--color-neutral-700)}</style>
+<script src="./hw-polish.js"></script>
+<style>html{scroll-behavior:smooth}</style>
+</helmet>
+<div style="overflow:hidden">
+  <dc-import name="HWHeader" active="Services" hint-size="100%,130px"></dc-import>
+
+  <section data-screen-label="Service hero" style="background:radial-gradient(55% 70% at 90% 10%, var(--lav) 0%, rgba(236,223,245,0) 70%), radial-gradient(45% 60% at 0% 100%, var(--blush) 0%, rgba(245,220,213,0) 70%)">
+    <div style="max-width:1440px;margin:0 auto;padding:clamp(32px,4vw,56px) clamp(20px,5vw,64px) clamp(56px,7vw,96px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(40px,5vw,80px);align-items:center">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <a href="Services.dc.html" style="align-self:flex-start;display:flex;align-items:center;gap:10px;min-height:44px;font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--color-neutral-600)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>All treatments</a>
+        <h1 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(42px,7vw,104px);line-height:.95">{{ s.pre }}<span style="font-family:'Allura',cursive;font-weight:400;font-size:1.15em">{{ s.script }}</span>{{ s.post }}</h1>
+        <p style="margin:0;display:flex;align-items:flex-start;gap:16px;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;line-height:1.9;color:var(--color-neutral-700)"><span style="width:40px;height:2px;margin-top:.9em;flex:none;background:linear-gradient(90deg,var(--peach),var(--lav))"></span><span>{{ s.tagA }}<br>{{ s.tagB }}</span></p>
+        <p style="margin:0;font-size:16px;line-height:1.85;color:var(--color-neutral-700);max-width:520px;text-wrap:pretty">{{ s.what }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+          <a href="{{ s.book }}" style="align-self:flex-start;display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--color-text);padding:6px 20px 6px 6px;border-radius:999px;transition:background .25s" style-hover="background:rgba(255,255,255,.55)"><span style="width:56px;height:56px;flex:none;border-radius:50%;background-image:linear-gradient(135deg,var(--peach),var(--blush));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg></span><span style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase">Book {{ s.name }}</span></a>
+          <a href="tel:2054901300" style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:8px 0;border-bottom:1px solid currentColor">Or call (205) 490-1300</a>
+        </div>
+      </div>
+      <div style="position:relative;width:100%;aspect-ratio:4/5;max-width:620px;justify-self:end">
+        <div style="position:absolute;left:0;top:0;width:78%;height:88%;overflow:hidden;border-radius:999px 999px 40px 40px;background:var(--blush);box-shadow:var(--shadow-md)">{{ heroImg }}</div>
+        <div style="position:absolute;right:0;bottom:0;width:46%;aspect-ratio:1;overflow:hidden;border-radius:50%;border:8px solid var(--color-bg);background:var(--sky);box-shadow:var(--shadow-md)">{{ altImg }}</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Details" style="border-top:1px solid rgba(32,30,29,.08);max-width:1440px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,64px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(40px,5vw,80px)">
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="background:var(--sage);padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:10px">
+        <span style="font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase">Who it's for</span>
+        <p style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(22px,2vw,28px);line-height:1.3">{{ s.who }}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="padding:22px;background-image:linear-gradient(135deg,var(--sky),var(--lav));display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase">Session</span><span style="font-family:var(--font-heading);font-weight:500;font-size:22px;line-height:1.2">{{ s.time }}</span></div>
+        <div style="padding:22px;background-image:linear-gradient(135deg,var(--peach),var(--blush));display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase">Pricing</span><span style="font-family:var(--font-heading);font-weight:500;font-size:22px;line-height:1.2">{{ s.price }}</span></div>
+      </div>
+      <sc-if value="{{ s.priceLink }}" hint-placeholder-val="{{ false }}"><a href="Memberships.dc.html" style="align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:8px 0;border-bottom:1px solid currentColor">See IV memberships →</a></sc-if>
+      <p style="margin:0;font-size:13px;line-height:1.7;color:var(--color-neutral-700);padding-top:16px;border-top:1px solid rgba(32,30,29,.12)">{{ s.note }}</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <span style="display:flex;align-items:center;gap:14px;font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-600)"><span style="width:36px;height:1px;background:currentColor"></span>What to expect</span>
+      <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+        <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+          <li style="display:flex;gap:24px;align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(32,30,29,.1)"><span style="font-family:var(--font-heading);font-size:44px;line-height:.8;opacity:.15;width:56px;flex:none">{{ st.n }}</span><span style="font-size:17px;line-height:1.5">{{ st.t }}</span></li>
+        </sc-for>
+      </ol>
+    </div>
+  </section>
+
+  <sc-if value="{{ hasMenu }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="Menu" style="border-top:1px solid rgba(32,30,29,.08)">
+      <div style="max-width:1440px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,64px);box-sizing:border-box;display:flex;flex-direction:column;gap:32px">
+        <h2 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(32px,4vw,56px);line-height:1">{{ s.menuTitle }}</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:12px">
+          <sc-for list="{{ menu }}" as="m" hint-placeholder-count="6">
+            <div style="background-image:{{ m.g }};padding:22px 24px;display:flex;flex-direction:column;gap:6px;min-height:84px;justify-content:center"><span style="font-family:var(--font-heading);font-weight:500;font-size:24px;line-height:1.15">{{ m.t }}</span><span style="font-size:14px;color:var(--color-neutral-700)">{{ m.d }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <section data-screen-label="More services" style="max-width:1440px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,64px);box-sizing:border-box;display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px">
+      <h2 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(32px,3.4vw,48px);line-height:1">Pairs well <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.2em">with</span></h2>
+      <a href="Services.dc.html" style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:8px 0;border-bottom:1px solid currentColor">All treatments</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px">
+      <sc-for list="{{ others }}" as="o" hint-placeholder-count="3">
+        <a href="{{ o.href }}" style="position:relative;display:block;aspect-ratio:4/3;overflow:hidden;text-decoration:none;color:#fff;background:var(--blush)">{{ o.img }}<span style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(32,30,29,.6),rgba(32,30,29,0) 60%)"></span><span style="position:absolute;left:22px;bottom:18px;font-family:var(--font-heading);font-weight:500;font-size:28px">{{ o.name }}</span></a>
+      </sc-for>
+    </div>
+  </section>
+
+  <dc-import name="HWFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;slug&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;iv&quot;,&quot;peptides&quot;,&quot;nad&quot;,&quot;vitamins&quot;,&quot;red-light&quot;,&quot;pelvic-floor&quot;,&quot;body-sculpting&quot;,&quot;aesthetics&quot;],&quot;default&quot;:&quot;iv&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() { if (!window.HW_SERVICES) this.t = setInterval(() => { if (window.HW_SERVICES) { clearInterval(this.t); this.forceUpdate(); } }, 50); }
+  componentWillUnmount() { clearInterval(this.t); }
+  renderVals() {
+    const D = window.HW_SERVICES || [];
+    const slug = new URLSearchParams(location.search).get('s') || this.props.slug || 'iv';
+    const i = Math.max(0, D.findIndex(x => x.slug === slug));
+    const s = D[i];
+    if (!s) return { s: {}, steps: [], menu: [], others: [], hasMenu: false };
+    const at = s.name.lastIndexOf(s.script);
+    const ci = s.tagline.indexOf(', ');
+    const im = (src, alt) => React.createElement('img', { src, alt, style: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' } });
+    if (typeof document !== 'undefined') document.title = s.name + ' · Heights Wellness';
+    return {
+      s: { ...s, tagA: ci > 0 ? s.tagline.slice(0, ci + 1) : s.tagline, tagB: ci > 0 ? s.tagline.slice(ci + 2) : '', pre: at >= 0 ? s.name.slice(0, at) : s.name + ' ', post: at >= 0 ? s.name.slice(at + s.script.length) : '', script: at >= 0 ? s.script : '', book: 'Book.dc.html?service=' + s.slug, priceLink: !!s.priceLink },
+      heroImg: im(s.hero, s.name), altImg: im(s.alt, s.name + ' detail'),
+      steps: s.expect.map((t, k) => ({ t, n: '0' + (k + 1) })),
+      hasMenu: s.menu.length > 0,
+      menu: s.menu.map(([t, d], k) => ({ t, d, g: (window.HW_GRADS || [])[k % 5] })),
+      others: [1, 2, 3].map(k => D[(i + k) % D.length]).map(o => ({ name: o.name, href: 'Service.dc.html?s=' + o.slug, img: im(o.hero, o.name) })),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+<script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+<script src="./hw-services.js"></script>
+<style>body{--font-heading:'Cormorant Garamond',Georgia,serif;--color-bg:#ffffff;--color-surface:#f5dcd5;--color-accent:#201e1d;--sage:#d3dac3;--sky:#c1d6e8;--lav:#ecdff5;--blush:#f5dcd5;--peach:#fdcba1;margin:0;background:var(--color-bg);font-family:var(--font-body);color:var(--color-text)}a{color:var(--color-text)}a:hover{color:var(--color-neutral-700)}</style>
+<script src="./hw-polish.js"></script>
+<style>html{scroll-behavior:smooth}</style>
+</helmet>
+<div style="overflow:hidden">
+  <dc-import name="HWHeader" active="" hint-size="100%,130px"></dc-import>
+
+  <section data-screen-label="Book" style="background:radial-gradient(55% 70% at 90% 10%, var(--lav) 0%, rgba(236,223,245,0) 70%), radial-gradient(45% 60% at 0% 100%, var(--blush) 0%, rgba(245,220,213,0) 70%)">
+    <div style="max-width:1440px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(20px,5vw,64px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(40px,6vw,96px);align-items:start">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <span style="display:flex;align-items:center;gap:14px;font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-600)"><span style="width:36px;height:1px;background:currentColor"></span>Book a Consultation</span>
+        <h1 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(42px,6vw,88px);line-height:.95">Your journey <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.15em">begins here.</span></h1>
+        <p style="margin:0;font-size:16px;line-height:1.85;color:var(--color-neutral-700);max-width:440px">Send a request and our team will reach out to confirm a time. Prefer to talk? Call us anytime during studio hours.</p>
+        <div style="display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(32,30,29,.15);max-width:440px">
+          <a href="tel:2054901300" style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(32,30,29,.15);text-decoration:none"><span style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase">Call</span><span style="font-size:16px">(205) 490-1300</span></a>
+          <a href="mailto:info@glowheightswellness.com" style="display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid rgba(32,30,29,.15);text-decoration:none"><span style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase">Email</span><span style="font-size:16px;text-align:right">info@glowheightswellness.com</span></a>
+          <div style="display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid rgba(32,30,29,.15)"><span style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase">Visit</span><span style="font-size:16px;text-align:right">3168 Heights Village<br>Vestavia Hills, AL 35243</span></div>
+        </div>
+      </div>
+
+      <div style="background:var(--color-bg);padding:clamp(28px,4vw,56px);box-shadow:var(--shadow-md)">
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ submit }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px 28px">
+            <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-neutral-700)">First name</span><input required="" style="font:inherit;font-size:17px;padding:10px 0;border:none;border-bottom:1px solid rgba(32,30,29,.35);background:transparent;outline:none;border-radius:0"></label>
+            <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-neutral-700)">Last name</span><input required="" style="font:inherit;font-size:17px;padding:10px 0;border:none;border-bottom:1px solid rgba(32,30,29,.35);background:transparent;outline:none;border-radius:0"></label>
+            <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-neutral-700)">Phone</span><input type="tel" required="" style="font:inherit;font-size:17px;padding:10px 0;border:none;border-bottom:1px solid rgba(32,30,29,.35);background:transparent;outline:none;border-radius:0"></label>
+            <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-neutral-700)">Email</span><input type="email" required="" style="font:inherit;font-size:17px;padding:10px 0;border:none;border-bottom:1px solid rgba(32,30,29,.35);background:transparent;outline:none;border-radius:0"></label>
+            <div style="grid-column:1 / -1;display:flex;flex-direction:column;gap:12px">
+              <span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-neutral-700)">I'm interested in</span>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{ opts }}" as="o" hint-placeholder-count="9"><button type="button" onClick="{{ o.pick }}" style="font:inherit;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;border-radius:999px;cursor:pointer;border:1px solid {{ o.border }};background:{{ o.bg }};color:{{ o.fg }}">{{ o.t }}</button></sc-for>
+              </div>
+            </div>
+            <div style="grid-column:1 / -1;display:flex;flex-direction:column;gap:12px">
+              <span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-neutral-700)">Best time to reach you</span>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{ times }}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{ o.pick }}" style="font:inherit;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;border-radius:999px;cursor:pointer;border:1px solid {{ o.border }};background:{{ o.bg }};color:{{ o.fg }}">{{ o.t }}</button></sc-for>
+              </div>
+            </div>
+            <label style="grid-column:1 / -1;display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-neutral-700)">Anything we should know?</span><textarea rows="3" style="font:inherit;font-size:17px;padding:10px 0;border:none;border-bottom:1px solid rgba(32,30,29,.35);background:transparent;outline:none;resize:vertical;border-radius:0"></textarea></label>
+            <button type="submit" style="grid-column:1 / -1;justify-self:start;display:flex;align-items:center;gap:16px;font:inherit;background:none;border:none;padding:6px 20px 6px 6px;border-radius:999px;cursor:pointer;color:var(--color-text)" style-hover="background:var(--blush)">
+              <span style="width:56px;height:56px;border-radius:50%;background-image:linear-gradient(135deg,var(--peach),var(--blush));display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
+              <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Request appointment</span>
+            </button>
+          </form>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:14px;padding:24px 0">
+            <h2 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:44px;line-height:1">Thank <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.2em">you.</span></h2>
+            <p style="margin:0;font-size:16px;line-height:1.8;color:var(--color-neutral-700)">We've received your request for {{ chosen }}. Our team will reach out to confirm a time.</p>
+            <a href="Heights%20Wellness%20v2.dc.html" style="align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:8px 0;border-bottom:1px solid currentColor">Back to home</a>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="HWFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { svc: new URLSearchParams(location.search).get('service') || 'unsure', time: 'Morning', sent: false };
+  componentDidMount() { if (!window.HW_SERVICES) this.t = setInterval(() => { if (window.HW_SERVICES) { clearInterval(this.t); this.forceUpdate(); } }, 50); }
+  componentWillUnmount() { clearInterval(this.t); }
+  renderVals() {
+    const D = window.HW_SERVICES || [];
+    const all = [...D.map(s => [s.slug, s.name]), ['unsure', 'Not sure yet']];
+    const chip = (on) => ({ bg: on ? 'var(--color-text)' : 'transparent', fg: on ? 'var(--color-bg)' : 'var(--color-text)', border: on ? 'var(--color-text)' : 'rgba(32,30,29,.25)' });
+    const cur = all.find(a => a[0] === this.state.svc);
+    return {
+      opts: all.map(([v, t]) => ({ t, ...chip(v === this.state.svc), pick: () => this.setState({ svc: v }) })),
+      times: ['Morning', 'Afternoon', 'Evening'].map(t => ({ t, ...chip(t === this.state.time), pick: () => this.setState({ time: t }) })),
+      sent: this.state.sent, notSent: !this.state.sent,
+      chosen: cur && cur[0] !== 'unsure' ? cur[1] : 'a consultation',
+      submit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

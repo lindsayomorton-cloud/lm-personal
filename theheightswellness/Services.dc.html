@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+<script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+<script src="./hw-services.js"></script>
+<style>body{--font-heading:'Cormorant Garamond',Georgia,serif;--color-bg:#ffffff;--color-surface:#f5dcd5;--color-accent:#201e1d;--sage:#d3dac3;--sky:#c1d6e8;--lav:#ecdff5;--blush:#f5dcd5;--peach:#fdcba1;margin:0;background:var(--color-bg);font-family:var(--font-body);color:var(--color-text)}a{color:var(--color-text)}a:hover{color:var(--color-neutral-700)}</style>
+<script src="./hw-polish.js"></script>
+<style>html{scroll-behavior:smooth}</style>
+</helmet>
+<div style="overflow:hidden">
+  <dc-import name="HWHeader" active="Services" hint-size="100%,130px"></dc-import>
+
+  <section data-screen-label="Services hero" style="background:radial-gradient(55% 70% at 90% 10%, var(--lav) 0%, rgba(236,223,245,0) 70%), radial-gradient(45% 60% at 0% 100%, var(--peach) 0%, rgba(253,203,161,0) 70%)">
+    <div style="max-width:1440px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(20px,5vw,64px);box-sizing:border-box;display:flex;flex-direction:column;gap:24px">
+      <span style="display:flex;align-items:center;gap:14px;font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-600)"><span style="width:36px;height:1px;background:currentColor"></span>All Treatments</span>
+      <h1 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(42px,7vw,104px);line-height:.95">A menu of <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.15em">well-being.</span></h1>
+      <p style="margin:0;font-size:16px;line-height:1.85;color:var(--color-neutral-700);max-width:720px;text-wrap:pretty">We offer thoughtfully chosen services, each curated to address your well-being from the inside out.<br>Our goal is to support the way you live, the way you recover, and most importantly, the way you show up.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Service grid" style="max-width:1440px;margin:0 auto;padding:clamp(48px,6vw,88px) clamp(20px,5vw,64px) clamp(72px,9vw,128px);box-sizing:border-box">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:clamp(16px,2vw,28px)">
+      <sc-for list="{{ services }}" as="s" hint-placeholder-count="8">
+        <a href="{{ s.href }}" onMouseEnter="{{ s.enter }}" onMouseLeave="{{ s.leave }}" data-reveal="img" style="display:flex;flex-direction:column;text-decoration:none;color:var(--color-text);background:var(--color-bg);border:1px solid rgba(32,30,29,.08);transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s" style-hover="transform:translateY(-4px);box-shadow:var(--shadow-md)">
+          <div style="position:relative;aspect-ratio:4/3;overflow:visible;background:{{ s.bg }}"><div style="position:absolute;inset:0;overflow:hidden">{{ s.img }}</div>
+            <div style="position:absolute;inset:0;background:linear-gradient(200deg,rgba(32,30,29,.72) 0%,rgba(32,30,29,.3) 40%,rgba(32,30,29,0) 70%);opacity:{{ s.op }};transition:opacity .5s ease;pointer-events:none"></div>
+            <div style="position:absolute;top:20px;right:20px;max-width:220px;display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:10px;color:#fff;opacity:{{ s.op }};transform:translateY({{ s.y }});transition:opacity .5s ease,transform .6s cubic-bezier(.2,.7,.2,1);pointer-events:none">
+              <span style="font-size:10px;font-weight:700;letter-spacing:.26em;text-transform:uppercase">At a glance</span>
+              <div style="display:flex;flex-direction:column;gap:2px;padding-top:10px;border-top:1px solid rgba(255,255,255,.35);align-self:stretch"><span style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;opacity:.8">Session</span><span style="font-family:var(--font-heading);font-size:19px;line-height:1.2">{{ s.time }}</span></div>
+              <div style="display:flex;flex-direction:column;gap:2px;padding-top:10px;border-top:1px solid rgba(255,255,255,.35);align-self:stretch"><span style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;opacity:.8">Pricing</span><span style="font-family:var(--font-heading);font-size:19px;line-height:1.2">{{ s.price }}</span></div>
+            </div>
+            <span style="position:absolute;left:18px;bottom:-26px;width:56px;height:56px;border-radius:50%;background-image:{{ s.g }};border:5px solid var(--color-bg);display:flex;align-items:center;justify-content:center;color:var(--color-text)">{{ s.icon }}</span>
+          </div>
+          <div style="padding:44px 24px 28px;display:flex;flex-direction:column;gap:10px;flex:1">
+            <span style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--color-neutral-600)">{{ s.n }}</span>
+            <h2 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:30px;line-height:1.05">{{ s.name }}</h2>
+            <p style="margin:0;font-size:15px;line-height:1.6;color:var(--color-neutral-700)">{{ s.tagline }}</p>
+            <span style="margin-top:auto;padding-top:12px;display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-screen-label="Memberships CTA" style="background:radial-gradient(60% 80% at 100% 0%, var(--sky) 0%, rgba(193,214,232,0) 70%), radial-gradient(50% 70% at 0% 100%, var(--lav) 0%, rgba(236,223,245,0) 70%), var(--sage)">
+    <div style="max-width:1440px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,64px);box-sizing:border-box;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:32px">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:640px">
+        <h2 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(32px,4vw,56px);line-height:1.05">Make it a <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.2em">ritual.</span></h2>
+        <p style="margin:0;font-size:16px;line-height:1.8">IV memberships start at $99.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="Memberships.dc.html" style="align-self:flex-start;display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--color-text);padding:6px 20px 6px 6px;border-radius:999px;transition:background .25s" style-hover="background:rgba(255,255,255,.55)"><span style="width:56px;height:56px;flex:none;border-radius:50%;background-image:linear-gradient(135deg,var(--peach),var(--blush));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span><span style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase">View Memberships</span></a>
+        <a href="Book.dc.html" style="align-self:flex-start;display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--color-text);padding:6px 20px 6px 6px;border-radius:999px;transition:background .25s" style-hover="background:rgba(255,255,255,.55)"><span style="width:56px;height:56px;flex:none;border-radius:50%;background-image:linear-gradient(135deg,var(--sky),var(--lav));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span><span style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase">Book a Consultation</span></a>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="HWFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() { if (!window.HW_SERVICES) this.t = setInterval(() => { if (window.HW_SERVICES) { clearInterval(this.t); this.forceUpdate(); } }, 50); }
+  componentWillUnmount() { clearInterval(this.t); }
+  state = { hov: -1 };
+  renderVals() {
+    const D = window.HW_SERVICES || [];
+    const IC = window.HW_ICONS || {}, GR = window.HW_GRADS || [];
+    const icon = (k) => React.createElement('svg', { width: 22, height: 22, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.5, strokeLinecap: 'round', strokeLinejoin: 'round' }, (IC[k] || []).map((d, i) => React.createElement('path', { key: i, d })));
+    const bgs = ['var(--blush)', 'var(--sky)', 'var(--lav)', 'var(--sage)'];
+    return {
+      services: D.map((s, k) => ({
+        name: s.name, tagline: s.tagline, time: s.time, price: s.price, icon: icon(s.slug), g: GR[k % GR.length], op: this.state.hov === k ? 1 : 0, y: this.state.hov === k ? '0px' : '-10px', enter: () => this.setState({ hov: k }), leave: () => this.setState({ hov: -1 }), n: String(k + 1).padStart(2, '0'), href: 'Service.dc.html?s=' + s.slug, bg: bgs[k % 4],
+        img: React.createElement('img', { src: s.hero, alt: s.name, loading: 'lazy', style: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' } }),
+      })),
+    };
+  }
+}
+</script>
+</body>
+</html>

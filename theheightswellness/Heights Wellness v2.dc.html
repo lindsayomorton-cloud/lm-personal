@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+<script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>html{scroll-behavior:smooth}@keyframes hw-pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(3);opacity:0}}@media (prefers-reduced-motion:reduce){[style*="hw-pulse"]{animation:none!important}}body{--font-heading:'Cormorant Garamond',Georgia,serif;--grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .12  0 0 0 0 .1  0 0 0 0 .1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");--color-bg:#ffffff;--color-surface:#f5dcd5;--color-accent:#201e1d;--sage:#d3dac3;--sky:#c1d6e8;--lav:#ecdff5;--blush:#f5dcd5;--peach:#fdcba1;margin:0;background:var(--color-bg);font-family:var(--font-body);color:var(--color-text)}a{color:var(--color-text)}a:hover{color:var(--color-neutral-700)}</style>
+</helmet>
+<div style="overflow:hidden;position:relative">
+  <div style="position:fixed;inset:0;pointer-events:none;z-index:40;background-image:var(--grain);opacity:.12;mix-blend-mode:soft-light"></div>
+
+  <div data-screen-label="Top bar" style="background:linear-gradient(90deg,var(--blush),var(--lav) 50%,var(--sky));color:var(--color-text);border-bottom:1px solid rgba(32,30,29,.08)">
+    <div style="max-width:1440px;margin:0 auto;padding:12px clamp(20px,5vw,64px);box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 28px">
+      <span style="display:flex;align-items:center;gap:14px;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">
+        <span style="position:relative;width:8px;height:8px;flex:none"><span style="position:absolute;inset:0;border-radius:50%;background:{{ openDot }};animation:hw-pulse 2.4s ease-out infinite"></span><span style="position:absolute;inset:0;border-radius:50%;background:{{ openDot }}"></span></span>
+        <span>{{ openLabel }}</span><span style="width:1px;height:14px;background:rgba(32,30,29,.2)"></span><span style="font-weight:500;letter-spacing:.14em">{{ openDetail }}</span>
+      </span>
+      <span style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">
+        <a href="tel:2054901300" style="display:flex;align-items:center;gap:8px;color:var(--color-text);text-decoration:none;min-height:44px;margin:-14px 0" style-hover="opacity:.65"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>(205) 490-1300</a>
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><span style="display:flex;align-items:center;gap:22px"><span style="width:1px;height:14px;background:rgba(32,30,29,.2)"></span><a href="https://maps.google.com/?q=3168+Heights+Village+Vestavia+Hills+AL+35243" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;color:var(--color-text);text-decoration:none" style-hover="opacity:.65"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>3168 Heights Village, Vestavia Hills</a></span></sc-if>
+      </span>
+    </div>
+  </div>
+
+  <div style="position:relative;background:radial-gradient(55% 60% at 88% 18%, var(--lav) 0%, rgba(236,223,245,0) 70%), radial-gradient(45% 55% at 0% 100%, var(--blush) 0%, rgba(245,220,213,0) 70%), radial-gradient(40% 40% at 55% 105%, var(--sky) 0%, rgba(193,214,232,0) 70%), radial-gradient(28% 40% at 100% 72%, var(--peach) 0%, rgba(253,203,161,0) 70%)">
+  <header style="position:relative;z-index:2;border-bottom:1px solid rgba(32,30,29,.08);max-width:1440px;margin:0 auto;padding:clamp(14px,2vw,22px) clamp(16px,5vw,64px);box-sizing:border-box;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(8px,2vw,24px)">
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><nav style="display:flex;align-items:center;gap:clamp(20px,2.4vw,36px)"><a href="About.dc.html" style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--color-text);padding:8px 0;border-bottom:1px solid transparent;transition:border-color .3s" style-hover="border-bottom-color:var(--color-text)">About</a><a href="Services.dc.html" style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--color-text);padding:8px 0;border-bottom:1px solid transparent;transition:border-color .3s" style-hover="border-bottom-color:var(--color-text)">Services</a><a href="#approach" style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--color-text);padding:8px 0;border-bottom:1px solid transparent;transition:border-color .3s" style-hover="border-bottom-color:var(--color-text)">Approach</a></nav></sc-if>
+    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}"><button onClick="{{ toggleMenu }}" aria-label="Menu" style="justify-self:start;display:flex;align-items:center;gap:10px;background:none;border:none;padding:8px 0;cursor:pointer;color:var(--color-text);font:inherit;font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase"><span style="display:flex;flex-direction:column;gap:5px"><span style="width:22px;height:1.5px;background:currentColor"></span><span style="width:14px;height:1.5px;background:currentColor"></span></span>Menu</button></sc-if>
+    <a href="#" style="position:relative;display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--color-text);line-height:1"><span style="font-family:var(--font-heading);font-weight:500;font-size:clamp(28px,2.6vw,36px);letter-spacing:.04em">Heights</span><span style="margin-top:6px;font-size:9px;font-weight:700;letter-spacing:.42em;text-transform:uppercase;color:var(--color-neutral-700);padding-left:.42em">Wellness &amp; Aesthetics</span></a>
+    <div style="display:flex;align-items:center;justify-content:flex-end;gap:clamp(20px,2.4vw,36px)">
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><a href="Contact.dc.html" style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--color-text);padding:8px 0;border-bottom:1px solid transparent;transition:border-color .3s" style-hover="border-bottom-color:var(--color-text)">Contact</a></sc-if>
+      <a href="Book.dc.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--color-text);padding:{{ bookPad }};border:1px solid rgba(32,30,29,.25);border-radius:999px;transition:background .3s,border-color .3s" style-hover="background:var(--color-bg);border-color:var(--color-text)"><sc-if value="{{ showBookLabel }}" hint-placeholder-val="{{ true }}"><span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap">Book</span></sc-if><span style="width:36px;height:36px;border-radius:50%;background-image:linear-gradient(135deg,var(--peach),var(--blush));display:flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+    </div>
+  </header>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}"><div style="position:fixed;inset:0;z-index:60;background:linear-gradient(160deg,var(--blush),var(--lav) 55%,var(--sky));padding:24px clamp(20px,5vw,64px);display:flex;flex-direction:column;gap:32px;overflow:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:var(--font-heading);font-weight:500;font-size:28px">Heights</span><button onClick="{{ toggleMenu }}" aria-label="Close menu" style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(32,30,29,.25);background:none;cursor:pointer;color:var(--color-text);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div>
+    <nav style="display:flex;flex-direction:column"><a href="About.dc.html" onClick="{{ toggleMenu }}" style="font-family:var(--font-heading);font-weight:500;font-size:44px;line-height:1.1;text-decoration:none;color:var(--color-text);padding:10px 0;border-bottom:1px solid rgba(32,30,29,.1)">About</a><a href="Services.dc.html" onClick="{{ toggleMenu }}" style="font-family:var(--font-heading);font-weight:500;font-size:44px;line-height:1.1;text-decoration:none;color:var(--color-text);padding:10px 0;border-bottom:1px solid rgba(32,30,29,.1)">Services</a><a href="#approach" onClick="{{ toggleMenu }}" style="font-family:var(--font-heading);font-weight:500;font-size:44px;line-height:1.1;text-decoration:none;color:var(--color-text);padding:10px 0;border-bottom:1px solid rgba(32,30,29,.1)">Approach</a><a href="Contact.dc.html" onClick="{{ toggleMenu }}" style="font-family:var(--font-heading);font-weight:500;font-size:44px;line-height:1.1;text-decoration:none;color:var(--color-text);padding:10px 0;border-bottom:1px solid rgba(32,30,29,.1)">Contact</a></nav>
+    <a href="Book.dc.html" onClick="{{ toggleMenu }}" style="align-self:flex-start;display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--color-bg);background:var(--color-text);padding:16px 28px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase">Book a Consultation</a>
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:6px;font-size:14px"><a href="tel:2054901300" style="color:var(--color-text)">(205) 490-1300</a><span>3168 Heights Village, Vestavia Hills, AL</span></div>
+  </div></sc-if>
+
+  <div aria-hidden="true" style="position:absolute;left:0;right:0;top:0;height:min(100vh,1100px);pointer-events:none;display:flex;justify-content:space-evenly;z-index:0"><span style="width:1px;background:linear-gradient(180deg,rgba(32,30,29,0),rgba(32,30,29,.07) 30%,rgba(32,30,29,0))"></span><span style="width:1px;background:linear-gradient(180deg,rgba(32,30,29,0),rgba(32,30,29,.07) 30%,rgba(32,30,29,0))"></span><span style="width:1px;background:linear-gradient(180deg,rgba(32,30,29,0),rgba(32,30,29,.07) 30%,rgba(32,30,29,0))"></span></div>
+  <section data-screen-label="Hero" style="position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:clamp(20px,2.5vw,32px) clamp(20px,5vw,64px) clamp(72px,9vw,120px);box-sizing:border-box;display:grid;grid-template-columns:{{ heroCols }};gap:clamp(32px,4vw,64px);align-items:start">
+    <div style="display:flex;flex-direction:column;gap:28px;align-self:center">
+      <span style="display:flex;align-items:center;gap:14px;font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-600)"><span style="width:36px;height:1px;background:currentColor"></span>Vestavia Hills, Alabama</span>
+      <h1 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(46px,8.4vw,120px);line-height:.9;letter-spacing:-.015em;font-weight:500">Wellness,<br><span style="font-family:'Allura',cursive;font-weight:400;letter-spacing:0;text-transform:none;display:inline-block;font-size:.92em;line-height:1.1;margin-left:.9em;margin-top:-.05em;color:var(--color-neutral-700)">elevated.</span></h1>
+      <p style="margin:0;align-self:flex-start;background:linear-gradient(120deg,var(--blush),var(--lav));padding:12px 22px;font-family:var(--font-body);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;line-height:1.4;color:var(--color-text)">Where confidence is cared for.</p>
+      <p style="margin:0;font-family:var(--font-body);font-size:16px;line-height:1.85;font-weight:400;color:var(--color-neutral-700);max-width:500px;text-wrap:pretty;max-width:440px">A modern wellness studio offering IV therapy, peptides, vitamin boosts, pelvic floor therapy, and red light…all in one beautifully considered space.</p>
+      <a href="Book.dc.html" style="align-self:flex-start;display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--color-text);padding:6px 20px 6px 6px;border-radius:999px;transition:background .2s" style-hover="background:var(--blush)">
+        <span style="width:64px;height:64px;flex:none;border-radius:50%;background-image:linear-gradient(135deg,var(--peach),var(--blush));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg></span>
+        <span style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap">Book a Consultation</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-neutral-600)"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+      </a>
+    </div>
+    <div style="position:relative;width:100%;max-width:860px;width:100%;aspect-ratio:1/1.05;justify-self:end">
+      <div style="position:absolute;left:8%;top:4%;width:84%;height:92%;border-radius:999px 999px 48px 48px;border:2px solid var(--sky)"></div>
+      <div style="position:absolute;left:22%;top:0;width:60%;height:82%;border-radius:999px 999px 40px 40px;overflow:hidden;background:var(--blush);border:clamp(5px,.8vw,8px) solid var(--color-bg);box-shadow:var(--shadow-md);box-sizing:border-box;z-index:1">{{ rotA }}</div>
+      <div style="position:absolute;left:0;bottom:4%;width:40%;height:42%;border-radius:32px;overflow:hidden;background:var(--blush);border:clamp(5px,.8vw,8px) solid var(--color-bg);box-shadow:var(--shadow-md);box-sizing:border-box;z-index:2">{{ rotB }}</div>
+      <div style="position:absolute;right:0;bottom:0;width:30%;aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--blush);border:clamp(5px,.8vw,8px) solid var(--color-bg);box-shadow:var(--shadow-md);box-sizing:border-box;z-index:2">{{ rotC }}</div>
+      <div style="position:absolute;right:6%;top:10%;width:9%;aspect-ratio:1;border-radius:50%;background:linear-gradient(135deg,var(--peach),var(--blush));z-index:2"></div>
+      <div style="position:absolute;left:10%;top:30%;width:5%;aspect-ratio:1;border-radius:50%;background:var(--sage);z-index:2"></div>
+    </div>
+  </section>
+  </div>
+
+
+  <section data-screen-label="Service icons" style="border-top:1px solid rgba(32,30,29,.08);max-width:1440px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,5vw,64px) 0;box-sizing:border-box">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:clamp(8px,1.5vw,16px)">
+      <a href="#services" onClick="{{ pick0 }}" style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px 12px;border-radius:32px;text-decoration:none;text-align:center;transition:background .2s" style-hover="background:var(--blush)">
+        <span style="width:76px;height:76px;border-radius:50%;background-image:linear-gradient(135deg,var(--peach),var(--blush));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg></span>
+        <span style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.35">IV Therapy</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-neutral-600)"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+      </a>
+      <a href="#services" onClick="{{ pick1 }}" style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px 12px;border-radius:32px;text-decoration:none;text-align:center;transition:background .2s" style-hover="background:var(--blush)">
+        <span style="width:76px;height:76px;border-radius:50%;background-image:linear-gradient(135deg,var(--sky),var(--lav));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="m18 2 4 4"></path><path d="m17 7 3-3"></path><path d="M19 9 8.7 19.3c-1 1-2.5 1-3.4 0l-.6-.6c-1-1-1-2.5 0-3.4L15 5"></path><path d="m9 11 4 4"></path><path d="m5 19-3 3"></path><path d="m14 4 6 6"></path></svg></span>
+        <span style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.35">Peptide Therapy</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-neutral-600)"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+      </a>
+      <a href="#services" onClick="{{ pick2 }}" style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px 12px;border-radius:32px;text-decoration:none;text-align:center;transition:background .2s" style-hover="background:var(--blush)">
+        <span style="width:76px;height:76px;border-radius:50%;background-image:linear-gradient(135deg,var(--sage),var(--sky));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"></path><path d="m8.5 8.5 7 7"></path></svg></span>
+        <span style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.35">Vitamin Boosts</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-neutral-600)"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+      </a>
+      <a href="#services" onClick="{{ pick3 }}" style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px 12px;border-radius:32px;text-decoration:none;text-align:center;transition:background .2s" style-hover="background:var(--blush)">
+        <span style="width:76px;height:76px;border-radius:50%;background-image:linear-gradient(135deg,var(--blush),var(--lav));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></span>
+        <span style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.35">Pelvic Floor Therapy</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-neutral-600)"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+      </a>
+      <a href="#services" onClick="{{ pick4 }}" style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px 12px;border-radius:32px;text-decoration:none;text-align:center;transition:background .2s" style-hover="background:var(--blush)">
+        <span style="width:76px;height:76px;border-radius:50%;background-image:linear-gradient(135deg,var(--peach),var(--sage));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg></span>
+        <span style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.35">Red Light Therapy</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-neutral-600)"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+      </a>
+    </div>
+  </section>
+
+  <section id="story" data-screen-label="Our Story" style="scroll-margin-top:24px;border-top:1px solid rgba(32,30,29,.08);max-width:1440px;margin:0 auto;padding:clamp(64px,10vw,144px) clamp(20px,5vw,64px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(56px,8vw,120px);align-items:center">
+    <div style="position:relative;width:100%;max-width:400px;justify-self:center">
+      <div style="position:absolute;inset:-16px;border:2px solid var(--sky);border-radius:999px 999px 48px 48px"></div>
+      <figure style="margin:0;position:relative">
+        <div style="aspect-ratio:3/4;border-radius:999px 999px 40px 40px;overflow:hidden;background:var(--blush);filter:brightness(1.18) contrast(1.04) saturate(1.05)"><image-slot id="hw-founder" shape="rect" src="uploads/Tezza-8744.webp" placeholder="Founder portrait"></image-slot></div>
+        <figcaption style="position:absolute;left:50%;bottom:-24px;transform:translateX(-50%);white-space:nowrap;background:var(--sage);border-radius:999px;padding:12px 26px;font-size:14px;font-weight:600;box-shadow:var(--shadow-sm)">Our Founder, Grace Gullung</figcaption>
+      </figure>
+      <div style="position:absolute;right:clamp(-64px,-5vw,-8px);top:32px;width:clamp(150px,18vw,220px);aspect-ratio:3/2;border-radius:999px;overflow:hidden;border:8px solid var(--color-bg);background:#ece6dc;box-shadow:var(--shadow-sm)"><image-slot id="hw-sign" fit="contain" src="https://images.squarespace-cdn.com/content/v1/69f26965f185f144397b5ad8/774c468d-3b33-449d-94b5-c69725a59498/Untitled%2Bdesign%2B%288%29.png?format=1500w" shape="rect" placeholder="Studio sign"></image-slot></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px;max-width:540px">
+      <span style="display:flex;align-items:center;gap:14px;font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-600)"><span style="width:36px;height:1px;background:currentColor"></span>About Heights</span>
+      <h2 style="margin:-4px 0 0;font-family:var(--font-heading);font-weight:500;font-size:clamp(44px,5.4vw,72px);line-height:1;color:var(--color-text)">Our <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.2em">Story</span></h2>
+      <p style="margin:0;font-family:var(--font-body);font-weight:500;font-size:clamp(18px,1.6vw,21px);line-height:1.55;letter-spacing:-.005em;color:var(--color-text);text-wrap:pretty">Heights Wellness was built on a simple belief, that confidence starts from within, and how you feel should be just as elevated as how you live.</p>
+      <p style="margin:0;font-family:var(--font-body);font-size:16px;line-height:1.85;font-weight:400;color:var(--color-neutral-700);max-width:500px;text-wrap:pretty">We've created a space where wellness feels less like a checklist and more like a ritual.<br>Whether you're here for a quick IV reset, a recurring peptide protocol, or a quiet hour under our red light, every visit is intentional, results-driven, and rooted in care.</p>
+      <a href="About.dc.html" style="align-self:flex-start;display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;text-decoration:none;padding-bottom:6px;border-bottom:3px solid var(--sage)">Learn More About Us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+    </div>
+  </section>
+
+  <section id="services" data-screen-label="Services" style="scroll-margin-top:24px;margin-top:clamp(48px,6vw,80px);background:radial-gradient(60% 70% at 0% 0%, var(--sky) 0%, rgba(193,214,232,0) 65%), radial-gradient(55% 60% at 100% 100%, var(--peach) 0%, rgba(253,203,161,0) 65%), radial-gradient(40% 50% at 85% 10%, var(--blush) 0%, rgba(245,220,213,0) 70%), var(--lav)">
+    <div style="max-width:1440px;margin:0 auto;padding:clamp(48px,8vw,112px) clamp(20px,4vw,48px);box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(48px,6vw,96px);align-items:start">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <span style="display:flex;align-items:center;gap:14px;font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-600)"><span style="width:36px;height:1px;background:currentColor"></span>Our Services</span>
+        <h2 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(44px,5.4vw,72px);line-height:.98">A menu of <span style="font-family:'Allura',cursive;font-weight:400;letter-spacing:0;text-transform:none;font-size:1.15em;line-height:1.1">well-being.</span></h2>
+        <p style="margin:0;font-family:var(--font-body);font-size:16px;line-height:1.85;font-weight:400;color:var(--color-neutral-700);max-width:820px;text-wrap:pretty">We offer thoughtfully chosen services, each curated to address your well-being from the inside out.<br>Our goal is to support the way you live, the way you recover, and most importantly, the way you show up.<br>Whether you are seeking physical restoration or a mental reset, these offerings provide a whole-body approach to health, empowering you to be your best self for those who matter most.</p>
+      </div>
+      <div style="grid-column:1 / -1;display:flex;flex-direction:column;gap:clamp(20px,3vw,32px)">
+        <div role="tablist" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px">
+          <sc-for list="{{ svcTabs }}" as="t" hint-placeholder-count="5">
+            <button role="tab" aria-selected="{{ t.on }}" onClick="{{ t.pick }}" style="min-width:0;font:inherit;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;line-height:1.25;text-align:left;padding:6px 16px 6px 6px;display:flex;align-items:center;gap:12px;border-radius:999px;cursor:pointer;border:1.5px solid {{ t.border }};background:{{ t.bg }};color:{{ t.fg }};transition:background .2s,color .2s"><span style="width:40px;height:40px;flex:none;border-radius:50%;background-image:{{ t.g }};color:var(--color-text);display:flex;align-items:center;justify-content:center">{{ t.icon }}</span>{{ t.name }}</button>
+          </sc-for>
+        </div>
+        <div role="tabpanel" style="background:var(--color-bg);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));box-shadow:var(--shadow-md)">
+          <div onMouseEnter="{{ imgIn }}" onMouseLeave="{{ imgOut }}" style="position:relative;overflow:hidden;min-height:clamp(280px,40vw,560px);background:var(--blush)">{{ svcImg }}
+            <div style="position:absolute;inset:0;background:linear-gradient(200deg,rgba(32,30,29,.72) 0%,rgba(32,30,29,.35) 35%,rgba(32,30,29,0) 65%);opacity:{{ hoverOp }};transition:opacity .5s ease;pointer-events:none"></div>
+            <div style="position:absolute;top:clamp(20px,3vw,36px);right:clamp(20px,3vw,36px);max-width:260px;display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:14px;color:#fff;opacity:{{ hoverOp }};transform:translateY({{ hoverY }});transition:opacity .5s ease,transform .6s cubic-bezier(.2,.7,.2,1);pointer-events:none">
+              <span style="font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase">At a glance</span>
+              <sc-for list="{{ svcFacts }}" as="x" hint-placeholder-count="3">
+                <div style="display:flex;flex-direction:column;gap:2px;padding-top:12px;border-top:1px solid rgba(255,255,255,.35);align-self:stretch"><span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;opacity:.8">{{ x.k }}</span><span style="font-family:var(--font-heading);font-size:20px;line-height:1.25">{{ x.v }}</span></div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="padding:clamp(28px,4vw,56px);display:flex;flex-direction:column;gap:24px">
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div aria-hidden="true" style="display:flex;gap:8px"><sc-for list="{{ svcDots }}" as="d" hint-placeholder-count="5"><span style="width:{{ d.w }};height:6px;border-radius:999px;background:{{ d.c }};transition:width .3s,background .3s"></span></sc-for></div>
+              <h3 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(34px,3.6vw,48px);line-height:1.05">{{ svc.title }}</h3>
+              <p style="margin:0;font-family:var(--font-heading);font-size:clamp(20px,1.8vw,24px);line-height:1.35;color:var(--color-neutral-800)">{{ svc.tagline }}</p>
+            </div>
+            <p style="margin:0;font-size:16px;line-height:1.85;color:var(--color-neutral-700);max-width:540px">{{ svc.body }}</p>
+            <div style="background:var(--sage);padding:clamp(20px,2.4vw,28px);display:flex;flex-direction:column;gap:8px">
+              <span style="font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-text)">Ideal for</span>
+              <p style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(22px,2vw,28px);line-height:1.3;color:var(--color-text);text-wrap:pretty">{{ svc.for }}</p>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <span style="font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-600)">May support</span>
+              <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px">
+                <sc-for list="{{ svcBenefits }}" as="b" hint-placeholder-count="4"><li style="display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:20px 22px;background-image:{{ b.g }};font-size:15px;font-weight:600;line-height:1.35"><span style="display:flex;color:var(--color-text)">{{ b.icon }}</span>{{ b.t }}</li></sc-for>
+              </ul>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;padding:18px 0;border-top:1px solid var(--color-neutral-300);border-bottom:1px solid var(--color-neutral-300)">
+              <span style="width:44px;height:44px;flex:none;border-radius:50%;background:var(--sky);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg></span>
+              <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-600)">Session length</span><span style="font-size:17px;font-weight:600">{{ svc.time }}</span></div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding-top:8px">
+              <a class="btn" href="{{ svcBook }}" style="border-radius:999px;white-space:nowrap;background:var(--color-text);color:var(--color-bg);padding:16px 28px" style-hover="background:var(--color-neutral-800)">Book {{ svc.title }}</a>
+              <a href="{{ svcMore }}" style="font-size:14px;font-weight:700;text-decoration:none;padding:8px 4px;border-bottom:2px solid var(--peach)">Full details</a>
+              <button onClick="{{ svcNext }}" style="font:inherit;font-size:14px;font-weight:700;background:none;border:none;padding:8px 4px;cursor:pointer;color:var(--color-text);border-bottom:2px solid var(--sage)">Next: {{ svcNextName }} →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Testimonials" style="border-top:1px solid rgba(32,30,29,.08);background:radial-gradient(45% 40% at 50% 50%, var(--blush) 0%, rgba(245,220,213,0) 75%);max-width:960px;margin:0 auto;padding:clamp(64px,10vw,144px) clamp(20px,5vw,64px);box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:36px;text-align:center">
+    <h2 style="margin:0;display:flex;justify-content:center;align-items:center;gap:14px;font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-600)"><span style="width:36px;height:1px;background:currentColor"></span>Loved by people who care about how they feel.<span style="width:36px;height:1px;background:currentColor"></span></h2>
+    <div style="font-family:var(--font-heading);font-size:120px;line-height:.5;height:48px;color:var(--peach)">“</div>
+    <p style="margin:0;font-family:var(--font-body);font-weight:400;font-size:clamp(20px,2vw,26px);line-height:1.55;color:var(--color-text);text-wrap:balance">{{ review.quote }}</p>
+    <span style="font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--color-neutral-600)">— {{ review.name }}</span>
+    <div style="display:flex;align-items:center;gap:20px">
+      <button onClick="{{ prev }}" aria-label="Previous" style="width:48px;height:48px;border-radius:50%;border:2px solid var(--color-text);background:transparent;color:var(--color-text);cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:var(--blush)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
+      <span style="white-space:nowrap;font-size:14px;font-weight:600;color:var(--color-neutral-700)">Item {{ pos }} of {{ total }}</span>
+      <button onClick="{{ next }}" aria-label="Next" style="width:48px;height:48px;border-radius:50%;border:2px solid var(--color-text);background:transparent;color:var(--color-text);cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:var(--blush)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button>
+    </div>
+  </section>
+
+  <section id="approach" data-screen-label="Considered Care" style="scroll-margin-top:24px;border-top:1px solid rgba(32,30,29,.08);margin:0 auto;padding:0 clamp(12px,1.5vw,24px) clamp(64px,10vw,144px);box-sizing:border-box;display:flex;flex-direction:column;gap:64px">
+    <div style="width:100%;max-width:1440px;margin:0 auto;box-sizing:border-box;padding:0 clamp(8px,3.5vw,40px);display:flex;flex-direction:column;gap:clamp(40px,5vw,64px)">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:16px;max-width:640px">
+          <span style="display:flex;align-items:center;gap:14px;font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-600)"><span style="width:36px;height:1px;background:currentColor"></span>The Heights Approach</span>
+          <h2 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(40px,4.6vw,64px);line-height:1">No two bodies are the same.</h2>
+        </div>
+        <a class="btn" href="Services.dc.html" style="border-radius:999px;white-space:nowrap;background:var(--color-text);color:var(--color-bg);padding:16px 32px" style-hover="background:var(--color-neutral-800)">Explore Our Services</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:2px;background:var(--color-neutral-200)">
+        <div style="display:flex;flex-direction:column;gap:28px;padding:clamp(40px,5vw,72px) clamp(28px,3.5vw,56px);background:var(--color-bg)">
+          <span style="font-family:var(--font-heading);font-size:clamp(64px,6vw,96px);line-height:.8;color:var(--color-text);opacity:.1">01</span>
+          <h3 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(26px,2.4vw,32px);line-height:1.1">A real <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.3em">conversation</span></h3>
+          <p style="margin:0;font-size:16px;line-height:1.8;color:var(--color-neutral-700);max-width:280px;text-wrap:pretty">Every visit starts with how you feel and what you want.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:28px;padding:clamp(40px,5vw,72px) clamp(28px,3.5vw,56px);background:var(--color-bg)">
+          <span style="font-family:var(--font-heading);font-size:clamp(64px,6vw,96px);line-height:.8;color:var(--color-text);opacity:.1">02</span>
+          <h3 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(26px,2.4vw,32px);line-height:1.1">A true <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.3em">sanctuary</span></h3>
+          <p style="margin:0;font-size:16px;line-height:1.8;color:var(--color-neutral-700);max-width:280px;text-wrap:pretty">Calm lighting, considered details, and time that belongs to you.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:28px;padding:clamp(40px,5vw,72px) clamp(28px,3.5vw,56px);background:var(--color-bg)">
+          <span style="font-family:var(--font-heading);font-size:clamp(64px,6vw,96px);line-height:.8;color:var(--color-text);opacity:.1">03</span>
+          <h3 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(26px,2.4vw,32px);line-height:1.1">Results you <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.3em">feel</span></h3>
+          <p style="margin:0;font-size:16px;line-height:1.8;color:var(--color-neutral-700);max-width:280px;text-wrap:pretty">Energy, recovery, glow and confidence you feel every day.</p>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:clamp(8px,1.2vw,16px);align-items:start">
+      <figure style="margin:0;display:flex;flex-direction:column;gap:16px"><div style="aspect-ratio:3/4;border-radius:999px 999px 32px 32px;overflow:hidden;background:var(--blush)" class="washed"><image-slot id="hw-care-1" src="https://images.squarespace-cdn.com/content/v1/69f26965f185f144397b5ad8/a5234c80-f95f-4e05-a663-dc62c8c1ff3c/5S9A2610.JPEG?format=1500w" shape="rect" placeholder="Founder with gold mirror"></image-slot></div><figcaption style="font-family:var(--font-heading);font-weight:500;font-size:clamp(24px,2.4vw,32px);line-height:1;color:var(--color-text)">Considered <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.3em">Care.</span></figcaption></figure>
+      <div style="margin-top:clamp(24px,6vw,72px);aspect-ratio:3/4;border-radius:32px;overflow:hidden;background:var(--sky)" class="washed"><image-slot id="hw-care-2" src="https://images.squarespace-cdn.com/content/v1/69f26965f185f144397b5ad8/0c2b5435-f13b-4661-913b-34c9d1db4189/cf839cfc9328bf14d9b2f89ec3663843.jpg?format=1500w" shape="rect" placeholder="Red light device above treatment bed"></image-slot></div>
+      <div style="margin-top:clamp(8px,2vw,24px);aspect-ratio:3/4;border-radius:32px;overflow:hidden;background:var(--sage)" class="washed"><image-slot id="hw-care-3" src="https://images.squarespace-cdn.com/content/v1/69f26965f185f144397b5ad8/df1ea5b2-b4ac-4342-a4c2-d25e97e36a6d/5S9A2584.JPEG?format=1500w" shape="rect" placeholder="Body sculpting applicator close-up"></image-slot></div>
+      <figure style="margin:clamp(32px,8vw,96px) 0 0;display:flex;flex-direction:column;gap:16px"><div style="aspect-ratio:3/4;border-radius:999px 999px 32px 32px;overflow:hidden;background:var(--lav)" class="washed"><image-slot id="hw-care-4" src="https://images.squarespace-cdn.com/content/v1/69f26965f185f144397b5ad8/6503f1ed-a74a-4025-9768-1cd74f30de5b/3.png?format=1500w" shape="rect" placeholder="Leaf shadows on skin"></image-slot></div><figcaption style="font-family:var(--font-heading);font-weight:500;font-size:clamp(24px,2.4vw,32px);line-height:1;color:var(--color-text)">Real Results</figcaption></figure>
+    </div>
+  </section>
+
+  <section data-screen-label="Stay connected" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));background:radial-gradient(60% 80% at 100% 0%, var(--sky) 0%, rgba(193,214,232,0) 70%), radial-gradient(50% 70% at 0% 100%, var(--lav) 0%, rgba(236,223,245,0) 70%), var(--sage)">
+    <div style="position:relative;min-height:clamp(320px,42vw,620px);background:var(--blush)" class="washed"><image-slot id="hw-stay" src="https://images.squarespace-cdn.com/content/v1/69f26965f185f144397b5ad8/6503f1ed-a74a-4025-9768-1cd74f30de5b/3.png?format=1500w" shape="rect" placeholder="Leaf shadows on skin"></image-slot></div>
+    <div style="padding:clamp(48px,7vw,112px) clamp(24px,6vw,96px);display:flex;flex-direction:column;justify-content:center;gap:clamp(28px,3vw,40px);max-width:640px;box-sizing:border-box">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <span style="display:flex;align-items:center;gap:14px;font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-700)"><span style="width:36px;height:1px;background:currentColor"></span>Stay Connected</span>
+        <h2 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(40px,4.4vw,60px);line-height:1.02">Join the <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.25em">inner circle.</span></h2>
+        <p style="margin:0;font-size:16px;line-height:1.8;color:var(--color-neutral-800);max-width:420px">Stay up to date with our latest promotions, offerings and news!</p>
+      </div>
+      <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ subscribe }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px 28px">
+          <label for="hw-first" style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-neutral-700)">First name</span><input id="hw-first" type="text" style="font:inherit;font-size:17px;padding:10px 0;border:none;border-bottom:1px solid rgba(32,30,29,.35);background:transparent;color:var(--color-text);outline:none;border-radius:0" style-focus="border-bottom-color:var(--color-text)"></label>
+          <label for="hw-last" style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-neutral-700)">Last name</span><input id="hw-last" type="text" style="font:inherit;font-size:17px;padding:10px 0;border:none;border-bottom:1px solid rgba(32,30,29,.35);background:transparent;color:var(--color-text);outline:none;border-radius:0" style-focus="border-bottom-color:var(--color-text)"></label>
+          <label for="hw-email" style="display:flex;flex-direction:column;gap:6px;grid-column:1 / -1;"><span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--color-neutral-700)">Email address</span><input id="hw-email" type="email" style="font:inherit;font-size:17px;padding:10px 0;border:none;border-bottom:1px solid rgba(32,30,29,.35);background:transparent;color:var(--color-text);outline:none;border-radius:0" style-focus="border-bottom-color:var(--color-text)"></label>
+          <button type="submit" style="grid-column:1 / -1;justify-self:start;margin-top:8px;display:flex;align-items:center;gap:16px;font:inherit;background:none;border:none;padding:6px 20px 6px 6px;border-radius:999px;cursor:pointer;color:var(--color-text);transition:background .2s" style-hover="background:rgba(255,255,255,.45)">
+            <span style="width:56px;height:56px;flex:none;border-radius:50%;background:var(--color-text);color:var(--color-bg);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
+            <span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Subscribe</span>
+          </button>
+        </form>
+      </sc-if>
+      <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:8px;padding:24px 0;border-top:1px solid rgba(32,30,29,.2)">
+          <span style="font-family:var(--font-heading);font-weight:500;font-size:30px">Welcome in.</span>
+          <span style="font-size:16px;color:var(--color-neutral-800)">You're on the list. Watch your inbox for our next update.</span>
+        </div>
+      </sc-if>
+      <span style="font-size:12px;color:var(--color-neutral-700)">No spam. Unsubscribe anytime.</span>
+    </div>
+  </section>
+
+  <footer id="contact" style="background:radial-gradient(50% 60% at 100% 0%, var(--lav) 0%, rgba(236,223,245,0) 70%), radial-gradient(45% 55% at 0% 100%, var(--blush) 0%, rgba(245,220,213,0) 70%), linear-gradient(180deg, var(--sky), #d4e2ee);overflow:hidden">
+    <div style="max-width:1440px;margin:0 auto;padding:72px clamp(24px,4vw,48px) 24px;box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:48px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;opacity:.75">Visit</span>
+        <p style="margin:0;font-size:16px;line-height:1.6">3168 Heights Village<br>Vestavia Hills, AL 35243</p>
+        <a href="tel:2054901300" style="font-size:16px">(205) 490-1300</a>
+        <a href="mailto:info@glowheightswellness.com" style="font-size:16px">info@glowheightswellness.com</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
+        <span style="font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;opacity:.75;margin-bottom:6px">Links</span>
+        <sc-for list="{{ links }}" as="l" hint-placeholder-count="6"><a href="{{ l.href }}" style="text-decoration:none">{{ l.t }}</a></sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
+        <span style="font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;opacity:.75;margin-bottom:6px">Hours &amp; Contact</span>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ hours }}" as="h" hint-placeholder-count="4"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:12px 0;border-bottom:1px solid rgba(32,30,29,.12)"><span style="font-size:16px;font-weight:{{ h.w }}">{{ h.d }}</span><span style="font-size:16px;font-weight:{{ h.w }};white-space:nowrap">{{ h.t }}</span></div></sc-for>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { i: 0, w: window.innerWidth, menu: false, tick: 0 };
+  componentDidMount() {
+    this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR);
+    this.setupReveal();
+    this.tm = setInterval(() => this.setState(s => ({ tick: (s.tick || 0) + 1 })), 1800);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); clearInterval(this.tm); this.io && this.io.disconnect(); }
+  setupReveal() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    const root = document.getElementById('dc-root') || document.body;
+    const sel = ['section[data-screen-label] h1', 'section[data-screen-label] h2', 'section[data-screen-label] h3', 'section[data-screen-label] p', 'section[data-screen-label] figure', 'section[data-screen-label] [role=tabpanel]', 'section[data-screen-label] [role=tablist]', 'section[data-screen-label="Service icons"] a', 'section[data-screen-label] .washed', 'section[data-screen-label] form', 'section[data-screen-label] span[style*="letter-spacing:.26em"]', 'section[data-screen-label="Hero"] > div > a', 'section[data-screen-label="Hero"] > div:last-child'].join(',');
+    const els = Array.from(root.querySelectorAll(sel)).filter(el => !el.closest('[role=tabpanel] p, [role=tabpanel] h3') || el.getAttribute('role') === 'tabpanel');
+    const seen = new Set();
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        const el = en.target;
+        el.style.opacity = '1'; el.style.transform = 'none'; el.style.filter = 'none';
+        this.io.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    els.forEach((el) => {
+      if (seen.has(el) || Array.from(seen).some(p => p.contains(el))) return;
+      seen.add(el);
+      const sib = el.parentElement ? Array.from(el.parentElement.children).indexOf(el) : 0;
+      const isImg = el.matches('.washed, figure, section[data-screen-label="Hero"] > div:last-child');
+      el.style.opacity = '0';
+      el.style.transform = isImg ? 'translateY(32px) scale(.985)' : 'translateY(22px)';
+      el.style.filter = isImg ? 'blur(6px)' : 'none';
+      el.style.transition = 'opacity 1.1s cubic-bezier(.2,.7,.2,1), transform 1.3s cubic-bezier(.2,.7,.2,1), filter 1.2s ease';
+      el.style.transitionDelay = Math.min(sib, 5) * 90 + 'ms';
+      this.io.observe(el);
+    });
+  }
+  svcVals() {
+    const B = 'https://images.squarespace-cdn.com/content/v1/69f26965f185f144397b5ad8/';
+    const D = [
+      { title: 'IV Therapy', tagline: 'Hydration and nutrients, delivered directly.', img: 'c6b3f539-e219-4e94-8d6a-ca5210348794/5S9A2447.JPEG', body: 'A customized blend of fluids, vitamins and electrolytes delivered intravenously, so your body can absorb them fully. Settle into a lounge chair, read or rest while your drip runs.', benefits: ['Hydration and recovery', 'Energy and focus', 'Immune support', 'Post-travel or post-event reset'], for: 'Busy schedules, athletes, travel recovery and anyone feeling run down.', time: '45–60 minutes' },
+      { title: 'Peptide Therapy', tagline: 'Targeted protocols, built around your goals.', img: '92218757-c354-429a-95a0-4326b89781ee/5S9A2598.JPEG', body: 'Peptides are short chains of amino acids that act as signals in the body. After a consultation, we design a protocol around what you want to change, and check in as you go.', benefits: ['Recovery and repair', 'Body composition goals', 'Sleep quality', 'Skin and healthy aging'], for: 'Clients who want an ongoing, guided plan rather than a one-time visit.', time: 'Consultation, then a recurring protocol' },
+      { title: 'Vitamin Boosts', tagline: 'A quick shot of support.', img: 'd8e5a605-0b97-4928-8c6a-6cdb3b20ce59/5S9A2504.JPEG', body: 'Single-dose vitamin injections such as B12 or glutathione. In and out in minutes, and easy to add on to any other visit.', benefits: ['Daily energy', 'Metabolism support', 'Skin glow', 'Immune support'], for: 'A fast pick-me-up, or an add-on to IV or red light.', time: '10–15 minutes' },
+      { title: 'Pelvic Floor Therapy', tagline: 'Strength and confidence, from the core.', img: '45fbdf99-d4b8-4362-9577-870337e0aabd/5S9A2566.JPEG', body: 'A non-invasive treatment chair that stimulates the pelvic floor muscles while you sit fully clothed. A private, comfortable way to rebuild strength.', benefits: ['Bladder control', 'Postpartum recovery', 'Core strength', 'Intimate wellness'], for: 'Postpartum clients, women and men of any age wanting pelvic strength.', time: '30 minutes, usually a series' },
+      { title: 'Red Light Therapy', tagline: 'A quiet hour that works on a cellular level.', img: 'aa880cb8-20fa-40f1-9ea4-9f820d649cfc/5S9A2525.JPEG', body: 'Specific wavelengths of red and near-infrared light reach the skin and tissue beneath. Lie back, close your eyes and let the light do the work.', benefits: ['Skin tone and texture', 'Muscle recovery', 'Joint comfort', 'Calm and relaxation'], for: 'Skin goals, active recovery, or simply time to unwind.', time: '15–20 minutes' },
+    ];
+    const P = {
+      droplet: ['M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z'],
+      zap: ['M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z'],
+      shield: ['M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z'],
+      plane: ['M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z'],
+      refresh: ['M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8', 'M21 3v5h-5', 'M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16', 'M8 16H3v5'],
+      activity: ['M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2'],
+      moon: ['M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z'],
+      sparkles: ['M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z'],
+      flame: ['M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z'],
+      heart: ['M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z'],
+      dumbbell: ['M14.4 14.4 9.6 9.6', 'M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z', 'm21.5 21.5-1.4-1.4', 'M3.9 3.9 2.5 2.5', 'M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z'],
+      leaf: ['M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z', 'M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'],
+      hourglass: ['M5 22h14', 'M5 2h14', 'M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22', 'M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2'],
+      target: ['M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20', 'M12 6a6 6 0 1 0 0 12 6 6 0 1 0 0-12', 'M12 10a2 2 0 1 0 0 4 2 2 0 1 0 0-4'],
+    };
+    const IC = { 'Hydration and recovery': 'droplet', 'Energy and focus': 'zap', 'Immune support': 'shield', 'Post-travel or post-event reset': 'plane', 'Recovery and repair': 'refresh', 'Body composition goals': 'target', 'Sleep quality': 'moon', 'Skin and healthy aging': 'hourglass', 'Daily energy': 'zap', 'Metabolism support': 'flame', 'Skin glow': 'sparkles', 'Bladder control': 'droplet', 'Postpartum recovery': 'heart', 'Core strength': 'dumbbell', 'Intimate wellness': 'heart', 'Skin tone and texture': 'sparkles', 'Muscle recovery': 'refresh', 'Joint comfort': 'activity', 'Calm and relaxation': 'leaf' };
+    const icon = (name) => React.createElement('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.25, strokeLinecap: 'round', strokeLinejoin: 'round' }, (P[name] || P.sparkles).map((d, i) => React.createElement('path', { key: i, d })));
+    const TP = [
+      ['M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z'],
+      ['m18 2 4 4', 'm17 7 3-3', 'M19 9 8.7 19.3c-1 1-2.5 1-3.4 0l-.6-.6c-1-1-1-2.5 0-3.4L15 5', 'm9 11 4 4', 'm5 19-3 3', 'm14 4 6 6'],
+      ['m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z', 'm8.5 8.5 7 7'],
+      ['M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z'],
+      ['M12 8a4 4 0 1 0 0 8 4 4 0 1 0 0-8', 'M12 2v2', 'M12 20v2', 'm4.93 4.93 1.41 1.41', 'm17.66 17.66 1.41 1.41', 'M2 12h2', 'M20 12h2', 'm6.34 17.66-1.41 1.41', 'm19.07 4.93-1.41 1.41'],
+    ];
+    const TG = ['linear-gradient(135deg,var(--peach),var(--blush))', 'linear-gradient(135deg,var(--sky),var(--lav))', 'linear-gradient(135deg,var(--sage),var(--sky))', 'linear-gradient(135deg,var(--blush),var(--lav))', 'linear-gradient(135deg,var(--peach),var(--sage))'];
+    const tIcon = (k) => React.createElement('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.75, strokeLinecap: 'round', strokeLinejoin: 'round' }, TP[k].map((d, i) => React.createElement('path', { key: i, d })));
+    const a = this.state.svc || 0, n = D.length;
+    const set = (k) => () => this.setState({ svc: k });
+    const out = {
+      svc: { ...D[a], n: '0' + (a + 1) },
+      svcBenefits: D[a].benefits.map((t, k) => ({ t, icon: icon(IC[t]), g: ['linear-gradient(135deg,var(--peach),var(--blush))', 'linear-gradient(135deg,var(--sky),var(--lav))', 'linear-gradient(135deg,var(--sage),var(--sky))', 'linear-gradient(135deg,var(--blush),var(--lav))'][k % 4] })),
+      svcImg: D.map((d, k) => React.createElement('img', { key: k, src: B + d.img + '?format=1500w', alt: d.title, style: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: k === a ? 1 : 0, transition: 'opacity .6s ease' } })),
+      svcTabs: D.map((d, k) => ({ name: d.title, icon: tIcon(k), g: TG[k], on: k === a ? 'true' : 'false', pick: set(k), bg: k === a ? 'var(--color-text)' : 'rgba(255,255,255,.6)', fg: k === a ? 'var(--color-bg)' : 'var(--color-text)', border: k === a ? 'var(--color-text)' : 'transparent' })),
+      svcBook: 'Book.dc.html?service=' + ['iv', 'peptides', 'vitamins', 'pelvic-floor', 'red-light'][a], svcMore: 'Service.dc.html?s=' + ['iv', 'peptides', 'vitamins', 'pelvic-floor', 'red-light'][a],
+      svcFacts: [{ k: 'Session', v: D[a].time }, { k: 'Best for', v: D[a].benefits[0] }, { k: 'Also supports', v: D[a].benefits[1] }],
+      hoverOp: this.state.imgHover ? 1 : 0, hoverY: this.state.imgHover ? '0px' : '-10px', imgIn: () => this.setState({ imgHover: true }), imgOut: () => this.setState({ imgHover: false }),
+      svcDots: D.map((d, k) => ({ w: k === a ? '24px' : '6px', c: k === a ? 'var(--color-text)' : 'var(--color-neutral-300)' })),
+      svcNext: set((a + 1) % n), svcNextName: D[(a + 1) % n].title,
+    };
+    D.forEach((d, k) => { out['pick' + k] = set(k); });
+    return out;
+  }
+  openVals() {
+    const S = { 0: [11, 15], 1: [9, 18], 2: [9, 18], 3: [9, 18], 4: [9, 18], 5: [9, 15], 6: [10, 16] };
+    const fmt = (x) => (x % 12 || 12) + (x < 12 ? ' am' : ' pm');
+    const now = new Date(), d = now.getDay(), t = now.getHours() + now.getMinutes() / 60;
+    const [o, c] = S[d];
+    const names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    if (t >= o && t < c) return { openLabel: 'Open now', openDetail: 'Today ' + fmt(o) + ' – ' + fmt(c), openDot: '#5f9a63', openRing: 'transparent' };
+    if (t < o) return { openLabel: 'Closed now', openDetail: 'Opens today at ' + fmt(o), openDot: '#c67139', openRing: 'transparent' };
+    const n = (d + 1) % 7;
+    return { openLabel: 'Closed now', openDetail: 'Opens ' + (n === 0 ? 'Sunday' : 'tomorrow') + ' at ' + fmt(S[n][0]), openDot: '#c67139', openRing: 'transparent' };
+  }
+  rot(list, offset) {
+    const B = 'https://images.squarespace-cdn.com/content/v1/69f26965f185f144397b5ad8/';
+    const t = (this.state.tick || 0) + offset;
+    const cur = Math.floor(t / 3) % list.length;
+    return list.map(([p, alt], k) => React.createElement('img', { key: k, src: B + p + '?format=1000w', alt, style: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: k === cur ? 1 : 0, transform: k === cur ? 'scale(1.06)' : 'scale(1)', transition: 'opacity 1.6s ease, transform 7s ease-out' } }));
+  }
+  renderVals() {
+    const reviews = [
+      { quote: '[Client testimonial 1]', name: '[Client name]' },
+      { quote: '[Client testimonial 2]', name: '[Client name]' },
+    ];
+    const n = reviews.length, i = this.state.i;
+    return {
+      wide: this.state.w >= 760, showBookLabel: this.state.w >= 420, bookPad: this.state.w >= 420 ? '4px 4px 4px 18px' : '4px', ...this.openVals(), subscribed: !!this.state.sub, notSubscribed: !this.state.sub, subscribe: (ev) => { ev.preventDefault(); this.setState({ sub: true }); }, heroCols: this.state.w >= 900 ? 'minmax(0,5fr) minmax(0,7fr)' : 'minmax(0,1fr)',
+      rotA: this.rot([['3a22efad-ddcd-4cd7-8060-a6a404daf95c/5S9A2385.JPEG','Treatment lounge'],['aa880cb8-20fa-40f1-9ea4-9f820d649cfc/5S9A2525.JPEG','Red light treatment room'],['dab29fbc-116d-4a1e-8ba1-c44e382e6b59/5S9A2514.JPEG','Woman in white dress'],['8fd1dd5e-7fb3-4d53-ab1e-d46773c66cea/5S9A2643.JPEG','Two women with mirror']], 0),
+      rotB: this.rot([['c6b3f539-e219-4e94-8d6a-ca5210348794/5S9A2447.JPEG','IV client reading'],['ce604651-fb09-45f3-b429-325aa51a8578/5S9A2431.JPEG','Nurse attending IV client'],['45fbdf99-d4b8-4362-9577-870337e0aabd/5S9A2566.JPEG','Pelvic floor chair'],['92218757-c354-429a-95a0-4326b89781ee/5S9A2598.JPEG','Practitioner administering injection']], 1),
+      rotC: this.rot([['c877b91c-292b-4efa-8a66-505efa529d5d/5S9A2483.JPEG','Syringes'],['d8e5a605-0b97-4928-8c6a-6cdb3b20ce59/5S9A2504.JPEG','Vials on silver tray'],['1cf53ea7-2985-46ba-9f27-b4f423c65afd/5S9A2404.JPEG','Saline IV bag'],['574f5827-a489-4466-8292-67e5cf0307b5/5S9A2548.JPEG','Aesthetic injections']], 2), narrow: this.state.w < 760, menuOpen: this.state.w < 760 && this.state.menu, toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      review: reviews[i], pos: i + 1, total: n,
+      prev: () => this.setState({ i: (i - 1 + n) % n }),
+      next: () => this.setState({ i: (i + 1) % n }),
+      ...this.svcVals(),
+      services: ['IV THERAPY', 'PEPTIDE THERAPY', 'VITAMIN BOOSTS', 'PELVIC FLOOR THERAPY', 'RED LIGHT THERAPY'].map((name, k) => ({ name, n: '0' + (k + 1), color: ['linear-gradient(135deg,var(--peach),var(--blush))', 'linear-gradient(135deg,var(--sky),var(--lav))', 'linear-gradient(135deg,var(--sage),var(--sky))', 'linear-gradient(135deg,var(--blush),var(--lav))', 'linear-gradient(135deg,var(--peach),var(--sage))'][k] })),
+      links: [['About Us', 'About.dc.html'], ['All Services', 'Services.dc.html'], ['Memberships', 'Memberships.dc.html'], ['Book a Consultation', 'Book.dc.html'], ['Frequently Asked Questions', 'FAQ.dc.html'], ['Contact', 'Contact.dc.html'], ['Appointment Policies', 'Policies.dc.html?p=appointment'], ['Privacy Policy', 'Policies.dc.html?p=privacy'], ['Terms and Conditions', 'Policies.dc.html?p=terms']].map(([t, href]) => ({ t, href })),
+      hours: (() => { const day = new Date().getDay(); return [['Mon – Thu', '9 am – 6 pm', [1,2,3,4]], ['Friday', '9 am – 3 pm', [5]], ['Saturday', '10 am – 4 pm', [6]], ['Sunday', '11 am – 3 pm', [0]]].map(([d, t, ds]) => ({ d: ds.includes(day) ? d + '  · Today' : d, t, w: ds.includes(day) ? 700 : 400 })); })(),
+    };
+  }
+}
+</script>
+</body>
+</html>

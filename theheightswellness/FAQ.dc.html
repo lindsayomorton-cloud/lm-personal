@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+<script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+<style>body{--font-heading:'Cormorant Garamond',Georgia,serif;--color-bg:#ffffff;--color-surface:#f5dcd5;--color-accent:#201e1d;--sage:#d3dac3;--sky:#c1d6e8;--lav:#ecdff5;--blush:#f5dcd5;--peach:#fdcba1;margin:0;background:var(--color-bg);font-family:var(--font-body);color:var(--color-text)}a{color:var(--color-text)}a:hover{color:var(--color-neutral-700)}</style>
+<script src="./hw-polish.js"></script>
+<style>html{scroll-behavior:smooth}</style>
+</helmet>
+<div style="overflow:hidden">
+  <dc-import name="HWHeader" active="FAQ" hint-size="100%,130px"></dc-import>
+
+  <section data-screen-label="FAQ" style="max-width:1440px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(20px,5vw,64px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(40px,6vw,96px);align-items:start">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <span style="display:flex;align-items:center;gap:14px;font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-600)"><span style="width:36px;height:1px;background:currentColor"></span>FAQ</span>
+      <h1 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(42px,6vw,88px);line-height:.95">Good <span style="font-family:'Allura',cursive;font-weight:400;font-size:1.15em">questions.</span></h1>
+      <p style="margin:0;font-size:16px;line-height:1.85;color:var(--color-neutral-700);max-width:420px">Don't see yours? Call us at <a href="tel:2054901300">(205) 490-1300</a> or <a href="Contact.dc.html">send a message</a>.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;border-top:1px solid rgba(32,30,29,.15)">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="8">
+        <div style="border-bottom:1px solid rgba(32,30,29,.15)">
+          <button onClick="{{ f.toggle }}" aria-expanded="{{ f.exp }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;background:none;border:none;cursor:pointer;text-align:left;font:inherit;color:var(--color-text)">
+            <span style="font-family:var(--font-heading);font-weight:500;font-size:clamp(22px,2vw,26px);line-height:1.25">{{ f.q }}</span>
+            <span style="width:36px;height:36px;flex:none;border-radius:50%;background-image:{{ f.g }};display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1">{{ f.sign }}</span>
+          </button>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><p style="margin:0 0 24px;font-size:16px;line-height:1.8;color:var(--color-neutral-700);max-width:640px">{{ f.a }}</p></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <dc-import name="HWFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { open: 0 };
+  renderVals() {
+    const g = ['linear-gradient(135deg,var(--peach),var(--blush))', 'linear-gradient(135deg,var(--sky),var(--lav))', 'linear-gradient(135deg,var(--sage),var(--sky))', 'linear-gradient(135deg,var(--blush),var(--lav))'];
+    const F = [
+      ['Do I need a consultation first?', 'Yes. Every new client starts with a short consultation and health screening so we can recommend what is appropriate for you. Some services, like peptides and aesthetics, always require a consultation.'],
+      ['How long is a visit?', 'Vitamin boosts take about 10–15 minutes, red light 15–20 minutes, pelvic floor sessions about 30 minutes, and most IV drips 45–60 minutes. Plan a little extra time on your first visit.'],
+      ['Who performs treatments?', 'Treatments are performed by our clinical team. Eligibility and protocols are determined by our clinicians.'],
+      ['Does an IV hurt?', 'Most clients feel a quick pinch when the line is placed, then nothing more. Let us know if you are nervous and we will take it slowly.'],
+      ['What should I wear?', 'Something comfortable. For IV therapy, sleeves that roll up easily are helpful.'],
+      ['Can I combine services?', 'Often, yes. Vitamin boosts pair easily with IV or red light visits. We will confirm what can be combined at your visit.'],
+      ['Do you offer memberships?', 'Yes, we offer four IV membership levels starting at $99. See the Memberships page or ask at your visit.'],
+      ['What if I need to cancel?', 'Please give us as much notice as possible. See our Appointment Policies for details.'],
+    ];
+    return {
+      faqs: F.map(([q, a], k) => {
+        const open = this.state.open === k;
+        return { q, a, open, exp: open ? 'true' : 'false', sign: open ? '−' : '+', g: g[k % 4], toggle: () => this.setState({ open: open ? -1 : k }) };
+      }),
+    };
+  }
+}
+</script>
+</body>
+</html>

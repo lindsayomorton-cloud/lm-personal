@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+<script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+<style>body{--font-heading:'Cormorant Garamond',Georgia,serif;--color-bg:#ffffff;--color-surface:#f5dcd5;--color-accent:#201e1d;--sage:#d3dac3;--sky:#c1d6e8;--lav:#ecdff5;--blush:#f5dcd5;--peach:#fdcba1;margin:0;background:var(--color-bg);font-family:var(--font-body);color:var(--color-text)}a{color:var(--color-text)}a:hover{color:var(--color-neutral-700)}</style>
+<script src="./hw-polish.js"></script>
+<style>html{scroll-behavior:smooth}</style>
+</helmet>
+<div style="overflow:hidden">
+  <dc-import name="HWHeader" active="" hint-size="100%,130px"></dc-import>
+
+  <section data-screen-label="Policies" style="max-width:1100px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(20px,5vw,64px);box-sizing:border-box;display:flex;flex-direction:column;gap:32px">
+    <span style="display:flex;align-items:center;gap:14px;font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--color-neutral-600)"><span style="width:36px;height:1px;background:currentColor"></span>Policies</span>
+    <div role="tablist" style="display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3"><button role="tab" onClick="{{ t.pick }}" style="font:inherit;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:12px 20px;border-radius:999px;cursor:pointer;border:1px solid {{ t.border }};background:{{ t.bg }};color:{{ t.fg }}">{{ t.t }}</button></sc-for>
+    </div>
+    <h1 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:clamp(36px,5vw,72px);line-height:1">{{ doc.title }}</h1>
+    <div style="display:flex;flex-direction:column;border-top:1px solid rgba(32,30,29,.15)">
+      <sc-for list="{{ doc.items }}" as="it" hint-placeholder-count="4">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 40px;padding:28px 0;border-bottom:1px solid rgba(32,30,29,.15)">
+          <h2 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:26px;line-height:1.2">{{ it.h }}</h2>
+          <p style="margin:0;font-size:16px;line-height:1.8;color:var(--color-neutral-700)">{{ it.p }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ doc.ext }}" hint-placeholder-val="{{ false }}"><a href="{{ doc.url }}" target="_blank" rel="noopener" style="align-self:flex-start;text-decoration:none;color:var(--color-bg);background:var(--color-text);padding:16px 28px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Read the full {{ doc.title }}</a></sc-if>
+  </section>
+
+  <dc-import name="HWFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { p: new URLSearchParams(location.search).get('p') || 'appointment' };
+  renderVals() {
+    const DOCS = {
+      appointment: { title: 'Appointment Policies', items: [
+        ['Consultations', 'New clients complete a consultation and health screening before treatment. Some services always require a consultation.'],
+        ['Arriving', 'Please arrive a few minutes early, especially for your first visit. Late arrivals may shorten your session so we can stay on schedule for the next guest.'],
+        ['Cancellations', 'If you need to cancel or reschedule, please call us as early as possible so we can offer your time to another client.'],
+        ['Eligibility', 'Treatment is provided only when our clinical team determines it is appropriate for you. We may decline or adjust a service for your safety.'],
+      ] },
+      privacy: { title: 'Privacy Policy', ext: true, url: 'https://www.heightsivwellness.com/privacy-policy', items: [
+        ['Your information', 'We collect the information you share with us to schedule appointments, provide care and communicate with you.'],
+        ['Health information', 'Health details you provide during screening are used only to determine and deliver appropriate care.'],
+        ['Questions', 'Contact us at info@glowheightswellness.com with any privacy questions.'],
+      ] },
+      terms: { title: 'Terms and Conditions', ext: true, url: 'https://www.heightsivwellness.com/terms-and-conditions', items: [
+        ['Website use', 'Information on this website is for general education and is not medical advice.'],
+        ['Treatment', 'All treatments are subject to consultation and clinical eligibility.'],
+        ['Pricing', 'Prices and memberships are subject to change.'],
+      ] },
+    };
+    const doc = DOCS[this.state.p] || DOCS.appointment;
+    const chip = (on) => ({ bg: on ? 'var(--color-text)' : 'transparent', fg: on ? 'var(--color-bg)' : 'var(--color-text)', border: on ? 'var(--color-text)' : 'rgba(32,30,29,.25)' });
+    return {
+      doc: { ...doc, ext: !!doc.ext, url: doc.url || '', items: doc.items.map(([h, p]) => ({ h, p })) },
+      tabs: [['appointment', 'Appointment Policies'], ['privacy', 'Privacy'], ['terms', 'Terms']].map(([k, t]) => ({ t, ...chip(k === this.state.p), pick: () => { this.setState({ p: k }); history.replaceState(null, '', '?p=' + k); } })),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+<script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+</helmet>
+<footer style="background:radial-gradient(50% 60% at 100% 0%, var(--lav) 0%, rgba(236,223,245,0) 70%), radial-gradient(45% 55% at 0% 100%, var(--blush) 0%, rgba(245,220,213,0) 70%), linear-gradient(180deg, var(--sky), #d4e2ee);color:var(--color-text)">
+  <div style="max-width:1440px;margin:0 auto;padding:72px clamp(24px,4vw,48px);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:48px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <a href="Heights%20Wellness%20v2.dc.html" style="display:flex;flex-direction:column;text-decoration:none;color:var(--color-text);line-height:1"><span style="font-family:var(--font-heading);font-weight:500;font-size:34px">Heights</span><span style="margin-top:6px;font-size:9px;font-weight:700;letter-spacing:.42em;text-transform:uppercase">Wellness &amp; Aesthetics</span></a>
+      <p style="margin:0;font-size:16px;line-height:1.6">3168 Heights Village<br>Vestavia Hills, AL 35243</p>
+      <a href="tel:2054901300" style="font-size:16px">(205) 490-1300</a>
+      <a href="mailto:info@glowheightswellness.com" style="font-size:16px">info@glowheightswellness.com</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
+      <span style="font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;opacity:.75;margin-bottom:6px">Services</span>
+      <sc-for list="{{ services }}" as="s" hint-placeholder-count="8"><a href="{{ s.href }}" style="text-decoration:none">{{ s.t }}</a></sc-for>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
+      <span style="font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;opacity:.75;margin-bottom:6px">Studio</span>
+      <sc-for list="{{ links }}" as="l" hint-placeholder-count="8"><a href="{{ l.href }}" style="text-decoration:none">{{ l.t }}</a></sc-for>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
+      <span style="font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;opacity:.75;margin-bottom:6px">Hours</span>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ hours }}" as="h" hint-placeholder-count="4"><div style="display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid rgba(32,30,29,.12)"><span style="font-weight:{{ h.w }}">{{ h.d }}</span><span style="font-weight:{{ h.w }};white-space:nowrap">{{ h.t }}</span></div></sc-for>
+      </div>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const day = new Date().getDay();
+    return {
+      services: [['IV Therapy', 'iv'], ['Peptide Therapy', 'peptides'], ['NAD+ Therapy', 'nad'], ['Vitamin Boosts', 'vitamins'], ['Red Light Therapy', 'red-light'], ['Pelvic Floor Therapy', 'pelvic-floor'], ['Body Sculpting', 'body-sculpting'], ['Aesthetics', 'aesthetics']].map(([t, s]) => ({ t, href: 'Service.dc.html?s=' + s })),
+      links: [['About Us', 'About.dc.html'], ['All Services', 'Services.dc.html'], ['Memberships', 'Memberships.dc.html'], ['Book a Consultation', 'Book.dc.html'], ['FAQ', 'FAQ.dc.html'], ['Contact', 'Contact.dc.html'], ['Appointment Policies', 'Policies.dc.html?p=appointment'], ['Privacy Policy', 'Policies.dc.html?p=privacy'], ['Terms and Conditions', 'Policies.dc.html?p=terms']].map(([t, href]) => ({ t, href })),
+      hours: [['Mon – Thu', '9 am – 6 pm', [1, 2, 3, 4]], ['Friday', '9 am – 3 pm', [5]], ['Saturday', '10 am – 4 pm', [6]], ['Sunday', '11 am – 3 pm', [0]]].map(([d, t, ds]) => ({ d: ds.includes(day) ? d + ' · Today' : d, t, w: ds.includes(day) ? 700 : 400 })),
+    };
+  }
+}
+</script>
+</body>
+</html>
