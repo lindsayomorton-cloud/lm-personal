@@ -3604,30 +3604,9 @@ html.sol-on,html.sol-on body{overflow:hidden!important}
   </div>
   <div class="paper">
     <div class="ask-grid">
-      <div class="ask-head"><h3>Ask my résumé<span class="dot">.</span></h3><p>Ask anything about my experience, or paste a job description and get a version of my résumé tailored to it.</p></div>
+      <div class="ask-head"><h3>My experience<span class="dot">.</span></h3><p>Years in each area, from my first marketing role in 2010 to today.</p></div>
       <div class="years"><h4>Years of experience</h4><ul><li style="--c:#fe7bbf;--from:0%"><span class="n">16+<small>yrs</small></span><span class="sk"><b>Social &amp; content creation</b><em>Since 2010</em></span><span class="bar" aria-hidden="true"><i></i></span></li><li style="--c:#ceff32;--from:0%"><span class="n">16+<small>yrs</small></span><span class="sk"><b>Demand generation</b><em>Since 2010</em></span><span class="bar" aria-hidden="true"><i></i></span></li><li style="--c:#ec2b7a;--from:0%"><span class="n">15+<small>yrs</small></span><span class="sk"><b>Product marketing</b><em>Since 2011</em></span><span class="bar" aria-hidden="true"><i></i></span></li><li style="--c:#b89cff;--from:13%"><span class="n">13+<small>yrs</small></span><span class="sk"><b>Paid media</b><em>Since 2013</em></span><span class="bar" aria-hidden="true"><i></i></span></li></ul><p class="yr-scale" aria-hidden="true"><span>2010</span><span>Today</span></p></div>
-      <div class="bot" id="bot">
-        <div class="bot-tabs" role="tablist" aria-label="Assistant mode">
-          <button class="bot-tab" role="tab" id="tabAsk" aria-selected="true" aria-controls="paneAsk" type="button">Ask about my experience</button>
-          <button class="bot-tab" role="tab" id="tabFit" aria-selected="false" aria-controls="paneFit" type="button">Tailor to your role</button>
-        </div>
-        <div class="bot-pane" id="paneAsk" role="tabpanel" aria-labelledby="tabAsk">
-          <div class="chat" id="chat" aria-live="polite"><div class="msg them">Hi! I can answer questions about Lindsay's experience, results and skills.<br>Try one of these, or ask your own.</div></div>
-          <div class="qchips"><button type="button" class="qchip">What kind of teams has she built?</button><button type="button" class="qchip">How has she used AI in marketing?</button><button type="button" class="qchip">Tell me about her partnership work</button><button type="button" class="qchip">Has she worked with private equity?</button></div>
-          <form id="askForm"><label class="sr" for="askInput">Your question</label><input id="askInput" type="text" placeholder="Ask about Lindsay's experience…" autocomplete="off"><button class="send" type="submit" id="askBtn">Ask</button></form>
-        </div>
-        <div class="bot-pane" id="paneFit" role="tabpanel" aria-labelledby="tabFit" hidden>
-          <form id="fitForm" class="fit">
-            <label for="fitInput">Paste a job description, or describe the role you're hiring for.</label>
-            <textarea id="fitInput" rows="6" placeholder="e.g. VP of Marketing at a PE-backed B2B SaaS company. Owns demand gen, brand and a team of 8…"></textarea>
-            <div class="bot-row"><button class="send" type="submit" id="fitBtn">Build my tailored résumé</button><button class="link-btn" type="button" id="fitStop" hidden>Stop</button></div>
-          </form>
-          <article class="doc" id="doc" hidden aria-live="polite"></article>
-          <div class="bot-row" id="docActions" hidden><button class="btn light" type="button" id="docSave">Download this version (.md) ↓</button><button class="btn ghost" type="button" id="docCopy">Copy text</button></div>
-        </div>
-        <p class="fine">Answers come only from Lindsay's real résumé.<br>The assistant won't make up roles, numbers or skills.</p>
-        <p class="off" id="botOff" hidden>The assistant works when this page is opened in Claude.<br>You can still download the résumé or reach Lindsay on LinkedIn.</p>
-      </div>
+      <!-- "Ask my résumé" assistant is off until the live version is fixed (kept on the resume-assistant branch) -->
     </div>
   </div>
 </template>
