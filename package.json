@@ -1,8 +1,0 @@
-{
-  "name": "lm-personal",
-  "private": true,
-  "description": "linsmeetsworld.com. The only dependency is for the /api/ask Pages Function.",
-  "dependencies": {
-    "@anthropic-ai/sdk": "^1.12.0"
-  }
-}
