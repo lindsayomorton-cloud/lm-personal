@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vibes Candy</title>
+<title>Vibes Candy concept | Lindsay Morton</title>
+<meta name="description" content="An unofficial homepage concept for Vibes Candy, designed by Lindsay Morton.">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -21,7 +22,7 @@ input::placeholder{color:#6b4a78;}
 @keyframes vibesFloat{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-14px) rotate(calc(var(--r,0deg) + 8deg))}}
 @keyframes vibesMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes gb-drift{from{transform:translateX(0)}to{transform:translateX(-50%)}}@keyframes gb-shimmer{from{transform:translate(-3%,-2%) scale(1)}to{transform:translate(3%,2%) scale(1.08)}}@keyframes gb-caustic{from{transform:scale(1) translateX(0)}to{transform:scale(1.06) translateX(-2%)}}
-@media (max-width:640px){[data-hide-mobile]{display:none!important}}
+@media (max-width:640px){[data-hide-mobile]{display:none!important}[data-hib-a]{display:none!important}[data-hib-b]{top:-28px!important;left:-24px!important;width:96px!important}}
 </style>
 </helmet>
 <div style="min-height:100vh;color:#fff;overflow:hidden;font-family:'Figtree',sans-serif;position:relative;">
@@ -208,6 +209,7 @@ input::placeholder{color:#6b4a78;}
         <a href="#" aria-label="Spotify" style="color:#fff;" style-hover="color:#eaff3b;"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M7 9.5c3.5-1 7-.6 10 1M7.5 12.8c3-.8 6-.4 8.5 1M8 16c2.4-.6 4.6-.3 6.5.8"></path></svg></a>
       </div>
     </div>
+  <p style="margin:20px auto 0;font-size:13px;line-height:1.5;color:rgba(255,255,255,.85);text-align:center;">Unofficial website concept by <a href="https://linsmeetsworld.com/" style="color:inherit;text-decoration:underline;">Lindsay Morton</a> · Not affiliated with Vibes Candy.</p>
   </footer>
 </div>
 </sc-if>
@@ -395,8 +397,8 @@ input::placeholder{color:#6b4a78;}
   <div style="display:flex;justify-content:center;margin-top:clamp(40px,5vw,64px);"><a href="{{ amazonUrl }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:18px;white-space:nowrap;background:#eaff3b;color:#2a0636;font-family:'Lilita One',sans-serif;font-size:clamp(28px,4vw,52px);line-height:1;text-decoration:none;padding:clamp(18px,2.2vw,28px) clamp(40px,5.6vw,80px);border-radius:999px;box-shadow:0 0 0 6px #ff3fd0,0 12px 0 6px #b8c400,0 28px 50px rgba(60,0,40,.45);transition:transform .15s;" style-hover="transform:translateY(-4px) scale(1.02);color:#2a0636;" style-active="transform:translateY(6px);">BUY ON AMAZON <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a></div>
   </section>
   <section style="position:relative;overflow:hidden;background:linear-gradient(0deg,#e0168a 0px,rgba(224,22,138,0) 160px),linear-gradient(180deg,#c8107e 0px,rgba(200,16,126,0) 160px),radial-gradient(60% 90% at 0% 55%,#ff8fd8 0%,rgba(255,143,216,0) 60%),radial-gradient(60% 80% at 100% 100%,#ff9a3c 0%,rgba(255,154,60,0) 60%),linear-gradient(180deg,#c8107e 0%,#ff2d9a 55%,#e0168a 100%);padding:clamp(48px,6vw,80px) clamp(20px,4vw,48px) clamp(64px,8vw,110px);margin-top:-2px;color:#fff;text-align:center;">
-    <img src="assets/home/hib-left.png" alt="" style="position:absolute;left:clamp(12px,6vw,90px);top:clamp(20px,3vw,40px);width:clamp(90px,10vw,150px);height:auto;transform:rotate(-18deg);z-index:3;filter:drop-shadow(0 10px 14px rgba(80,0,40,.35));pointer-events:none;">
-    <img src="assets/home/hib-left.png" alt="" style="position:absolute;left:-30px;top:16%;width:clamp(110px,13vw,190px);height:auto;transform:rotate(-14deg);pointer-events:none;">
+    <img data-hib-a src="assets/home/hib-left.png" alt="" style="position:absolute;left:clamp(12px,6vw,90px);top:clamp(20px,3vw,40px);width:clamp(90px,10vw,150px);height:auto;transform:rotate(-18deg);z-index:3;filter:drop-shadow(0 10px 14px rgba(80,0,40,.35));pointer-events:none;">
+    <img data-hib-b src="assets/home/hib-left.png" alt="" style="position:absolute;left:-30px;top:16%;width:clamp(110px,13vw,190px);height:auto;transform:rotate(-14deg);pointer-events:none;">
     <img src="assets/home/hib-right.png" alt="" style="position:absolute;right:-24px;bottom:8%;width:clamp(100px,12vw,170px);height:auto;transform:rotate(12deg);pointer-events:none;">
     <div style="max-width:880px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:clamp(18px,2.4vw,28px);">
       <div style="font-family:'Lilita One',sans-serif;font-size:16px;letter-spacing:.2em;color:#eaff3b;">AS SEEN IN</div>
@@ -445,6 +447,7 @@ input::placeholder{color:#6b4a78;}
         <a href="#" aria-label="Spotify" style="color:#fff;" style-hover="color:#eaff3b;"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M7 9.5c3.5-1 7-.6 10 1M7.5 12.8c3-.8 6-.4 8.5 1M8 16c2.4-.6 4.6-.3 6.5.8"></path></svg></a>
       </div>
     </div>
+  <p style="margin:24px auto 0;font-size:13px;line-height:1.5;color:rgba(255,255,255,.85);text-align:center;">Unofficial website concept by <a href="https://linsmeetsworld.com/" style="color:inherit;text-decoration:underline;">Lindsay Morton</a> · Not affiliated with Vibes Candy.</p>
   </footer>
 </div>
 </sc-if>
