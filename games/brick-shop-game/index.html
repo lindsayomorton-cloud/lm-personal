@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"><link rel="icon" href="favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brick Shop</title>
+<meta name="description" content="Brick Shop: a math and reading game. Earn Brick Bucks, work out discounts, and build your fish tank.">
+<meta property="og:title" content="Brick Shop">
+<meta property="og:description" content="Earn Brick Bucks, work out discounts, and build your fish tank.">
+<meta name="theme-color" content="#182238">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,600..800&display=swap" rel="stylesheet">
+<style>html,body{margin:0;height:100%;background:#182238}*{box-sizing:border-box}button{font-family:inherit}a{color:#182238}a:hover{color:#F05A50}h1,h2{text-wrap:balance}
+@keyframes bsg-pop{0%{transform:scale(0.2) rotate(-12deg);opacity:0}45%{transform:scale(1.18) rotate(4deg);opacity:1}70%{transform:scale(0.96) rotate(-2deg)}85%{transform:scale(1.02)}100%{transform:scale(1) rotate(0);opacity:1}}
+@keyframes bsg-glow{0%{opacity:0;transform:scale(0.4)}35%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.4)}}
+@keyframes bsg-burst{0%{transform:translate(0,0) rotate(0) scale(0.4);opacity:1}70%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--r)) scale(1);opacity:0}}
+@keyframes bsg-pulse{0%,100%{filter:drop-shadow(0 0 0.8cqw rgba(255,199,44,0.6))}50%{filter:drop-shadow(0 0 3cqw rgba(255,214,79,1))}}
+@keyframes bsg-in{0%{opacity:0;transform:translateY(3cqh) scale(0.96)}100%{opacity:1;transform:none}}
+@keyframes bsg-dot{0%,25%{transform:translateX(0)}60%,100%{transform:translateX(var(--to))}}
+@keyframes bsg-zero{0%,60%{opacity:1}80%,100%{opacity:0.25}}
+@keyframes bsg-bob{0%,100%{transform:translateY(-0.6cqh)}50%{transform:translateY(0.8cqh)}}
+@keyframes bsg-word{0%{background:transparent;color:#F6F1E4}12%,80%{background:#FFC72C;color:#182238}100%{background:transparent;color:#F6F1E4}}
+@keyframes bsg-rain{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(var(--fall)) rotate(var(--r))}}
+@keyframes bsg-nope{0%{transform:translateY(60cqh) rotate(4deg)}70%{transform:translateY(-2cqh) rotate(-1deg)}100%{transform:none}}
+@keyframes bsg-drop{0%{transform:translateY(-30cqh) rotate(-20deg);opacity:0}60%{transform:translateY(1cqh) rotate(4deg);opacity:1}100%{transform:none;opacity:1}}
+@keyframes bsg-swim{0%,100%{transform:translateX(0) translateY(0)}25%{transform:translateX(-30%) translateY(-6%)}50%{transform:translateX(-55%) translateY(4%) scaleX(-1)}75%{transform:translateX(-25%) translateY(-4%) scaleX(-1)}}
+@keyframes bsg-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-1cqw)}75%{transform:translateX(1cqw)}}
+@keyframes bsg-fade{0%,80%{opacity:1}100%{opacity:0}}</style>
+</helmet>
+<div style="position:fixed;inset:0;display:grid;place-items:center;background:#182238;font-family:Lexend,system-ui,sans-serif;color:#182238">
+<div style="position:relative;width:min(100vw,177.78vh);height:100vh;overflow:hidden;container-type:size;background:#F3E6CF">
+
+<sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+  <div data-screen-label="01 Meet Dean" style="position:absolute;inset:0">
+    <img src="{{ imgInterior }}" alt="" style="position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;filter:blur(6px) brightness(0.85)">
+    <div style="position:absolute;left:2cqw;top:12cqh;width:78cqh;height:78cqh;border-radius:50%;overflow:hidden;background:#FFC72C;box-shadow:0 0 0 1.2cqh #FFFBF2,0 3cqh 6cqh -1cqh rgba(24,34,56,0.55)">
+      <img src="{{ imgDeanA }}" alt="Dean" style="position:absolute;left:0;top:8%;width:100%">
+    </div>
+    <div style="position:absolute;left:48cqw;top:16cqh;width:48cqw;padding:4.5cqh 3cqw;border-radius:3cqw;background:#FFFBF2;box-shadow:0 3cqh 6cqh -2cqh rgba(24,34,56,0.5);display:flex;flex-direction:column;gap:2.4cqh">
+      <span style="align-self:flex-start;padding:0.8cqh 1.2cqw;border-radius:999px;background:#F05A50;color:#fff;font-weight:700;font-size:1.25cqw">Birthday Sale today</span>
+      <h1 style="margin:0;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:6cqw;line-height:0.95;letter-spacing:-0.035em">Hi! I'm Dean.</h1>
+      <p style="margin:0;font-size:2.8cqw;line-height:1.3;font-weight:600;color:#182238;text-wrap:pretty">Let's go shopping for bricks! The store is having a birthday sale.</p>
+      <button onClick="{{ goStore }}" style="align-self:flex-start;margin-top:1cqh;display:inline-flex;align-items:center;gap:1.2cqw;height:7.5cqh;padding:0 0.7cqw 0 2.2cqw;border:none;border-radius:999px;background:#182238;color:#fff;font-weight:700;font-size:1.6cqw;cursor:pointer" style-hover="background:#24335A">Let's go in<span style="display:grid;place-items:center;width:5.6cqh;height:5.6cqh;border-radius:50%;background:#FFC72C;color:#182238;font-size:1.6cqw">→</span></button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isStore }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="02 Store" onMouseEnter="{{ earnOn }}" onMouseLeave="{{ earnOff }}" style="position:absolute;inset:0">
+    <img src="{{ imgInterior }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:filter .4s;filter:{{ earnFilter }}">
+    <button onClick="{{ goShelf }}" aria-label="Shop the sale" style="position:absolute;left:0.5cqw;top:28cqh;width:33cqw;height:50cqh;padding:2cqh 1.4cqw;border:0.4cqw dashed rgba(255,255,255,0.85);border-radius:2cqw;background:rgba(24,34,56,0.35);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2cqh;transition:background .2s,transform .2s" style-hover="background:rgba(24,34,56,0.5);transform:scale(1.02)">
+      <span style="padding:1cqh 2.4cqw;border-radius:2cqw;background:#F05A50;color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:5.4cqw;line-height:1;letter-spacing:-0.02em;transform:rotate(-4deg);box-shadow:0 0 0 0.6cqh #fff,0 1.5cqh 3cqh -1cqh rgba(0,0,0,0.5)">10% OFF</span>
+      <span style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4cqh 1cqw;justify-items:center;align-items:center">
+        <img src="uploads/jet.webp" alt="" style="width:13cqw;max-height:13cqh;object-fit:contain;filter:drop-shadow(0 1cqh 1cqh rgba(0,0,0,0.4));transform:rotate(-4deg);animation:bsg-in .5s 0s ease-out both"><img src="uploads/camper.webp" alt="" style="width:13cqw;max-height:13cqh;object-fit:contain;filter:drop-shadow(0 1cqh 1cqh rgba(0,0,0,0.4));transform:rotate(3deg);animation:bsg-in .5s 0.08s ease-out both"><img src="uploads/adventure-cut.webp" alt="" style="width:13cqw;max-height:13cqh;object-fit:contain;filter:drop-shadow(0 1cqh 1cqh rgba(0,0,0,0.4));transform:rotate(-2deg);animation:bsg-in .5s 0.16s ease-out both"><img src="assets/tank.webp" alt="" style="width:12cqw;max-height:13cqh;object-fit:contain;filter:drop-shadow(0 1cqh 1cqh rgba(0,0,0,0.4));transform:rotate(4deg);animation:bsg-in .5s 0.24s ease-out both">
+      </span>
+      <span style="display:inline-flex;align-items:center;gap:1cqw;height:7.5cqh;padding:0 0.7cqw 0 2cqw;border-radius:999px;background:#182238;color:#fff;font-weight:700;font-size:1.7cqw;box-shadow:0 1.5cqh 3cqh -1cqh rgba(24,34,56,0.6)">Shop the sale<span style="display:grid;place-items:center;width:5.6cqh;height:5.6cqh;border-radius:50%;background:#FFC72C;color:#182238">→</span></span>
+    </button>
+    <sc-if value="{{ noStoreTip }}" hint-placeholder-val="{{ false }}">
+      <img src="{{ imgDeanB }}" alt="Dean" style="position:absolute;left:22cqw;bottom:0;height:52cqh;filter:drop-shadow(0 1.5cqh 2cqh rgba(24,34,56,0.35));pointer-events:none">
+    </sc-if>
+    <button onClick="{{ goEarn }}" aria-label="Earn Brick Bucks" style="position:absolute;right:1cqw;bottom:0;width:38cqw;height:66cqh;padding:0;border:none;background:none;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-1cqh)">
+      <img src="{{ imgCashier }}" alt="Cashier" style="position:absolute;right:2cqw;bottom:0;height:46cqh;filter:grayscale(0.55) brightness(0.88) saturate(0.8);opacity:0.9;transition:filter .3s,opacity .3s" style-hover="filter:none;opacity:1">
+    </button>
+    
+    <sc-if value="{{ storeTip }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;z-index:5">
+        <div onClick="{{ closeTip }}" style="position:absolute;inset:0;background:rgba(40,40,48,0.5);backdrop-filter:grayscale(0.7)"></div>
+        <img src="{{ imgDeanB }}" alt="Dean" style="position:absolute;left:0;bottom:0;height:68cqh;filter:drop-shadow(0 2cqh 3cqh rgba(0,0,0,0.4));pointer-events:none">
+        <div style="position:absolute;left:38cqw;top:18cqh;width:54cqw;padding:4.5cqh 3cqw;border-radius:3cqw;background:#FFFBF2;box-shadow:0 3cqh 6cqh -2cqh rgba(0,0,0,0.5);display:flex;flex-direction:column;gap:2.6cqh">
+          <span style="position:absolute;left:-2.2cqw;top:9cqh;width:0;height:0;border-top:2cqw solid transparent;border-bottom:2cqw solid transparent;border-right:2.4cqw solid #FFFBF2"></span>
+          <p style="margin:0;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:3.6cqw;line-height:1.05;letter-spacing:-0.03em">We're in!</p>
+          <p style="margin:0;font-size:2.4cqw;line-height:1.35;font-weight:500;text-wrap:pretty">The sale sets are on the shelves on the <b style="color:#F05A50">left</b>.</p>
+          <p style="margin:0;font-size:2.4cqw;line-height:1.35;font-weight:500;text-wrap:pretty">The cashier on the <b style="color:#F05A50">right</b> gives you Brick Bucks for solving math problems.</p>
+          <button onClick="{{ closeTip }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:1.2cqw;height:8cqh;padding:0 0.7cqw 0 2.4cqw;border:none;border-radius:999px;background:#182238;color:#fff;font-weight:700;font-size:1.8cqw;cursor:pointer" style-hover="background:#24335A">Got it<span style="display:grid;place-items:center;width:6cqh;height:6cqh;border-radius:50%;background:#FFC72C;color:#182238">→</span></button>
+        </div>
+      </div>
+    </sc-if>
+    <button onClick="{{ goEarn }}" style="position:absolute;right:4cqw;top:16cqh;display:inline-flex;align-items:center;gap:1.2cqw;height:8.5cqh;padding:0 0.9cqw 0 2.2cqw;border:none;border-radius:999px;background:#3E9B5A;color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:1.9cqw;cursor:pointer;box-shadow:inset 0 -0.7cqh 0 rgba(0,0,0,0.18),0 1.5cqh 3cqh -1cqh rgba(30,90,50,0.7)" style-hover="background:#348A4E">Earn Brick Bucks<span style="display:grid;place-items:center;width:7.6cqw;aspect-ratio:2.35/1;border-radius:0.4cqw;background:linear-gradient(160deg,#EAF2DF 0%,#CFE0BF 55%,#BFD5AC 100%);box-shadow:inset 0 0 0 0.2cqw #EAF2DF,inset 0 0 0 0.35cqw #5E8F6A;color:#2F5E3C;font-size:1.6cqw;transform:rotate(-6deg)">$20</span></button>
+    <button onClick="{{ goLab }}" aria-label="Go to the Science Room" style="position:absolute;left:50%;top:13cqh;transform:translateX(-50%);display:inline-flex;align-items:center;gap:1.2cqw;height:9cqh;padding:0 0.9cqw 0 1cqw;border:none;border-radius:999px;background:#7B3FD0;color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2cqw;cursor:pointer;box-shadow:inset 0 -0.7cqh 0 rgba(0,0,0,0.2),0 1.5cqh 3cqh -1cqh rgba(60,20,120,0.7)" style-hover="background:#6A33B8"><span style="display:grid;place-items:center;width:6.6cqh;height:7cqh;border-radius:3.3cqh 3.3cqh 0.6cqh 0.6cqh;background:#FFC72C;color:#7B3FD0;font-size:1.8cqw">⚛</span>Science Room<span style="display:grid;place-items:center;width:7cqh;height:7cqh;border-radius:50%;background:#fff;color:#7B3FD0">→</span></button>
+    {{ storeRain }}
+  </div>
+</sc-if>
+
+<sc-if value="{{ isLab }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Science Room" style="position:absolute;inset:0;overflow:hidden">
+    <div style="position:absolute;left:50%;top:50%;width:max(100cqw,177.7cqh);aspect-ratio:1672/941;transform:translate(-50%,-50%)">
+      <img src="assets/lab-room.webp" alt="Science Room" style="position:absolute;inset:0;width:100%;height:100%">
+      <button onClick="{{ openMathShelf }}" aria-label="Math and reading shelf" style="position:absolute;left:5%;top:4%;width:26%;height:64%;border:0.5cqw dashed rgba(255,255,255,0.9);border-radius:2cqw;background:rgba(255,199,44,0.1);cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2cqh;transition:background .2s,transform .2s" style-hover="background:rgba(255,199,44,0.28);transform:scale(1.02)"><span style="padding:1.4cqh 2.2cqw;border-radius:999px;background:#FFC72C;color:#182238;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2.6cqw;box-shadow:0 1.5cqh 3cqh -1cqh rgba(0,0,0,0.5)">Math &amp; Reading →</span></button>
+      <button onClick="{{ openSciShelf }}" aria-label="Science shelf" style="position:absolute;left:75%;top:4%;width:24%;height:66%;border:0.5cqw dashed rgba(255,255,255,0.9);border-radius:2cqw;background:rgba(255,199,44,0.1);cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2cqh;transition:background .2s,transform .2s" style-hover="background:rgba(255,199,44,0.28);transform:scale(1.02)"><span style="padding:1.4cqh 2.2cqw;border-radius:999px;background:#FFC72C;color:#182238;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2.6cqw;box-shadow:0 1.5cqh 3cqh -1cqh rgba(0,0,0,0.5)">Science →</span></button>
+    </div>
+    <img src="{{ imgDeanB }}" alt="Dean" style="position:absolute;left:33cqw;bottom:0;height:50cqh;filter:drop-shadow(0 1.5cqh 2cqh rgba(0,0,0,0.4));pointer-events:none">
+    <div style="position:absolute;left:52cqw;top:14cqh;width:22cqw;padding:2.6cqh 1.8cqw;border-radius:2.4cqw;background:#FFFBF2;box-shadow:0 2cqh 4cqh -1cqh rgba(0,0,0,0.5);display:flex;flex-direction:column;gap:1.2cqh">
+      <p style="margin:0;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2.8cqw;line-height:1.05;color:#182238">Science Room!</p>
+      <p style="margin:0;font-size:1.9cqw;line-height:1.3;font-weight:600;color:#182238">Pick a shelf.</p>
+      <p style="margin:0;font-size:1.9cqw;line-height:1.3;font-weight:600;color:#182238">Win <b style="color:#3E9B5A">$10</b> for every right answer!</p>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isLabShelf }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Science Shelf" style="position:absolute;inset:0;overflow:hidden">
+    <div style="position:absolute;left:50%;top:50%;width:max(100cqw,150cqh);aspect-ratio:3/2;transform:translate(-50%,-50%)">
+      <img src="{{ labShelfImg }}" alt="" style="position:absolute;inset:0;width:100%;height:100%">
+      <sc-for list="{{ labSpots }}" as="sp" hint-placeholder-count="3">
+        <button onClick="{{ sp.open }}" aria-label="{{ sp.name }} quiz" style="position:absolute;left:{{ sp.l }};top:{{ sp.t }};width:{{ sp.w }};height:{{ sp.h }};border:0.5cqw solid #FFF6C8;border-radius:2cqw;background:rgba(255,199,44,0.12);cursor:pointer;animation:bsg-pulse 2s ease-in-out infinite;transition:transform .2s,background .2s" style-hover="transform:scale(1.06);background:rgba(255,199,44,0.3)">
+          <span style="position:absolute;left:50%;bottom:-3.6cqh;transform:translateX(-50%);display:flex;align-items:center;gap:0.6cqw;padding:1cqh 1.6cqw;border-radius:999px;background:{{ sp.pillBg }};color:{{ sp.pillFg }};font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2.2cqw;white-space:nowrap;box-shadow:0 1cqh 2cqh -0.5cqh rgba(0,0,0,0.5)">{{ sp.label }}</span>
+        </button>
+      </sc-for>
+    </div>
+    <div style="position:absolute;left:50%;bottom:3cqh;transform:translateX(-50%);padding:1.6cqh 3cqw;border-radius:999px;background:#FFFBF2;color:#182238;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2.6cqw;box-shadow:0 1.5cqh 3cqh -1cqh rgba(0,0,0,0.5)">Tap a glowing item for a quiz!</div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ quizOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;inset:0;z-index:7;display:grid;place-items:center">
+    <div onClick="{{ closeQuiz }}" style="position:absolute;inset:0;background:rgba(24,34,56,0.72)"></div>
+    <div style="position:relative;width:88cqw;padding:4cqh 3.4cqw;border-radius:3cqw;background:#FFFBF2;box-shadow:0 3cqh 6cqh -2cqh rgba(0,0,0,0.6);display:flex;flex-direction:column;gap:3.4cqh;animation:bsg-in .4s ease-out both">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:1cqw">
+        <span style="padding:1cqh 2cqw;border-radius:999px;background:#7B3FD0;color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2.2cqw">{{ quizTopic }}</span>
+        <span style="font-weight:700;font-size:1.8cqw;color:#3A4560">{{ quizCount }}</span>
+        <button onClick="{{ closeQuiz }}" aria-label="Close" style="width:7cqh;height:7cqh;border:none;border-radius:50%;background:#EDE3CF;color:#182238;font-weight:800;font-size:2cqw;cursor:pointer" style-hover="background:#E2D4B8">✕</button>
+      </div>
+      <sc-if value="{{ quizAsking }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;align-items:center;gap:3cqw">
+          <div role="img" aria-label="{{ quizTopic }}" style="flex:none;width:36cqh;height:36cqh;border-radius:50%;background-image:url({{ quizImg }});background-size:{{ quizBgSize }};background-position:{{ quizBgPos }};background-repeat:no-repeat;background-color:#2B2A6B;box-shadow:0 0 0 1cqh #FFC72C,0 2cqh 4cqh -1cqh rgba(0,0,0,0.5)"></div>
+          <h2 style="margin:0;flex:1;min-width:0;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:5.6cqw;line-height:1.08;letter-spacing:-0.02em;color:#182238;text-wrap:balance">{{ quizQ }}</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.6cqw">
+          <sc-for list="{{ quizChoices }}" as="c" hint-placeholder-count="3">
+            <button onClick="{{ c.on }}" style="min-height:18cqh;padding:2cqh 1.4cqw;border:none;border-radius:2.4cqw;background:{{ c.bg }};color:{{ c.fg }};font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:3.6cqw;line-height:1.05;cursor:pointer;box-shadow:inset 0 -1cqh 0 rgba(0,0,0,0.18);transition:transform .15s" style-hover="transform:translateY(-0.8cqh)">{{ c.text }}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ quizFinished }}" hint-placeholder-val="{{ false }}">
+        <h2 style="margin:0;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:5cqw;line-height:1.1;color:#182238;text-align:center">You finished the {{ quizTopic }} quiz!</h2>
+        <p style="margin:0;font-size:2.6cqw;font-weight:700;text-align:center;color:#3E9B5A">You won {{ quizWon }}</p>
+        <button onClick="{{ closeQuiz }}" style="align-self:center;display:inline-flex;align-items:center;gap:1.2cqw;height:10cqh;padding:0 1cqw 0 3cqw;border:none;border-radius:999px;background:#182238;color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2.4cqw;cursor:pointer" style-hover="background:#24335A">Pick another<span style="display:grid;place-items:center;width:8cqh;height:8cqh;border-radius:50%;background:#FFC72C;color:#182238">→</span></button>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isEarn }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="03 Earn Brick Bucks" onMouseEnter="{{ earnOn }}" onMouseLeave="{{ earnOff }}" style="position:absolute;inset:0">
+    <img src="uploads/workshop.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:filter .4s;filter:{{ earnFilter }}">
+    <div onClick="{{ zoomIn }}" style="position:absolute;left:26cqw;top:20cqh;width:48cqw;height:34cqh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1cqh;color:#F6F1E4;text-align:center;cursor:zoom-in;border-radius:1cqw;transition:background .2s" style-hover="background:rgba(255,255,255,0.06)">
+      <span style="font-size:1.3cqw;font-weight:600;color:#FFC72C">Solve it to earn ${{ reward }}</span>
+      <div style="display:flex;align-items:center;gap:1cqw;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:9cqw;line-height:1;letter-spacing:-0.02em;white-space:nowrap">
+        <span>{{ qText }}</span><span>=</span>
+        <span style="min-width:10cqw;padding:0 0.6cqw;border-bottom:0.5cqw solid #FFC72C;color:#FFC72C;text-align:center">{{ inputShow }}</span>
+      </div>
+      <span style="min-height:2.4cqw;font-size:1.6cqw;font-weight:700;color:{{ fbColor }}">{{ fb }}</span>
+    </div>
+    <div style="position:absolute;left:8cqw;top:58cqh;width:84cqw;height:39cqh;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:2cqh 1.4cqw">
+      <sc-for list="{{ earnKeys }}" as="k" hint-placeholder-count="12">
+        <button onClick="{{ k.on }}" style="grid-column:{{ k.gc }};grid-row:{{ k.gr }};border:{{ k.bd }};border-radius:1.6cqw;background:{{ k.bg }};color:{{ k.fg }};font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:{{ k.fs }};cursor:pointer;box-shadow:inset 0 -1.2cqh 0 rgba(0,0,0,0.22),0 1.2cqh 2cqh rgba(0,0,0,0.35);transition:transform .1s" style-hover="transform:translateY(-0.4cqh)" style-active="transform:translateY(0.3cqh)">{{ k.label }}</button>
+      </sc-for>
+    </div>
+    <sc-if value="{{ earnZoom }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;z-index:4">
+        <img src="uploads/workbench.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;left:0;right:0;top:9cqh;display:flex;justify-content:center;align-items:center;gap:1.6cqw;color:#F6F1E4;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:7cqw;line-height:1;white-space:nowrap">
+          <span>{{ qText }} =</span>
+          <span style="min-width:10cqw;padding:0 0.8cqw;border-bottom:0.6cqw solid #FFC72C;color:#FFC72C;text-align:center">{{ inputShow }}</span>
+          <span style="position:absolute;left:0;right:0;top:100%;margin-top:0.6cqh;text-align:center;font-family:Lexend,sans-serif;font-size:2cqw;font-weight:700;color:{{ fbColor }}">{{ fb }}</span>
+        </div>
+        <div style="position:absolute;left:5cqw;right:5cqw;top:25cqh;height:45cqh;display:flex;align-items:center;justify-content:center">
+          <div style="display:flex;align-items:flex-start;justify-content:center;flex-wrap:nowrap">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2cqh">
+            <span style="display:grid;place-items:center;min-width:5.2cqw;height:5.2cqw;padding:0 0.8cqw;border-radius:999px;background:#2F6FD6;color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:3cqw;box-shadow:0 0 0 0.5cqh #F6F1E4">{{ labelA }}</span>
+            <div style="display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:flex-end;gap:{{ brickGap }};width:{{ groupMax }};box-sizing:content-box;padding:{{ trayPad }};border-radius:1.6cqw;border:{{ trayA }};background:{{ trayBgA }};transition:border-color .6s,background .6s">
+              <sc-for list="{{ groupA }}" as="b" hint-placeholder-count="0">
+                <button onClick="{{ b.on }}" style="position:relative;flex:none;width:{{ brickW }};height:{{ brickH }};padding:0;border:none;outline:{{ b.ol }};outline-offset:-0.3cqw;border-radius:0.8cqw;background:{{ b.bg }};color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:{{ brickFs }};cursor:pointer;margin-right:{{ b.mr }};filter:drop-shadow(0 1cqh 1cqh rgba(0,0,0,0.45));text-shadow:0 0.3cqw 0.6cqw rgba(0,0,0,0.7);transform:{{ b.tf }};opacity:{{ b.op }};transition:transform .9s cubic-bezier(.3,.8,.3,1.1),opacity .9s">
+                  {{ b.n }}
+                </button>
+              </sc-for>
+            </div>
+            </div>
+            <span style="flex:none;overflow:hidden;width:{{ opW }};opacity:{{ opOp }};text-align:center;color:#F6F1E4;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:8cqw;line-height:1;align-self:center;transition:width .9s cubic-bezier(.6,0,.2,1),opacity .5s">{{ qOp }}</span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2cqh;margin-left:{{ joinGap }};transition:margin .9s cubic-bezier(.6,0,.2,1)">
+            <sc-if value="{{ hasB }}" hint-placeholder-val="{{ false }}"><span style="display:grid;place-items:center;min-width:5.2cqw;height:5.2cqw;padding:0 0.8cqw;border-radius:999px;background:#FF851F;color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:3cqw;box-shadow:0 0 0 0.5cqh #F6F1E4">{{ labelB }}</span></sc-if>
+            <div style="display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:flex-end;gap:{{ brickGap }};width:{{ groupMaxB }};box-sizing:content-box;padding:{{ trayPad }};border-radius:1.6cqw;border:{{ trayB }};background:{{ trayBgB }};transition:border-color .6s,background .6s">
+              <sc-for list="{{ groupB }}" as="b" hint-placeholder-count="0">
+                <button onClick="{{ b.on }}" style="position:relative;flex:none;width:{{ brickW }};height:{{ brickH }};padding:0;border:none;outline:{{ b.ol }};outline-offset:-0.3cqw;border-radius:0.8cqw;background:{{ b.bg }};color:#182238;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:{{ brickFs }};cursor:pointer;color:#fff;filter:drop-shadow(0 1cqh 1cqh rgba(0,0,0,0.45));text-shadow:0 0.3cqw 0.6cqw rgba(0,0,0,0.7)">
+                  {{ b.n }}
+                </button>
+              </sc-for>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;top:72cqh;display:flex;justify-content:center;align-items:center;gap:2cqw">
+          <sc-if value="{{ notMerged }}" hint-placeholder-val="{{ true }}">
+            <button onClick="{{ tapB }}" aria-label="Put them together" style="width:22cqw;height:13cqh;border:none;border-radius:999px;background:#FFC72C;color:#182238;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:8cqw;line-height:1;cursor:pointer;box-shadow:inset 0 -1cqh 0 rgba(0,0,0,0.18),0 0 4cqw rgba(255,199,44,0.7);transition:transform .15s" style-hover="transform:scale(1.06)" style-active="transform:scale(0.96)">=</button>
+          </sc-if>
+        </div>
+        <div style="position:absolute;left:10cqw;width:80cqw;top:83cqh;height:16cqh;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:1.2cqh 1cqw">
+          <sc-for list="{{ earnKeysSm }}" as="k" hint-placeholder-count="12">
+            <button onClick="{{ k.on }}" style="grid-column:{{ k.gc }};grid-row:{{ k.gr }};border:{{ k.bd }};border-radius:1.2cqw;background:{{ k.bg }};color:{{ k.fg }};font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:{{ k.fs }};cursor:pointer;box-shadow:inset 0 -0.8cqh 0 rgba(0,0,0,0.22),0 0.8cqh 1.4cqh rgba(0,0,0,0.4);transition:transform .1s" style-hover="transform:translateY(-0.5cqh)" style-active="transform:translateY(0.3cqh)">{{ k.label }}</button>
+          </sc-for>
+        </div>
+        <button onClick="{{ zoomOut }}" style="position:absolute;left:4cqw;top:11.5cqh;height:5cqh;padding:0 1.6cqw;border:none;border-radius:999px;background:#FFFBF2;color:#182238;font-weight:700;font-size:1.2cqw;cursor:pointer">← Workbench</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ hasPending }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ goPay }}" style="position:absolute;right:2cqw;top:12cqh;display:inline-flex;align-items:center;gap:1cqw;height:7cqh;padding:0 0.7cqw 0 2cqw;border:none;border-radius:999px;background:#182238;color:#fff;font-weight:700;font-size:1.5cqw;cursor:pointer">Back to checkout<span style="display:grid;place-items:center;width:5.2cqh;height:5.2cqh;border-radius:50%;background:#FFC72C;color:#182238">→</span></button>
+    </sc-if>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isShelf }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="04 Sale Shelves" style="position:absolute;inset:0">
+    <img src="{{ imgShelves }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(0.55) brightness(0.72)">
+    <div style="position:absolute;inset:0;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;height:100%;display:flex;width:400cqw;transform:{{ trackX }};transition:transform .55s cubic-bezier(.7,0,.2,1)">
+        <sc-for list="{{ products }}" as="p" hint-placeholder-count="3">
+          <div style="position:relative;flex:none;width:100cqw;height:100%">
+            <img src="{{ p.img }}" alt="{{ p.name }}" style="position:absolute;left:9cqw;top:12cqh;width:50cqw;height:50cqh;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 2cqh 2cqh rgba(60,30,10,0.45))">
+            
+            <div style="position:absolute;left:58cqw;top:12cqh;width:34cqw;padding:3cqh 2.6cqw;border-radius:2.4cqw;background:#FFFBF2;box-shadow:0 3cqh 6cqh -2cqh rgba(60,30,10,0.55);display:flex;flex-direction:column;gap:2.2cqh">
+              <div style="display:flex;flex-direction:column;gap:0.4cqh">
+                <span style="font-size:2.2cqw;font-weight:700;color:#3A4560">Price</span>
+                <b style="font-family:'Bricolage Grotesque',Lexend,sans-serif;font-size:9.5cqw;font-weight:800;line-height:1;letter-spacing:-0.03em">{{ p.priceLabel }}</b>
+              </div>
+              <sc-if value="{{ p.isSale }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;gap:1.2cqw;padding:1.8cqh 1.4cqw;border-radius:1.4cqw;background:#F05A50;color:#fff">
+                <b style="font-family:'Bricolage Grotesque',Lexend,sans-serif;font-size:6.4cqw;font-weight:800;line-height:1;white-space:nowrap">{{ p.pctLabel }}</b>
+                <span style="font-size:2.4cqw;font-weight:800;line-height:1.1">OFF for the<br>Birthday Sale</span>
+              </div></sc-if>
+              <sc-if value="{{ p.tank }}" hint-placeholder-val="{{ false }}"><div style="padding:1.8cqh 1.4cqw;border-radius:1.4cqw;background:#2F6FD6;color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2.4cqw;line-height:1.15">Build your own! Pick a fish and a plant.</div></sc-if>
+              <sc-if value="{{ p.owned }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start;padding:0.8cqh 1.2cqw;border-radius:999px;background:#3E9B5A;color:#fff;font-weight:700;font-size:1.3cqw">Already in your collection</span></sc-if>
+            </div>
+            <div style="position:absolute;left:0;right:0;top:70.5cqh;display:flex;justify-content:center">
+              <button onClick="{{ p.pick }}" style="display:flex;align-items:center;gap:2.2cqw;height:19cqh;padding:0 1.6cqw;border:none;border-radius:999px;background:#3E9B5A;color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:5.4cqw;letter-spacing:-0.01em;cursor:pointer;box-shadow:inset 0 -1cqh 0 rgba(0,0,0,0.18),0 2cqh 3cqh -1cqh rgba(30,90,50,0.6);transition:transform .15s,background .2s" style-hover="background:#348A4E;transform:scale(1.04)" style-active="transform:scale(0.97)"><span style="flex:none;display:grid;place-items:center;width:15.5cqh;height:15.5cqh;border-radius:50%;background:#fff;color:#3E9B5A"><svg viewBox="0 0 24 24" width="62%" height="62%" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="padding-right:2.6cqw">Add to cart</span></button>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <button onClick="{{ prevProd }}" aria-label="Previous set" style="position:absolute;left:2cqw;top:40cqh;width:12cqh;height:12cqh;border:none;border-radius:50%;background:#FFC72C;color:#182238;font-size:3cqw;font-weight:800;cursor:pointer;box-shadow:inset 0 -0.8cqh 0 rgba(0,0,0,0.18),0 1.5cqh 3cqh -1cqh rgba(24,34,56,0.6)" style-hover="transform:scale(1.08)">←</button>
+    <button onClick="{{ nextProd }}" aria-label="Next set" style="position:absolute;right:2cqw;top:40cqh;width:12cqh;height:12cqh;border:none;border-radius:50%;background:#FFC72C;color:#182238;font-size:3cqw;font-weight:800;cursor:pointer;box-shadow:inset 0 -0.8cqh 0 rgba(0,0,0,0.18),0 1.5cqh 3cqh -1cqh rgba(24,34,56,0.6)" style-hover="transform:scale(1.08)">→</button>
+    <button onClick="{{ replayLesson }}" style="position:absolute;right:2cqw;bottom:2cqh;height:6.5cqh;padding:0 1.8cqw;border:none;border-radius:999px;background:#FFFBF2;color:#182238;font-weight:700;font-size:1.4cqw;cursor:pointer;box-shadow:0 1cqh 2cqh -0.5cqh rgba(24,34,56,0.45)" style-hover="background:#fff">Learn 10% again</button>
+    <div style="position:absolute;left:50%;transform:translateX(-50%);bottom:1.5cqh;display:flex;align-items:center;gap:1cqw;padding:1.2cqh 1.6cqw;border-radius:999px;background:#FFFBF2;box-shadow:0 1cqh 2cqh -0.5cqh rgba(24,34,56,0.4)">
+      <sc-for list="{{ dots }}" as="d" hint-placeholder-count="3">
+        <button onClick="{{ d.on }}" aria-label="{{ d.name }}" style="width:{{ d.w }};height:1.6cqh;padding:0;border:none;border-radius:999px;background:{{ d.bg }};cursor:pointer;transition:width .3s,background .3s"></button>
+      </sc-for>
+      <span style="margin-left:0.6cqw;font-size:1.3cqw;font-weight:700">{{ slideLabel }}</span>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isDeal }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="05 Work out the deal" style="position:absolute;inset:0">
+    <img src="{{ imgInterior }}" alt="" style="position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;filter:blur(5px) brightness(0.9)">
+    <div style="position:absolute;left:0;right:0;top:10cqh;height:34cqh;display:flex;align-items:center;justify-content:center;gap:3cqw;animation:bsg-in .7s ease-out both;transition:opacity .6s,transform .8s cubic-bezier(.6,0,.2,1);opacity:{{ prodOp }};transform:{{ prodTf }}">
+      <img src="{{ prodImg }}" alt="{{ prodName }}" style="height:100%;max-width:40cqw;object-fit:contain;filter:drop-shadow(0 2cqh 2cqh rgba(24,34,56,0.45))">
+      <div style="display:flex;flex-direction:column;gap:1.4cqh">
+        <h2 style="align-self:flex-start;margin:0;padding:1cqh 1.6cqw;border-radius:999px;background:#FFFBF2;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2.4cqw;line-height:1;letter-spacing:-0.03em">{{ prodName }}</h2>
+        <div style="display:flex;align-items:center;gap:2cqw">
+          <span style="padding:1.4cqh 2.4cqw;border-radius:2.4cqw;background:#FFFBF2;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:7.4cqw;line-height:1;letter-spacing:-0.03em;box-shadow:0 2cqh 3cqh -1cqh rgba(24,34,56,0.5)">{{ priceText }}</span>
+          <span style="padding:1.4cqh 2.4cqw;border-radius:2.4cqw;background:#F05A50;color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:7.4cqw;line-height:1;letter-spacing:-0.03em;white-space:nowrap;transform:rotate(-3deg);box-shadow:0 0 0 0.8cqh #fff,0 2cqh 3cqh -1cqh rgba(24,34,56,0.5)">{{ pctText }}</span>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;left:3cqw;right:3cqw;top:{{ boardTop }};bottom:13.5cqh;transition:top .8s cubic-bezier(.6,0,.2,1);padding:{{ boardPadTop }} 2.6cqw 2.6cqh;grid-template-rows:minmax(0,1fr);grid-auto-rows:0;border-radius:2.4cqw;background:#1F1F1F;border:0.6cqw solid #FFC72C;box-shadow:inset 0 0 6cqw rgba(0,0,0,0.6),0 2cqh 4cqh -1cqh rgba(24,34,56,0.5);display:grid;grid-template-columns:{{ boardCols }};gap:3cqw;color:#F6F1E4">
+      {{ methodTabs }}
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4cqh;min-width:0;height:100%">
+        <sc-if value="{{ hasGoal }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:{{ goalFs }};line-height:1.05;letter-spacing:-0.02em;color:#FFC72C;text-align:center;text-wrap:balance;transition:font-size .6s;animation:bsg-in .7s .9s ease-out both">{{ goalText }}</p></sc-if>
+        <div style="display:flex;flex-direction:{{ boardDir }};align-items:center;justify-content:center;gap:4cqw;min-width:0;flex:1;width:100%">
+          {{ pieEl }}
+          <div style="display:flex;flex-direction:column;align-items:center;gap:1.4cqh;min-width:0;max-width:{{ textMax }}">
+            {{ ideaEl }}
+            <p style="margin:0;font-size:2.4cqw;line-height:1.2;font-weight:600;color:#FFE7A0;text-align:center">{{ ideaSub }}</p>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center;gap:1.4cqh">
+        <sc-if value="{{ isAsk }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:0.8cqh">
+            <span style="height:6.5cqh;padding:0 1.4cqw;border-radius:1cqw;border:0.3cqw solid #FFC72C;display:flex;align-items:center;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:3.6cqw;color:#FFC72C">{{ dealInput }}</span>
+            <span style="min-height:2.2cqw;font-size:1.4cqw;font-weight:700;color:{{ fbColor }}">{{ fb }}</span>
+            <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1cqh 0.7cqw">
+              <sc-for list="{{ dealKeys }}" as="k" hint-placeholder-count="12">
+                <button onClick="{{ k.on }}" style="height:5.8cqh;border:none;border-radius:1cqw;background:{{ k.bg }};color:{{ k.fg }};font-weight:800;font-size:{{ k.fs }};cursor:pointer;box-shadow:inset 0 -0.5cqh 0 rgba(0,0,0,0.25);transition:transform .1s" style-hover="transform:translateY(-0.3cqh)" style-active="transform:translateY(0.2cqh)">{{ k.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        
+      </div>
+    </div>
+    <div style="position:absolute;left:0;right:0;bottom:2.5cqh;height:9cqh;display:flex;justify-content:center;align-items:center;gap:1.6cqw;animation:{{ btnAnim }}">
+      <sc-if value="{{ isLesson }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ skipLesson }}" style="height:9cqh;padding:0 2.4cqw;border:0.3cqw solid #FFFBF2;border-radius:999px;background:rgba(24,34,56,0.55);color:#FFFBF2;font-weight:800;font-size:1.9cqw;cursor:pointer" style-hover="background:rgba(24,34,56,0.8)">Skip lesson →</button>
+        </sc-if>
+      <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ prevIdea }}" aria-label="Go back" style="display:flex;align-items:center;gap:0.8cqw;height:6.4cqh;padding:0 1.6cqw 0 0.6cqw;border:0.2cqw solid rgba(255,251,242,0.6);border-radius:999px;background:rgba(24,34,56,0.45);color:#FFFBF2;font-weight:700;font-size:1.4cqw;cursor:pointer" style-hover="background:rgba(24,34,56,0.7)"><span style="display:grid;place-items:center;width:4.8cqh;height:4.8cqh;border-radius:50%;color:#FFFBF2">←</span>Back</button>
+        </sc-if>
+      <sc-if value="{{ isWideAsk }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:0.6cqw">
+            <span style="min-width:11cqw;height:9cqh;padding:0 1.2cqw;border-radius:1.2cqw;border:0.35cqw solid #FFC72C;background:#1F1F1F;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:3.6cqw;color:#FFC72C">{{ dealInput }}</span>
+            <sc-for list="{{ dealKeys }}" as="k" hint-placeholder-count="12">
+              <button onClick="{{ k.on }}" style="min-width:4.6cqw;height:9cqh;padding:0 0.6cqw;border:none;border-radius:1cqw;background:{{ k.bg }};color:{{ k.fg }};font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:{{ k.fs }};cursor:pointer;box-shadow:inset 0 -0.6cqh 0 rgba(0,0,0,0.25),0 1cqh 2cqh -0.5cqh rgba(0,0,0,0.5);transition:transform .1s" style-hover="transform:translateY(-0.3cqh)" style-active="transform:translateY(0.2cqh)">{{ k.label }}</button>
+            </sc-for>
+          </div>
+        </sc-if>
+      <sc-if value="{{ isInfo }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ nextIdea }}" style="display:flex;align-items:center;gap:1cqw;height:{{ nextH }};padding:0 0.6cqw 0 {{ nextPadL }};border:0.2cqw solid rgba(255,251,242,0.6);border-radius:999px;background:{{ nextBg }};color:{{ nextFg }};font-weight:800;font-size:{{ nextFs }};cursor:pointer;box-shadow:{{ nextSh }}">{{ nextLabel }}<span style="display:grid;place-items:center;width:{{ nextDot }};height:{{ nextDot }};border-radius:50%;background:#FFC72C;color:#182238">→</span></button>
+        </sc-if>
+        <sc-if value="{{ showCount }}" hint-placeholder-val="{{ false }}"><span style="text-align:center;font-size:1.2cqw;font-weight:600;color:#182238;padding:0.8cqh 1.4cqw;border-radius:999px;background:#FFFBF2">{{ ideaCount }}</span></sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isTank }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="07 Build a Fish Tank" style="position:absolute;inset:0">
+    <img src="{{ imgInterior }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(4px) brightness(0.8)">
+    <h1 style="position:absolute;left:0;right:0;top:2.5cqh;margin:0;text-align:center;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:3.4cqw;line-height:1;color:#fff;text-shadow:0 0.6cqh 1.6cqh rgba(0,0,0,0.5)">Build your fish tank!</h1>
+    <div style="position:absolute;left:50%;top:7cqh;width:46cqw;aspect-ratio:1.5/1;transform:translateX(-50%)">
+      <img src="assets/tank.webp" alt="Fish tank" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
+      <div style="position:absolute;left:13%;right:13%;top:27%;bottom:20%;overflow:hidden">
+        <sc-for list="{{ tankPlantList }}" as="tp" hint-placeholder-count="0"><img src="{{ tp.img }}" alt="" style="position:absolute;left:{{ tp.left }};bottom:0;width:{{ tp.w }};height:{{ tp.h }};object-fit:contain;object-position:bottom;animation:bsg-in .6s ease-out both"></sc-for>
+        <sc-if value="{{ hasTankFish }}" hint-placeholder-val="{{ false }}"><img src="{{ tankFishImg }}" alt="" style="position:absolute;left:40%;top:{{ tankFishTop }};height:{{ tankFishH }};width:auto;animation:bsg-swim 6s ease-in-out infinite"></sc-if>
+      </div>
+      <span style="position:absolute;left:50%;bottom:-1cqh;transform:translateX(-50%);padding:0.8cqh 1.8cqw;border-radius:999px;background:#FFFBF2;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2cqw;color:#182238;box-shadow:0 1cqh 2cqh -0.5cqh rgba(0,0,0,0.4)">Tank $50</span>
+    </div>
+    <p style="position:absolute;left:3cqw;top:57cqh;margin:0;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2.8cqw;color:#fff;text-shadow:0 0.4cqh 1.2cqh rgba(0,0,0,0.6)">{{ pickTitle }}</p>
+    <sc-if value="{{ showChangeFish }}" hint-placeholder-val="{{ false }}"><button onClick="{{ showFish }}" style="position:absolute;right:3cqw;top:56cqh;height:7cqh;padding:0 2cqw;border:0.25cqw solid #FFFBF2;border-radius:999px;background:rgba(24,34,56,0.5);color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:1.8cqw;cursor:pointer" style-hover="background:rgba(24,34,56,0.75)">Change fish</button></sc-if>
+    <sc-if value="{{ showBackPlants }}" hint-placeholder-val="{{ false }}"><button onClick="{{ showPlants }}" style="position:absolute;right:3cqw;top:56cqh;height:7cqh;padding:0 2cqw;border:0.25cqw solid #FFFBF2;border-radius:999px;background:rgba(24,34,56,0.5);color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:1.8cqw;cursor:pointer" style-hover="background:rgba(24,34,56,0.75)">Back to plants →</button></sc-if>
+    <sc-if value="{{ canSum }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ openSum }}" style="position:absolute;right:3cqw;top:26cqh;height:11cqh;padding:0 2.6cqw;border:none;border-radius:999px;background:#3E9B5A;color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2.6cqw;cursor:pointer;box-shadow:inset 0 -0.8cqh 0 rgba(0,0,0,0.18),0 1.5cqh 3cqh -1cqh rgba(0,0,0,0.5);animation:bsg-in .5s ease-out both" style-hover="background:#348A4E">Add it up! →</button>
+    </sc-if>
+    <div style="position:absolute;left:3cqw;right:3cqw;top:65cqh;bottom:2.5cqh;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1cqw">
+      <sc-for list="{{ tankItems }}" as="it" hint-placeholder-count="5">
+        <button onClick="{{ it.on }}" aria-label="{{ it.name }}" style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0.3cqh;min-height:0;padding:0.6cqh 0.4cqw 1cqh;border:none;border-radius:1.6cqw;background:#FFFBF2;cursor:pointer;box-shadow:{{ it.ring }};transition:transform .15s" style-hover="transform:translateY(-0.8cqh)">
+          <img src="{{ it.img }}" alt="" style="width:100%;flex:1;min-height:0;object-fit:contain">
+          <span style="font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:1.9cqw;color:#182238;text-align:center">{{ it.name }}</span>
+          <span style="position:absolute;top:1cqh;right:0.8cqw;padding:0.6cqh 1cqw;border-radius:999px;background:#F05A50;color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2.2cqw">{{ it.priceLabel }}</span>
+          <sc-if value="{{ it.picked }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:1cqh;left:0.8cqw;padding:0.5cqh 0.9cqw;border-radius:999px;background:#3E9B5A;color:#fff;font-weight:800;font-size:1.3cqw">In tank ✓</span></sc-if>
+        </button>
+      </sc-for>
+    </div>
+    <sc-if value="{{ riddleOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:rgba(24,34,56,0.6)">
+        <div style="position:relative;width:70cqw;max-height:94cqh;padding:3cqh 3cqw;border-radius:3cqw;background:#1F1F1F;border:0.6cqw solid #FFC72C;color:#F6F1E4;display:flex;flex-direction:column;align-items:center;gap:2cqh;text-align:center">
+          <button onClick="{{ closeRiddle }}" aria-label="Close" style="position:absolute;top:1.6cqh;right:1.4cqw;width:5cqw;height:5cqw;border:none;border-radius:50%;background:#FFFBF2;color:#182238;font-weight:800;font-size:2cqw;cursor:pointer">✕</button>
+          <img src="{{ riddleImg }}" alt="{{ riddleName }}" style="height:30cqh;max-width:40cqw;object-fit:contain;filter:drop-shadow(0 1.5cqh 2cqh rgba(0,0,0,0.5))">
+          <sc-if value="{{ riddlePhase }}" hint-placeholder-val="{{ false }}">
+            {{ riddleReadEl }}
+            <div style="display:flex;gap:1.6cqw">
+              <sc-for list="{{ riddleChoices }}" as="ch" hint-placeholder-count="3">
+                <button onClick="{{ ch.on }}" style="min-width:16cqw;height:11cqh;padding:0 2cqw;border:none;border-radius:999px;background:#FFFBF2;color:#182238;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:3.2cqw;cursor:pointer;animation:{{ ch.anim }};box-shadow:inset 0 -0.8cqh 0 rgba(0,0,0,0.15)" style-hover="background:#FFE7A0">{{ ch.w }}</button>
+              </sc-for>
+            </div>
+            <span style="font-size:1.8cqw;font-weight:600;color:#FFE7A0">Pick the answer!</span>
+          </sc-if>
+          <sc-if value="{{ spellPhase }}" hint-placeholder-val="{{ false }}">
+            <p style="margin:0;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:3.4cqw;color:#FFC72C">Now spell it!</p>
+          <div style="display:flex;gap:1cqw">
+            <sc-for list="{{ riddleSlots }}" as="sl" hint-placeholder-count="4">
+              <span style="display:grid;place-items:center;width:7cqw;height:7cqw;border-radius:1.2cqw;border:0.35cqw dashed #FFC72C;background:{{ sl.bg }};font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:4.4cqw;color:{{ sl.fg }}">{{ sl.c }}</span>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1cqw">
+            <sc-for list="{{ riddleTiles }}" as="tl" hint-placeholder-count="6">
+              <button onClick="{{ tl.on }}" style="width:7cqw;height:7cqw;border:none;border-radius:1.2cqw;background:{{ tl.bg }};color:#fff;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:4cqw;cursor:pointer;opacity:{{ tl.op }};animation:{{ tl.anim }};box-shadow:inset 0 -0.9cqh 0 rgba(0,0,0,0.22),0 1cqh 1.6cqh rgba(0,0,0,0.4)" style-hover="transform:translateY(-0.5cqh)">{{ tl.c }}</button>
+            </sc-for>
+          </div>
+          <span style="font-size:1.6cqw;font-weight:600;color:#FFE7A0">Tap the letters in order!</span>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ sumOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:rgba(24,34,56,0.6)">
+        <div style="position:relative;width:86cqw;padding:4cqh 3cqw;border-radius:3cqw;background:#1F1F1F;border:0.6cqw solid #FFC72C;color:#F6F1E4;display:flex;flex-direction:column;align-items:center;gap:3cqh">
+          <button onClick="{{ closeSum }}" aria-label="Close" style="position:absolute;top:1.6cqh;right:1.4cqw;width:5cqw;height:5cqw;border:none;border-radius:50%;background:#FFFBF2;color:#182238;font-weight:800;font-size:2cqw;cursor:pointer">✕</button>
+          <p style="margin:0;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:3.4cqw;color:#FFC72C">Add it up!</p>
+          <div style="display:flex;align-items:center;gap:2cqw;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:5cqw">
+            <span style="display:flex;flex-direction:column;align-items:center;gap:1cqh"><img src="assets/tank.webp" alt="" style="height:14cqh"><span>$50</span></span>
+            <span>+</span>
+            <span style="display:flex;flex-direction:column;align-items:center;gap:1cqh"><img src="{{ tankFishImg }}" alt="" style="height:14cqh"><span>{{ sumFishPrice }}</span></span>
+            <sc-for list="{{ sumPlants }}" as="sp" hint-placeholder-count="1"><span style="display:flex;align-items:center;gap:2cqw"><span>+</span><span style="display:flex;flex-direction:column;align-items:center;gap:1cqh"><img src="{{ sp.img }}" alt="" style="height:{{ sumImgH }}"><span>{{ sp.priceLabel }}</span></span></span></sc-for>
+            <span>=</span>
+            <span style="min-width:12cqw;padding:0 1cqw;border-bottom:0.6cqw solid #FFC72C;color:#FFC72C;text-align:center">{{ dealInput }}</span>
+          </div>
+          <span style="min-height:2cqw;font-size:1.8cqw;font-weight:700;color:{{ fbColor }}">{{ fb }}</span>
+          <span style="font-size:1.8cqw;font-weight:600;color:#FFE7A0">Start at 50 and count on!</span>
+          <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.6cqw">
+            <sc-for list="{{ dealKeys }}" as="k" hint-placeholder-count="12">
+              <button onClick="{{ k.on }}" style="min-width:5cqw;height:9cqh;padding:0 0.6cqw;border:none;border-radius:1cqw;background:{{ k.bg }};color:{{ k.fg }};font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:{{ k.fs }};cursor:pointer;box-shadow:inset 0 -0.6cqh 0 rgba(0,0,0,0.25)">{{ k.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isPay }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="06 Checkout" style="position:absolute;inset:0">
+    <img src="{{ imgInterior }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(3px) brightness(0.9)">
+    <img src="{{ imgCashier }}" alt="Cashier" style="position:absolute;right:0;bottom:0;height:80cqh">
+    <div style="position:absolute;left:5cqw;top:13cqh;width:50cqw;padding:4cqh 2.6cqw;border-radius:2.4cqw;background:#FFFBF2;box-shadow:0 3cqh 6cqh -2cqh rgba(24,34,56,0.5);display:flex;flex-direction:column;gap:2.2cqh">
+      <div style="display:flex;align-items:center;gap:1.6cqw">
+        <img src="{{ prodImg }}" alt="" style="width:11cqw;height:9cqw;object-fit:contain">
+        <div style="flex:1;min-width:0">
+          <h2 style="margin:0;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:2.4cqw;line-height:1;letter-spacing:-0.03em">{{ prodName }}</h2>
+          <p style="margin:0.8cqh 0 0;font-size:1.3cqw;color:#3A4560">${{ prodPrice }} − ${{ prodDiscount }} sale discount</p>
+        </div>
+        <b style="font-family:'Bricolage Grotesque',Lexend,sans-serif;font-size:3.4cqw;font-weight:800;color:#F05A50">${{ prodTotal }}</b>
+      </div>
+      <p style="margin:0;font-size:1.5cqw;font-weight:600">Tap the bills to pay exactly ${{ prodTotal }}. You have ${{ wallet }}.</p>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4cqh 1.4cqw">
+        <sc-for list="{{ bills }}" as="b" hint-placeholder-count="4">
+          <button onClick="{{ b.on }}" aria-label="{{ b.v }} dollar bill" style="position:relative;aspect-ratio:2.35/1;padding:0;border:none;border-radius:0.6cqw;background:linear-gradient(160deg,#EAF2DF 0%,#CFE0BF 55%,#BFD5AC 100%);display:grid;place-items:center;cursor:pointer;box-shadow:0 0.6cqh 1.2cqh rgba(24,34,56,0.3);transition:transform .15s" style-hover="transform:translateY(-0.8cqh) rotate(-2deg)" style-active="transform:scale(0.96)">
+            <span style="position:absolute;inset:0.5cqw;border:0.18cqw solid #5E8F6A;border-radius:0.4cqw;background:repeating-linear-gradient(45deg,rgba(94,143,106,0.12) 0 0.2cqw,transparent 0.2cqw 0.6cqw)"></span>
+            <span style="position:absolute;left:0.9cqw;top:0.9cqw;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:1.6cqw;line-height:1;color:#2F5E3C">{{ b.v }}</span>
+            <span style="position:absolute;right:0.9cqw;top:0.9cqw;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:1.6cqw;line-height:1;color:#2F5E3C">{{ b.v }}</span>
+            <span style="position:absolute;left:0.9cqw;bottom:0.9cqw;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:1.6cqw;line-height:1;color:#2F5E3C">{{ b.v }}</span>
+            <span style="position:absolute;right:0.9cqw;bottom:0.9cqw;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:1.6cqw;line-height:1;color:#2F5E3C">{{ b.v }}</span>
+            <span style="position:relative;display:grid;place-items:center;width:4.6cqw;height:5.6cqw;border-radius:50%;background:radial-gradient(circle at 50% 40%,#F4F1E2 0 45%,#D7E3C8 46% 100%);border:0.18cqw solid #5E8F6A">
+              <img src="uploads/assets/yellow_contest_trophy.webp" alt="" style="width:55%;opacity:0.85;filter:sepia(1) hue-rotate(60deg) saturate(1.6) brightness(0.8)">
+            </span>
+            <span style="position:absolute;left:50%;bottom:0.9cqw;transform:translateX(-50%);padding:0.2cqh 0.8cqw;border-radius:999px;background:#2F5E3C;color:#EAF2DF;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:1.3cqw;line-height:1.2;white-space:nowrap">$ {{ b.v }}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="min-height:8cqh;padding:1.4cqh 1.2cqw;border-radius:1.2cqw;background:#F3E6CF;display:flex;align-items:center;flex-wrap:wrap;gap:0.8cqw">
+        <span style="font-size:1.3cqw;font-weight:600;color:#3A4560">On the counter:</span>
+        <sc-for list="{{ paidList }}" as="b" hint-placeholder-count="0">
+          <span style="position:relative;width:7.6cqw;aspect-ratio:2.35/1;border-radius:0.3cqw;background:linear-gradient(160deg,#EAF2DF 0%,#CFE0BF 55%,#BFD5AC 100%);display:grid;place-items:center;box-shadow:0 0.4cqh 0.8cqh rgba(24,34,56,0.25);transform:rotate(-3deg);animation:bsg-in .35s ease-out both">
+            <span style="position:absolute;inset:0.25cqw;border:0.12cqw solid #5E8F6A;border-radius:0.2cqw;background:repeating-linear-gradient(45deg,rgba(94,143,106,0.12) 0 0.2cqw,transparent 0.2cqw 0.6cqw)"></span>
+            <span style="position:absolute;left:0.45cqw;top:0.45cqw;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:0.8cqw;line-height:1;color:#2F5E3C">{{ b.v }}</span>
+            <span style="position:absolute;right:0.45cqw;top:0.45cqw;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:0.8cqw;line-height:1;color:#2F5E3C">{{ b.v }}</span>
+            <span style="position:absolute;left:0.45cqw;bottom:0.45cqw;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:0.8cqw;line-height:1;color:#2F5E3C">{{ b.v }}</span>
+            <span style="position:absolute;right:0.45cqw;bottom:0.45cqw;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:0.8cqw;line-height:1;color:#2F5E3C">{{ b.v }}</span>
+            <span style="position:relative;display:grid;place-items:center;width:2.2cqw;height:2.7cqw;border-radius:50%;background:radial-gradient(circle at 50% 40%,#F4F1E2 0 45%,#D7E3C8 46% 100%);border:0.12cqw solid #5E8F6A">
+              <img src="uploads/assets/yellow_contest_trophy.webp" alt="" style="width:55%;opacity:0.85;filter:sepia(1) hue-rotate(60deg) saturate(1.6) brightness(0.8)">
+            </span>
+          </span>
+        </sc-for>
+        <b style="margin-left:auto;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-size:2.4cqw;font-weight:800">${{ paidSum }}</b>
+      </div>
+      <span style="min-height:2cqw;font-size:1.4cqw;font-weight:700;color:{{ fbColor }}">{{ fb }}</span>
+      <div style="display:flex;flex-wrap:wrap;gap:1cqw">
+        <button onClick="{{ payNow }}" style="display:inline-flex;align-items:center;gap:1cqw;height:7.5cqh;padding:0 0.7cqw 0 2cqw;border:none;border-radius:999px;background:#182238;color:#fff;font-weight:700;font-size:1.6cqw;cursor:pointer" style-hover="background:#24335A">{{ payLabel }}<span style="display:grid;place-items:center;width:5.6cqh;height:5.6cqh;border-radius:50%;background:#FFC72C;color:#182238">→</span></button>
+        <button onClick="{{ undoBill }}" style="height:7.5cqh;padding:0 2cqw;border:0.2cqw solid #182238;border-radius:999px;background:none;color:#182238;font-weight:700;font-size:1.5cqw;cursor:pointer" style-hover="background:#F3E6CF">Take one back</button>
+        <sc-if value="{{ short }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ goEarn }}" style="height:7.5cqh;padding:0 2cqw;border:none;border-radius:999px;background:#F05A50;color:#fff;font-weight:700;font-size:1.5cqw;cursor:pointer">Earn ${{ needMore }} more</button>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="07 You bought it" style="position:absolute;inset:0">
+    <img src="{{ imgInterior }}" alt="" style="position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;filter:blur(6px) brightness(0.85)">
+    <img src="{{ imgDeanA }}" alt="Dean" style="position:absolute;right:2cqw;bottom:0;height:70cqh;filter:drop-shadow(0 2cqh 3cqh rgba(24,34,56,0.35))">
+    <div style="position:absolute;left:6cqw;top:14cqh;width:52cqw;padding:4.5cqh 3cqw;border-radius:3cqw;background:#FFFBF2;box-shadow:0 3cqh 6cqh -2cqh rgba(24,34,56,0.5);display:flex;flex-direction:column;gap:2.2cqh">
+      <img src="{{ prodImg }}" alt="" style="width:26cqw;max-height:28cqh;object-fit:contain;align-self:flex-start">
+      <h1 style="margin:0;font-family:'Bricolage Grotesque',Lexend,sans-serif;font-weight:800;font-size:4cqw;line-height:0.95;letter-spacing:-0.035em">You bought the {{ prodName }}!</h1>
+      <p style="margin:0;font-size:1.7cqw;line-height:1.45;color:#3A4560">You paid ${{ prodTotal }} and saved ${{ prodDiscount }} at the Birthday Sale. You have ${{ wallet }} left.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:1cqw">
+        <button onClick="{{ goShelf }}" style="display:inline-flex;align-items:center;gap:1cqw;height:7.5cqh;padding:0 0.7cqw 0 2cqw;border:none;border-radius:999px;background:#182238;color:#fff;font-weight:700;font-size:1.6cqw;cursor:pointer" style-hover="background:#24335A">Shop again<span style="display:grid;place-items:center;width:5.6cqh;height:5.6cqh;border-radius:50%;background:#FFC72C;color:#182238">→</span></button>
+        <button onClick="{{ goEarn }}" style="height:7.5cqh;padding:0 2cqw;border:0.2cqw solid #182238;border-radius:999px;background:none;color:#182238;font-weight:700;font-size:1.5cqw;cursor:pointer" style-hover="background:#F3E6CF">Earn more Brick Bucks</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+{{ celebration }}
+{{ nopeOverlay }}
+<sc-if value="{{ showHud }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;z-index:6;left:2cqw;right:2cqw;top:3cqh;display:flex;justify-content:space-between;align-items:center;gap:1cqw;pointer-events:none">
+    <button onClick="{{ goBack }}" style="pointer-events:auto;height:6.5cqh;padding:0 1.8cqw;border:none;border-radius:999px;background:#FFFBF2;color:#182238;font-weight:700;font-size:1.4cqw;cursor:pointer;box-shadow:0 1cqh 2cqh -0.5cqh rgba(24,34,56,0.45)" style-hover="background:#fff">← {{ backLabel }}</button>
+    <div style="display:flex;gap:0.8cqw">
+      <span style="display:flex;align-items:center;height:6.5cqh;padding:0 1.6cqw;border-radius:999px;background:#FFFBF2;font-weight:600;font-size:1.3cqw;box-shadow:0 1cqh 2cqh -0.5cqh rgba(24,34,56,0.45)">{{ setsLabel }}</span>
+      <button onClick="{{ toggleWater }}" aria-label="Underwater mode" title="Underwater mode" style="pointer-events:auto;display:flex;align-items:center;gap:0.6cqw;height:6.5cqh;padding:0 1.4cqw 0 0.6cqw;border:none;border-radius:999px;background:{{ waterBg }};color:#fff;font-weight:800;font-size:1.3cqw;cursor:pointer;box-shadow:{{ waterSh }};transition:background .3s" style-hover="filter:brightness(1.1)"><span style="display:grid;place-items:center;width:5cqh;height:5cqh;border-radius:50%;background:rgba(255,255,255,0.25)"><svg viewBox="0 0 24 24" width="70%" height="70%" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg></span>{{ waterLabel }}</button>
+      <span style="display:flex;align-items:center;gap:0.8cqw;height:6.5cqh;padding:0 1.8cqw 0 0.6cqw;border-radius:999px;background:#182238;color:#fff;font-weight:700;font-size:1.5cqw;box-shadow:0 1cqh 2cqh -0.5cqh rgba(24,34,56,0.45)"><span aria-label="Wallet" style="display:grid;place-items:center;width:5cqh;height:5cqh;border-radius:50%;background:#FFC72C;color:#182238"><svg viewBox="0 0 24 24" width="62%" height="62%" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg></span>${{ wallet }}</span>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startBucks&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:200,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Game&quot;},&quot;reward&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:20,&quot;min&quot;:1,&quot;max&quot;:50,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Game&quot;},&quot;maxNumber&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:20,&quot;options&quot;:[10,20,50,100],&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Game&quot;}}">
+class Component extends DCLogic {
+  PRODUCTS = [
+    { id: 'jet', name: 'Sky Jet', img: 'uploads/jet.webp', price: 120, pct: 10, hint: '' },
+    { id: 'lakeview', name: 'Lakeview Camper', img: 'uploads/camper.webp', price: 160, pct: 10, hint: '' },
+    { id: 'adventure', name: 'Adventure Camper', img: 'uploads/adventure-cut.webp', price: 200, pct: 10, hint: '' },
+    { id: 'tank', name: 'Fish Tank', img: 'assets/tank.webp', price: 50, pct: 0, hint: '', tank: true },
+  ];
+  constructor(p) {
+    super(p);
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem('brickshop-v1') || '{}'); } catch (e) {}
+    this.state = { screen: saved.screen && saved.screen !== 'deal' && saved.screen !== 'pay' && saved.screen !== 'done' ? saved.screen : 'intro',
+      wallet: saved.wallet ?? (p.startBucks ?? 0), owned: saved.owned || [], lessonDone: !!saved.lessonDone, water: !!saved.water, prodId: null, step: 1,
+      input: '', fb: '', ok: null, q: this.newQ(), hint: false, wrong: 0, paid: [] };
+  }
+  componentDidMount() {
+    this.rainI = setInterval(() => { if (this.state.screen === 'store') this.setState({ rainId: Date.now() }); }, 7000);
+    this.onKey = (e) => {
+      const s = this.state.screen;
+      if (s === 'shelf' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) return this.setState(st => ({ slide: ((st.slide || 0) + (e.key === 'ArrowRight' ? 1 : 3)) % 4 }));
+      if (s === 'tank' && this.state.riddle && /^[a-zA-Z]$/.test(e.key)) return this.tapLetter(e.key.toUpperCase());
+      if (s !== 'earn' && s !== 'deal' && !(s === 'tank' && this.state.tankSum)) return;
+      if (/^[0-9]$/.test(e.key)) this.press(e.key);
+      else if (e.key === 'Backspace') this.setState({ input: this.state.input.slice(0, -1) });
+      else if (e.key === 'Enter') { if (s === 'deal' && this.ideas()[this.state.dstep || 0].kind === 'info') this.nextIdea(); else this.check(); }
+    };
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { clearInterval(this.rainI); window.removeEventListener('keydown', this.onKey); clearTimeout(this.t); clearTimeout(this.autoT); clearTimeout(this.nt); clearTimeout(this.ct); }
+  WORD_MS = 650;
+  readEl(say, key, size) {
+    const h = React.createElement; const ms = this.WORD_MS;
+    const sentences = String(say).match(/[^.!?]+[.!?]*/g)?.map(x => x.trim()).filter(Boolean) || [String(say)];
+    const big = `calc(${size} * 1.25)`; let n = 0;
+    return h('div', { key, style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1cqh', animation: 'bsg-in .5s ease-out both' } },
+      ...sentences.map((snt, si) => h('p', { key: si, style: { margin: 0, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.4cqh 0.5cqw', fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: big, lineHeight: 1.12, letterSpacing: '-0.02em', color: '#F6F1E4' } },
+        ...snt.split(/\s+/).filter(Boolean).map((w) => { const j = n++; return h('span', { key: j, style: { padding: '0.2cqh 0.6cqw', borderRadius: '0.8cqw', animation: `bsg-word ${ms * 1.15}ms ease-in-out ${400 + j * ms}ms both` } }, w); }))));
+  }
+
+  METHODS = [{ k: 'pie', label: 'Pie' }, { k: 'bar', label: 'Brick bar' }, { k: 'money', label: 'Share the money' }, { k: 'zero', label: 'Cover the zero' }];
+  methodSteps(meth, p, m) {
+    const price = p.price, part = m.part;
+    if (meth === 'bar') {
+      const adds = this.barAdds(price); const beats = [
+        { say: `This bar is all $${price}.`, hl: 'whole' }, { say: 'Break it into 10 equal bricks.', hl: 'cut' }, { say: '1 brick is 10%!', hl: 'one' }, { say: `Let's share $${price} so every brick gets the same.`, hl: 'cut' }];
+      let used = 0;
+      adds.forEach((a, k) => { used += a * 10; beats.push({ say: k ? `Put $${a} more in every brick.` : `Put $${a} in every brick.`, hl: 'fill' + k });
+        beats.push({ say: price - used ? `That uses $${used}. $${price - used} is left.` : 'All the money is shared!', hl: 'fill' + k }); });
+      return [{ kind: 'info', viz: 'bar', lvl: 1, one: true, beats },
+        { kind: 'ask', viz: 'bar', hl: 'fill' + (adds.length - 1), text: 'How much is in 1 brick?', sub: adds.map(a => '$' + a).join(' + ') + ' = ?', ans: part, lvl: 1, one: true }];
+    }
+    if (meth === 'money') {
+      const n10 = price / 10, L = n10 % 10;
+      const beats = [{ say: `Here is $${price} in $10 bills.`, hl: 'all' }, { say: 'Make 10 piles. Deal the $10 bills out.', hl: 'deal' }];
+      if (L) beats.push({ say: `${L} bills are left over.`, hl: 'left' }, { say: `Trade them for ${L * 10} $1 bills.`, hl: 'trade' }, { say: `Deal the $1 bills out too. ${L} each!`, hl: 'share' });
+      beats.push({ say: 'Every pile is the same. 1 pile is 10%!', hl: 'pile' });
+      return [{ kind: 'info', viz: 'money', lvl: 1, one: true, beats },
+        { kind: 'ask', viz: 'money', hl: 'pile', text: 'How much money is in 1 pile?', sub: 'Count it up!', ans: part, lvl: 1, one: true }];
+    }
+    return [
+      { kind: 'info', viz: 'zero', lvl: 1, one: true, beats: [
+        { say: '10% means 1 out of 10 equal parts.', hl: 'div' }, { say: 'Here is a trick for numbers that end in 0.', hl: 'div' }, { say: 'Cover the last 0 with a brick!', hl: 'cover' }, { say: `$${price} becomes $${part}!`, hl: 'res' }] },
+      { kind: 'ask', viz: 'zero', hl: 'cover', text: `10% of $${price} = ?`, sub: 'Cover the 0. What is left?', ans: part, lvl: 1, one: true }];
+  }
+  saleSteps(p, m) {
+    const P = p.price, R = P / 10, d = m.part, a = Math.floor(d / 10), b = d % 10;
+    const full = R - a - (b ? 1 : 0), rem = b ? 10 - b : 0;
+    const rows = (k) => `${k} row${k > 1 ? 's' : ''}`;
+    const sub = [
+      { say: `You save $${d}! Now take $${d} away.`, hl: 'subShow' },
+      { say: `$${d} is ${rows(a)} of 10${b ? ` and ${b} more` : ''}.`, hl: 'subRows' },
+      { say: `Take away ${rows(a)}.`, hl: 'subRowsGone' }];
+    if (b) sub.push({ say: `Take away ${b} more bricks.`, hl: 'subBricksGone' });
+    sub.push({ say: 'Count what is left!', hl: 'left' });
+    return [
+      { kind: 'info', viz: 'towers', n: R, lvl: 1, beats: [
+        { say: `The ${p.name} costs $${P}.`, hl: 'all' }, { say: `Each brick is $1. That is ${R} rows of 10.`, hl: 'count' },
+        { say: '10% off means 1 out of every 10.', hl: 'one' }, { say: 'Take 1 brick from every row!', hl: 'pull' }] },
+      { kind: 'ask', viz: 'towers', n: R, hl: 'pull', text: 'How much money do we save?', sub: 'Count the orange bricks. Each one is $1!', ans: d, lvl: 1 },
+      { kind: 'info', viz: 'towers', n: R, d, lvl: 3, beats: sub },
+      { kind: 'ask', viz: 'towers', n: R, d, hl: 'left', text: `$${P} − $${d} = ?`, sub: `${rows(full)} of 10${rem ? ` and ${rem} more` : ''}`, ans: m.total, lvl: 3 },
+    ];
+  }
+  FISH = [
+    { name: 'Stripy Fish', img: 'assets/fish-1.webp', price: 6, riddle: 'I live in water. I swim with fins. What am I?', word: 'FISH' },
+    { name: 'Sunny Fish', img: 'assets/fish-2.webp', price: 4, riddle: 'I am yellow, like the big hot ball in the sky. What is it?', word: 'SUN' },
+    { name: 'Clownfish', img: 'assets/fish-3.webp', price: 5, riddle: 'I am orange and white. I have a funny name, like a circus ___!', word: 'CLOWN' },
+    { name: 'Blue Fish', img: 'assets/fish-4.webp', price: 3, riddle: 'I am the color of the sky. What color am I?', word: 'BLUE' },
+    { name: 'Jellyfish', img: 'assets/fish-5.webp', tall: true, price: 7, riddle: 'I am wiggly like jelly on toast. I am a ___fish!', word: 'JELLY' },
+  ];
+  PLANTS = [
+    { name: 'Leafy Plant', img: 'assets/plant-1.webp', price: 2, riddle: 'I am green and I grow on plants. What am I?', word: 'LEAF' },
+    { name: 'Coral Garden', img: 'assets/plant-2.webp', price: 5, riddle: 'Fish live in me. I am big, blue and salty. What am I?', word: 'SEA' },
+    { name: 'Starfish Weed', img: 'assets/plant-3.webp', price: 4, riddle: 'Find the orange shape. It has 5 points, like a ___ at night!', word: 'STAR' },
+    { name: 'Rock Plant', img: 'assets/plant-4.webp', price: 3, riddle: 'I am hard. You find me on the ground. What am I?', word: 'ROCK' },
+    { name: 'Rainbow Arch', img: 'assets/plant-5.webp', short: true, price: 6, riddle: 'I have red, orange, yellow, green, blue and purple. I come after the rain. What am I?', word: 'RAINBOW' },
+  ];
+  tankTotal() { const s = this.state; return 50 + (s.tankFish != null ? this.FISH[s.tankFish].price : 0) + (s.tankPlants || []).reduce((a, i) => a + this.PLANTS[i].price, 0); }
+  openRiddle(kind, idx) {
+    const item = (kind === 'fish' ? this.FISH : this.PLANTS)[idx];
+    const pool = 'ABCDEFGHIKLMNOPRSTUW'.split('').filter(c => !item.word.includes(c));
+    const extra = [pool[Math.floor(Math.random() * pool.length)], pool[Math.floor(Math.random() * pool.length)]];
+    const tiles = [...item.word.split(''), ...extra].map((c, i) => ({ c, id: i })).sort(() => Math.random() - 0.5);
+    const others = [...this.FISH, ...this.PLANTS].map(x => x.word).filter(w => w !== item.word).sort(() => Math.random() - 0.5).slice(0, 2);
+    const choices = [item.word, ...others].sort(() => Math.random() - 0.5);
+    this.setState({ riddle: { kind, idx, filled: [], tiles, used: [], bad: null, phase: 'riddle', choices, badChoice: null } });
+  }
+  tapLetter(c, id) {
+    const r = this.state.riddle; if (!r || r.phase !== 'spell') return;
+    const item = (r.kind === 'fish' ? this.FISH : this.PLANTS)[r.idx];
+    const tile = id != null ? r.tiles.find(t => t.id === id) : r.tiles.find(t => t.c === c && !r.used.includes(t.id));
+    if (!tile || r.used.includes(tile.id)) return;
+    if (item.word[r.filled.length] !== tile.c) return this.setState({ riddle: { ...r, bad: tile.id + '-' + Date.now() } });
+    const filled = [...r.filled, tile.c]; const used = [...r.used, tile.id];
+    this.setState({ riddle: { ...r, filled, used, bad: null } });
+    if (filled.length === item.word.length) {
+      this.celebrate(item.word);
+      this.t = setTimeout(() => this.setState(r.kind === 'fish' ? { tankFish: r.idx, riddle: null, tankTab: 'plant' } : { tankPlants: [...new Set([...(this.state.tankPlants || []), r.idx])], riddle: null }), 1800);
+    }
+  }
+  tankVals() {
+    const s = this.state; const r = s.riddle;
+    const list = s.tankTab === 'plant' ? this.PLANTS : this.FISH; const kind = s.tankTab === 'plant' ? 'plant' : 'fish';
+    const pls = s.tankPlants || []; const isPicked = i => kind === 'fish' ? s.tankFish === i : pls.includes(i);
+    const item = r ? (r.kind === 'fish' ? this.FISH : this.PLANTS)[r.idx] : null;
+    const f = s.tankFish != null ? this.FISH[s.tankFish] : null, plObjs = pls.map(i => this.PLANTS[i]); const pl = plObjs[0] || null;
+    return {
+      tabFishBg: kind === 'fish' ? '#182238' : 'transparent', tabFishFg: kind === 'fish' ? '#fff' : '#182238',
+      tabPlantBg: kind === 'plant' ? '#182238' : 'transparent', tabPlantFg: kind === 'plant' ? '#fff' : '#182238',
+      pickTitle: kind === 'fish' ? 'Pick a fish!' : pls.length ? 'Add more plants!' : 'Pick a plant!', showChangeFish: kind === 'plant' && !!f, showBackPlants: kind === 'fish' && !!f, showFish: () => this.setState({ tankTab: 'fish' }), showPlants: () => this.setState({ tankTab: 'plant' }),
+      tankItems: list.map((x, i) => ({ ...x, priceLabel: `$${x.price}`, ring: isPicked(i) ? '0 0 0 0.5cqw #3E9B5A' : '0 1cqh 2cqh -1cqh rgba(24,34,56,0.35)', picked: isPicked(i), on: () => kind === 'plant' && isPicked(i) ? this.setState({ tankPlants: pls.filter(j => j !== i) }) : this.openRiddle(kind, i) })),
+      hasTankFish: !!f, tankFishImg: f ? f.img : '', tankFishH: f && f.tall ? '80%' : '45%', tankFishTop: f && f.tall ? '6%' : '18%', tankPlantList: pls.map((i, k) => { const x = this.PLANTS[i]; const n = pls.length; const w = 96 / n; return { img: x.img, h: x.short ? '45%' : n > 2 ? '70%' : '85%', w: w + '%', left: (2 + k * w) + '%' }; }),
+      rcptFish: f ? `${f.name}  $${f.price}` : 'Fish: pick one!', rcptPlant: pl ? plObjs.map(x => x.name + '  $' + x.price).join(', ') : 'Plant: pick one!',
+      canSum: !!f && pls.length > 0, openSum: () => this.setState({ tankSum: true, input: '', fb: '', ok: null }), closeSum: () => this.setState({ tankSum: false }),
+      sumOpen: !!s.tankSum, sumFishPrice: f ? `$${f.price}` : '', sumPlants: plObjs.map(x => ({ img: x.img, priceLabel: '$' + x.price })), sumImgH: plObjs.length > 2 ? '10cqh' : '14cqh',
+      riddleOpen: !!r, riddlePhase: !!r && r.phase === 'riddle', spellPhase: !!r && r.phase === 'spell',
+      riddleChoices: r && r.choices ? r.choices.map(w => ({ w, anim: r.badChoice && r.badChoice.startsWith(w + '-') ? 'bsg-shake .4s' : 'none', on: () => { const it = (r.kind === 'fish' ? this.FISH : this.PLANTS)[r.idx]; if (w === it.word) this.setState({ riddle: { ...r, phase: 'spell' } }); else { this.nope('Try again!'); this.setState({ riddle: { ...r, badChoice: w + '-' + Date.now() } }); } } })) : [],
+      riddleReadEl: r && r.phase === 'riddle' ? this.readEl((r.kind === 'fish' ? this.FISH : this.PLANTS)[r.idx].riddle, 'rid' + r.idx, '2.6cqw') : null, riddleImg: item ? item.img : '', riddleText: item ? item.riddle : '', riddleName: item ? item.name : '',
+      riddleSlots: item ? item.word.split('').map((c, i) => ({ c: r.filled[i] || c, fg: r.filled[i] ? '#182238' : 'rgba(246,241,228,0.28)', bg: r.filled[i] ? '#FFC72C' : 'rgba(255,255,255,0.06)' })) : [],
+      riddleTiles: r ? r.tiles.map((t, i) => ({ c: t.c, gone: r.used.includes(t.id), op: r.used.includes(t.id) ? 0.2 : 1, bg: ['#E5432F', '#2F6FD6', '#3E9B5A', '#FF851F', '#9B3FD6'][i % 5], anim: r.bad && r.bad.startsWith(t.id + '-') ? 'bsg-shake .4s' : 'none', on: () => this.tapLetter(t.c, t.id) })) : [],
+      closeRiddle: () => this.setState({ riddle: null }),
+    };
+  }
+  lessonSteps() {
+    return [
+      { kind: 'info', viz: 'towers', n: 1, lvl: 1, beats: [
+        { say: 'Here are 10 bricks.', hl: 'all' }, { say: '10% means 1 out of every 10.', hl: 'one' }, { say: 'So 10% of 10 is 1!', hl: 'pull' }] },
+      { kind: 'info', viz: 'towers', n: 2, lvl: 1, beats: [
+        { say: 'Now here are 20 bricks.', hl: 'all' }, { say: 'That is 2 rows of 10.', hl: 'count' }, { say: 'Take 1 from every row.', hl: 'pull' }, { say: '10% of 20 is 2!', hl: 'pull' }] },
+      { kind: 'ask', viz: 'towers', n: 4, hl: 'count', text: '10% of 40 = ?', sub: 'Take 1 from every row!', ans: 4, lvl: 1 },
+      { kind: 'info', viz: 'bills', n: 3, lvl: 1, beats: [
+        { say: 'Money works the same way!', hl: 'all' }, { say: 'Here is $30. That is 3 tens.', hl: 'all' }, { say: 'For every $10, take $1.', hl: 'pull' }, { say: '10% of $30 is $3!', hl: 'pull' }] },
+      { kind: 'ask', viz: 'bills', n: 5, hl: 'all', text: '10% of $50 = ?', sub: 'Take $1 for every $10!', ans: 5, lvl: 1 },
+      { kind: 'info', viz: 'pattern', lvl: 1, beats: [
+        { say: 'Look at the pattern!', hl: 'rows' }, { say: 'The answer is the number without its 0!', hl: 'cover' }] },
+      { kind: 'info', viz: 'zero', n: 120, lvl: 1, beats: [
+        { say: 'It works for big numbers too.', hl: 'none' }, { say: 'Cover the last 0 with a brick!', hl: 'cover' }, { say: '10% of $120 is $12!', hl: 'res' }] },
+      { kind: 'ask', viz: 'zero', n: 160, hl: 'cover', text: '10% of $160 = ?', sub: 'Cover the 0!', ans: 16, lvl: 1 },
+      { kind: 'info', lvl: 1, beats: [{ say: 'You can find 10% of any number that ends in 0!', hl: 'none' }, { say: 'Now let\u2019s go shopping!', hl: 'none' }] },
+    ];
+  }
+  towersViz(n, hl, d = 0, compact = false) {
+    const h = React.createElement; const F = "'Bricolage Grotesque',Lexend,sans-serif";
+    const two = n > 6; const w = (n <= 2 ? 4.6 : n <= 4 ? 4 : n <= 6 ? 3.6 : n <= 12 ? 3.4 : n <= 16 ? 2.9 : 2.3) * (compact ? 0.82 : 1);
+    const a = Math.floor(d / 10), b = d % 10;
+    const ph = ['subShow', 'subRows', 'subRowsGone', 'subBricksGone', 'left'].indexOf(hl);
+    const lit = hl === 'one' || hl === 'pull';
+    const goneRow = (k) => k >= n - a; const partRow = (k) => b && k === n - a - 1;
+    const brick = (k, j) => {
+      let src = 'assets/brick-2.webp', op = 1, ml = 0, glow = false;
+      if (lit && j === 9) { src = 'assets/brick-5.webp'; glow = true; if (hl === 'pull') ml = w * 0.5; }
+      if (ph >= 1 && (goneRow(k) || (partRow(k) && j >= 10 - b))) { src = 'assets/brick-1.webp'; if ((goneRow(k) && ph >= 2) || (!goneRow(k) && ph >= 3)) op = 0.1; }
+      if (ph === 4 && op === 1) glow = false;
+      return h('img', { key: j, src, alt: '', style: { width: `${w}cqw`, marginLeft: ml ? `${ml}cqw` : 0, opacity: op, filter: glow ? 'drop-shadow(0 0 1cqw rgba(255,199,44,1))' : 'none', transition: 'margin .7s cubic-bezier(.3,.8,.3,1.2), opacity .7s' } });
+    };
+    const rowLabel = (k) => hl === 'count' ? String(k + 1) : ph === 4 ? (goneRow(k) ? '' : partRow(k) ? String(10 - b) : '10') : '10';
+    const row = (k) => h('div', { key: k, style: { display: 'flex', alignItems: 'center', gap: '1cqw' } },
+      h('span', { style: { width: '2.6cqw', textAlign: 'right', fontFamily: F, fontWeight: 800, fontSize: '1.8cqw', color: hl === 'count' || ph === 4 ? '#FFC72C' : 'rgba(246,241,228,0.6)' } }, rowLabel(k)),
+      h('div', { style: { display: 'flex', alignItems: 'center', gap: `${w * 0.08}cqw` } }, ...Array.from({ length: 10 }, (_, j) => brick(k, j))));
+    const col = (from, to) => h('div', { key: 'c' + from, style: { display: 'flex', flexDirection: 'column', gap: n <= 2 ? '2.4cqh' : n <= 12 ? '0.8cqh' : '0.4cqh' } }, ...Array.from({ length: to - from }, (_, i) => row(from + i)));
+    return h('div', { key: 'rows', style: { display: 'flex', gap: '3cqw', paddingRight: `${w * 0.6}cqw`, animation: 'bsg-in .6s ease-out both' } }, ...(two ? [col(0, Math.ceil(n / 2)), col(Math.ceil(n / 2), n)] : [col(0, n)]));
+  }
+  billsViz(n, hl) {
+    const h = React.createElement; const F = "'Bricolage Grotesque',Lexend,sans-serif";
+    return h('div', { key: 'bills', style: { display: 'flex', alignItems: 'flex-end', gap: '2cqw', paddingTop: '9cqh', animation: 'bsg-in .6s ease-out both' } },
+      ...Array.from({ length: n }, (_, k) => h('div', { key: k, style: { position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' } },
+        hl === 'pull' ? h('span', { style: { position: 'absolute', bottom: '100%', marginBottom: '1.4cqh', display: 'grid', placeItems: 'center', width: '6cqw', aspectRatio: '2.35/1', borderRadius: '0.3cqw', background: 'linear-gradient(160deg,#FFF6D6,#FFD86B)', boxShadow: 'inset 0 0 0 0.2cqw #C9971E, 0 0 2cqw rgba(255,199,44,0.9)', fontFamily: F, fontWeight: 800, fontSize: '1.8cqw', color: '#7A5A00', animation: `bsg-in .5s ${k * 0.15}s ease-out both` } }, '$1') : null,
+        h('span', { style: { display: 'grid', placeItems: 'center', width: '12cqw', aspectRatio: '2.35/1', borderRadius: '0.5cqw', background: 'linear-gradient(160deg,#EAF2DF,#BFD5AC)', boxShadow: 'inset 0 0 0 0.3cqw #5E8F6A, 0 1cqh 1.6cqh rgba(0,0,0,0.35)', fontFamily: F, fontWeight: 800, fontSize: '3.4cqw', color: '#2F5E3C' } }, '$10'))));
+  }
+  patternViz(hl) {
+    const h = React.createElement; const F = "'Bricolage Grotesque',Lexend,sans-serif";
+    const rows = [[10, 1], [20, 2], [30, 3], [40, 4], [50, 5]];
+    return h('div', { key: 'pattern', style: { display: 'grid', gridTemplateColumns: 'auto auto auto', alignItems: 'center', gap: '0.6cqh 2cqw', padding: '2cqh 3cqw', borderRadius: '2cqw', background: '#F6F1E4', color: '#182238', fontFamily: F, fontWeight: 800, fontSize: '3.6cqw', lineHeight: 1.1, animation: 'bsg-in .6s ease-out both' } },
+      ...rows.flatMap(([a, b], k) => [
+        h('span', { key: 'a' + k, style: { textAlign: 'right' } }, `10% of ${String(a)[0]}`, h('span', { style: { position: 'relative' } }, '0', hl === 'cover' ? h('img', { src: 'assets/brick-5.webp', alt: '', style: { position: 'absolute', left: '-30%', top: '10%', width: '160%', animation: `bsg-drop .6s ${k * 0.15}s cubic-bezier(.3,.8,.3,1.1) both` } }) : null)),
+        h('span', { key: 'e' + k, style: { color: '#8A8478' } }, '='),
+        h('span', { key: 'b' + k, style: { color: '#E89B00' } }, String(b))]));
+  }
+  barAdds(price) { let rem = price; const adds = []; while (rem >= 100) { adds.push(10); rem -= 100; } if (rem) adds.push(rem / 10); return adds; }
+  setMethod(k) { clearTimeout(this.t); clearTimeout(this.autoT); this.autoKey = null; this.setState({ method: k, dstep: 0, beat: 0, input: '', fb: '', ok: null }); }
+  iconEl(k, big) {
+    const h = React.createElement; const u = big ? 1 : 0.42;
+    if (k === 'pie') return h('span', { style: { width: `${7 * u}cqw`, height: `${7 * u}cqw`, borderRadius: '50%', background: 'conic-gradient(#FFC72C 0 36deg, #2F6FD6 36deg 360deg)', boxShadow: 'inset 0 0 0 0.25cqw #F6F1E4' } });
+    if (k === 'bar') return h('span', { style: { display: 'flex', gap: `${0.2 * u}cqw` } }, ...[0, 1, 2, 3].map(j => h('img', { key: j, src: 'assets/brick-3.webp', alt: '', style: { width: `${2.4 * u}cqw`, opacity: j === 0 ? 1 : 0.55 } })));
+    if (k === 'money') return h('span', { style: { position: 'relative', width: `${8 * u}cqw`, height: `${5 * u}cqw` } }, ...[0, 1].map(j => h('span', { key: j, style: { position: 'absolute', left: `${j * 1.6 * u}cqw`, top: `${j * 1.4 * u}cqw`, width: `${6 * u}cqw`, aspectRatio: '2.35/1', borderRadius: '0.2cqw', background: 'linear-gradient(160deg,#EAF2DF,#BFD5AC)', boxShadow: 'inset 0 0 0 0.2cqw #5E8F6A', display: 'grid', placeItems: 'center', fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: `${1.4 * u}cqw`, color: '#2F5E3C', transform: `rotate(${j ? 6 : -6}deg)` } }, '$10')));
+    return h('span', { style: { position: 'relative', fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: `${4.6 * u}cqw`, lineHeight: 1, color: '#182238', whiteSpace: 'nowrap' } }, '12', h('span', { style: { position: 'relative' } }, '0', h('img', { src: 'assets/brick-5.webp', alt: '', style: { position: 'absolute', left: '-15%', top: '5%', width: '130%' } })));
+  }
+  pickerEl() {
+    const h = React.createElement;
+    return h('div', { key: 'picker', style: { display: 'grid', gridTemplateColumns: 'repeat(4, 17cqw)', gap: '1.6cqw', animation: 'bsg-in .6s ease-out both' } },
+      ...this.METHODS.map(x => h('button', { key: x.k, onClick: () => this.setMethod(x.k), style: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '2.4cqh', height: '30cqh', border: 'none', borderRadius: '2cqw', background: '#FFFBF2', color: '#182238', cursor: 'pointer', fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: '2cqw', boxShadow: 'inset 0 -1cqh 0 rgba(0,0,0,0.12)' } },
+        h('span', { style: { height: '9cqw', display: 'grid', placeItems: 'center' } }, this.iconEl(x.k, true)), x.label)));
+  }
+  tabsEl(cur) {
+    const h = React.createElement;
+    return h('div', { key: 'tabs', style: { position: 'absolute', top: '1.6cqh', right: '1.6cqw', zIndex: 3, display: 'flex', alignItems: 'center', gap: '0.6cqw', padding: '0.6cqh 0.6cqw 0.6cqh 1.2cqw', borderRadius: '999px', background: 'rgba(246,241,228,0.1)' } },
+      h('span', { style: { fontSize: '1.2cqw', fontWeight: 700, color: '#FFE7A0', marginRight: '0.4cqw' } }, 'Another way:'),
+      ...this.METHODS.map(x => h('button', { key: x.k, title: x.label, 'aria-label': x.label, onClick: () => this.setMethod(x.k), style: { width: '5cqw', height: '5cqw', display: 'grid', placeItems: 'center', border: 'none', borderRadius: '50%', background: '#FFFBF2', cursor: 'pointer', boxShadow: x.k === cur ? '0 0 0 0.35cqw #FFC72C, 0 0 1.6cqw rgba(255,199,44,0.8)' : 'none', opacity: x.k === cur ? 1 : 0.75 } }, this.iconEl(x.k, false))));
+  }
+  vizFor(cur, hl, p, m, i, beat) {
+    if (cur.kind === 'pick') return this.pickerEl();
+    if (cur.subFrame) return this.subEl(cur.subFrame, i);
+    if (cur.viz === 'sub') return this.subEl(cur.beats[beat].frame, i);
+    if (cur.viz === 'pie') return this.pieViz(cur.lit, hl, `$${m.part}`, cur.kind === 'ask' ? '34cqh' : '40cqh', `$${p.price}`);
+    if (cur.viz === 'bar') return this.barViz(p.price, m.part, cur.lit || 1, hl);
+    if (cur.viz === 'money') return this.moneyViz(p.price, m.part, cur.lit || 1, hl);
+    if (cur.viz === 'zero') return this.zeroViz(cur.n || p.price, (cur.n || p.price) / 10, hl);
+    if (cur.viz === 'towers') return this.towersViz(cur.n, hl, cur.d || 0, cur.kind === 'ask');
+    if (cur.viz === 'bills') return this.billsViz(cur.n, hl);
+    if (cur.viz === 'pattern') return this.patternViz(hl);
+    if (cur.viz) return this.vizEl(cur.viz, p.price, i, hl);
+    if (cur.kind === 'ask' && cur.lvl < 3) return this.pieViz(cur.one ? 1 : m.take, cur.lvl >= 2 || i > 4 ? 'label' : 'slice', `$${m.part}`, '30cqh');
+    return null;
+  }
+  barViz(price, part, lit, hl) {
+    const h = React.createElement; const whole = hl === 'whole'; const F = "'Bricolage Grotesque',Lexend,sans-serif";
+    const on = (j) => (hl === 'one' && j === 0) || (hl === 'take' && j < lit);
+    const adds = this.barAdds(price); const fk = hl.startsWith('fill') ? Number(hl.slice(4)) : -1;
+    const left = fk >= 0 ? price - 10 * adds.slice(0, fk + 1).reduce((a, b) => a + b, 0) : price;
+    const lab = (j) => fk >= 0 ? adds.slice(0, fk + 1).map(a => '$' + a).join('+') : hl === 'share' ? '?' : hl === 'take' ? `$${part}` : hl === 'one' && j === 0 ? '10%' : '';
+    return h('div', { key: 'bar', style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.6cqh', animation: 'bsg-in .6s ease-out both' } },
+      h('div', { style: { fontFamily: F, fontWeight: 800, fontSize: '4cqw', color: fk >= 0 ? '#FFC72C' : '#F6F1E4', opacity: whole || hl === 'cut' || fk >= 0 ? 1 : 0.55, transition: 'opacity .5s' } }, fk >= 0 ? `Money left: $${left}` : `$${price}`),
+      h('div', { style: { display: 'flex', alignItems: 'flex-start', gap: whole ? '0cqw' : '0.7cqw', transition: 'gap .8s cubic-bezier(.6,0,.2,1)' } },
+        ...Array.from({ length: 10 }, (_, j) => h('div', { key: j, style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1cqh', width: '6.2cqw' } },
+          h('img', { src: 'assets/brick-3.webp', alt: '', style: { width: '100%', opacity: whole || on(j) || hl === 'cut' || hl === 'share' || fk >= 0 ? 1 : 0.45, filter: on(j) ? 'drop-shadow(0 0 1.2cqw rgba(255,199,44,1)) brightness(1.1)' : 'none', transform: on(j) ? 'translateY(-1.2cqh) scale(1.08)' : 'none', transition: 'transform .5s, opacity .5s, filter .5s' } }),
+          h('span', { key: hl, style: { minHeight: '2.6cqw', fontFamily: F, fontWeight: 800, fontSize: hl === 'take' || fk > 0 ? '1.4cqw' : '2cqw', color: on(j) || fk >= 0 ? '#FFC72C' : '#F6F1E4', whiteSpace: 'nowrap', animation: fk >= 0 ? `bsg-in .4s ${j * 0.08}s ease-out both` : 'none' } }, lab(j))))));
+  }
+  moneyViz(price, part, lit, hl) {
+    const h = React.createElement; const F = "'Bricolage Grotesque',Lexend,sans-serif";
+    const n10 = price / 10, per = Math.floor(n10 / 10), L = n10 % 10;
+    const order = ['all', 'deal', 'left', 'trade', 'share', 'pile', 'take']; const st = order.indexOf(hl);
+    const bill = (v, w0, key, extra = {}) => { const w = w0 * 1.15; return h('span', { key, style: { display: 'grid', placeItems: 'center', width: `${w}cqw`, aspectRatio: '2.35/1', borderRadius: '0.2cqw', background: 'linear-gradient(160deg,#EAF2DF,#BFD5AC)', boxShadow: 'inset 0 0 0 0.18cqw #5E8F6A, 0 0.3cqh 0.6cqh rgba(0,0,0,0.35)', fontFamily: F, fontWeight: 800, fontSize: `${w * 0.3}cqw`, color: '#2F5E3C', ...extra } }, `$${v}`); };
+    if (hl === 'all') return h('div', { key: 'money-all', style: { display: 'grid', gridTemplateColumns: 'repeat(6, 6cqw)', gap: '0.8cqw', animation: 'bsg-in .6s ease-out both' } }, ...Array.from({ length: n10 }, (_, j) => bill(10, 6, j)));
+    const glow = (j) => (hl === 'pile' && j === 0) || (hl === 'take' && j < lit);
+    const piles = Array.from({ length: 10 }, (_, j) => h('div', { key: j, style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1cqh' } },
+      h('div', { style: { display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0.6cqw', borderRadius: '0.8cqw', border: `0.25cqw solid ${glow(j) ? '#FFC72C' : 'rgba(246,241,228,0.3)'}`, boxShadow: glow(j) ? '0 0 2cqw rgba(255,199,44,0.7)' : 'none', minHeight: '3cqw', transition: 'box-shadow .4s, border-color .4s' } },
+        ...Array.from({ length: per }, (_, b) => bill(10, 3.6, 't' + b, { marginTop: b ? '-0.9cqw' : 0, animation: `bsg-in .4s ${j * 0.06}s ease-out both` })),
+        ...(st >= 4 ? Array.from({ length: L }, (_, b) => bill(1, 2.8, 'o' + b, { marginTop: '-0.5cqw', animation: `bsg-in .4s ${j * 0.06}s ease-out both` })) : [])),
+      h('span', { style: { minHeight: '2.4cqw', fontFamily: F, fontWeight: 800, fontSize: '1.6cqw', color: '#FFC72C' } }, glow(j) ? `$${part}` : '')));
+    const aside = L && (hl === 'deal' || hl === 'left') ? h('div', { style: { display: 'flex', flexDirection: 'column', gap: '0.4cqw', padding: '0.8cqw', borderRadius: '1cqw', border: `0.3cqw dashed ${hl === 'left' ? '#FFC72C' : 'rgba(246,241,228,0.4)'}`, boxShadow: hl === 'left' ? '0 0 2cqw rgba(255,199,44,0.6)' : 'none' } }, ...Array.from({ length: L }, (_, b) => bill(10, 4, b)))
+      : L && hl === 'trade' ? h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(5, 2.4cqw)', gap: '0.3cqw', padding: '0.8cqw', borderRadius: '1cqw', border: '0.3cqw dashed #FFC72C', animation: 'bsg-in .5s ease-out both' } }, ...Array.from({ length: L * 10 }, (_, b) => bill(1, 2.4, b))) : null;
+    return h('div', { key: 'money', style: { display: 'flex', alignItems: 'center', gap: '1.6cqw' } }, h('div', { style: { display: 'flex', alignItems: 'flex-start', gap: '0.5cqw' } }, ...piles), aside);
+  }
+  zeroViz(price, part, hl) {
+    const h = React.createElement; const F = "'Bricolage Grotesque',Lexend,sans-serif"; const ds = String(price).split('');
+    const covered = hl === 'cover' || hl === 'res';
+    return h('div', { key: 'zero', style: { display: 'flex', alignItems: 'center', gap: '2cqw' } },
+      h('div', { style: { display: 'flex', alignItems: 'center', padding: '2cqh 2.4cqw', borderRadius: '2cqw', background: '#F6F1E4', color: '#182238', fontFamily: F, fontWeight: 800, fontSize: '10cqw', lineHeight: 1 } },
+        h('span', null, '$'),
+        ...ds.map((d, j) => h('span', { key: j, style: { position: 'relative', color: hl === 'res' && j < ds.length - 1 ? '#E89B00' : '#182238', textShadow: hl === 'res' && j < ds.length - 1 ? '0 0 2cqw rgba(255,199,44,0.9)' : 'none', transition: 'color .4s' } }, d,
+          j === ds.length - 1 && covered ? h('img', { src: 'assets/brick-5.webp', alt: '', style: { position: 'absolute', left: '-25%', top: '8%', width: '150%', filter: 'drop-shadow(0 1cqh 1cqh rgba(0,0,0,0.4))', animation: 'bsg-drop .7s cubic-bezier(.3,.8,.3,1.1) both' } }) : null))),
+      hl === 'div' ? h('span', { style: { fontFamily: F, fontWeight: 800, fontSize: '5cqw', color: '#FFC72C' } }, '10% = ?') : null,
+      hl === 'res' ? h('span', { style: { fontFamily: F, fontWeight: 800, fontSize: '7cqw', color: '#FFC72C', animation: 'bsg-in .5s ease-out both' } }, `= $${part}`) : null);
+  }
+  legoEl(hl) {
+    if (!['pct', 'frac', 'dec'].includes(hl)) return null;
+    const h = React.createElement;
+    const brick = (lit, w, key) => h('img', { key, src: lit ? 'assets/brick-5.webp' : 'assets/brick-2.webp', alt: '', style: { width: `${w}cqw`, opacity: lit ? 1 : 0.4, filter: lit ? 'drop-shadow(0 0 0.8cqw rgba(255,199,44,0.95))' : 'none', transition: 'opacity .5s' } });
+    const cap = (txt) => h('span', { style: { fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: '2.2cqw', color: '#FFE7A0', textAlign: 'center' } }, txt);
+    if (hl === 'pct') {
+      return h('div', { key: 'lego-pct', style: { display: 'flex', alignItems: 'center', gap: '2.4cqw', animation: 'bsg-in .6s ease-out both' } },
+        h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(10, 1.7cqw)', gap: '0.2cqw 0.15cqw' } }, ...Array.from({ length: 100 }, (_, i) => brick(i < 10, 1.7, i))),
+        cap('10 out of 100 bricks'));
+    }
+    const groups = Array.from({ length: 10 }, (_, g) => h('div', { key: g, style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6cqh' } },
+      h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(2, 1.6cqw)', gap: '0.15cqw', padding: '0.5cqw', borderRadius: '0.8cqw', border: `0.25cqw solid ${g === 0 ? '#FFC72C' : 'rgba(246,241,228,0.35)'}`, boxShadow: g === 0 ? '0 0 2cqw rgba(255,199,44,0.6)' : 'none' } }, ...Array.from({ length: 10 }, (_, i) => brick(g === 0, 1.6, i))),
+      hl === 'dec' && g === 0 ? h('span', { style: { fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: '2.4cqw', color: '#FFC72C' } }, '0.1') : null));
+    return h('div', { key: 'lego-' + hl, style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.4cqh', animation: 'bsg-in .6s ease-out both' } },
+      h('div', { style: { display: 'flex', alignItems: 'flex-start', gap: '0.9cqw' } }, ...groups),
+      cap(hl === 'frac' ? '100 bricks in 10 groups. 1 group out of 10!' : '1 group out of 10 = 0.1'));
+  }
+  prevIdea() {
+    clearTimeout(this.t); clearTimeout(this.autoT); this.autoKey = null;
+    const s = this.state; const beat = s.beat || 0; const step = s.dstep || 0;
+    if (!s.started) return;
+    if (beat > 0) return this.setState({ beat: beat - 1, input: '', fb: '', ok: null });
+    if (step === 0 && s.method) return this.setState({ method: null, beat: 0, input: '', fb: '', ok: null });
+    if (step > 0) { const prev = this.ideas()[step - 1]; return this.setState({ dstep: step - 1, beat: prev.beats ? prev.beats.length - 1 : 0, input: '', fb: '', ok: null }); }
+    if (s.prodId === 'lesson') return this.go('store');
+    this.setState({ started: false, beat: 0, input: '', fb: '', ok: null });
+  }
+  calloutOffset(viz, hl) {
+    const map = { pie: { slice: -9, label: -9 }, one: { res: 9 }, move: { dot: 9, res: 9 } };
+    return (map[viz] || {})[hl] || 0;
+  }
+  calloutEl(inner, key, off, dir = 'left') {
+    const h = React.createElement;
+    return h('div', { key, style: { position: 'relative', padding: '2.4cqh 2cqw', borderRadius: '2cqw', background: 'rgba(255,255,255,0.06)', border: '0.3cqw solid #FFC72C', boxShadow: '0 0 3cqw rgba(255,199,44,0.25)', transform: `translateY(${off}cqh)`, transition: 'transform .7s cubic-bezier(.5,0,.2,1)' } },
+      dir === 'up' ? h('span', { style: { position: 'absolute', top: '-1.6cqw', left: '50%', width: '2.4cqw', height: '2.4cqw', marginLeft: '-1.2cqw', background: '#FFC72C', clipPath: 'polygon(0 100%, 50% 0, 100% 100%)' } }) : h('span', { style: { position: 'absolute', left: '-1.6cqw', top: '50%', width: '2.4cqw', height: '2.4cqw', marginTop: '-1.2cqw', background: '#FFC72C', clipPath: 'polygon(100% 0, 0 50%, 100% 100%)' } }),
+      inner);
+  }
+  autoAdvance() {
+    const s = this.state;
+    const key = `${s.screen}|${s.prodId}|${s.dstep || 0}|${s.beat || 0}|${!!s.started}`;
+    if (key === this.autoKey) return;
+    this.autoKey = key; clearTimeout(this.autoT);
+    if (s.screen !== 'deal' || !s.started) return;
+    const cur = this.ideas()[s.dstep || 0];
+    if (!cur || cur.kind !== 'info') return;
+    const say = cur.beats ? (cur.beats[s.beat || 0] || {}).say || '' : (cur.text || '');
+    const ms = say.split(/\s+/).filter(Boolean).length * this.WORD_MS + 2600;
+    this.autoT = setTimeout(() => { if (this.state.screen === 'deal') this.nextIdea(); }, ms);
+  }
+  componentDidUpdate() {
+    this.autoAdvance();
+    const { screen, wallet, owned, lessonDone, water } = this.state;
+    localStorage.setItem('brickshop-v1', JSON.stringify({ screen, wallet, owned, lessonDone, water }));
+  }
+  newQ() {
+    const max = this.props?.maxNumber ?? 20;
+    if (Math.random() < 0.5) { const a = 2 + Math.floor(Math.random() * (max / 2)); const b = 2 + Math.floor(Math.random() * (max / 2)); return { a, b, op: '+' }; }
+    const a = 6 + Math.floor(Math.random() * (max - 5)); const b = 1 + Math.floor(Math.random() * (a - 1)); return { a, b, op: '−' };
+  }
+  math(p) {
+    const parts = 10; const take = p.pct / 10;
+    const part = p.price / parts; const disc = part * take; return { parts, take, part, disc, total: p.price - disc };
+  }
+  subFrames(a, b) {
+    const A = String(a).split('').map(Number); const n = A.length;
+    const B = String(b).padStart(n, ' ').split('').map(c => c === ' ' ? null : Number(c));
+    const cur = A.slice(); const nv = Array(n).fill(null); const ans = Array(n).fill('');
+    const names = ['ones', 'tens', 'hundreds', 'thousands']; const nm = (c) => names[n - 1 - c];
+    const cap = (s) => s[0].toUpperCase() + s.slice(1);
+    const snap = (hl, from = -1, all = false) => ({ top: A.map((d, i) => ({ d, nv: nv[i] })), bot: B.slice(), ans: ans.slice(), hl, from, all });
+    const out = [{ say: 'Stack them up. Line up the ones!', hl: 'none', frame: snap(-1) }];
+    for (let c = n - 1; c >= 0; c--) {
+      const t = cur[c]; const bb = B[c];
+      if (bb === null) { ans[c] = String(t); out.push({ say: `${cap(nm(c))}: nothing to take away. ${t} stays ${t}.`, frame: snap(c) }); continue; }
+      if (t >= bb) {
+        out.push({ say: `${cap(nm(c))}: ${t} − ${bb}`, frame: snap(c) });
+        ans[c] = String(t - bb); out.push({ say: `${t} − ${bb} = ${t - bb}`, frame: snap(c) });
+      } else {
+        out.push({ say: `${cap(nm(c))}: ${t} − ${bb}. ${t} is too small!`, frame: snap(c) });
+        const L = c - 1; const prev = cur[L]; cur[L] = prev - 1; nv[L] = cur[L];
+        out.push({ say: `Borrow 1 from the ${nm(L)}. The ${prev} becomes ${cur[L]}.`, frame: snap(c, L) });
+        cur[c] = t + 10; nv[c] = cur[c];
+        out.push({ say: `The ${t} becomes ${cur[c]}!`, frame: snap(c) });
+        ans[c] = String(cur[c] - bb); out.push({ say: `${cur[c]} − ${bb} = ${cur[c] - bb}`, frame: snap(c) });
+      }
+    }
+    out.push({ say: `$${a} − $${b} = $${a - b}`, frame: snap(-1, -1, true) });
+    return out.map(x => ({ hl: 'none', ...x }));
+  }
+  subEl(f, key) {
+    if (!f) return null;
+    const h = React.createElement; const n = f.top.length; const cw = 4.8; const sign = 3.6;
+    const font = { fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: '4cqw', lineHeight: 1, textAlign: 'center' };
+    const cols = `${sign}cqw repeat(${n}, ${cw}cqw)`;
+    const grid = (children, st = {}) => h('div', { style: { display: 'grid', gridTemplateColumns: cols, alignItems: 'center', ...st } }, ...children);
+    const band = (c, bg, glow) => c < 0 ? null : h('div', { key: 'band' + bg, style: { position: 'absolute', left: `calc(2cqw + ${sign + c * cw}cqw)`, width: `${cw}cqw`, top: '4.4cqw', bottom: '1.2cqh', borderRadius: '1.2cqw', background: bg, boxShadow: glow, transition: 'left .5s cubic-bezier(.6,0,.2,1)' } });
+    return h('div', { key: 'sub', style: { position: 'relative', flex: 'none', padding: '0 2cqw 1.2cqh', paddingTop: '4.4cqw', borderRadius: '1.8cqw', background: '#F6F1E4', color: '#182238' } },
+      band(f.from, '#FFD3C9', 'none'),
+      band(f.hl, '#FFE7A0', '0 0 3cqw rgba(255,199,44,0.8)'),
+      f.hl >= 0 ? h('span', { key: 'ar' + f.hl, style: { position: 'absolute', top: '0.4cqw', left: `calc(2cqw + ${sign + f.hl * cw + cw / 2}cqw)`, transform: 'translateX(-50%)' } }, this.arrowEl('down', { position: 'relative' })) : null,
+      h('div', { style: { position: 'relative' } },
+        grid([h('span', { key: 's' }), ...f.top.map((t, i) => h('span', { key: i + '-' + t.nv, style: { ...font, fontSize: '2.4cqw', height: '2.6cqw', color: '#F05A50', animation: t.nv !== null ? 'bsg-in .5s ease-out both' : 'none' } }, t.nv !== null ? String(t.nv) : ''))]),
+        grid([h('span', { key: 's' }), ...f.top.map((t, i) => h('span', { key: i, style: { ...font, color: t.nv !== null ? '#8A8478' : '#182238', textDecoration: t.nv !== null ? 'line-through' : 'none', textDecorationColor: '#F05A50', textDecorationThickness: '0.5cqw' } }, String(t.d)))]),
+        grid([h('span', { key: 's', style: { ...font, color: '#F05A50' } }, '−'), ...f.bot.map((d, i) => h('span', { key: i, style: font }, d === null ? '' : String(d)))], { marginTop: '0.8cqh' }),
+        h('div', { style: { height: '0.6cqh', margin: '1cqh 0', borderRadius: '1cqh', background: '#182238' } }),
+        grid([h('span', { key: 's' }), ...f.ans.map((d, i) => h('span', { key: i + d, style: { ...font, color: '#2F6FD6', textShadow: f.all ? '0 0 2cqw rgba(255,199,44,0.95)' : 'none', animation: d ? 'bsg-in .5s ease-out both' : 'none' } }, d || '\u00a0'))])));
+  }
+  ideas() {
+    const p = this.prod(); const m = this.math(p); const meth = this.state.method;
+    if (p.id === 'lesson') return this.lessonSteps();
+    return this.saleSteps(p, m);
+    const list = !meth ? [{ kind: 'pick', text: p.id === 'lesson' ? 'First, let\u2019s learn 10%! How do you want to figure it out?' : 'How do you want to figure it out?', lvl: 1, one: true }] : meth !== 'pie' ? this.methodSteps(meth, p, m) : [
+      { kind: 'info', viz: 'pie', lit: 1, lvl: 1, one: true, beats: [
+        { say: `This circle is all $${p.price}.`, hl: 'whole' }, { say: 'Cut it into 10 equal slices.', hl: 'lines' }, { say: '1 slice is 10%!', hl: 'slice' }] },
+      { kind: 'info', viz: 'why', lvl: 1, one: true, beats: [
+        { say: 'How much money is this 1 slice?', hl: 'slice' }, { say: 'Percent means "out of 100."', hl: 'pct' }, { say: '10 out of 100 is the same as 1 out of 10.', hl: 'frac' }, { say: 'And 1 out of 10 is written 0.1', hl: 'dec' }, { say: '"Of" means times!', hl: 'of' }, { say: `So 10% of ${p.price} is ${p.price} × 0.1`, hl: 'eq' }, { say: 'Let\u2019s make it simpler first!', hl: 'simple' }] },
+      { kind: 'info', viz: 'one', lvl: 1, one: true, beats: [
+        { say: `Start easy: ${p.price} × 1`, hl: 'mult' }, { say: 'Times 1 stays the same!', hl: 'res' }] },
+      { kind: 'info', viz: 'compare', lvl: 1, one: true, beats: [
+        { say: 'Look at 1 and 0.1.', hl: 'both' }, { say: 'They look almost the same...', hl: 'none' }, { say: 'The only difference is the dot!', hl: 'dot' }] },
+      { kind: 'info', viz: 'move', lvl: 1, one: true, beats: [
+        { say: `Now try ${p.price} × 0.1`, hl: 'mult' }, { say: 'The dot moves 1 place left.', hl: 'dot' }, { say: `${p.price} becomes ${m.part}!`, hl: 'res' }] },
+      { kind: 'ask', text: `10% of $${p.price} = ?`, sub: 'Type what you found!', ans: m.part, lvl: 1, one: true },
+    ];
+    if (meth && m.take > 1) {
+      if (meth === 'pie') list.push({ kind: 'info', viz: 'pie', lit: m.take, lvl: 2, beats: [
+        { say: `${p.pct}% = ${m.take} slices`, hl: 'slice' }, { say: `Each slice is $${m.part}.`, hl: 'label' }] });
+      else if (meth === 'money') list.push({ kind: 'info', viz: 'money', lit: m.take, lvl: 2, beats: [
+        { say: `${p.pct}% = ${m.take} piles`, hl: 'take' }, { say: `Each pile is $${m.part}.`, hl: 'take' }] });
+      else list.push({ kind: 'info', viz: 'bar', lit: m.take, lvl: 2, beats: [
+        { say: `${p.pct}% = ${m.take} bricks`, hl: 'take' }, { say: `Each brick is $${m.part}.`, hl: 'take' }] });
+      list.push({ kind: 'ask', viz: meth === 'pie' ? undefined : meth === 'money' ? 'money' : 'bar', lit: m.take, hl: 'take', text: `${m.take} × $${m.part} = ?`, sub: '', ans: m.disc, lvl: 2 });
+    }
+    if (!meth || p.id === 'lesson') { if (meth && p.id === 'lesson') list.push({ kind: 'info', lvl: 1, beats: [{ say: '10% of $100 is $10. You learned 10%!', hl: 'none' }, { say: 'Now let\u2019s go shopping!', hl: 'none' }] }); return list; }
+    const frames = this.subFrames(p.price, m.disc); const last = frames[frames.length - 1].frame;
+    list.push({ kind: 'info', viz: 'sub', lvl: 3, beats: [{ say: `You save $${m.disc}!`, hl: 'none', frame: null }, { say: `Now take $${m.disc} away from $${p.price}.`, hl: 'none', frame: null }, ...frames] });
+    list.push({ kind: 'ask', text: `$${p.price} − $${m.disc} = ?`, sub: 'Your turn! Type the answer.', ans: m.total, lvl: 3, subFrame: { ...last, ans: last.ans.map(() => ''), all: false } });
+    return list;
+  }
+  nextIdea() {
+    if (!this.state.started) return this.setState({ started: true, beat: 0 });
+    const cur = this.ideas()[this.state.dstep || 0]; const beat = this.state.beat || 0;
+    if (cur && cur.beats && beat < cur.beats.length - 1) return this.setState({ beat: beat + 1 });
+    this.setState({ beat: 0 });
+    const i = (this.state.dstep || 0) + 1;
+    if (i >= this.ideas().length) return this.state.prodId === 'lesson' ? this.go('shelf', { lessonDone: true, prodId: null }) : this.go('pay', { paid: [] });
+    clearTimeout(this.t); this.setState({ dstep: i, input: '', fb: '', ok: null });
+  }
+  LESSON = { id: 'lesson', name: '10% lesson', img: 'assets/brick-3.webp', price: 100, pct: 10, hint: '' };
+  prod() { if (this.state.prodId === 'tank') return { id: 'tank', name: 'Fish Tank', img: 'assets/tank.webp', price: this.state.tankTotal || 50, pct: 0 }; return this.state.prodId === 'lesson' ? this.LESSON : this.PRODUCTS.find(p => p.id === this.state.prodId) || this.PRODUCTS[0]; }
+  go(screen, extra = {}) { clearTimeout(this.t); this.setState({ screen, input: '', fb: '', ok: null, ...extra }); }
+  press(d) { if (this.state.input.length < 3) this.setState({ input: this.state.input + d, fb: '' }); }
+  check() {
+    const { screen, input, q, step } = this.state;
+    if (!input) return;
+    const n = Number(input); const reward = this.props.reward ?? 20;
+    if (screen === 'earn') {
+      const ans = q.op === '+' ? q.a + q.b : q.a - q.b;
+      if (n === ans) {
+        if (this.state.ok === true) return;
+        this.celebrate(`+$${reward}`, true);
+        this.setState(s => ({ wallet: s.wallet + reward, fb: `Correct! +$${reward}`, ok: true }));
+        this.t = setTimeout(() => this.setState({ q: this.newQ(), input: '', fb: '', ok: null, showB: false, counted: [] }), 4000);
+      } else { this.nope('Try again!'); this.setState({ fb: 'Not quite. Try again!', ok: false, input: '' }); }
+      return;
+    }
+    if (screen === 'tank') {
+      if (!this.state.tankSum) return;
+      const total = this.tankTotal();
+      if (n === total) { if (this.state.ok === true) return; this.celebrate(`$${total}`); this.setState({ fb: 'Yes!', ok: true }); this.t = setTimeout(() => this.go('pay', { prodId: 'tank', tankTotal: total, tankSum: false, paid: [] }), 3200); }
+      else { this.nope('Try again!'); this.setState({ fb: 'Not quite. Try again!', ok: false, input: '' }); }
+      return;
+    }
+    const cur = this.ideas()[this.state.dstep || 0];
+    if (cur.kind !== 'ask') return;
+    if (n === cur.ans) { if (this.state.ok === true) return; this.celebrate(`${cur.ans}`); this.setState({ fb: 'Yes! That\u2019s right.', ok: true }); this.t = setTimeout(() => this.nextIdea(), 4000); }
+    else { this.nope('Try again!'); this.setState({ fb: 'Not quite. Try again!', ok: false, input: '' }); }
+  }
+  keys(cols) {
+    const brick = ['#E5432F', '#2F6FD6', '#FFC72C', '#3E9B5A'];
+    const digits = cols === 7 ? ['1','2','3','4','5','6','7','8','9','0'] : ['1','2','3','4','5','6','7','8','9','0'];
+    const k = digits.map((d, i) => ({ label: d, bg: brick[i % 4], fg: i % 4 === 2 ? '#182238' : '#fff', fs: cols === 7 ? '6cqw' : '2.6cqw', gc: 'auto', gr: 'auto', bd: 'none', on: () => this.press(d) }));
+    k.push({ label: 'Clear', bg: '#F6F1E4', fg: '#182238', gc: cols === 7 ? '6' : 'auto', gr: cols === 7 ? '1 / span 2' : 'auto', bd: 'none', fs: cols === 7 ? '2.2cqw' : '1.5cqw', on: () => this.setState({ input: '', fb: '' }) });
+    k.push(cols === 6 ? { label: 'Check', bg: '#FFC72C', fg: '#182238', fs: '1.5cqw', on: () => this.check() } : { label: 'Check ✓', bg: '#3E9B5A', fg: '#fff', gc: '7 / span 2', gr: '1 / span 2', bd: '0.5cqw solid #fff', fs: '4cqw', on: () => this.check() });
+    return k;
+  }
+  addBill(v) {
+    const sum = this.state.paid.reduce((a, b) => a + b, 0);
+    if (sum + v > this.state.wallet) return this.setState({ fb: `You only have $${this.state.wallet} Brick Bucks.`, ok: false });
+    this.setState({ paid: [...this.state.paid, v], fb: '', ok: null });
+  }
+  pay() {
+    const p = this.prod(); const total = p.price - p.price * p.pct / 100;
+    const sum = this.state.paid.reduce((a, b) => a + b, 0);
+    if (sum === total) this.go('done', { wallet: this.state.wallet - total, owned: [...new Set([...this.state.owned, p.id])], paid: [] });
+    else if (sum < total) { this.nope(`You need $${total - sum} more.`); this.setState({ fb: `You need $${total - sum} more on the counter.`, ok: false }); }
+    else { this.nope(`That's $${sum - total} too much!`); this.setState({ fb: `That's $${sum - total} too much. Take a bill back.`, ok: false }); }
+  }
+  brickVals() {
+    const s = this.state; const { a, b, op } = s.q; const merged = !!s.showB; const counted = s.counted || [];
+    const n = op === '+' ? a + b : a;
+    const rc = op === '+' ? 5 : Math.min(10, a);
+    const w = op === '+' ? (Math.max(a, b) <= 5 ? 9 : 7) : (a <= 10 ? 8 : 6.6);
+    const gx = w * 0.12; const five = op !== '+' && a > 5 ? 2.4 : 0;
+    const gw = (cnt) => `${cnt * w + (cnt - 1) * gx + five + 0.2}cqw`;
+    const count = (key) => () => { if (!merged) return; this.setState(st => { const c = st.counted || []; return c.includes(key) ? null : { counted: [...c, key] }; }); };
+    const num = (key) => { const i = counted.indexOf(key); return i >= 0 ? String(i + 1) : ''; };
+    let groupA, groupB = [];
+    if (op === '+') {
+      const ghost = (len, col) => Array.from({ length: (5 - len % 5) % 5 }, () => ({ bg: 'transparent', ol: `0.3cqw dashed ${col}`, tf: 'none', op: merged ? 0 : 0.55, mr: '0', n: '', on: () => {} }));
+      groupA = [...Array.from({ length: a }, (_, i) => ({ bg: 'url(assets/brick-2.webp) center/contain no-repeat', ol: 'none', tf: 'none', op: 1, mr: '0', n: num('a' + i), on: count('a' + i) })), ...ghost(a, 'rgba(47,111,214,0.8)')];
+      groupB = [...Array.from({ length: b }, (_, i) => ({ bg: 'url(assets/brick-5.webp) center/contain no-repeat', ol: 'none', n: num('b' + i), on: count('b' + i) })), ...ghost(b, 'rgba(255,133,31,0.85)')];
+    } else {
+      groupA = Array.from({ length: a }, (_, i) => { const gone = i >= a - b;
+        return { ol: 'none', mr: five && i % 10 === 4 ? `${five}cqw` : '0', bg: gone ? 'url(assets/brick-1.webp) center/contain no-repeat' : 'url(assets/brick-2.webp) center/contain no-repeat', tf: gone && merged ? 'translateY(30cqh) rotate(20deg)' : 'none', op: gone && merged ? 0 : 1, n: gone ? '' : num('a' + i), on: gone ? () => {} : count('a' + i) }; });
+    }
+    const left = op === '+' ? a + b : a - b;
+    const tip = !merged
+      ? (op === '+' ? `${a} blue bricks and ${b} orange bricks. Tap = to put them together!` : `${a} bricks. The ${b} red ones go away. Tap = to see!`)
+      : counted.length < left ? `Count the bricks! Tap each one. (${counted.length})` : `You counted ${counted.length}! Type it in.`;
+    return {
+      groupA, groupB, brickW: `${w}cqw`, brickH: `${w * 0.92}cqw`, brickFs: `${w * 0.45}cqw`, brickGap: `${w * 0.3}cqw ${gx}cqw`,
+      groupMax: op === '+' ? gw(5) : gw(rc), groupMaxB: op === '+' ? gw(5) : '0cqw',
+      labelA: String(a), labelB: String(b), hasB: op === '+',
+      trayPad: op === '+' ? `${w * 0.45}cqw ${w * 0.2}cqw ${w * 0.2}cqw` : '0', trayA: op === '+' ? '0.35cqw solid rgba(47,111,214,0.7)' : 'none', trayB: op === '+' ? '0.35cqw solid rgba(255,133,31,0.75)' : 'none',
+      trayBgA: op === '+' ? 'rgba(47,111,214,0.14)' : 'transparent', trayBgB: op === '+' ? 'rgba(255,133,31,0.12)' : 'transparent',
+      opW: op === '+' && !merged ? '11cqw' : '0cqw', opOp: op === '+' && !merged ? 1 : 0,
+      joinGap: op === '+' && merged ? `${gx}cqw` : '0cqw',
+      notMerged: !merged, brickTip: tip,
+      earnKeysSm: this.keys(7).map(k => ({ ...k, fs: /^[0-9]$/.test(k.label) ? '4.4cqw' : k.label === 'Clear' ? '1.8cqw' : '2.8cqw' })),
+    };
+  }
+  arrowEl(dir, st = {}) {
+    const rot = { down: 0, right: -90, left: 90, up: 180 }[dir] || 0;
+    return React.createElement('span', { key: 'arrow', style: { position: 'absolute', zIndex: 2, pointerEvents: 'none', ...st } },
+      React.createElement('span', { style: { display: 'block', transform: `rotate(${rot}deg)` } },
+        React.createElement('span', { style: { display: 'block', fontSize: '4.4cqw', lineHeight: 1, color: '#FFC72C', textShadow: '0 0 1.6cqw rgba(255,199,44,0.9)', animation: 'bsg-bob .9s ease-in-out infinite' } }, '▼')));
+  }
+  pieViz(lit, hl, label, size) {
+    const h = React.createElement; const deg = lit * 36; const showLines = hl !== 'whole'; const showLit = hl === 'slice' || hl === 'label';
+    const mid = (deg / 2) * Math.PI / 180; const ar = (deg / 2);
+    return h('div', { key: 'pie', style: { position: 'relative', flex: 'none', width: size, height: size, marginTop: '7cqh', animation: 'bsg-in .6s ease-out both' } },
+      h('div', { style: { position: 'absolute', inset: 0, borderRadius: '50%', background: hl === 'whole' ? '#F6F1E4' : '#3A3A3A', boxShadow: hl === 'whole' ? '0 0 4cqw rgba(255,240,200,0.7)' : 'inset 0 0 0 0.4cqh #F6F1E4', transition: 'background .6s, box-shadow .6s' } }),
+      h('div', { style: { position: 'absolute', inset: 0, borderRadius: '50%', background: `conic-gradient(#FFC72C 0 ${deg}deg, transparent ${deg}deg 360deg)`, opacity: showLit ? 1 : 0, transition: 'opacity .6s', animation: showLit ? 'bsg-pulse 1.4s ease-in-out infinite' : 'none' } }),
+      h('div', { style: { position: 'absolute', inset: 0, borderRadius: '50%', background: 'repeating-conic-gradient(from -0.6deg, #F6F1E4 0 1.2deg, transparent 1.2deg 36deg)', opacity: showLines ? 1 : 0, transition: 'opacity .8s' } }),
+      hl === 'whole' ? h('span', { style: { position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: '5cqw', color: '#182238' } }, label.replace(/^\$\d+$/, '') || '') : null,
+      hl === 'label' ? h('span', { style: { position: 'absolute', left: `${50 + Math.sin(mid) * 32}%`, top: `${50 - Math.cos(mid) * 32}%`, transform: 'translate(-50%,-50%)', fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: lit > 1 ? '1.6cqw' : '2.2cqw', color: '#182238', whiteSpace: 'nowrap' } }, lit === 1 ? label : '') : null,
+      showLit ? h('span', { style: { position: 'absolute', left: `${50 + Math.sin(mid) * 64}%`, top: `${50 - Math.cos(mid) * 64}%`, transform: `translate(-50%,-50%) rotate(${ar}deg)` } }, this.arrowEl('down', { position: 'relative' })) : null);
+  }
+  vizEl(kind, price, key, hl = 'none') {
+    const glow = { color: '#E89B00', textShadow: '0 0 1.8cqw rgba(255,199,44,0.95)', transform: 'scale(1.12)' };
+    const on = (k) => hl === k || (hl === 'both' && k !== 'dot');
+    const h = React.createElement; const ds = String(price).split(''); const cw = 5.2;
+    const font = { fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: '7.4cqw', lineHeight: 1 };
+    const cell = (c, i, st = {}) => h('span', { key: i, style: { ...font, width: c === '.' ? '1.6cqw' : `${cw}cqw`, textAlign: 'center', ...st } }, c);
+    const row = (cells, st = {}) => h('div', { style: { position: 'relative', display: 'flex', justifyContent: 'flex-end', alignItems: 'baseline', ...st } }, ...cells);
+    const tile = { flex: 'none', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', padding: '1.6cqh 2cqw', borderRadius: '1.6cqw', background: '#F6F1E4', color: '#182238', animation: 'bsg-in .6s ease-out both' };
+    const line = h('div', { style: { alignSelf: 'stretch', height: '0.5cqh', margin: '0.6cqh 0', borderRadius: '1cqh', background: '#182238' } });
+    if (kind === 'why') {
+      const sm = { ...font, fontSize: '5cqw' }; const hot = { color: '#E89B00', textShadow: '0 0 1.6cqw rgba(255,199,44,0.9)' };
+      const frac = (n, d, st = {}) => h('span', { style: { display: 'inline-flex', flexDirection: 'column', alignItems: 'center', ...st } },
+        h('span', { style: { ...sm, fontSize: '4.2cqw' } }, n), h('span', { style: { alignSelf: 'stretch', height: '0.6cqh', background: 'currentColor', borderRadius: '1cqh', margin: '0.5cqh 0' } }), h('span', { style: { ...sm, fontSize: '4.2cqw' } }, d));
+      const T = (...kids) => h('span', { style: { display: 'flex', alignItems: 'center', gap: '1.2cqw' } }, ...kids);
+      const s = (txt, st = {}) => h('span', { style: { ...sm, ...st } }, txt);
+      let body = null;
+      if (hl === 'pct') body = T(s('10', hot), s('%', hot), s('='), frac('10', '100', hot));
+      else if (hl === 'frac') body = T(frac('10', '100'), s('='), frac('1', '10', hot));
+      else if (hl === 'dec') body = T(frac('1', '10'), s('='), s('0.1', hot));
+      else if (hl === 'of') body = T(s('10%'), s('of', { ...hot, fontStyle: 'italic' }), s(String(price)), s('→'), s('0.1'), s('×', hot), s(String(price)));
+      else if (hl === 'eq' || hl === 'simple') body = T(s(String(price)), s('×', { color: '#F05A50' }), s('0.1'), s('='), s('?', { color: '#E89B00' }));
+      const lego = this.legoEl(hl);
+      return h('div', { key: 'viz' + key, style: { flex: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3cqh' } }, h('div', { style: { display: 'flex', alignItems: 'center', gap: '4cqw' } },
+        hl === 'slice' ? this.pieViz(1, 'slice', '', '36cqh', '') : null,
+        body ? h('div', { key: hl, style: { ...tile, flexDirection: 'row', alignItems: 'center', padding: '2.4cqh 2.6cqw', boxShadow: hl === 'eq' ? '0 0 0 0.6cqh #FFC72C, 0 0 4cqw rgba(255,199,44,0.7)' : 'none' } }, body) : null), lego);
+    }
+    const G = (k) => on(k) ? glow : {};
+    const T = { transition: 'color .4s, text-shadow .4s, transform .4s, opacity .5s' };
+    const arrowRow = (k) => on(k) ? this.arrowEl('right', { left: '-6.5cqw', top: '50%', marginTop: '-2.4cqw' }) : null;
+    if (kind === 'compare') {
+      const big = { ...font, fontSize: '13cqw', ...T };
+      const dotOn = hl === 'dot';
+      const dot = h('span', { style: { ...big, position: 'relative', color: '#F05A50', textShadow: dotOn ? '0 0 3cqw rgba(240,90,80,1)' : 'none', transform: dotOn ? 'scale(1.3)' : 'none' } }, '.', dotOn ? this.arrowEl('up', { left: '50%', top: '100%', marginLeft: '-2.2cqw' }) : null);
+      const tileOn = (k) => on(k) ? { boxShadow: '0 0 0 0.6cqh #FFC72C, 0 0 4cqw rgba(255,199,44,0.7)' } : {};
+      return h('div', { key: 'viz' + key, style: { flex: 'none', display: 'flex', alignItems: 'center', gap: '2.4cqw', paddingBottom: '9cqh', animation: 'bsg-in .6s ease-out both' } },
+        h('div', { style: { ...tile, ...tileOn('both'), alignItems: 'center', padding: '1.6cqh 3cqw', transition: 'box-shadow .4s' } }, h('span', { style: big }, '1')),
+        h('span', { style: { ...font, color: '#F6F1E4' } }, 'vs'),
+        h('div', { style: { ...tile, ...tileOn('both'), alignItems: 'center', flexDirection: 'row', padding: '1.6cqh 3cqw', transition: 'box-shadow .4s' } }, h('span', { style: { ...big, color: '#8A8478' } }, '0'), dot, h('span', { style: big }, '1')));
+    }
+    const top = row(ds.map((d, i) => cell(d, i, T)));
+    if (kind === 'one') {
+      const showRes = hl === 'res';
+      return h('div', { key: 'viz' + key, style: { ...tile, position: 'relative', marginLeft: '7cqw' } }, top,
+        row([arrowRow('mult'), cell('×', 'x', { color: '#F05A50', marginRight: '1cqw', ...T, ...G('mult') }), cell('1', 1, { ...T, ...G('mult') })]), line,
+        row([arrowRow('res'), ...ds.map((d, i) => cell(d, i, { color: '#2F6FD6', ...T, ...G('res') }))], { opacity: showRes ? 1 : 0, transition: 'opacity .6s' }));
+    }
+    const showRes = hl === 'dot' || hl === 'res';
+    const res = row([arrowRow('res'), ...ds.map((d, i) => cell(d, i, { color: '#2F6FD6', ...T, ...(hl === 'res' && i < ds.length - 1 ? glow : {}), animation: showRes && i === ds.length - 1 ? 'bsg-zero 2.4s ease-in-out .3s both' : 'none' })),
+      showRes ? h('span', { key: 'dot', style: { position: 'absolute', left: `${ds.length * cw - 0.7}cqw`, bottom: '0.9cqh', width: '1.6cqw', height: '1.6cqw', borderRadius: '50%', background: '#F05A50', boxShadow: '0 0 1.6cqw rgba(240,90,80,1)', '--to': `-${cw}cqw`, animation: 'bsg-dot 2.4s ease-in-out .3s both' } },
+        hl === 'dot' ? this.arrowEl('up', { left: '50%', top: '2.6cqw', marginLeft: '-2.2cqw' }) : null) : null,
+      hl === 'res' ? h('span', { key: 'eq', style: { ...font, position: 'absolute', left: 'calc(100% + 1.4cqw)', whiteSpace: 'nowrap', color: '#F05A50', animation: 'bsg-in .6s ease-out both' } }, `= ${price / 10}`) : null], { opacity: showRes ? 1 : 0, transition: 'opacity .5s' });
+    return h('div', { key: 'viz' + key, style: { ...tile, position: 'relative', marginLeft: '7cqw', marginRight: '11cqw' } }, top,
+      row([arrowRow('mult'), cell('×', 'x', { color: '#F05A50', marginRight: '1cqw', ...T, ...G('mult') }), cell('0', 0, { ...T, ...G('mult') }), cell('.', 'd', { color: '#F05A50', ...T, ...G('mult') }), cell('1', 1, { ...T, ...G('mult') })]), line, res);
+  }
+  decimalEl(price) {
+    const h = React.createElement; const digits = String(price).split(''); const cw = 4.6;
+    const font = { fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800 };
+    return h('div', { key: 'dec', style: { flex: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.4cqh' } },
+      h('div', { style: { position: 'relative', display: 'flex', padding: '1.6cqh 1.4cqw', borderRadius: '1.6cqw', background: '#F6F1E4', color: '#182238' } },
+        ...digits.map((d, i) => h('span', { key: i, style: { ...font, width: `${cw}cqw`, textAlign: 'center', fontSize: '6.4cqw', lineHeight: 1, animation: i === digits.length - 1 ? 'bsg-zero 2.4s ease-in-out .4s both' : 'none' } }, d)),
+        h('span', { style: { position: 'absolute', left: `calc(1.4cqw + ${digits.length * cw}cqw - 0.9cqw)`, bottom: '1.4cqh', width: '1.8cqw', height: '1.8cqw', borderRadius: '50%', background: '#F05A50', boxShadow: '0 0 1.4cqw rgba(240,90,80,0.8)', '--to': `-${cw}cqw`, animation: 'bsg-dot 2.4s ease-in-out .4s both' } })),
+      h('span', { style: { ...font, fontSize: '5cqw', color: '#FFC72C', animation: 'bsg-in .6s 2.4s ease-out both' } }, `= $${price / 10}`));
+  }
+  pieEl(size, lit, label) {
+    if (!lit) return null;
+    const h = React.createElement; const deg = lit * 36;
+    const mid = (deg / 2 - 90) * Math.PI / 180;
+    return h('div', { key: 'pie', style: { position: 'relative', flex: 'none', width: size, height: size, animation: 'bsg-in .7s 1.8s ease-out both' } },
+      h('div', { style: { position: 'absolute', inset: 0, borderRadius: '50%', background: '#3A3A3A', boxShadow: 'inset 0 0 0 0.4cqh #F6F1E4' } }),
+      h('div', { style: { position: 'absolute', inset: 0, borderRadius: '50%', background: `conic-gradient(#FFC72C 0 ${deg}deg, transparent ${deg}deg 360deg)`, animation: 'bsg-pulse 1.6s ease-in-out infinite' } }),
+      h('div', { style: { position: 'absolute', inset: 0, borderRadius: '50%', background: 'repeating-conic-gradient(from -0.6deg, #F6F1E4 0 1.2deg, transparent 1.2deg 36deg)' } }),
+      label ? h('span', { style: { position: 'absolute', left: `${50 + Math.cos(mid) * 31}%`, top: `${50 + Math.sin(mid) * 31}%`, transform: 'translate(-50%,-50%)', fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: '1.7cqw', color: '#182238', whiteSpace: 'nowrap' } }, lit === 1 ? label : '') : null);
+  }
+  celebrate(sub, money) {
+    const words = ['assets/yay.webp', 'assets/smart.webp'];
+    clearTimeout(this.ct);
+    this.celeN = (this.celeN || 0) + 1;
+    this.setState({ cele: { id: Date.now(), word: words[this.celeN % 2], sub, rain: this.celeN % 3 === 0, money: !!money } });
+    this.ct = setTimeout(() => this.setState({ cele: null }), 4000);
+  }
+  celebrationEl() {
+    const c = this.state.cele; if (!c) return null;
+    const h = React.createElement; const colors = ['#E5432F', '#2F6FD6', '#FFC72C', '#3E9B5A', '#F05A50', '#FFFFFF'];
+    const imgs = [1, 2, 3, 4, 5, 6].map(k => `assets/brick-${k}.webp`);
+    if (!this.conf || this.conf.id !== c.id) {
+      const rain = c.rain || c.money;
+      this.conf = { id: c.id, bits: Array.from({ length: rain ? 46 : 56 }, (_, i) => {
+        if (c.money) return { bill: true, left: Math.random() * 100, w: 6 + Math.random() * 3, fall: `${125 + Math.random() * 30}cqh`, r: `${Math.random() * 300 - 150}deg`, delay: Math.random() * 1.2, dur: 2 + Math.random() * 1, v: [1, 5, 10, 20][i % 4] };
+        if (rain) return { rain: true, img: imgs[i % 6], left: Math.random() * 100, w: 3 + Math.random() * 4.5, fall: `${120 + Math.random() * 30}cqh`, r: `${Math.random() * 540 - 270}deg`, delay: Math.random() * 1.1, dur: 1.6 + Math.random() * 1 };
+        const a = (i / 56) * Math.PI * 2 + Math.random() * 0.3; const d = 30 + Math.random() * 40; const isImg = i % 3 === 0;
+        return { dx: `${Math.cos(a) * d}cqw`, dy: `${Math.sin(a) * d * 0.9 + 12}cqh`, r: `${Math.random() * 720 - 360}deg`, c: colors[i % colors.length], img: isImg ? imgs[(i / 3) % 6 | 0] : null, w: isImg ? 2.6 + Math.random() * 2.6 : 0.8 + Math.random() * 1.2, delay: Math.random() * 0.12 };
+      }) };
+    }
+    const bit = (b, i) => b.bill
+      ? h('span', { key: i, style: { position: 'absolute', left: `${b.left}%`, top: '-12cqh', width: `${b.w}cqw`, aspectRatio: '2.35/1', borderRadius: '0.3cqw', background: 'linear-gradient(160deg,#EAF2DF 0%,#CFE0BF 55%,#BFD5AC 100%)', boxShadow: 'inset 0 0 0 0.25cqw #EAF2DF, inset 0 0 0 0.4cqw #5E8F6A, 0 0.8cqh 1cqh rgba(0,0,0,0.3)', display: 'grid', placeItems: 'center', fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: `${b.w * 0.26}cqw`, color: '#2F5E3C', '--fall': b.fall, '--r': b.r, animation: `bsg-rain ${b.dur}s cubic-bezier(.4,0,.8,.6) ${b.delay}s both` } }, `$${b.v}`)
+      : b.rain
+      ? h('img', { key: i, src: b.img, alt: '', style: { position: 'absolute', left: `${b.left}%`, top: '-14cqh', width: `${b.w}cqw`, filter: 'drop-shadow(0 0.8cqh 0.8cqh rgba(0,0,0,0.35))', '--fall': b.fall, '--r': b.r, animation: `bsg-rain ${b.dur}s cubic-bezier(.4,0,.8,.6) ${b.delay}s both` } })
+      : b.img
+        ? h('img', { key: i, src: b.img, alt: '', style: { position: 'absolute', left: '50%', top: '45%', width: `${b.w}cqw`, '--dx': b.dx, '--dy': b.dy, '--r': b.r, animation: `bsg-burst 2.2s cubic-bezier(.15,.7,.3,1) ${b.delay}s both` } })
+        : h('span', { key: i, style: { position: 'absolute', left: '50%', top: '45%', width: `${b.w}cqw`, height: `${b.w * 1.6}cqw`, borderRadius: '0.1cqw', background: b.c, '--dx': b.dx, '--dy': b.dy, '--r': b.r, animation: `bsg-burst 2.2s cubic-bezier(.15,.7,.3,1) ${b.delay}s both` } });
+    return h('div', { key: c.id, style: { position: 'absolute', inset: 0, zIndex: 8, pointerEvents: 'none', overflow: 'hidden', display: 'grid', placeItems: 'center', animation: 'bsg-fade 4s ease forwards' } },
+      h('div', { style: { position: 'absolute', width: '90cqh', height: '90cqh', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,214,79,0.95) 0%, rgba(255,199,44,0.55) 35%, rgba(255,199,44,0) 70%)', animation: 'bsg-glow 2.2s ease-out forwards' } }),
+      ...this.conf.bits.map(bit),
+      h('div', { style: { position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1cqh', animation: 'bsg-pop 0.9s cubic-bezier(.2,.9,.3,1.2) both' } },
+        h('span', { style: { display: 'grid', placeItems: 'center', padding: '3cqh 3cqw', borderRadius: '4cqw', background: '#FFFFFF', boxShadow: '0 0 0 1cqh #FFC72C, 0 3cqh 5cqh -1cqh rgba(0,0,0,0.45)' } }, h('img', { src: c.word, alt: c.word.includes('smart') ? 'Smart!' : 'Yay!', style: { width: '56cqw', display: 'block' } })),
+        false && h('span', { style: { padding: '2.4cqh 4cqw', borderRadius: '4cqw', background: '#FFFFFF', color: '#182238', fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: '9cqw', lineHeight: 1, letterSpacing: '-0.02em', whiteSpace: 'nowrap', boxShadow: '0 0 0 1cqh #FFC72C, 0 3cqh 5cqh -1cqh rgba(0,0,0,0.45)' } }, c.word),
+        h('span', { style: { padding: '1.2cqh 2.4cqw', borderRadius: '999px', background: '#3E9B5A', color: '#fff', fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: '4cqw', boxShadow: '0 0 0 0.6cqh #fff, 0 2cqh 3cqh -1cqh rgba(0,0,0,0.4)' } }, c.sub)));
+  }
+  LAB = {
+    sci: [
+      { id: 'atom', name: 'Atoms', l: '35%', t: '3%', w: '30%', h: '24%', qs: [
+        ['Everything is made of tiny...?', ['Atoms', 'Crayons', 'Stickers'], 0],
+        ['Which one is a solid?', ['Steam', 'Ice', 'Juice'], 1],
+        ['When ice melts, it turns into...?', ['Sand', 'Wood', 'Water'], 2]] },
+      { id: 'globe', name: 'Globe', l: '25%', t: '31%', w: '13%', h: '18%', qs: [
+        ['Most of Earth is covered by...?', ['Water', 'Sand', 'Ice cream'], 0],
+        ['Which place is very cold?', ['A desert', 'The North Pole', 'A beach'], 1],
+        ['Earth spins around once every...?', ['Year', 'Week', 'Day'], 2]] },
+      { id: 'plant', name: 'Plants', l: '61%', t: '33%', w: '18%', h: '16%', qs: [
+        ['What do plants need to grow?', ['Sun and water', 'Candy', 'Toys'], 0],
+        ['Which part grows under the ground?', ['Flower', 'Roots', 'Leaf'], 1],
+        ['A seed grows into a...?', ['Rock', 'Fish', 'Plant'], 2]] },
+      { id: 'dna', name: 'DNA', l: '42%', t: '53%', w: '15%', h: '17%', qs: [
+        ['Kittens grow up to be...?', ['Cats', 'Dogs', 'Birds'], 0],
+        ['Babies often look like their...?', ['Pets', 'Parents', 'Neighbors'], 1],
+        ['Who gave you your eye color?', ['The sun', 'Your teacher', 'Your parents'], 2]] },
+      { id: 'volcano', name: 'Volcano', l: '59%', t: '53%', w: '19%', h: '17%', qs: [
+        ['Hot melted rock under the ground is called...?', ['Lava', 'Magma', 'Mud'], 1],
+        ['The top hole of a volcano is called the...?', ['Crater', 'Root', 'Shell'], 0],
+        ['A volcano that will never erupt again is...?', ['Asleep', 'Busy', 'Extinct'], 2],
+        ['Baking soda + vinegar makes a pretend volcano. What makes the fizz?', ['Water', 'Gas bubbles', 'Sugar'], 1],
+        ['Which land is made by volcanoes?', ['Hawaii islands', 'Deserts', 'Ice caps'], 0]] }],
+    math: [
+      { id: 'scope', name: 'Microscope', l: '40%', t: '45%', w: '16%', h: '24%', qs: [
+        ['A microscope makes tiny things look...?', ['Bigger', 'Smaller', 'Purple'], 0],
+        ['Which is too small to see without a microscope?', ['A dog', 'Germs', 'A tree'], 1],
+        ['You look into a microscope with your...?', ['Ear', 'Nose', 'Eye'], 2]] }] };
+  labVals() {
+    const s = this.state; const side = s.labSide || 'sci'; const done = s.quizDone || [];
+    const all = [...this.LAB.sci, ...this.LAB.math]; const qz = s.quiz; const item = qz && all.find(x => x.id === qz.id);
+    const q = item && !qz.done ? item.qs[qz.qi] : null;
+    return {
+      isLab: s.screen === 'lab', isLabShelf: s.screen === 'labShelf',
+      goLab: () => this.go('lab'),
+      openSciShelf: () => this.go('labShelf', { labSide: 'sci' }), openMathShelf: () => this.go('labShelf', { labSide: 'math' }),
+      labShelfImg: side === 'math' ? 'assets/lab-math.webp' : 'assets/lab-sci.webp',
+      labSpots: this.LAB[side].map(x => { const d = done.includes(x.id); return { ...x, label: d ? x.name + ' ✓' : x.name, pillBg: d ? '#3E9B5A' : '#FFC72C', pillFg: d ? '#fff' : '#182238', open: () => this.setState({ quiz: { id: x.id, qi: 0, wrong: [], won: 0 } }) }; }),
+      quizOpen: !!item, ...this.quizPic(item), quizTopic: item ? item.name : '', quizAsking: !!q, quizFinished: !!(qz && qz.done), quizWon: qz ? '$' + qz.won : '',
+      quizCount: item ? (qz.done ? 'All done!' : 'Question ' + (qz.qi + 1) + ' of ' + item.qs.length) : '', quizQ: q ? q[0] : '',
+      quizChoices: q ? q[1].map((c, i) => { const bad = qz.wrong.includes(i); const good = qz.right && i === q[2]; return { text: c, bg: good ? '#3E9B5A' : bad ? '#D8CFC0' : ['#2F6FD6', '#F05A50', '#7B3FD0'][i], fg: bad ? '#8A8170' : '#fff', on: () => this.answerQuiz(item, i) }; }) : [],
+      closeQuiz: () => { clearTimeout(this.qt); this.setState({ quiz: null }); } };
+  }
+  quizPic(item) {
+    if (!item) return { quizImg: '', quizBgSize: '', quizBgPos: '' };
+    const S = 36; const p = v => parseFloat(v) / 100; const l = p(item.l), t = p(item.t), w = p(item.w), hh = p(item.h);
+    const bgW = S / (Math.max(w, hh * 2 / 3) * 1.12); const bgH = bgW * 2 / 3;
+    const x = S / 2 - (l + w / 2) * bgW; const y = S / 2 - (t + hh / 2) * bgH;
+    const sci = this.LAB.sci.some(z => z.id === item.id);
+    return { quizImg: sci ? 'assets/lab-sci.webp' : 'assets/lab-math.webp', quizBgSize: bgW.toFixed(2) + 'cqh ' + bgH.toFixed(2) + 'cqh', quizBgPos: x.toFixed(2) + 'cqh ' + y.toFixed(2) + 'cqh' };
+  }
+  answerQuiz(item, i) {
+    const qz = this.state.quiz; if (!qz || qz.right) return;
+    const q = item.qs[qz.qi];
+    if (i === q[2]) {
+      this.celebrate('+$10', true);
+      this.setState(s => ({ wallet: s.wallet + 10, quiz: { ...s.quiz, right: true, won: s.quiz.won + 10 } }));
+      this.qt = setTimeout(() => this.setState(s => { if (!s.quiz) return null; const last = s.quiz.qi + 1 >= item.qs.length;
+        return { quiz: { ...s.quiz, qi: last ? s.quiz.qi : s.quiz.qi + 1, right: false, wrong: [], done: last }, quizDone: last ? [...new Set([...(s.quizDone || []), item.id])] : s.quizDone }; }), 3400);
+    } else { this.nope('Try again!'); this.setState(s => ({ quiz: { ...s.quiz, wrong: [...s.quiz.wrong, i] } })); }
+  }
+  waterVals() {
+    const w = !!this.state.water;
+    return { imgInterior: w ? 'assets/uw-interior.webp' : 'uploads/interior.webp', imgShelves: w ? 'assets/uw-shelves.webp' : 'uploads/store.webp', imgDeanA: w ? 'assets/uw-dean.webp' : 'uploads/48b57cc6-d87c-4b6d-b646-95993d9a4c68.webp', imgDeanB: w ? 'assets/uw-dean.webp' : 'uploads/f3cc8e9a-7709-4759-a45b-5349f6e411f7.webp', imgCashier: w ? 'assets/uw-cashier.webp' : 'uploads/d4d5fdd4-dc40-4a46-923d-e1a491143ad4.webp',
+      waterBg: w ? '#1E88E5' : 'rgba(30,136,229,0.85)', waterSh: w ? '0 0 0 0.4cqh #9FD8FF, 0 0 2cqw rgba(30,136,229,0.8)' : '0 1cqh 2cqh -0.5cqh rgba(24,34,56,0.45)', waterLabel: w ? 'Water on' : 'Water',
+      toggleWater: () => this.setState({ water: !w }) };
+  }
+  storeRainEl() {
+    const id = this.state.rainId; if (!id) return null;
+    const h = React.createElement; const F = "'Bricolage Grotesque',Lexend,sans-serif";
+    if (!this.rainBits || this.rainBits.id !== id) this.rainBits = { id, bits: Array.from({ length: 12 }, (_, i) => ({ brick: i % 3 === 0, img: `assets/brick-${1 + (i % 6)}.webp`, left: 58 + Math.random() * 40, w: i % 3 === 0 ? 2.6 + Math.random() * 1.6 : 4.4 + Math.random() * 1.6, v: [1, 5, 10, 20][i % 4], fall: `${110 + Math.random() * 20}cqh`, r: `${Math.random() * 300 - 150}deg`, delay: Math.random() * 1.6, dur: 2.6 + Math.random() * 1.2 })) };
+    return h('div', { key: id, style: { position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'hidden', zIndex: 1 } },
+      ...this.rainBits.bits.map((b, i) => b.brick
+        ? h('img', { key: i, src: b.img, alt: '', style: { position: 'absolute', left: `${b.left}%`, top: '-10cqh', width: `${b.w}cqw`, filter: 'drop-shadow(0 0.6cqh 0.6cqh rgba(0,0,0,0.3))', '--fall': b.fall, '--r': b.r, animation: `bsg-rain ${b.dur}s cubic-bezier(.4,0,.8,.6) ${b.delay}s both` } })
+        : h('span', { key: i, style: { position: 'absolute', left: `${b.left}%`, top: '-10cqh', width: `${b.w}cqw`, aspectRatio: '2.35/1', borderRadius: '0.3cqw', background: 'linear-gradient(160deg,#EAF2DF 0%,#CFE0BF 55%,#BFD5AC 100%)', boxShadow: 'inset 0 0 0 0.2cqw #EAF2DF, inset 0 0 0 0.35cqw #5E8F6A, 0 0.6cqh 1cqh rgba(0,0,0,0.3)', display: 'grid', placeItems: 'center', fontFamily: F, fontWeight: 800, fontSize: `${b.w * 0.26}cqw`, color: '#2F5E3C', '--fall': b.fall, '--r': b.r, animation: `bsg-rain ${b.dur}s cubic-bezier(.4,0,.8,.6) ${b.delay}s both` } }, `$${b.v}`)));
+  }
+  nopeEl() {
+    const n = this.state.nope; if (!n) return null;
+    const h = React.createElement;
+    return h('div', { key: n.id, style: { position: 'absolute', inset: 0, zIndex: 9, pointerEvents: 'none', animation: 'bsg-fade 2.4s ease forwards' } },
+      h('div', { style: { position: 'absolute', inset: 0, background: 'rgba(24,34,56,0.35)' } }),
+      h('img', { src: 'assets/cashier-nope.webp', alt: 'Nope! That\u2019s not right!', style: { position: 'absolute', right: '4cqw', bottom: 0, height: '78cqh', filter: 'drop-shadow(0 2cqh 3cqh rgba(0,0,0,0.4))', animation: 'bsg-nope .55s cubic-bezier(.2,.9,.3,1.2) both' } }),
+      n.msg ? h('span', { style: { position: 'absolute', left: '6cqw', bottom: '12cqh', maxWidth: '38cqw', padding: '2.4cqh 2.4cqw', borderRadius: '2cqw', background: '#FFFBF2', color: '#182238', fontFamily: "'Bricolage Grotesque',Lexend,sans-serif", fontWeight: 800, fontSize: '3cqw', lineHeight: 1.15, boxShadow: '0 0 0 0.6cqh #F05A50, 0 2cqh 3cqh -1cqh rgba(0,0,0,0.4)', animation: 'bsg-in .5s .25s ease-out both' } }, n.msg) : null);
+  }
+  nope(msg) { clearTimeout(this.nt); this.setState({ nope: { id: Date.now(), msg } }); this.nt = setTimeout(() => this.setState({ nope: null }), 2400); }
+
+  dealVals(p) {
+    const s = this.state; const m = this.math(p); const ideas = this.ideas();
+    const i = Math.min(s.dstep || 0, ideas.length - 1); const cur = ideas[i];
+    const focus = !!s.started; const beat = Math.min(s.beat || 0, cur.beats ? cur.beats.length - 1 : 0);
+    const hl = cur.beats ? cur.beats[beat].hl : (cur.hl || 'none'); const say = cur.beats ? cur.beats[beat].say : cur.text;
+    const done = (k) => i > k;
+    const barParts = cur.lvl === 0 ? [{ label: `$${p.price}`, bg: '#F6F1E4', fg: '#182238', fs: '2.4cqw' }]
+      : Array.from({ length: m.parts }, (_, j) => ({ label: cur.lvl >= 2 || done(2) ? `$${m.part}` : '?', bg: j < (cur.one ? 1 : m.take) ? '#F05A50' : '#F6F1E4', fg: j < (cur.one ? 1 : m.take) ? '#fff' : '#182238', fs: '1.5cqw' }));
+    const facts = [{ t: `Price $${p.price}`, c: '#F6F1E4' }];
+    facts.push({ t: `${p.pct}% off`, c: '#FF8A7A' });
+    if (done(2)) facts.push({ t: `10% = $${m.part}`, c: '#FFE7A0' });
+    if (cur.lvl >= 3) facts.push({ t: `You save $${m.disc}`, c: '#7FD99A' });
+    return {
+      goalText: focus ? '' : `We need to figure out what ${p.pct}% of $${p.price} is!`, hasGoal: !focus,
+      prodOp: focus ? 0 : 1, prodTf: focus ? 'translateY(-6cqh) scale(0.85)' : 'none', boardTop: focus ? '11cqh' : '46cqh',
+      ideaFs: i > 0 ? '5.6cqw' : '4.4cqw', subFs: i > 0 ? '3cqw' : '2.2cqw',
+      goalFs: focus ? '2.6cqw' : '4.8cqw', btnAnim: !focus ? 'bsg-in .6s 1.6s ease-out both' : 'none',
+      pieEl: !focus ? null : this.vizFor(cur, hl, p, m, i, beat),
+      methodTabs: focus && s.method && cur.lvl === 1 ? this.tabsEl(s.method) : null,
+      boardPadTop: focus && s.method && cur.lvl === 1 ? '10.5cqh' : '2.6cqh',
+      boardDir: cur.kind === 'pick' || ['bar', 'money', 'towers', 'bills', 'pattern'].includes(cur.viz) || (cur.kind === 'ask' && cur.viz && cur.viz !== 'pie') ? 'column' : 'row', textMax: cur.kind === 'pick' || cur.viz === 'towers' ? '84cqw' : ['bar', 'money', 'towers', 'bills', 'pattern'].includes(cur.viz) && cur.kind !== 'ask' ? '70cqw' : '38cqw',
+      ideaEl: !focus ? null : this.calloutEl(this.readEl(cur.viz === 'towers' && cur.kind === 'ask' && cur.sub ? `${say} ${cur.sub}` : say, `${i}-${beat}`, cur.viz === 'sub' ? '4cqw' : ['bar', 'money', 'towers', 'bills', 'pattern'].includes(cur.viz) ? (cur.kind === 'ask' ? '3.2cqw' : '3.6cqw') : cur.kind === 'ask' ? '4.6cqw' : '5cqw'), `c${i}`, cur.kind === 'ask' ? 0 : this.calloutOffset(cur.viz, hl), ['bar', 'money', 'towers', 'bills', 'pattern'].includes(cur.viz) || cur.kind === 'pick' ? 'up' : 'left'),
+      boardCols: cur.kind === 'ask' && cur.viz !== 'towers' ? 'minmax(0,1fr) 36cqw' : 'minmax(0,1fr)',
+      barCaption: `10 parts = $${p.price}`,
+      ideaSub: cur.kind === 'pick' && focus ? 'Tap a card to start!' : cur.viz === 'towers' ? '' : cur.sub || '', isAsk: focus && cur.kind === 'ask' && cur.viz !== 'towers', isWideAsk: focus && cur.kind === 'ask' && cur.viz === 'towers', isInfo: !focus || cur.kind === 'info', showCount: focus && cur.kind !== 'pick' && !(cur.kind === 'ask' && cur.viz === 'towers'),
+      barParts, facts, nextIdea: () => this.nextIdea(), nextLabel: !focus ? 'Let\u2019s find out' : 'Next',
+      nextH: focus ? '6.4cqh' : '9cqh', nextPadL: focus ? '1.8cqw' : '2.6cqw', nextBg: focus ? 'rgba(24,34,56,0.45)' : '#FFC72C', nextFg: focus ? '#FFFBF2' : '#182238', nextFs: focus ? '1.5cqw' : '2.2cqw', nextDot: focus ? '4.8cqh' : '7.6cqh', nextSh: focus ? 'none' : '0 1.5cqh 3cqh -1cqh rgba(0,0,0,0.5)',
+      ideaCount: `Idea ${i + 1} of ${ideas.length}`, dealInput: `$${s.input || ''}`,
+      priceText: `$${p.price}`, pctText: `${p.pct}% OFF`,
+    };
+  }
+  renderVals() {
+    const s = this.state; const p = this.prod();
+    const disc = p.price * p.pct / 100; const total = p.price - disc;
+    const paidSum = s.paid.reduce((a, b) => a + b, 0);
+    const back = { tank: 'Shelves', earn: s.prodId && s.screen === 'earn' && s.pendingPay ? 'Checkout' : 'Store', shelf: 'Store', deal: 'Shelves', pay: 'Shelves', done: 'Store', store: 'Meet Dean', lab: 'Store', labShelf: 'Science Room' };
+    const backTo = { tank: 'shelf', earn: 'store', shelf: 'store', deal: 'shelf', pay: 'shelf', done: 'store', store: 'intro', lab: 'store', labShelf: 'lab' };
+    return {
+      isIntro: s.screen === 'intro', isStore: s.screen === 'store', isEarn: s.screen === 'earn', isShelf: s.screen === 'shelf',
+      isDeal: s.screen === 'deal', isPay: s.screen === 'pay', isDone: s.screen === 'done', showHud: s.screen !== 'intro',
+      wallet: s.wallet, ownedCount: s.owned.length, reward: this.props.reward ?? 20,
+      backLabel: s.screen === 'deal' && s.prodId === 'lesson' ? 'Store' : back[s.screen] || 'Store', goBack: () => this.go(s.screen === 'deal' && s.prodId === 'lesson' ? 'store' : backTo[s.screen] || 'store'),
+      goStore: () => this.go('store', { storeTip: true }),
+      earnZoom: s.screen === 'earn' && !!s.earnZoom, zoomIn: () => this.setState({ earnZoom: true }), zoomOut: () => this.setState({ earnZoom: false }),
+      isLesson: s.screen === 'deal' && s.prodId === 'lesson', skipLesson: () => this.go('shelf', { lessonDone: true, prodId: null }),
+      replayLesson: () => this.go('deal', { prodId: 'lesson', dstep: 0, beat: 0, started: true, method: null }),
+      canBack: s.screen === 'deal' && !!s.started, prevIdea: () => this.prevIdea(),
+      ...this.waterVals(), isTank: s.screen === 'tank', ...this.tankVals(), storeRain: s.screen === 'store' ? this.storeRainEl() : null,
+      ...this.labVals(),
+      celebration: this.celebrationEl(), nopeOverlay: this.nopeEl(),
+      ...this.brickVals(),
+      qA: s.q.a, qOp: s.q.op, qB: s.q.b, tapB: () => this.setState({ showB: true, counted: [] }),
+      bricksOld: s.q.op === '+'
+        ? [...Array(s.q.a).fill(0).map(() => ({ bg: '#2F6FD6', tf: 'none', op: 1 })), ...Array(s.q.b).fill(0).map(() => ({ bg: '#FFC72C', tf: s.showB ? 'none' : 'translateY(-6cqh) scale(0.6)', op: s.showB ? 1 : 0 }))]
+        : Array(s.q.a).fill(0).map((_, i) => { const gone = i >= s.q.a - s.q.b; return { bg: gone ? 'url(assets/brick-1.webp) center/contain no-repeat' : 'url(assets/brick-2.webp) center/contain no-repeat', tf: gone && s.showB ? 'translateY(7cqh) rotate(14deg)' : 'none', op: gone && s.showB ? 0.18 : 1 }; }),
+
+      earnOn: () => this.setState({ earnHover: true }), earnOff: () => this.setState({ earnHover: false }),
+      earnFilter: s.earnHover ? 'none' : 'grayscale(0.5) brightness(0.8)',
+      trackX: `translateX(-${(s.slide || 0) * 100}cqw)`,
+      prevProd: () => this.setState({ slide: ((s.slide || 0) + 3) % 4 }), nextProd: () => this.setState({ slide: ((s.slide || 0) + 1) % 4 }),
+      dots: this.PRODUCTS.map((x, i) => ({ name: x.name, w: i === (s.slide || 0) ? '4cqw' : '1.6cqh', bg: i === (s.slide || 0) ? '#F05A50' : '#D8C9AE', on: () => this.setState({ slide: i }) })),
+      slideLabel: `${(s.slide || 0) + 1} of 4`,
+      storeTip: s.screen === 'store' && !!s.storeTip, noStoreTip: !s.storeTip, closeTip: () => this.setState({ storeTip: false }), goShelf: () => s.lessonDone ? this.go('shelf') : this.go('deal', { prodId: 'lesson', dstep: 0, beat: 0, started: true, method: null }), goEarn: () => this.go('earn', { pendingPay: s.screen === 'pay' }), goPay: () => this.go('pay', { paid: [] }),
+      hasPending: s.screen === 'earn' && !!s.pendingPay,
+      qText: `${s.q.a} ${s.q.op} ${s.q.b}`, inputShow: s.input || '?', fb: s.fb, fbColor: s.ok === true ? '#5FD07E' : s.ok === false ? '#FF8A7A' : 'inherit',
+      earnKeys: this.keys(7), dealKeys: this.keys(6),
+      products: this.PRODUCTS.map(x => ({ ...x, owned: s.owned.includes(x.id), pctLabel: `${x.pct}%`, priceLabel: `$${x.price}`, isSale: !x.tank, pick: () => x.tank ? this.go('tank', { prodId: 'tank', tankFish: null, tankPlant: null, tankTab: 'fish', riddle: null, tankSum: false, tankTotal: 0 }) : this.go('deal', { prodId: x.id, dstep: 0, beat: 0, started: false, method: null }) })),
+      prodImg: p.img, prodName: p.name, prodPrice: p.price, prodPct: p.pct, prodDiscount: disc, prodTotal: total,
+      ...this.dealVals(p),
+      stepLabel: s.step === 1 ? 'Step 1 of 2 · Find the discount' : 'Step 2 of 2 · Find the sale price',
+      dealQ: s.step === 1 ? `The ${p.name} costs $${p.price} and is ${p.pct}% off. How many dollars do you save?` : `$${p.price} − $${disc} discount = ? What is the sale price?`,
+      hint: s.hint, noHint: !s.hint, showHint: () => this.setState({ hint: true }),
+      hintText: s.step === 1 ? p.hint : `Start at $${p.price} and take away the $${disc} you save.`,
+      bills: [1, 5, 10, 20].map(v => ({ v, on: () => this.addBill(v) })),
+      paidList: s.paid.map(v => ({ v })), paidSum, payLabel: `Pay $${paidSum}`, setsLabel: `Sets: ${s.owned.length}`, payNow: () => this.pay(), undoBill: () => this.setState({ paid: s.paid.slice(0, -1), fb: '' }),
+      short: s.wallet < total, needMore: Math.max(0, total - s.wallet),
+    };
+  }
+}
+</script>
+</body>
+</html>
