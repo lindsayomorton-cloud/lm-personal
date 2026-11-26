@@ -100,7 +100,7 @@ function realHover() { var n = Date.now(); return (n - __lastMove < 200 || n - _
   }
   window.__playTheme = playTheme; window.__theme = theme;
   window.__stopTheme = function () { stopTheme(); };
-  theme.loop = true;
+  theme.loop = false; // plays through once, then stays quiet
   /* once you're through the vortex, the theme fades out and stops */
   function stopTheme() {
     if (stopTheme.done) return; stopTheme.done = true; playTheme.done = true;
