@@ -1,6 +1,33 @@
 <html><head>
-<!-- Google Analytics -->
-<script>(function(){if(window.__lmGA)return;window.__lmGA=1;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-KCB2MVHZG7';document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-KCB2MVHZG7');})();</script>
+<!-- Google Analytics + LinkedIn Insight Tag + site events -->
+<script>(function(){if(window.__lmGA)return;window.__lmGA=1;
+var GA='G-KCB2MVHZG7',LI='10202354',CONTACT=32513954,RESUME=32513962;
+var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);
+window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config',GA);
+window._linkedin_partner_id=LI;window._linkedin_data_partner_ids=window._linkedin_data_partner_ids||[];window._linkedin_data_partner_ids.push(LI);
+if(!window.lintrk){window.lintrk=function(a,b){window.lintrk.q.push([a,b])};window.lintrk.q=[];}
+var l=document.createElement('script');l.async=true;l.src='https://snap.licdn.com/li.lms-analytics/insight.min.js';document.head.appendChild(l);
+var sent={};function once(k){if(sent[k])return false;sent[k]=1;return true;}
+function ev(name,p){try{gtag('event',name,p||{});}catch(e){}}
+function li(id){try{window.lintrk('track',{conversion_id:id});}catch(e){}}
+window.lmTrack=ev;
+function contact(method){ev('contact',{method:method});if(method==='form')ev('generate_lead',{method:'form'});if(once('c'))li(CONTACT);}
+function resume(action){ev('resume_'+action,{});if(once('r'))li(RESUME);}
+if(/\/resume(\.html)?\/?$/.test(location.pathname))resume('view');
+document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;
+ var a=t.closest('a[href]'),h=a?a.getAttribute('href')||'':'';
+ if(/^mailto:/i.test(h))return contact('email');
+ if(/linkedin\.com\/in\//i.test(h))return contact('linkedin');
+ if(/(^|\/)resume(\.html)?($|[?#])/i.test(h))return resume('view');
+ if(t.closest('#dlResume'))return resume('download');
+ var d=t.closest('[data-room]');if(d)ev('door_open',{door:d.getAttribute('data-room')});
+},true);
+document.addEventListener('submit',function(e){var f=e.target;if(!f||f.id!=='ideaFormEl')return;
+ var ok=f.name&&f.email&&f.msg&&f.name.value.trim()&&/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value.trim())&&f.msg.value.trim();if(ok)contact('form');},true);
+function watchProj(){var p=document.getElementById('proj'),tt=document.getElementById('projTitle');if(!p||!tt)return;var last='';function chk(){var n=tt.textContent.trim();if(!p.hidden&&n){if(n!==last){last=n;ev('project_open',{project:n});}}else if(p.hidden)last='';}var mo=new MutationObserver(chk);mo.observe(p,{attributes:true,attributeFilter:['hidden']});mo.observe(tt,{childList:true,characterData:true,subtree:true});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',watchProj);else watchProj();
+})();</script>
+<noscript><img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=10202354&fmt=gif" /></noscript>
 <meta charset="utf-8"><title>The Coven individual icons</title><style>body{font-family:system-ui;background:#251d28;color:#faf0df;padding:30px}section{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px}.tile{background:#3a303c;padding:12px;border-radius:12px}img{width:100%;height:180px;object-fit:contain}a{color:#eed7a0}</style></head><body><h1>The Coven — individual witchy icons</h1><p>Individual cropped PNG files from the approved icon-sheet artwork. They retain the original sheet background; these are not transparent vectors.</p><section>
 <div class="tile"><img src="crescent-moon.png"><p>crescent-moon</p><a download href="crescent-moon.png">Download PNG</a></div>
 <div class="tile"><img src="crystals.png"><p>crystals</p><a download href="crystals.png">Download PNG</a></div>
